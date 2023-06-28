@@ -12,14 +12,14 @@ import hu.sze.milab.dust.DustConsts;
 public class DustUtilsFile extends DustUtils implements DustConsts{
 
 
-	public static String getHashName(String dirName) {
-		int hash = dirName.hashCode();
+	public static String getHashName(String fileName) {
+		int hash = fileName.hashCode();
 
 		int mask = 255;
 		int firstDir = hash & mask;
 		int secondDir = (hash >> 8) & mask;
 
-		return String.format("%02x%s%02x%s%s", firstDir, File.separator, secondDir, File.separator, dirName);
+		return String.format("%02x%s%02x%s%s", firstDir, File.separator, secondDir, File.separator, fileName);
 	}
 
 	public static File getHashDir(File root, String dirName) {

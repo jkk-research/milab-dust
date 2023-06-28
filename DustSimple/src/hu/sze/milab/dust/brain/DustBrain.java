@@ -99,7 +99,24 @@ public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
 		for (Object p : path) {
 			if ( curr instanceof MindHandle ) {
 				curr = resolveKnowledge((DustBrainHandle) curr, true);
+			} else if ( null == curr ) {
+				if ( MindUtils.isCreateAccess(cmd) ) {
+					curr = (p instanceof Integer) ? new ArrayList() : new HashMap();
+
+					if ( prev instanceof ArrayList ) {
+						if ( KEY_ADD == (Integer) lastKey ) {
+							((ArrayList) prev).add(curr);
+						} else {
+							((ArrayList) prev).set((Integer) lastKey, curr);
+						}
+					} else if ( curr instanceof Map ) {
+						((Map) prev).put(lastKey, curr);
+					}
+				} else {
+					break;
+				}
 			}
+
 			prev = curr;
 			lastKey = p;
 
@@ -111,9 +128,6 @@ public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
 				curr = null;
 			}
 
-			if ( null == curr ) {
-				break;
-			}
 		}
 
 		ret = (null == curr) ? val : curr;

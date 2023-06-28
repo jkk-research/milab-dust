@@ -10,7 +10,8 @@ public interface DustConsts {
 	int KEY_ITER = -3;
 	int KEY_KEYS = -4;
 
-	interface MindHandle {};
+	interface MindHandle {
+	};
 
 	interface MindAgent {
 		MindStatus agentExecAction(MindAction action) throws Exception;
@@ -25,7 +26,7 @@ public interface DustConsts {
 	};
 
 	enum MindAccess {
-		Check, Peek, Get, Set, Insert, Delete, Reset, Commit, 
+		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
 	};
 
 	enum MindAction {
@@ -35,5 +36,11 @@ public interface DustConsts {
 	enum MindStatus {
 		Waiting, Processing, Reject, Pass, Read, ReadAccept, Accept, Error,
 	};
+
+	class MindUtils {
+		public static boolean isCreateAccess(MindAccess acc) {
+			return (acc == MindAccess.Set) || (acc == MindAccess.Insert);
+		}
+	}
 
 }
