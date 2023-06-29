@@ -1,5 +1,9 @@
 package hu.sze.milab.dust.utils;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
 
@@ -83,5 +87,28 @@ public class DustUtils implements DustConsts {
 		}
 		
 		return "?";
-	}	
+	}
+	
+	public static class Indexer<KeyType> {
+		private Map<KeyType, Integer> indexes = new HashMap<>();
+		
+		public synchronized int getIndex(KeyType ob) {
+			Integer ret = indexes.get(ob);
+			
+			if ( null == ret ) {
+				ret = indexes.size();
+				indexes.put(ob, ret);
+			}
+			
+			return ret;
+		}
+		
+		public int getSize() {
+			return indexes.size();
+		}
+		
+		public Collection<KeyType> keys() {
+			return indexes.keySet();
+		}
+	}
 }
