@@ -1,4 +1,4 @@
-package hu.sze.milab.dust.stream;
+package hu.sze.milab.dust.stream.xml;
 
 import java.io.File;
 
@@ -12,7 +12,7 @@ import org.xml.sax.helpers.DefaultHandler;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
 
-public class DustStreamXmlAgent implements DustStreamConsts, DustConsts.MindAgent {
+public class DustStreamXmlAgent implements DustStreamXmlConsts, DustConsts.MindAgent {
 
 	public class XbrlUtilsXmlLoader extends DefaultHandler {
 

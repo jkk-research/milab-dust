@@ -5,9 +5,9 @@ import java.io.PrintStream;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustMetaConsts;
-import hu.sze.milab.dust.stream.DustStreamConsts;
+import hu.sze.milab.dust.stream.xml.DustStreamXmlConsts;
 
-public class DustDevAgentXmlWriter implements DustMetaConsts, DustStreamConsts, DustConsts.MindAgent {
+public class DustDevAgentXmlWriter implements DustMetaConsts, DustStreamXmlConsts, DustConsts.MindAgent {
 
 	public MindHandle hTarget;
 	public PrintStream ps;

@@ -46,7 +46,7 @@ public class DustStreamUrlCache implements DustStreamConsts {
 		
 		if ( null != proc ) {
 			try (FileInputStream is = new FileInputStream(f)) {
-				proc.processStream(is);
+				proc.processStream(is, url);
 			}
 		}
 		

@@ -7,10 +7,6 @@ import hu.sze.milab.dust.DustMetaConsts;
 
 public interface DustStreamConsts extends DustMetaConsts {
 	
-	enum XmlData {
-		Element, Attribute, Content, 
-	}
-
 	public static MindHandle STREAM_UNIT = Dust.createHandle();
 	
 	public static MindHandle STREAM_ASP_STREAM = Dust.createHandle();
@@ -18,6 +14,6 @@ public interface DustStreamConsts extends DustMetaConsts {
 
 	
 	interface StreamProcessor {
-		public void processStream(InputStream is) throws Exception;
+		public void processStream(InputStream is, String url) throws Exception;
 	}
 }
