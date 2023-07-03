@@ -9,8 +9,43 @@ import java.util.zip.ZipInputStream;
 
 import hu.sze.milab.dust.DustConsts;
 
-public class DustUtilsFile extends DustUtils implements DustConsts{
+public class DustUtilsFile extends DustUtils implements DustConsts {
 
+	public static String optRemoveUpFromPath(String path) {
+		String ret = path;
+
+		if ( path.contains(".") ) {
+			String[] items = path.split(File.separator);
+
+			int ai = 0;
+
+			for (int i = 0; i < items.length; ++i) {
+				String p = items[i];
+
+				switch ( p ) {
+				case ".":
+					break;
+				case "..":
+					--ai;
+					break;
+				default:
+					if ( ai != i ) {
+						items[ai] = items[i];
+					}
+					++ai;
+					break;
+				}
+			}
+			
+			StringBuilder b = null;
+			for (int i = 0; i < ai; ++i) {
+				b = DustUtils.sbAppend(b, File.separator, true, items[i]);
+			}
+			ret = b.toString();
+		}
+
+		return ret;
+	}
 
 	public static String getHashName(String fileName) {
 		int hash = fileName.hashCode();
@@ -23,7 +58,7 @@ public class DustUtilsFile extends DustUtils implements DustConsts{
 	}
 
 	public static File getHashDir(File root, String dirName) {
-		String path = getHashName( dirName);
+		String path = getHashName(dirName);
 
 		File f = new File(root, path);
 

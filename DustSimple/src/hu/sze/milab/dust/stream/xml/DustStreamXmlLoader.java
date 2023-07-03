@@ -23,6 +23,7 @@ import org.w3c.dom.NodeList;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.stream.DustStreamUrlCache;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.QueueContainer<String> {
 
@@ -47,6 +48,8 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 			Document doc = db.parse(is);
 			
 			root = doc.getDocumentElement();
+			
+			myUrl = DustUtilsFile.optRemoveUpFromPath(myUrl);
 			
 			root.setUserData(XML_DATA_DOCURL, myUrl, null);
 
@@ -114,9 +117,12 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 	@Override
 	public void enqueue(String item, Object... hints) {
 		if ( !queue.containsKey(item) && !namespaces.containsKey(item) ) {
-			queue.put(item, (String) hints[0]);
+			String url = DustUtilsFile.optRemoveUpFromPath((String) hints[0]);
+			queue.put(item, url);
 
 //			Dust.dumpObs("      Queueing", item, hints[0]);
+//		} else {
+//			Dust.dumpObs("      SKIPPING", item, hints[0]);
 		}
 	}
 
