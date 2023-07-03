@@ -12,32 +12,4 @@ There is another approach to knowledge management that starts from a TS, separat
 
 The milab-dust project is a limited, pragmatic implementation of a broader knowledge managemet research that serves the needs of our XBRL data management services. As such, the goal here is not a broad investigation and explanation of the scenario, only to introduce the core concepts as the development goes, without which understanding the code can be harder.
 
-# "Kedves-levels"
-
-Disclaimer: I am mostly an engineer, reading and writing working source codes, not articles and books (only the old and forgotten ones). The following classification is not coming from the latter but emerged from the former and made my job of evaluating existing or designing new information systems easier. 
-
-When I estimate and optimize the flexibility of an information system, I investigate how the meta information appears in its implementation (configurations, scripts, sources). That indicates the side effects of changes on various levels (used technologies, data to be handled, expected behaviors) and leads to a relatively clear segmentation. Milab-dust is expected to provide wide range of services on the XBRL target system where adapting to different meta information sets (taxonomies) by each state information (business report) is a declared functional requirement (against the general scenario when it is a non-functional requirement that may offer some benefits over time). Therefore, this project must aim higher levels.
-
-## Level 0
-
-Meta information represented in the target platform's constructs (class definitions, table scripts, etc.), the code uses standard object instances to represent an external entity, member variables to store attribute infrormation of that entity.
-
-## Level 1
-
-## Level 2
-
-## Level 3
-
-Out of scope.
-
-## Level 4
-
-## Level 5
-
-## Level 6
-
-Out of scope.
-
-## Level 7
-
-Out of scope.
+Disclaimer: I am mostly an engineer, reading and writing working source codes most of the time. When I estimate and optimize the flexibility of an information system, I investigate how the meta information appears in its implementation (configurations, scripts, sources). That foretells the side effects of changes on various levels (used technologies, data to be handled, expected behaviors) and leads to a relatively clear segmentation that I call "Kedves-levels"... :-) Milab-dust is expected to provide wide range of services on the XBRL target system where adapting to different meta information sets (taxonomies) by each state information blocks (business report reporting to the taxonomies) is a declared functional requirement, not just a non-functional requirement that may offer some benefits over time. The scale goes from 0 (traditional programming) to 7, milab-dust aims at level 2 and 4.
