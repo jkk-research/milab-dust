@@ -46,11 +46,11 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(is);
-			
+
 			root = doc.getDocumentElement();
-			
+
 			myUrl = DustUtilsFile.optRemoveUpFromPath(myUrl);
-			
+
 			root.setUserData(XML_DATA_DOCURL, myUrl, null);
 
 			Map<String, String> nsRefs = new TreeMap<>();
@@ -69,7 +69,7 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 					if ( name.startsWith(XML_PREF_XMLNS) ) {
 						nsRefs.put(name.substring(XML_PREF_XMLNS.length()), sVal);
 					} else if ( name.endsWith(XML_ATT_SCHEMALOC) ) {
-						schemaLoc = sVal.trim().split(" ");
+						schemaLoc = sVal.trim().replaceAll("\\s+", " ").split(" ");
 					}
 				}
 			}
@@ -104,6 +104,7 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 
 	Map<String, Element> namespaces = new TreeMap<>();
 	Map<String, String> queue = new TreeMap<>();
+	Map<String, Element> nsByUrl = new TreeMap<>();
 
 	File root;
 	@SuppressWarnings("unchecked")
@@ -116,8 +117,11 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 
 	@Override
 	public void enqueue(String item, Object... hints) {
-		if ( !queue.containsKey(item) && !namespaces.containsKey(item) ) {
-			String url = DustUtilsFile.optRemoveUpFromPath((String) hints[0]);
+		String url = DustUtilsFile.optRemoveUpFromPath((String) hints[0]);
+		if ( DustUtils.isEmpty(url) ) {
+			Dust.dumpObs("Hey", item, hints[0]);
+		}
+		if ( !queue.containsKey(item) && !namespaces.containsKey(item) && !nsByUrl.containsKey(url) ) {
 			queue.put(item, url);
 
 //			Dust.dumpObs("      Queueing", item, hints[0]);
@@ -127,46 +131,49 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 	}
 
 	private Element resolveUrl(String url) throws Exception {
-		File f = null;
+		Element eRoot = nsByUrl.get(url);
 
-		if ( url.startsWith("file") ) {
-			f = Paths.get(new URL(url).toURI()).toFile();
-		} else if ( url.startsWith("http") ) {
-			for (Map.Entry<String, String> e : urlRewrite.entrySet()) {
-				String prefix = e.getKey();
-				if ( url.startsWith(prefix) ) {
-					f = new File(root, e.getValue());
-					f = new File(f, url.substring(prefix.length()));
-					break;
+		if ( null == eRoot ) {
+			File f = null;
+
+			if ( url.startsWith("file") ) {
+				f = Paths.get(new URL(url).toURI()).toFile();
+			} else if ( url.startsWith("http") ) {
+				for (Map.Entry<String, String> e : urlRewrite.entrySet()) {
+					String prefix = e.getKey();
+					if ( url.startsWith(prefix) ) {
+						f = new File(root, e.getValue());
+						f = new File(f, url.substring(prefix.length()));
+						break;
+					}
 				}
+			} else {
+				f = new File(root, url);
 			}
-		} else {
-			f = new File(root, url);
-		}
 //		url.startsWith("http") ? null : (null == currParent) ? new File(root, url) : new File(currParent, url);
 
-		URL ref = null;
-		if ( null == f ) {
-			cache.access(url, nsLoader);
-			ref = new URL(url);
-		} else {
-			if ( !f.exists() ) {
-				Dust.dumpObs("HEH??");
+			URL ref = null;
+			if ( null == f ) {
+				cache.access(url, nsLoader);
+				ref = new URL(url);
+			} else {
+				if ( !f.exists() ) {
+					Dust.dumpObs("HEH??");
+				}
+				ref = f.toURI().toURL();
+				try (FileInputStream is = new FileInputStream(f)) {
+					nsLoader.processStream(is, ref.toString());
+				}
 			}
-			ref = f.toURI().toURL();
-			try (FileInputStream is = new FileInputStream(f)) {
-				nsLoader.processStream(is, ref.toString());
+
+			eRoot = nsLoader.root;
+			nsByUrl.put(url, eRoot);
+			if ( null != nsProc ) {
+				nsProc.namespaceLoaded(eRoot, this);
 			}
 		}
-
-		Element root = nsLoader.root;
-//		root.setAttribute(XML_ATT_REF, ref.toString());
-
-		if ( null != nsProc ) {
-			nsProc.namespaceLoaded(root, this);
-		}
-
-		return nsLoader.root;
+		
+		return eRoot;
 	}
 
 	private void processQueue() throws Exception {
