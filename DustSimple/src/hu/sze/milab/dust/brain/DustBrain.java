@@ -121,7 +121,11 @@ public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
 			lastKey = p;
 
 			if ( curr instanceof ArrayList ) {
-				curr = ((ArrayList) curr).get((Integer) p);
+				if ( KEY_ADD == (Integer) p ) {
+					curr = null;
+				} else {
+					curr = ((ArrayList) curr).get((Integer) p);
+				}
 			} else if ( curr instanceof Map ) {
 				curr = ((Map) curr).get(p);
 			} else {
@@ -166,8 +170,16 @@ public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
 			}
 			break;
 		case Set:
-			if ( (null != lastKey) && (prev instanceof Map) ) {
-				((Map) prev).put(lastKey, val);
+			if ( null != lastKey ) {
+				if ( prev instanceof Map ) {
+					((Map) prev).put(lastKey, val);
+				} else if ( prev instanceof ArrayList ) {
+					if ( KEY_ADD == (Integer) lastKey ) {
+						((ArrayList) prev).add(val);
+					} else {
+						((ArrayList) prev).set((Integer) lastKey, val);
+					}
+				}
 			}
 			break;
 		default:

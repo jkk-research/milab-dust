@@ -1,5 +1,7 @@
 package hu.sze.milab.dust.stream.json;
 
+import java.util.EnumSet;
+
 import hu.sze.milab.dust.stream.DustStreamConsts;
 
 public interface DustStreamJsonConsts extends DustStreamConsts {
@@ -12,7 +14,7 @@ public interface DustStreamJsonConsts extends DustStreamConsts {
 	String JSONAPI_VERSION = "1.1";
 
 //@formatter:off
-	enum JsonApiMembers {
+	enum JsonApiMember {
 		jsonapi, version, ext, profile,
 		
 		meta, links, type, describedby,
@@ -27,13 +29,15 @@ public interface DustStreamJsonConsts extends DustStreamConsts {
 		
 		;
 		
+		public static final EnumSet<JsonApiMember> TOP = EnumSet.of(jsonapi, data, errors, meta, links, included);
+		public static final EnumSet<JsonApiMember> DATA = EnumSet.of(data, included);
 	};
 	
-	enum JsonApiParams {
-		sort, filter, page, limit, offset
+	enum JsonApiParam {
+		include, sort, filter, page, limit, offset
 	}
 	
-	enum JsonFilterFunctions {
+	enum JsonFilterFunction {
 		equals, lessThan, lessOrEqual, greaterThan, greaterOrEqual,
 		contains, startsWith, endsWith,
 		isType, count, any, has,
