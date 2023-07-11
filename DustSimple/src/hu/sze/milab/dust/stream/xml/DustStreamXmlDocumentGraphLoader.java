@@ -25,17 +25,17 @@ import hu.sze.milab.dust.stream.DustStreamUrlCache;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
-public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.QueueContainer<String> {
+public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, DustUtils.QueueContainer<String> {
 
-	public interface NamespaceProcessor {
-		void namespaceLoaded(Element root, DustUtils.QueueContainer<String> loader);
+	public interface XmlDocumentProcessor {
+		void documentLoaded(Element root, DustUtils.QueueContainer<String> loader);
 	}
 
 	DustStreamUrlCache cache;
 
 	DocumentBuilderFactory dbf;
 
-	class NamespaceLoader implements StreamProcessor {
+	class XmlDocumentLoader implements StreamProcessor {
 		Element root;
 
 		@Override
@@ -86,11 +86,10 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 					NamedNodeMap atts = nl.item(ni).getAttributes();
 					String uri = atts.getNamedItem("namespace").getNodeValue();
 
-					if ( !namespaces.containsKey(uri) ) {
+					if ( !docById.containsKey(uri) ) {
 						String url = atts.getNamedItem("schemaLocation").getNodeValue();
 
 						if ( !url.startsWith("http") ) {
-//							Dust.dumpObs("      Plain ref", url, "replaced to", DustUtils.replacePostfix(myUrl, "/", url));
 							url = DustUtils.replacePostfix(myUrl, "/", url);
 						}
 						enqueue(uri, url);
@@ -100,18 +99,19 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 		}
 	};
 
-	NamespaceLoader nsLoader = new NamespaceLoader();
+	XmlDocumentLoader docLoader = new XmlDocumentLoader();
 
-	Map<String, Element> namespaces = new TreeMap<>();
-	Map<String, String> queue = new TreeMap<>();
-	Map<String, Element> nsByUrl = new TreeMap<>();
+	Map<String, Element> docById = new TreeMap<>();
+	Map<String, Element> docByUrl = new TreeMap<>();
+
+	Map<String, String> readQueue = new TreeMap<>();
 
 	File root;
 	@SuppressWarnings("unchecked")
 	Map<String, String> urlRewrite = Collections.EMPTY_MAP;
-	NamespaceProcessor nsProc = null;
+	XmlDocumentProcessor docProc = null;
 
-	public DustStreamXmlLoader(DustStreamUrlCache cache) {
+	public DustStreamXmlDocumentGraphLoader(DustStreamUrlCache cache) {
 		this.cache = cache;
 	}
 
@@ -121,8 +121,8 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 		if ( DustUtils.isEmpty(url) ) {
 			Dust.dumpObs("Hey", item, hints[0]);
 		}
-		if ( !queue.containsKey(item) && !namespaces.containsKey(item) && !nsByUrl.containsKey(url) ) {
-			queue.put(item, url);
+		if ( !readQueue.containsKey(item) && !docById.containsKey(item) && !docByUrl.containsKey(url) ) {
+			readQueue.put(item, url);
 
 //			Dust.dumpObs("      Queueing", item, hints[0]);
 //		} else {
@@ -131,7 +131,7 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 	}
 
 	private Element resolveUrl(String url) throws Exception {
-		Element eRoot = nsByUrl.get(url);
+		Element eRoot = docByUrl.get(url);
 
 		if ( null == eRoot ) {
 			File f = null;
@@ -150,11 +150,10 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 			} else {
 				f = new File(root, url);
 			}
-//		url.startsWith("http") ? null : (null == currParent) ? new File(root, url) : new File(currParent, url);
 
 			URL ref = null;
 			if ( null == f ) {
-				cache.access(url, nsLoader);
+				cache.access(url, docLoader);
 				ref = new URL(url);
 			} else {
 				if ( !f.exists() ) {
@@ -162,14 +161,14 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 				}
 				ref = f.toURI().toURL();
 				try (FileInputStream is = new FileInputStream(f)) {
-					nsLoader.processStream(is, ref.toString());
+					docLoader.processStream(is, ref.toString());
 				}
 			}
 
-			eRoot = nsLoader.root;
-			nsByUrl.put(url, eRoot);
-			if ( null != nsProc ) {
-				nsProc.namespaceLoaded(eRoot, this);
+			eRoot = docLoader.root;
+			docByUrl.put(url, eRoot);
+			if ( null != docProc ) {
+				docProc.documentLoaded(eRoot, this);
 			}
 		}
 		
@@ -177,26 +176,26 @@ public class DustStreamXmlLoader implements DustStreamXmlConsts, DustUtils.Queue
 	}
 
 	private void processQueue() throws Exception {
-		while (!queue.isEmpty()) {
-			Iterator<Entry<String, String>> qi = queue.entrySet().iterator();
+		while (!readQueue.isEmpty()) {
+			Iterator<Entry<String, String>> qi = readQueue.entrySet().iterator();
 			Map.Entry<String, String> item = qi.next();
 			qi.remove();
 
 			String uri = item.getKey();
-			if ( !namespaces.containsKey(uri) ) {
-				namespaces.put(uri, resolveUrl(item.getValue()));
+			if ( !docById.containsKey(uri) ) {
+				docById.put(uri, resolveUrl(item.getValue()));
 			}
 		}
 	}
 
-	public Element getNamespace(String uri) throws Exception {
-		return namespaces.get(uri);
+	public Element getDocRoot(String uri) throws Exception {
+		return docById.get(uri);
 	}
 
-	public Element loadNamespace(File root, String path, NamespaceProcessor proc, Map<String, String> urlRewrite) throws Exception {
+	public Element loadDocument(File root, String path, XmlDocumentProcessor proc, Map<String, String> urlRewrite) throws Exception {
 		this.root = root;
 		this.urlRewrite = urlRewrite;
-		this.nsProc = proc;
+		this.docProc = proc;
 
 		Element ret = resolveUrl(path);
 

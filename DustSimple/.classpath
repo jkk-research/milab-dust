@@ -7,5 +7,6 @@
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/poi/poi-ooxml-3.14-20160307.jar"/>
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/poi/poi-ooxml-schemas-3.14-20160307.jar"/>
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/poi/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/json/json-simple-1.1.1.jar" sourcepath="/DustExtLibs/lib/json/json-simple-1.1.1-sources.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

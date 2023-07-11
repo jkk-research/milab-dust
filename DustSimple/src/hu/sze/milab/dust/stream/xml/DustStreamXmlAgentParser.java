@@ -12,9 +12,9 @@ import org.xml.sax.helpers.DefaultHandler;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
 
-public class DustStreamXmlAgent implements DustStreamXmlConsts, DustConsts.MindAgent {
+public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts.MindAgent {
 
-	public class XbrlUtilsXmlLoader extends DefaultHandler {
+	class XmlEventRelay extends DefaultHandler {
 
 		private MindHandle hTarget;
 		private String pendingElement;
@@ -25,7 +25,7 @@ public class DustStreamXmlAgent implements DustStreamXmlConsts, DustConsts.MindA
 			hTarget = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Get, null, MISC_ATT_CONN_TARGET);
 			Dust.access(hTarget, MindAccess.Commit, MindAction.Init);
 		}
-		
+
 		@Override
 		public void processingInstruction(String target, String data) throws SAXException {
 			Dust.log("Processing instruction", target, data);
@@ -79,8 +79,8 @@ public class DustStreamXmlAgent implements DustStreamXmlConsts, DustConsts.MindA
 			Dust.access(hTarget, MindAccess.Set, qName, TEXT_ATT_NAMED_NAME);
 
 			MindAction action;
-			
-			if (null == pendingElement) {
+
+			if ( null == pendingElement ) {
 				action = MindAction.End;
 			} else {
 				action = MindAction.Process;
@@ -99,7 +99,7 @@ public class DustStreamXmlAgent implements DustStreamXmlConsts, DustConsts.MindA
 		public void optOpenPendingElement() {
 			if ( null != pendingElement ) {
 				Dust.access(hTarget, MindAccess.Set, null, MISC_ATT_VARIANT_VALUE);
-				//				Dust.access(hTarget, MindAccess.Reset, null);
+				// Dust.access(hTarget, MindAccess.Reset, null);
 				Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAG);
 				Dust.access(hTarget, MindAccess.Set, pendingElement, TEXT_ATT_NAMED_NAME);
 				Dust.access(hTarget, MindAccess.Commit, MindAction.Begin);
@@ -136,7 +136,7 @@ public class DustStreamXmlAgent implements DustStreamXmlConsts, DustConsts.MindA
 			break;
 		case Process:
 			File f = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
-			XbrlUtilsXmlLoader loader = new XbrlUtilsXmlLoader();
+			XmlEventRelay loader = new XmlEventRelay();
 			xmlParser.parse(f, loader);
 			break;
 		case End:
