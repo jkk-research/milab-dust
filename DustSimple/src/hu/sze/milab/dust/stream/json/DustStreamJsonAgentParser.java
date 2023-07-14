@@ -19,7 +19,7 @@ public class DustStreamJsonAgentParser implements DustStreamJsonConsts, DustCons
 
 		@Override
 		public void startJSON() throws ParseException, IOException {
-			hTarget = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Get, null, MISC_ATT_CONN_TARGET);
+			hTarget = Dust.access(MindContext.Self, MindAccess.Get, null, MISC_ATT_CONN_TARGET);
 			Dust.access(hTarget, MindAccess.Commit, MindAction.Init);
 		}
 
@@ -101,7 +101,7 @@ public class DustStreamJsonAgentParser implements DustStreamJsonConsts, DustCons
 		case Begin:
 			break;
 		case Process:
-			File f = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
+			File f = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
 			JsonEventRelay eventRelay = new JsonEventRelay();
 			parser.parse(new FileReader(f), eventRelay, true);
 			break;

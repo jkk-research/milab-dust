@@ -22,7 +22,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 
 		@Override
 		public void startDocument() {
-			hTarget = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Get, null, MISC_ATT_CONN_TARGET);
+			hTarget = Dust.access(MindContext.Self, MindAccess.Get, null, MISC_ATT_CONN_TARGET);
 			Dust.access(hTarget, MindAccess.Commit, MindAction.Init);
 		}
 
@@ -135,7 +135,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 		case Begin:
 			break;
 		case Process:
-			File f = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
+			File f = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
 			XmlEventRelay loader = new XmlEventRelay();
 			xmlParser.parse(f, loader);
 			break;

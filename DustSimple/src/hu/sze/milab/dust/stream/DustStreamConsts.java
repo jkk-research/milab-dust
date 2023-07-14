@@ -12,6 +12,8 @@ public interface DustStreamConsts extends DustMetaConsts {
 	public static MindHandle STREAM_ASP_STREAM = Dust.createHandle();
 	public static MindHandle STREAM_ATT_STREAM_FILE = Dust.createHandle();
 
+	public static MindHandle STREAM_LOG_JSONPARSER = Dust.createHandle();
+	public static MindHandle STREAM_LOG_JSONAPISERIALIZER = Dust.createHandle();
 	
 	interface StreamProcessor {
 		public void processStream(InputStream is, String url) throws Exception;

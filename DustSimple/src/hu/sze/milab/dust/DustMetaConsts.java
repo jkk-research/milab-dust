@@ -15,28 +15,33 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ATT_KNOWLEDGE_PRIMARYASPECT = Dust.createHandle();
 	public static MindHandle MIND_ATT_KNOWLEDGE_ID = Dust.createHandle();
 	
-	public static MindHandle MIND_ASP_TYPE = Dust.createHandle();
-	public static MindHandle MIND_ASP_MEMBER = Dust.createHandle();
+	public static MindHandle MIND_ASP_ASPECT = Dust.createHandle();
+	public static MindHandle MIND_ASP_ATTRIBUTE = Dust.createHandle();
 	public static MindHandle MIND_ASP_TAG = Dust.createHandle();
 	
-	public static MindHandle MIND_ASP_AGENT = Dust.createHandle();
-	public static MindHandle MIND_ATT_AGENT_SELF = Dust.createHandle();
+	public static MindHandle MIND_ASP_LOGIC = Dust.createHandle();
 	
 	public static MindHandle MIND_ASP_DIALOG = Dust.createHandle();
+	public static MindHandle DUST_ATT_DIALOG_LAUNCHPARAMS = Dust.createHandle();
+
+	public static MindHandle MIND_ASP_MESSAGE = Dust.createHandle();
+	
+	public static MindHandle MIND_ASP_AGENT = Dust.createHandle();
+	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.createHandle();
+//	public static MindHandle MIND_ATT_AGENT_SELF = Dust.createHandle();
 	
 	public static MindHandle DUST_UNIT = Dust.createHandle();
 
 	public static MindHandle DUST_ASP_BRAIN = Dust.createHandle();
-	public static MindHandle DUST_ATT_BRAIN_LAUNCHPARAMS = Dust.createHandle();
 	public static MindHandle DUST_ATT_BRAIN_UNITS = Dust.createHandle();
 	public static MindHandle DUST_ATT_BRAIN_DIALOGS = Dust.createHandle();
 	public static MindHandle DUST_ATT_BRAIN_THREADS = Dust.createHandle();
 	
 	public static MindHandle DUST_ASP_THREAD = Dust.createHandle();
-	public static MindHandle DUST_ATT_THREAD_DIALOG = Dust.createHandle();
-	public static MindHandle DUST_ATT_THREAD_ACTIVEAGENT = Dust.createHandle();
+//	public static MindHandle DUST_ATT_THREAD_CONTEXTS = Dust.createHandle();
 
 	public static MindHandle DUST_ASP_NATIVE = Dust.createHandle();
+	public static MindHandle DUST_ATT_NATIVE_IMPLEMENTATIONS = Dust.createHandle();
 	public static MindHandle DUST_ATT_NATIVE_INSTANCE = Dust.createHandle();
 	public static MindHandle DUST_ATT_NATIVE_CONTEXT = Dust.createHandle();
 	
@@ -60,6 +65,5 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle TEXT_UNIT = Dust.createHandle();
 	
 	public static MindHandle TEXT_ASP_NAMED = Dust.createHandle();
-	public static MindHandle TEXT_ATT_NAMED_NAME = Dust.createHandle();
-	
+	public static MindHandle TEXT_ATT_NAMED_NAME = Dust.createHandle();	
 }

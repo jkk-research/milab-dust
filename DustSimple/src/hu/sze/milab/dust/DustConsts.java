@@ -9,6 +9,8 @@ public interface DustConsts {
 	int KEY_SIZE = -2;
 	int KEY_ITER = -3;
 	int KEY_KEYS = -4;
+	
+	String VENDOR_PREFIX = "hu.sze.milab.";
 
 	interface MindHandle {
 	};
@@ -27,6 +29,10 @@ public interface DustConsts {
 
 	enum MindAccess {
 		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
+	};
+
+	enum MindContext {
+		Dialog, Self, Message
 	};
 
 	enum MindAction {

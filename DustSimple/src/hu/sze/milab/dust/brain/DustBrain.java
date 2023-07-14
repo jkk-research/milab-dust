@@ -1,82 +1,34 @@
 package hu.sze.milab.dust.brain;
 
-import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
+import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.DustMetaConsts;
-import hu.sze.milab.dust.stream.DustStreamConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindAgent {
+public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAgent {
 
 	static Map<MindHandle, Map> ctxBrain = new HashMap<>();
+	static Map brainRoot = new HashMap<>();
+	static DustBrainUtils utils = new DustBrainUtils();
+
+	private static final ThreadLocal<EnumMap<MindContext, MindHandle>> threadCtx = new ThreadLocal<EnumMap<MindContext, MindHandle>>() {
+		@Override
+		protected EnumMap<MindContext, MindHandle> initialValue() {
+			return new EnumMap<>(MindContext.class);
+		}
+	};
 
 	@Override
-	public MindStatus agentExecAction(MindAction action) throws Exception {
-		switch ( action ) {
-		case Begin:
-			break;
-		case End:
-			break;
-		case Init:
-			loadConstsFrom(DustMetaConsts.class);
-			loadConstsFrom(DustStreamConsts.class);
-			break;
-		case Process:
-			break;
-		case Release:
-			break;
-		}
-		
-		return MindStatus.Accept;
-	}
-
-	public void loadConstsFrom(Class constClass) {
-		Map<DustBrainHandle, String> handleToName = new HashMap<>();
-		Map<String, DustBrainHandle> nameToHandle = new HashMap<>();
-
-		for (Field f : constClass.getDeclaredFields()) {
-			try {
-				Object bh = f.get(null);
-				if ( bh instanceof MindHandle ) {
-					handleToName.put((DustBrainHandle) bh, f.getName());
-					nameToHandle.put(f.getName(), (DustBrainHandle) bh);
-				}
-			} catch (Throwable e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
-		for (Map.Entry<DustBrainHandle, String> ke : handleToName.entrySet()) {
-			DustBrainHandle bh = ke.getKey();
-			String name = ke.getValue();
-			Map k = resolveKnowledge(bh, true);
-
-			k.put(TEXT_ATT_NAMED_NAME, name);
-
-			String[] nameParts = name.split("_");
-
-			String unitName = nameParts[0] + "_" + "UNIT";
-
-			DustBrainHandle hTarget = nameToHandle.get(unitName);
-			k.put(MIND_ATT_KNOWLEDGE_UNIT, hTarget);
-		}
-	}
-
-	static public String handleToString(DustBrainHandle bh) {
-		Map k = resolveKnowledge(bh, false);
-		return (null == k) ? "???" : (String) k.getOrDefault(DustMetaConsts.TEXT_ATT_NAMED_NAME, "???");
-	}
-
-	static public void dumpHandle(String prefix, MindHandle bh) {
-		Map k = resolveKnowledge(bh, false);
-		Dust.dumpObs(prefix, (null == k) ? "???" : DustUtils.toString(k));
+	public MindHandle createHandle() {
+		return new DustBrainHandle();
 	}
 
 	static public Map resolveKnowledge(MindHandle bh, boolean createIfMissing) {
@@ -98,13 +50,60 @@ public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindA
 		}
 	}
 
-	@Override
-	public MindHandle createHandle() {
-		return new DustBrainHandle();
+	static public String handleToString(DustBrainHandle bh) {
+		Map k = resolveKnowledge(bh, false);
+		return (null == k) ? STR_UNKNOWN : (String) k.getOrDefault(DustMetaConsts.TEXT_ATT_NAMED_NAME, STR_UNKNOWN);
 	}
 
+	static public void dumpHandle(String prefix, MindHandle bh) {
+		Map k = resolveKnowledge(bh, false);
+		Dust.dumpObs(prefix, (null == k) ? STR_UNKNOWN : DustUtils.toString(k));
+	}
+
+	@Override
+	public MindStatus agentExecAction(MindAction action) throws Exception {
+		switch ( action ) {
+		case Init:
+			Thread t = Thread.currentThread();
+			MindHandle ht = createHandle();
+//			Map mt = resolveKnowledge(ht, true);
+
+			MindHandle hd = createHandle();
+			
+			EnumMap<MindContext, MindHandle> currCtx = threadCtx.get();
+			currCtx.put(MindContext.Dialog, hd);
+
+//			mt.put(DUST_ATT_THREAD_CONTEXTS, ctxMap);
+			access(brainRoot, MindAccess.Insert, hd, DUST_ATT_BRAIN_DIALOGS);
+
+			WeakHashMap<Thread, MindHandle> tm = new WeakHashMap<>();
+			brainRoot.put(DUST_ATT_BRAIN_THREADS, tm);
+			tm.put(t, ht);
+
+			utils.initBrain(this);
+			break;
+		case Begin:
+			utils.loadConfigs();
+			break;
+		case Process:
+			break;
+		case End:
+			break;
+		case Release:
+			break;
+		}
+
+		return MindStatus.Accept;
+	}
+
+	@Override
 	public <RetType> RetType access(Object root, MindAccess cmd, Object val, Object... path) {
 		Object ret = null;
+
+		if ( root instanceof MindContext ) {
+			root = threadCtx.get().get((MindContext)root);
+//			root = access(brainRoot, MindAccess.Peek, null, DUST_ATT_BRAIN_THREADS, Thread.currentThread());
+		}
 
 		Object curr = root;
 		Object prev = null;
@@ -123,7 +122,7 @@ public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindA
 						} else {
 							((ArrayList) prev).set((Integer) lastKey, curr);
 						}
-					} else if ( curr instanceof Map ) {
+					} else if ( prev instanceof Map ) {
 						((Map) prev).put(lastKey, curr);
 					}
 				} else {
@@ -135,10 +134,13 @@ public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindA
 			lastKey = p;
 
 			if ( curr instanceof ArrayList ) {
-				if ( KEY_ADD == (Integer) p ) {
+				ArrayList al = (ArrayList) curr;
+				Integer idx = (Integer) p;
+
+				if ( (KEY_ADD == idx) || (idx >= al.size()) ) {
 					curr = null;
 				} else {
-					curr = ((ArrayList) curr).get((Integer) p);
+					curr = al.get(idx);
 				}
 			} else if ( curr instanceof Map ) {
 				curr = ((Map) curr).get(p);
@@ -154,16 +156,41 @@ public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindA
 		case Check:
 			break;
 		case Commit:
-
 			if ( curr instanceof MindHandle ) {
-				MindAgent a = Dust.access(curr, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_LISTENERS, DUST_ATT_NATIVE_INSTANCE);
+				MindHandle h = Dust.access(curr, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_LISTENERS);
+				EnumMap<MindContext, MindHandle> prevCtx = new EnumMap<>(MindContext.class);
+				EnumMap<MindContext, MindHandle> currCtx = threadCtx.get();
+				prevCtx.putAll(currCtx);
+				
+				currCtx.put(MindContext.Message, (MindHandle) curr);
+				currCtx.put(MindContext.Self, h);
 
-				if ( null != a ) {
-					try {
-						a.agentExecAction((MindAction) val);
-					} catch (Throwable e) {
-						e.printStackTrace();
+				try {
+					MindAgent a = Dust.access(h, MindAccess.Peek, null, DUST_ATT_NATIVE_INSTANCE);
+
+					if ( null == a ) {
+						MindHandle hL = null;
+						String agentClass = null;
+						try {
+							hL = Dust.access(h, MindAccess.Peek, null, MIND_ATT_AGENT_LOGIC);
+							agentClass = Dust.access(brainRoot, MindAccess.Peek, null, DUST_ATT_NATIVE_IMPLEMENTATIONS, hL);
+							a = (MindAgent) Class.forName(agentClass).newInstance();
+							a.agentExecAction(MindAction.Init);
+							Dust.access(h, MindAccess.Set, a, DUST_ATT_NATIVE_INSTANCE);
+						} catch (Throwable e) {
+							DustException.wrap(e, hL, agentClass);
+						}
 					}
+
+					if ( null != a ) {
+						try {
+							a.agentExecAction((MindAction) val);
+						} catch (Throwable e) {
+							e.printStackTrace();
+						}
+					}
+				} finally {
+					currCtx.putAll(prevCtx);
 				}
 			}
 			break;
@@ -180,7 +207,10 @@ public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindA
 				curr = resolveKnowledge((DustBrainHandle) curr, false);
 			}
 			if ( curr instanceof Map ) {
-				((Map) curr).clear();
+				Map m = (Map) curr;
+				Object l = m.get(MIND_ATT_KNOWLEDGE_LISTENERS);
+				m.clear();
+				m.put(MIND_ATT_KNOWLEDGE_LISTENERS, l);
 			}
 			break;
 		case Set:

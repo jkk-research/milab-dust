@@ -44,8 +44,9 @@ public class Dust implements DustConsts {
 		BRAIN = (Brain) Class.forName("hu.sze.milab.dust.brain.DustBrain").newInstance();
 		((MindAgent) BRAIN).agentExecAction(MindAction.Init);
 		for ( String s : args ) {
-			access(DustMetaConsts.DUST_ATT_BRAIN_LAUNCHPARAMS, MindAccess.Set, s, KEY_ADD);
+			access(MindContext.Dialog, MindAccess.Set, s, DustMetaConsts.DUST_ATT_DIALOG_LAUNCHPARAMS, KEY_ADD);
 		}
+		
 		((MindAgent) BRAIN).agentExecAction(MindAction.Begin);
 	}
 }

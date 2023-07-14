@@ -14,7 +14,6 @@ import org.json.simple.parser.ParseException;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
-import hu.sze.milab.dust.brain.DustBrain;
 
 public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, DustConsts.MindAgent {
 
@@ -22,7 +21,6 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 	class JsonApiReader implements ContentHandler {
 
 		private JsonApiMember topMember;
-		private MindHandle hTarget;
 		private LinkedList<Object> path;
 		private Boolean isTopArr;
 
@@ -44,11 +42,12 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 					DustException.wrap(null, "Invalid top memner", topMember);
 				}
 
-				if ( null == hTarget ) {
-					hTarget = Dust.createHandle();
-				} else {
-					Dust.access(hTarget, MindAccess.Reset, null);
-				}
+//				if ( null == hTarget ) {
+//					hTarget = Dust.createHandle();
+//				} else {
+//					Dust.access(hTarget, MindAccess.Reset, null);
+//				}
+				Dust.access(hTarget, MindAccess.Reset, null);
 
 				isTopArr = null;
 			} else {
@@ -91,7 +90,8 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 				break;
 			}
 
-			DustBrain.dumpHandle(topMember + ": ", hTarget);
+			Dust.access(hTarget, MindAccess.Commit, MindAction.Process);
+//			DustBrain.dumpHandle(topMember + ": ", hTarget);
 		}
 
 		@Override
@@ -161,6 +161,7 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 	}
 
 	JSONParser parser = null;
+	private MindHandle hTarget;
 
 	@Override
 	public MindStatus agentExecAction(MindAction action) throws Exception {
@@ -171,11 +172,13 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 			if ( null == parser ) {
 				parser = new JSONParser();
 			}
+			hTarget = Dust.access(MindContext.Self, MindAccess.Get, null, MISC_ATT_CONN_TARGET);
+
 			break;
 		case Begin:
 			break;
 		case Process:
-			File f = Dust.access(MIND_ATT_AGENT_SELF, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
+			File f = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
 			JsonApiReader eventRelay = new JsonApiReader();
 			parser.parse(new FileReader(f), eventRelay, true);
 			break;
