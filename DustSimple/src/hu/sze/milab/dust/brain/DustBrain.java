@@ -6,20 +6,34 @@ import java.util.HashMap;
 import java.util.Map;
 
 import hu.sze.milab.dust.Dust;
+import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.stream.DustStreamConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
+public class DustBrain implements DustBrainConsts, Dust.Brain,  DustConsts.MindAgent {
 
-	static Map<MindHandle, Map> tempKnowledge = new HashMap<>();
+	static Map<MindHandle, Map> ctxBrain = new HashMap<>();
 
-	MindHandle hUnit = MIND_ATT_KNOWLEDGE_UNIT;
-
-	public DustBrain() {
-		loadConstsFrom(DustMetaConsts.class);
-		loadConstsFrom(DustStreamConsts.class);
+	@Override
+	public MindStatus agentExecAction(MindAction action) throws Exception {
+		switch ( action ) {
+		case Begin:
+			break;
+		case End:
+			break;
+		case Init:
+			loadConstsFrom(DustMetaConsts.class);
+			loadConstsFrom(DustStreamConsts.class);
+			break;
+		case Process:
+			break;
+		case Release:
+			break;
+		}
+		
+		return MindStatus.Accept;
 	}
 
 	public void loadConstsFrom(Class constClass) {
@@ -72,12 +86,12 @@ public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
 		}
 
 		synchronized (bh) {
-			Map k = tempKnowledge.get(bh);
+			Map k = ctxBrain.get(bh);
 
 			if ( (null == k) && createIfMissing ) {
 				k = new HashMap<>();
 				k.put(MIND_ATT_KNOWLEDGE_HANDLE, bh);
-				tempKnowledge.put(bh, k);
+				ctxBrain.put(bh, k);
 			}
 
 			return k;
@@ -142,7 +156,7 @@ public class DustBrain implements DustBrainConsts, DustImpl.BrainImpl {
 		case Commit:
 
 			if ( curr instanceof MindHandle ) {
-				MindAgent a = Dust.access(curr, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_LISTENERS, BRAIN_ATT_ACTOR_INSTANCE);
+				MindAgent a = Dust.access(curr, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_LISTENERS, DUST_ATT_NATIVE_INSTANCE);
 
 				if ( null != a ) {
 					try {

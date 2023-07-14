@@ -41,7 +41,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 
 			if ( 0 < ac ) {
 				optOpenPendingElement();
-				Dust.access(hTarget, MindAccess.Set, XmlData.Attribute, MIND_ATT_KNOWLEDGE_TAG);
+				Dust.access(hTarget, MindAccess.Set, XmlData.Attribute, MIND_ATT_KNOWLEDGE_TAGS);
 
 				for (int a = ac; a-- > 0;) {
 					String attName = attributes.getQName(a);
@@ -75,7 +75,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 			Dust.access(hTarget, MindAccess.Set, null, MISC_ATT_VARIANT_VALUE);
 //			Dust.access(hTarget, MindAccess.Reset, null);
 
-			Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAG);
+			Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAGS);
 			Dust.access(hTarget, MindAccess.Set, qName, TEXT_ATT_NAMED_NAME);
 
 			MindAction action;
@@ -100,7 +100,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 			if ( null != pendingElement ) {
 				Dust.access(hTarget, MindAccess.Set, null, MISC_ATT_VARIANT_VALUE);
 				// Dust.access(hTarget, MindAccess.Reset, null);
-				Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAG);
+				Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAGS);
 				Dust.access(hTarget, MindAccess.Set, pendingElement, TEXT_ATT_NAMED_NAME);
 				Dust.access(hTarget, MindAccess.Commit, MindAction.Begin);
 				pendingElement = null;
@@ -111,7 +111,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 			String lastString = collectedText.toString().trim();
 			if ( 0 < lastString.length() ) {
 				optOpenPendingElement();
-				Dust.access(hTarget, MindAccess.Set, XmlData.Content, MIND_ATT_KNOWLEDGE_TAG);
+				Dust.access(hTarget, MindAccess.Set, XmlData.Content, MIND_ATT_KNOWLEDGE_TAGS);
 				Dust.access(hTarget, MindAccess.Set, lastString, MISC_ATT_VARIANT_VALUE);
 				Dust.access(hTarget, MindAccess.Commit, MindAction.Process);
 				collectedText.setLength(0);

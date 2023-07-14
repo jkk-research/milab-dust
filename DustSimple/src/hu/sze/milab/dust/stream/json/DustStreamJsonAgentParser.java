@@ -77,10 +77,10 @@ public class DustStreamJsonAgentParser implements DustStreamJsonConsts, DustCons
 		}
 
 		void send(Object action, Object collType) {
-			Dust.access(hTarget, MindAccess.Set, collType, MIND_ATT_KNOWLEDGE_TAG);
+			Dust.access(hTarget, MindAccess.Set, collType, MIND_ATT_KNOWLEDGE_TAGS);
 			Dust.access(hTarget, MindAccess.Commit, action);
 			if ( null != collType ) {
-				Dust.access(hTarget, MindAccess.Set, null, MIND_ATT_KNOWLEDGE_TAG);
+				Dust.access(hTarget, MindAccess.Set, null, MIND_ATT_KNOWLEDGE_TAGS);
 			}
 		}
 

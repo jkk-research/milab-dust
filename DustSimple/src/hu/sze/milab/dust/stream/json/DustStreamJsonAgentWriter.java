@@ -38,7 +38,7 @@ public class DustStreamJsonAgentWriter implements DustMetaConsts, DustStreamJson
 
 	@Override
 	public MindStatus agentExecAction(MindAction action) throws Exception {
-		MindColl coll = Dust.access(hTarget, MindAccess.Peek, MindColl.One, MIND_ATT_KNOWLEDGE_TAG);
+		MindColl coll = Dust.access(hTarget, MindAccess.Peek, MindColl.One, MIND_ATT_KNOWLEDGE_TAGS);
 		String line = null;
 
 		switch ( action ) {

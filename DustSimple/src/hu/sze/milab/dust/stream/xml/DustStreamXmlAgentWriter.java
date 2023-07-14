@@ -36,7 +36,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 			rowPrefix.append("  ");
 			break;
 		case Process:
-			Object itemType = Dust.access(hTarget, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_TAG);
+			Object itemType = Dust.access(hTarget, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_TAGS);
 
 			if ( itemType == XmlData.Attribute ) {
 				ps.print(" ");
@@ -84,7 +84,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 		ps.print(rowPrefix);
 		ps.print(action);
 
-		print(MIND_ATT_KNOWLEDGE_TAG);
+		print(MIND_ATT_KNOWLEDGE_TAGS);
 		print(TEXT_ATT_NAMED_NAME);
 		print(MISC_ATT_VARIANT_VALUE);
 
