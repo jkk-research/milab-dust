@@ -6,6 +6,7 @@ public interface DustMetaConsts extends DustConsts {
 	
 	public static MindHandle MIND_ASP_UNIT = Dust.createHandle();
 	public static MindHandle MIND_ATT_UNIT_CONTEXT = Dust.createHandle();
+	public static MindHandle MIND_ATT_UNIT_DIALOGS = Dust.createHandle();
 	
 	public static MindHandle MIND_ASP_KNOWLEDGE = Dust.createHandle();
 	public static MindHandle MIND_ATT_KNOWLEDGE_HANDLE = Dust.createHandle();
@@ -22,13 +23,14 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ASP_LOGIC = Dust.createHandle();
 	
 	public static MindHandle MIND_ASP_DIALOG = Dust.createHandle();
-	public static MindHandle DUST_ATT_DIALOG_LAUNCHPARAMS = Dust.createHandle();
+	public static MindHandle MIND_ATT_DIALOG_LAUNCHPARAMS = Dust.createHandle();
 
 	public static MindHandle MIND_ASP_MESSAGE = Dust.createHandle();
 	
 	public static MindHandle MIND_ASP_AGENT = Dust.createHandle();
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.createHandle();
-//	public static MindHandle MIND_ATT_AGENT_SELF = Dust.createHandle();
+	
+	public static MindHandle MIND_LOG_MESSAGEREADER = Dust.createHandle();
 	
 	public static MindHandle DUST_UNIT = Dust.createHandle();
 
@@ -58,6 +60,7 @@ public interface DustMetaConsts extends DustConsts {
 	
 	public static MindHandle MISC_ASP_GEN = Dust.createHandle();
 	public static MindHandle MISC_TAG_GEN_EMPTY = Dust.createHandle();
+	public static MindHandle MISC_TAG_GEN_ACTIVE = Dust.createHandle();
 	
 	public static MindHandle MISC_ASP_VARIANT = Dust.createHandle();
 	public static MindHandle MISC_ATT_VARIANT_VALUE = Dust.createHandle();

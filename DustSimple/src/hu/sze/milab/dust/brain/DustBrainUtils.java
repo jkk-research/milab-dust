@@ -9,12 +9,14 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.dev.DustDevAgentDump;
 import hu.sze.milab.dust.dev.DustDevConsts;
+import hu.sze.milab.dust.net.DustNetConsts;
+import hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty;
 import hu.sze.milab.dust.stream.DustStreamConsts;
 import hu.sze.milab.dust.stream.json.DustStreamJsonAgentParser;
 import hu.sze.milab.dust.stream.json.DustStreamJsonApiAgentSerializer;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDevConsts {
+public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDevConsts, DustNetConsts {
 	DustBrain brain;
 
 	public void loadConstsFrom(Class constClass) {
@@ -87,19 +89,24 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 		loadConstsFrom(DustMetaConsts.class);
 		loadConstsFrom(DustDevConsts.class);
 		loadConstsFrom(DustStreamConsts.class);
+		loadConstsFrom(DustNetConsts.class);
 		
-
+		
+		brain.access(DustBrain.brainRoot, MindAccess.Set, DustBrainAgentMessageReader.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, MIND_LOG_MESSAGEREADER);
+		
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustDevAgentDump.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, DEV_LOG_DUMP);
 
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonAgentParser.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONPARSER);
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonApiAgentSerializer.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONAPISERIALIZER);
+		
+		brain.access(DustBrain.brainRoot, MindAccess.Set, DustHttpServerJetty.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, NET_LOG_SRVJETTY);
 	}
 
 	public void loadConfigs() throws Exception {
 		MindHandle hRead = null;
 
 		String cfgFile;
-		for (int i = 0; null != (cfgFile = brain.access(MindContext.Dialog, MindAccess.Peek, null, DUST_ATT_DIALOG_LAUNCHPARAMS, i)); ++i) {
+		for (int i = 0; null != (cfgFile = brain.access(MindContext.Dialog, MindAccess.Peek, null, MIND_ATT_DIALOG_LAUNCHPARAMS, i)); ++i) {
 
 			File fIn = new File(cfgFile);
 			
@@ -117,7 +124,7 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 				Dust.access(hRead, MindAccess.Set, target, MISC_ATT_CONN_TARGET);
 
 				MindHandle listener = Dust.createHandle();
-				Dust.access(listener, MindAccess.Set, DEV_LOG_DUMP, MIND_ATT_AGENT_LOGIC);
+				Dust.access(listener, MindAccess.Set, MIND_LOG_MESSAGEREADER, MIND_ATT_AGENT_LOGIC);
 				Dust.access(target, MindAccess.Set, listener, MIND_ATT_KNOWLEDGE_LISTENERS);
 			}
 			

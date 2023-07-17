@@ -180,7 +180,9 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 		case Process:
 			File f = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
 			JsonApiReader eventRelay = new JsonApiReader();
+			Dust.access(hTarget, MindAccess.Commit, MindAction.Begin);
 			parser.parse(new FileReader(f), eventRelay, true);
+			Dust.access(hTarget, MindAccess.Commit, MindAction.End);
 			break;
 		case End:
 			break;

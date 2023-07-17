@@ -1,6 +1,10 @@
 package hu.sze.milab.dust;
 
+import java.nio.charset.StandardCharsets;
+
 public interface DustConsts {
+	String CHARSET_UTF8 = StandardCharsets.UTF_8.name();// "UTF-8";
+
 	String EXT_JAR = ".jar";
 	String EXT_JSON = ".json";
 	String SEP = "_";

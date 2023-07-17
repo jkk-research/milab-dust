@@ -8,5 +8,13 @@
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/poi/poi-ooxml-schemas-3.14-20160307.jar"/>
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/poi/xmlbeans-2.6.0.jar"/>
 	<classpathentry kind="lib" path="/DustExtLibs/lib/json/json-simple-1.1.1.jar" sourcepath="/DustExtLibs/lib/json/json-simple-1.1.1-sources.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-http-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-io-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-security-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-server-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-servlet-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-util-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/jetty/jetty-webapp-9.3.7.v20160115.jar"/>
+	<classpathentry kind="lib" path="/DustExtLibs/lib/servlet/servlet-api-3.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
