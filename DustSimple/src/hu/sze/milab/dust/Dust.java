@@ -5,7 +5,7 @@ import hu.sze.milab.dust.utils.DustUtils;
 public class Dust implements DustConsts {
 
 	public interface Brain {
-		MindHandle createHandle();
+		MindHandle resolveID(String id, MindHandle primaryType);
 
 		<RetType> RetType access(Object root, MindAccess cmd, Object val, Object... path);
 	}
@@ -16,8 +16,8 @@ public class Dust implements DustConsts {
 		return BRAIN.access(root, cmd, val, path);
 	}
 
-	public static MindHandle createHandle() {
-		return BRAIN.createHandle();
+	public static MindHandle resolveID(String id, MindHandle primaryType) {
+		return BRAIN.resolveID(id, primaryType);
 	}
 
 	public static void dump(Object sep, boolean strict, Object... objects) {

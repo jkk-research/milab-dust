@@ -19,6 +19,8 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 	static Map brainRoot = new HashMap<>();
 	static DustBrainUtils utils = new DustBrainUtils();
 
+	private boolean booting = true;
+
 	private static final ThreadLocal<EnumMap<MindContext, MindHandle>> threadCtx = new ThreadLocal<EnumMap<MindContext, MindHandle>>() {
 		@Override
 		protected EnumMap<MindContext, MindHandle> initialValue() {
@@ -27,8 +29,42 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 	};
 
 	@Override
-	public MindHandle createHandle() {
-		return new DustBrainHandle();
+	public MindHandle resolveID(String id, MindHandle primaryAspect) {
+		MindHandle ret = null;
+		if ( null == id ) {
+			ret = new DustBrainHandle();
+		} else {
+			String[] ii = id.split(SEP_ID);
+			MindHandle hUnit = access(brainRoot, MindAccess.Peek, null, DUST_ATT_BRAIN_UNITS, ii[0]);
+
+			if ( null == hUnit ) {
+				if ( booting || (MIND_ASP_UNIT == primaryAspect) ) {
+					hUnit = new DustBrainHandle();
+					access(hUnit, MindAccess.Set, primaryAspect, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+					access(hUnit, MindAccess.Set, id, MIND_ATT_KNOWLEDGE_ID);
+					access(brainRoot, MindAccess.Set, hUnit, DUST_ATT_BRAIN_UNITS, ii[0]);
+				} else {
+					return null;
+				}
+			}
+
+			if ( 1 < ii.length ) {
+				ret = access(hUnit, MindAccess.Peek, null, MISC_ATT_CONN_MEMBERMAP, ii[1]);
+
+				if ( (null == ret) && (booting || (null != primaryAspect)) ) {
+					ret = new DustBrainHandle();
+					access(ret, MindAccess.Set, primaryAspect, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+					access(ret, MindAccess.Set, id, MIND_ATT_KNOWLEDGE_ID);
+					access(ret, MindAccess.Set, ii[1], TEXT_ATT_NAMED_NAME);
+					access(hUnit, MindAccess.Set, ret, MISC_ATT_CONN_MEMBERMAP, ii[1]);
+
+				}
+			} else {
+				ret = hUnit;
+			}
+		}
+
+		return ret;
 	}
 
 	static public Map resolveKnowledge(MindHandle bh, boolean createIfMissing) {
@@ -65,11 +101,11 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 		switch ( action ) {
 		case Init:
 			Thread t = Thread.currentThread();
-			MindHandle ht = createHandle();
+			MindHandle ht = resolveID(null, DUST_ASP_THREAD);
 //			Map mt = resolveKnowledge(ht, true);
 
-			MindHandle hd = createHandle();
-			
+			MindHandle hd = resolveID(null, MIND_ASP_DIALOG);
+
 			EnumMap<MindContext, MindHandle> currCtx = threadCtx.get();
 			currCtx.put(MindContext.Dialog, hd);
 
@@ -81,6 +117,8 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 			tm.put(t, ht);
 
 			utils.initBrain(this);
+
+//			booting = false;
 			break;
 		case Begin:
 			utils.loadConfigs();
@@ -101,7 +139,7 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 		Object ret = null;
 
 		if ( root instanceof MindContext ) {
-			root = threadCtx.get().get((MindContext)root);
+			root = threadCtx.get().get((MindContext) root);
 //			root = access(brainRoot, MindAccess.Peek, null, DUST_ATT_BRAIN_THREADS, Thread.currentThread());
 		}
 
@@ -110,6 +148,9 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 		Object lastKey = null;
 
 		for (Object p : path) {
+			if ( p instanceof Enum ) {
+				p = ((Enum) p).name();
+			}
 			if ( curr instanceof MindHandle ) {
 				curr = resolveKnowledge((DustBrainHandle) curr, true);
 			} else if ( null == curr ) {
@@ -161,7 +202,7 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 				EnumMap<MindContext, MindHandle> prevCtx = new EnumMap<>(MindContext.class);
 				EnumMap<MindContext, MindHandle> currCtx = threadCtx.get();
 				prevCtx.putAll(currCtx);
-				
+
 				currCtx.put(MindContext.Message, (MindHandle) curr);
 				currCtx.put(MindContext.Self, h);
 
@@ -232,5 +273,4 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 
 		return (RetType) ret;
 	}
-
 }

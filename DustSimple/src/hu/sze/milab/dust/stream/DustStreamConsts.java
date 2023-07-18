@@ -7,14 +7,16 @@ import hu.sze.milab.dust.DustMetaConsts;
 
 public interface DustStreamConsts extends DustMetaConsts {
 	
-	public static MindHandle STREAM_UNIT = Dust.createHandle();
+	public static MindHandle STREAM_UNIT = Dust.resolveID(null, null);
 	
-	public static MindHandle STREAM_ASP_STREAM = Dust.createHandle();
-	public static MindHandle STREAM_ATT_STREAM_FILE = Dust.createHandle();
+	public static MindHandle STREAM_ASP_STREAM = Dust.resolveID(null, null);
+	public static MindHandle STREAM_ATT_STREAM_FILE = Dust.resolveID(null, null);
 
-	public static MindHandle STREAM_LOG_JSONPARSER = Dust.createHandle();
-	public static MindHandle STREAM_LOG_JSONAPISERIALIZER = Dust.createHandle();
+	public static MindHandle STREAM_LOG_JSONPARSER = Dust.resolveID(null, null);
 	
+	public static MindHandle STREAM_LOG_JSONAPISERIALIZER = Dust.resolveID(null, null);
+	public static MindHandle STREAM_LOG_JSONAPIREADER = Dust.resolveID(null, null);
+
 	interface StreamProcessor {
 		public void processStream(InputStream is, String url) throws Exception;
 	}

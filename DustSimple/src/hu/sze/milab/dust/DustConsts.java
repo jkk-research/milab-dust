@@ -8,6 +8,7 @@ public interface DustConsts {
 	String EXT_JAR = ".jar";
 	String EXT_JSON = ".json";
 	String SEP = "_";
+	String SEP_ID = ":";
 
 	int KEY_ADD = -1;
 	int KEY_SIZE = -2;
@@ -17,6 +18,7 @@ public interface DustConsts {
 	String VENDOR_PREFIX = "hu.sze.milab.";
 
 	interface MindHandle {
+		String getID();
 	};
 
 	interface MindAgent {

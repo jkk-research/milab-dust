@@ -12,6 +12,7 @@ import hu.sze.milab.dust.dev.DustDevConsts;
 import hu.sze.milab.dust.net.DustNetConsts;
 import hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty;
 import hu.sze.milab.dust.stream.DustStreamConsts;
+import hu.sze.milab.dust.stream.json.DustStreamJsonApiAgentMessageReader;
 import hu.sze.milab.dust.stream.json.DustStreamJsonAgentParser;
 import hu.sze.milab.dust.stream.json.DustStreamJsonApiAgentSerializer;
 
@@ -91,13 +92,12 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 		loadConstsFrom(DustStreamConsts.class);
 		loadConstsFrom(DustNetConsts.class);
 		
-		
-		brain.access(DustBrain.brainRoot, MindAccess.Set, DustBrainAgentMessageReader.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, MIND_LOG_MESSAGEREADER);
-		
+				
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustDevAgentDump.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, DEV_LOG_DUMP);
 
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonAgentParser.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONPARSER);
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonApiAgentSerializer.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONAPISERIALIZER);
+		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonApiAgentMessageReader.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONAPIREADER);
 		
 		brain.access(DustBrain.brainRoot, MindAccess.Set, DustHttpServerJetty.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, NET_LOG_SRVJETTY);
 	}
@@ -116,15 +116,15 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 			}
 
 			if ( null == hRead ) {
-				hRead = Dust.createHandle();
+				hRead = Dust.resolveID(null, null);
 				Dust.access(hRead, MindAccess.Set, STREAM_LOG_JSONAPISERIALIZER, MIND_ATT_AGENT_LOGIC);
 				Dust.access(hRead, MindAccess.Set, hRead, MIND_ATT_KNOWLEDGE_LISTENERS);
 
-				MindHandle target = Dust.createHandle();
+				MindHandle target = Dust.resolveID(null, null);
 				Dust.access(hRead, MindAccess.Set, target, MISC_ATT_CONN_TARGET);
 
-				MindHandle listener = Dust.createHandle();
-				Dust.access(listener, MindAccess.Set, MIND_LOG_MESSAGEREADER, MIND_ATT_AGENT_LOGIC);
+				MindHandle listener = Dust.resolveID(null, null);
+				Dust.access(listener, MindAccess.Set, STREAM_LOG_JSONAPIREADER, MIND_ATT_AGENT_LOGIC);
 				Dust.access(target, MindAccess.Set, listener, MIND_ATT_KNOWLEDGE_LISTENERS);
 			}
 			

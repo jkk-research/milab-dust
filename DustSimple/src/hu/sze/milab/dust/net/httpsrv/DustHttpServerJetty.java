@@ -20,6 +20,8 @@ import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.util.ssl.SslContextFactory;
 
+import hu.sze.milab.dust.Dust;
+
 public class DustHttpServerJetty extends DustHttpServerBase {
 	enum Commands {
 		stop, info,
@@ -96,7 +98,8 @@ public class DustHttpServerJetty extends DustHttpServerBase {
 	}
 
 	public void initConnectors() throws Exception {
-		initConnectorPublic(8080, NO_PORT_SET);
+		long port = Dust.access(MindContext.Self, MindAccess.Peek, 8080, NET_ATT_HOST_PORT);
+		initConnectorPublic((int) port, NO_PORT_SET);
 	}
 
 	protected void initHandlers() {
