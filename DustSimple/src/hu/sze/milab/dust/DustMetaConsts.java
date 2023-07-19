@@ -41,7 +41,7 @@ public interface DustMetaConsts extends DustConsts {
 //	public static MindHandle DUST_ATT_THREAD_CONTEXTS = Dust.createHandle();
 
 	public static MindHandle DUST_ASP_NATIVE = Dust.resolveID(null, null);
-	public static MindHandle DUST_ATT_NATIVE_IMPLEMENTATIONS = Dust.resolveID(null, null);
+	public static MindHandle DUST_ATT_NATIVE_IMPLEMENTATION = Dust.resolveID(null, null);
 	public static MindHandle DUST_ATT_NATIVE_INSTANCE = Dust.resolveID(null, null);
 	public static MindHandle DUST_ATT_NATIVE_CONTEXT = Dust.resolveID(null, null);
 	
@@ -67,4 +67,7 @@ public interface DustMetaConsts extends DustConsts {
 	
 	public static MindHandle TEXT_ASP_NAMED = Dust.resolveID(null, null);
 	public static MindHandle TEXT_ATT_NAMED_NAME = Dust.resolveID(null, null);	
+	
+	public static MindHandle TEXT_ASP_PLAIN = Dust.resolveID(null, null);
+	public static MindHandle TEXT_ATT_PLAIN_TEXT = Dust.resolveID(null, null);	
 }

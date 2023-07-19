@@ -179,6 +179,20 @@ public class DustStreamJsonApiAgentSerializer implements DustStreamJsonConsts, D
 			break;
 		case Process:
 			File f = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_FILE);
+			if ( null == f ) {
+				String fn = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_PATH);
+				if ( null != fn ) {
+					f = new File(fn);
+					if (!f.isFile() ) {
+						f = null;
+					}
+				}
+			}
+			
+			if ( null == f ) {
+				DustException.wrap(null, "Missing input file");
+			}
+			
 			JsonApiReader eventRelay = new JsonApiReader();
 			Dust.access(hTarget, MindAccess.Commit, MindAction.Begin);
 			parser.parse(new FileReader(f), eventRelay, true);

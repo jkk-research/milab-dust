@@ -93,13 +93,13 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 		loadConstsFrom(DustNetConsts.class);
 		
 				
-		brain.access(DustBrain.brainRoot, MindAccess.Set, DustDevAgentDump.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, DEV_LOG_DUMP);
+		brain.access(DEV_LOG_DUMP, MindAccess.Set, DustDevAgentDump.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
 
-		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonAgentParser.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONPARSER);
-		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonApiAgentSerializer.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONAPISERIALIZER);
-		brain.access(DustBrain.brainRoot, MindAccess.Set, DustStreamJsonApiAgentMessageReader.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, STREAM_LOG_JSONAPIREADER);
+		brain.access(STREAM_LOG_JSONPARSER, MindAccess.Set, DustStreamJsonAgentParser.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
+		brain.access(STREAM_LOG_JSONAPISERIALIZER, MindAccess.Set, DustStreamJsonApiAgentSerializer.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
+		brain.access(STREAM_LOG_JSONAPIREADER, MindAccess.Set, DustStreamJsonApiAgentMessageReader.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
 		
-		brain.access(DustBrain.brainRoot, MindAccess.Set, DustHttpServerJetty.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATIONS, NET_LOG_SRVJETTY);
+		brain.access(NET_LOG_SRVJETTY, MindAccess.Set, DustHttpServerJetty.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
 	}
 
 	public void loadConfigs() throws Exception {

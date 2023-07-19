@@ -118,7 +118,7 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 
 			utils.initBrain(this);
 
-//			booting = false;
+			booting = false;
 			break;
 		case Begin:
 			utils.loadConfigs();
@@ -195,43 +195,46 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 
 		switch ( cmd ) {
 		case Check:
+			ret = (curr == val);
 			break;
 		case Commit:
 			if ( curr instanceof MindHandle ) {
 				MindHandle h = Dust.access(curr, MindAccess.Peek, null, MIND_ATT_KNOWLEDGE_LISTENERS);
-				EnumMap<MindContext, MindHandle> prevCtx = new EnumMap<>(MindContext.class);
-				EnumMap<MindContext, MindHandle> currCtx = threadCtx.get();
-				prevCtx.putAll(currCtx);
+				if ( null != h ) {
+					EnumMap<MindContext, MindHandle> prevCtx = new EnumMap<>(MindContext.class);
+					EnumMap<MindContext, MindHandle> currCtx = threadCtx.get();
+					prevCtx.putAll(currCtx);
 
-				currCtx.put(MindContext.Message, (MindHandle) curr);
-				currCtx.put(MindContext.Self, h);
+					currCtx.put(MindContext.Message, (MindHandle) curr);
+					currCtx.put(MindContext.Self, h);
 
-				try {
-					MindAgent a = Dust.access(h, MindAccess.Peek, null, DUST_ATT_NATIVE_INSTANCE);
+					try {
+						MindAgent a = Dust.access(h, MindAccess.Peek, null, DUST_ATT_NATIVE_INSTANCE);
 
-					if ( null == a ) {
-						MindHandle hL = null;
-						String agentClass = null;
-						try {
-							hL = Dust.access(h, MindAccess.Peek, null, MIND_ATT_AGENT_LOGIC);
-							agentClass = Dust.access(brainRoot, MindAccess.Peek, null, DUST_ATT_NATIVE_IMPLEMENTATIONS, hL);
-							a = (MindAgent) Class.forName(agentClass).newInstance();
-							a.agentExecAction(MindAction.Init);
-							Dust.access(h, MindAccess.Set, a, DUST_ATT_NATIVE_INSTANCE);
-						} catch (Throwable e) {
-							DustException.wrap(e, hL, agentClass);
+						if ( null == a ) {
+							MindHandle hL = null;
+							String agentClass = null;
+							try {
+								agentClass = Dust.access(h, MindAccess.Peek, null, MIND_ATT_AGENT_LOGIC, DUST_ATT_NATIVE_IMPLEMENTATION);
+//								agentClass = Dust.access(brainRoot, MindAccess.Peek, null, hL);
+								a = (MindAgent) Class.forName(agentClass).newInstance();
+								a.agentExecAction(MindAction.Init);
+								Dust.access(h, MindAccess.Set, a, DUST_ATT_NATIVE_INSTANCE);
+							} catch (Throwable e) {
+								DustException.wrap(e, hL, agentClass);
+							}
 						}
-					}
 
-					if ( null != a ) {
-						try {
-							a.agentExecAction((MindAction) val);
-						} catch (Throwable e) {
-							e.printStackTrace();
+						if ( null != a ) {
+							try {
+								a.agentExecAction((MindAction) val);
+							} catch (Throwable e) {
+								e.printStackTrace();
+							}
 						}
+					} finally {
+						currCtx.putAll(prevCtx);
 					}
-				} finally {
-					currCtx.putAll(prevCtx);
 				}
 			}
 			break;

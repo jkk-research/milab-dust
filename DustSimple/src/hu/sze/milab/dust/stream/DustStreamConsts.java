@@ -10,6 +10,7 @@ public interface DustStreamConsts extends DustMetaConsts {
 	public static MindHandle STREAM_UNIT = Dust.resolveID(null, null);
 	
 	public static MindHandle STREAM_ASP_STREAM = Dust.resolveID(null, null);
+	public static MindHandle STREAM_ATT_STREAM_PATH = Dust.resolveID(null, null);
 	public static MindHandle STREAM_ATT_STREAM_FILE = Dust.resolveID(null, null);
 
 	public static MindHandle STREAM_LOG_JSONPARSER = Dust.resolveID(null, null);
