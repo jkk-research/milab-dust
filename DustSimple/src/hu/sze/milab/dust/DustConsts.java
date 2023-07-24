@@ -15,7 +15,7 @@ public interface DustConsts {
 	int KEY_ITER = -3;
 	int KEY_KEYS = -4;
 	
-	String VENDOR_PREFIX = "hu.sze.milab.";
+	String PREFIX_MILAB = "hu.sze.milab.";
 
 	interface MindHandle {
 		String getID();

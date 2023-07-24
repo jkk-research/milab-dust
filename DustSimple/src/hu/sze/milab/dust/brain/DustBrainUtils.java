@@ -32,7 +32,7 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 					String[] nameParts = name.split(STR_IDSEP);
 
 					if ( 2 == nameParts.length ) {
-						String unitID = VENDOR_PREFIX + nameParts[0];
+						String unitID = PREFIX_MILAB + nameParts[0];
 						brain.access(DustBrain.brainRoot, MindAccess.Set, bh, DUST_ATT_BRAIN_UNITS, unitID);
 					}
 				}
@@ -50,7 +50,7 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 
 			String[] nameParts = name.split(STR_IDSEP);
 
-			String unitID = VENDOR_PREFIX + nameParts[0];
+			String unitID = PREFIX_MILAB + nameParts[0];
 			MindHandle hUnit = brain.access(DustBrain.brainRoot, MindAccess.Peek, null, DUST_ATT_BRAIN_UNITS, unitID);
 			k.put(MIND_ATT_KNOWLEDGE_UNIT, hUnit);
 
