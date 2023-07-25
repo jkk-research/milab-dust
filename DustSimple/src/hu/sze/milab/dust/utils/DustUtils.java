@@ -48,9 +48,7 @@ public class DustUtils implements DustConsts {
 				if ( null == sb ) {
 					sb = new StringBuilder(str);
 				} else {
-					if ( 0 < sb.length() ) {
-						sb.append(sep);
-					}
+					sb.append(sep);
 					sb.append(str);
 				}
 			}
@@ -114,10 +112,16 @@ public class DustUtils implements DustConsts {
 		public Collection<KeyType> keys() {
 			return indexes.keySet();
 		}
+
+		@Override
+		public String toString() {
+			return indexes.toString();
+		}
 	}
 
 	public static String replacePostfix(String where, String pfSep, String postfix) {
 		int sep = where.lastIndexOf(pfSep);
 		return where.substring(0, sep + 1) + postfix;
 	}
+
 }

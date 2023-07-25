@@ -4,6 +4,8 @@ import java.nio.charset.StandardCharsets;
 
 public interface DustConsts {
 	String CHARSET_UTF8 = StandardCharsets.UTF_8.name();// "UTF-8";
+	String FMT_TIMESTAMP = "yyyy-MM-dd'T'HH_mm_ss";
+	String FMT_DATE = "yyyy-MM-dd";
 
 	String EXT_JAR = ".jar";
 	String EXT_JSON = ".json";
