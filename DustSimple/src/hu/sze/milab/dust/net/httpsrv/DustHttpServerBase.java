@@ -13,134 +13,78 @@ import hu.sze.milab.dust.net.DustNetConsts;
 
 public abstract class DustHttpServerBase implements DustNetConsts, DustConsts.MindAgent {
 
-//    static final DustUtilsFactory<DustEntity, Set<DustEntity>> typeAtts = new DustUtilsFactory<DustEntity, Set<DustEntity>>(false) {
-//        @Override
-//        protected Set<DustEntity> create(DustEntity key, Object... hints) {
-//            return new HashSet<>();
-//        }
-//
-//        @Override
-//        protected void initNew(Set<DustEntity> item, DustEntity key, Object... hints) {
-//            DustUtils.accessEntity(DataCommand.processRef, key, DustMetaLinks.TypeAttDefs, new RefProcessor() {
-//                @Override
-//                public void processRef(DustRef ref) {
-//                    item.add(ref.get(RefKey.target));
-//                }
-//            });
-//
-//            DustUtils.accessEntity(DataCommand.processRef, key, DustGenericLinks.ConnectedRequires, new RefProcessor() {
-//                @Override
-//                public void processRef(DustRef ref) {
-//                    DustEntity t = ref.get(RefKey.target);
-//                    item.addAll(typeAtts.get(t));
-//                }
-//            });
-//        }
-//    };
+	class ProcessorWrapperServlet extends HttpServlet {
+		private static final long serialVersionUID = 1L;
 
-    class ProcessorWrapperServlet extends HttpServlet {
-        private static final long serialVersionUID = 1L;
+		String charset;
+		String contentType;
 
-//        DustEntity eSelf;
+		@Override
+		protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			request.getServerPort();
+			
+			Object eProc = null;
 
-        String charset;
-        String contentType;
-        
-//        Map<String, DustEntity> attsToRead = new HashMap<>();
+			Enumeration<String> ee;
+			String n = null;
 
-//        public ProcessorWrapperServlet(DustEntity eSelf) {
-//            this.eSelf = eSelf;
-//
-//            charset = DustUtils.getSafe(eSelf, DustNetAtts.NetProcessorRespCharset, CHARSET_UTF8);
-//            contentType = DustUtils.getSafe(eSelf, DustNetAtts.NetProcessorRespCharset, CONTENT_JSON);
-//            
-//            DustUtils.accessEntity(DataCommand.processRef, eSelf, DustNetLinks.NetProcessorParamTypes, new RefProcessor() {
-//                @Override
-//                public void processRef(DustRef ref) {
-//                    DustEntity t = ref.get(RefKey.target);
-//                    for ( DustEntity a : typeAtts.get(t)) {
-//                        if (!attsToRead.containsValue(a) ) {
-//                            String id = DustUtils.accessEntity(DataCommand.getValue, a, DustGenericAtts.IdentifiedIdLocal);
-//                            attsToRead.put(id, a);
-//                        }
-//                    }
-//                   
-//                }
-//            });
-//        }
+			for (ee = request.getAttributeNames(); ee.hasMoreElements();) {
+				n = ee.nextElement();
+				optAdd(eProc, n, request.getAttribute(n));
+			}
 
-        @Override
-        protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//            DustEntity eProc = DustUtils.accessEntity(DataCommand.getEntity, DustDataTypes.Message);
-        	Object eProc = null;
+			for (ee = request.getParameterNames(); ee.hasMoreElements();) {
+				n = ee.nextElement();
+				optAdd(eProc, n, request.getParameter(n));
+			}
 
-            Enumeration<String> ee;
-            String n = null;
+			for (ee = request.getHeaderNames(); ee.hasMoreElements();) {
+				n = ee.nextElement();
+				optAdd(eProc, n, request.getHeader(n));
+			}
 
-            for (ee = request.getAttributeNames(); ee.hasMoreElements(); ) {
-                n = ee.nextElement();
-                optAdd(eProc, n, request.getAttribute(n));
-            }
+			response.setCharacterEncoding(charset);
+			response.setContentType(contentType);
 
-            for (ee = request.getParameterNames(); ee.hasMoreElements(); ) {
-                n = ee.nextElement();
-                optAdd(eProc, n, request.getParameter(n));
-            }
+//    request.getMethod();
+//    response.getWriter();
 
-            for (ee = request.getHeaderNames(); ee.hasMoreElements(); ) {
-                n = ee.nextElement();
-                optAdd(eProc, n, request.getHeader(n));
-            }
+			response.setStatus(HttpServletResponse.SC_OK);
+		}
 
-            response.setCharacterEncoding(charset);
-            response.setContentType(contentType);
+		private void optAdd(Object msg, String name, Object val) {
+		}
+	}
 
-//            DustUtils.accessEntity(DataCommand.setRef, eProc, DustDataLinks.MessageCommand, DustProcMessages.ProcessorProcess);
-//            DustUtils.accessEntity(DataCommand.setValue, eProc, DustNetAtts.NetProcessMethod, request.getMethod());
-//            DustUtils.accessEntity(DataCommand.setValue, eProc, DustGenericAtts.StreamWriter, response.getWriter());
-//
-//            DustUtils.accessEntity(DataCommand.tempSend, eSelf, eProc);
-            response.setStatus(HttpServletResponse.SC_OK);
-        }
-        
-        private void optAdd(Object msg, String name, Object val) {
-//            DustEntity att = attsToRead.get(name);
-//            
-//            if ( null != att ) {
-//                DustUtils.accessEntity(DataCommand.setValue, msg, att, val);
-//            }
-        }
-    }
-    
-    @Override
-    	public MindStatus agentExecAction(MindAction action) throws Exception {
-    		switch ( action ) {
-				case Begin:
-					break;
-				case End:
-					break;
-				case Init:
-					activeInit();
-					break;
-				case Process:
-					break;
-				case Release:
-					activeRelease();
-					break;    		
-    		}
-    		
-    		return MindStatus.Accept;
-    	}
+	@Override
+	public MindStatus agentExecAction(MindAction action) throws Exception {
+		switch ( action ) {
+		case Begin:
+			break;
+		case End:
+			break;
+		case Init:
+			activeInit();
+			break;
+		case Process:
+			break;
+		case Release:
+			activeRelease();
+			break;
+		}
 
-    public void activeInit() throws Exception {
-        initConnectors();
-        initHandlers();
-    }
+		return MindStatus.Accept;
+	}
 
-    public void activeRelease() throws Exception {
-    }
+	public void activeInit() throws Exception {
+		initConnectors();
+		initHandlers();
+	}
 
-    public void initConnectors() throws Exception {
+	public void activeRelease() throws Exception {
+	}
+
+	public void initConnectors() throws Exception {
 //        int pPub = DustUtils.getInt(ContextRef.self, DustNetAtts.NetServerPublicPort, NO_PORT_SET);
 //        int pSsl = DustUtils.getInt(ContextRef.self, DustNetAtts.NetServerSslPort, NO_PORT_SET);
 //
@@ -151,9 +95,9 @@ public abstract class DustHttpServerBase implements DustNetConsts, DustConsts.Mi
 //        if (NO_PORT_SET != pSsl) {
 //            initConnectorSsl(pSsl);
 //        }
-    }
+	}
 
-    protected void initHandlers() {
+	protected void initHandlers() {
 //        DustUtils.accessEntity(DataCommand.processRef, ContextRef.self, DustProcLinks.DispatcherTargets, new RefProcessor() {
 //            @Override
 //            public void processRef(DustRef ref) {
@@ -163,13 +107,13 @@ public abstract class DustHttpServerBase implements DustNetConsts, DustConsts.Mi
 //                addServlet("/" + ctx, new ProcessorWrapperServlet(sc));
 //            }
 //        });
-    }
+	}
 
-    protected abstract void initConnectorPublic(int portPublic, int portSsl);
+	protected abstract void initConnectorPublic(int portPublic, int portSsl);
 
-    protected void initConnectorSsl(int portSsl) {
-    }
+	protected void initConnectorSsl(int portSsl) {
+	}
 
-    protected abstract void addServlet(String path, HttpServlet servlet);
+	protected abstract void addServlet(String path, HttpServlet servlet);
 
 }
