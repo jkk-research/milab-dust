@@ -124,6 +124,11 @@ public class DustUtils implements DustConsts {
 		return where.substring(sep + 1);
 	}
 
+	public static String cutPostfix(String where, String pfSep) {
+		int sep = where.lastIndexOf(pfSep);
+		return where.substring(0, sep);
+	}
+
 	public static String replacePostfix(String where, String pfSep, String postfix) {
 		int sep = where.lastIndexOf(pfSep);
 		return where.substring(0, sep + 1) + postfix;

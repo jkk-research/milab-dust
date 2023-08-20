@@ -17,5 +17,6 @@
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/jetty/jetty-webapp-9.3.7.v20160115.jar"/>
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/servlet/servlet-api-3.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/mvel/mvel2-2.4.15.Final.jar"/>
+	<classpathentry exported="true" kind="lib" path="/DustExtLibs/lib/zip/commons-compress-1.23.0.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
