@@ -91,6 +91,65 @@ public class DustUtils implements DustConsts {
 		return "?";
 	}
 
+	@SuppressWarnings("rawtypes")
+	public static class TableReader {
+		private Map<String, Integer> columns = new HashMap<>();
+
+		public TableReader(String[] data) {
+			for (int i = data.length; i-- > 0;) {
+				columns.put(data[i], i);
+			}
+		}
+
+		protected Object optConvert(String col, Object val) {
+			return val;
+		}
+
+		public Map getUntil(Object[] row, Map target, String until) {
+			if ( null == target ) {
+				target = new HashMap();
+			}
+
+			int ui = columns.get(until);
+
+			for (Map.Entry<String, Integer> ec : columns.entrySet()) {
+				if ( ec.getValue() < ui ) {
+					String c = ec.getKey();
+					Object v = get(row, c);
+					if ( null != v ) {
+						target.put(c, optConvert(c, v));
+					}
+				}
+			}
+
+			return target;
+		}
+
+		public Map<String, Object> get(Object[] row, Map<String, Object> target, String... cols) {
+			if ( null == target ) {
+				target = new HashMap<>();
+			}
+
+			for (String c : cols) {
+				Object v = get(row, c);
+				if ( null != v ) {
+					target.put(c, optConvert(c, v));
+				}
+			}
+
+			return target;
+		}
+
+		public <ValType> ValType get(ValType[] row, String col) {
+			return get(row, col, null);
+		}
+
+		public <ValType> ValType get(ValType[] row, String col, ValType def) {
+			int ci = columns.getOrDefault(col, Integer.MAX_VALUE);
+			return (row.length > ci) ? row[ci] : def;
+		}
+	}
+
 	public static class Indexer<KeyType> {
 		private Map<KeyType, Integer> indexes = new HashMap<>();
 
