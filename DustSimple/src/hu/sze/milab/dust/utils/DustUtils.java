@@ -1,6 +1,8 @@
 package hu.sze.milab.dust.utils;
 
+import java.io.PrintWriter;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -93,12 +95,18 @@ public class DustUtils implements DustConsts {
 
 	@SuppressWarnings("rawtypes")
 	public static class TableReader {
+		String[] headers;
 		private Map<String, Integer> columns = new HashMap<>();
 
 		public TableReader(String[] data) {
+			headers = data;
 			for (int i = data.length; i-- > 0;) {
 				columns.put(data[i], i);
 			}
+		}
+		
+		public int getSize() {
+			return columns.size();
 		}
 
 		protected Object optConvert(String col, Object val) {
@@ -110,7 +118,7 @@ public class DustUtils implements DustConsts {
 				target = new HashMap();
 			}
 
-			int ui = columns.get(until);
+			int ui = DustUtils.isEmpty(until) ? Integer.MAX_VALUE : columns.get(until);
 
 			for (Map.Entry<String, Integer> ec : columns.entrySet()) {
 				if ( ec.getValue() < ui ) {
@@ -148,6 +156,24 @@ public class DustUtils implements DustConsts {
 			int ci = columns.getOrDefault(col, Integer.MAX_VALUE);
 			return (row.length > ci) ? row[ci] : def;
 		}
+
+		public void writeHead(PrintWriter out, String sep) {
+			boolean first = true;
+			
+			for ( String c : headers ) {
+				if ( first ) {
+					first = false;
+				} else {
+					out.print(sep);
+				}
+				out.print(c);
+			}
+			out.println();
+		}
+
+		public int getColIdx(String col) {
+			return columns.getOrDefault(col, -1);
+		}
 	}
 
 	public static class Indexer<KeyType> {
@@ -177,6 +203,51 @@ public class DustUtils implements DustConsts {
 			return indexes.toString();
 		}
 	}
+
+	@SuppressWarnings("rawtypes")
+	public static class MapComparator implements Comparator<Map> {
+		String[] sf;
+		int sfl;
+		int[] sgn;
+
+		public MapComparator(String fieldList, String sep) {
+			this(fieldList.split(sep));
+		}
+
+		public MapComparator(String... fieldList) {
+			sf = fieldList;
+			sfl = sf.length;
+			sgn = new int[sfl];
+
+			for (int i = 0; i < sfl; ++i) {
+				if ( sf[i].startsWith("-") ) {
+					sf[i] = sf[i].substring(1);
+					sgn[i] = -1;
+				} else {
+					sgn[i] = 1;
+				}
+			}
+		}
+
+		@Override
+		public int compare(Map o1, Map o2) {
+			int ret = 0;
+
+			for (int i = 0; i < sfl; ++i) {
+				ret = safeCompare(o1.get(sf[i]), o2.get(sf[i]));
+				if ( 0 != ret ) {
+					return ret;
+				}
+			}
+
+			return ret;
+		}
+	};
+
+	@SuppressWarnings("rawtypes")
+	public static int safeCompare(Object v1, Object v2) {
+		return (null == v1) ? (null == v2) ? 0 : 1 : (null == v2) ? 1 : ((Comparable) v1).compareTo(v2);
+	};
 
 	public static String getPostfix(String where, String pfSep) {
 		int sep = where.lastIndexOf(pfSep);
