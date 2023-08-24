@@ -220,6 +220,7 @@ public class DustUtils implements DustConsts {
 			sgn = new int[sfl];
 
 			for (int i = 0; i < sfl; ++i) {
+				sf[i] = sf[i].trim();
 				if ( sf[i].startsWith("-") ) {
 					sf[i] = sf[i].substring(1);
 					sgn[i] = -1;
