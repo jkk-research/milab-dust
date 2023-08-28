@@ -1,10 +1,12 @@
 package hu.sze.milab.dust;
 
+import hu.sze.milab.dust.utils.DustUtils;
+
 public final class DustException extends RuntimeException implements DustConsts {
 	private static final long serialVersionUID = 1L;
-
-	public DustException(Throwable src) {
-		super(src);
+	
+	private DustException(Throwable src, Object... params) {
+		super(DustUtils.sbAppend(null, ",", false, params).toString(), src);
 	}
 
 	public static void swallow(Throwable src, Object... params) {
@@ -17,7 +19,7 @@ public final class DustException extends RuntimeException implements DustConsts 
 			throw (DustException) src;
 		}
 	
-		Dust.dumpObs(src, params);
-		throw new DustException(src);
+//		Dust.dumpObs(src, params);
+		throw new DustException(src, params);
 	}
 }

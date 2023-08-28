@@ -1,15 +1,14 @@
 package hu.sze.milab.dust.utils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import hu.sze.milab.dust.DustConsts;
-
-public class DustUtilsFile extends DustUtils implements DustConsts {
+public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 
 	public static String optRemoveUpFromPath(String path) {
 		String ret = path;
@@ -103,4 +102,24 @@ public class DustUtilsFile extends DustUtils implements DustConsts {
 			zis.closeEntry();
 		}
 	}
+	
+	public static File searchRecursive(File f, FileFilter ff) {
+		File ret = null;
+
+		if ( null != f ) {
+			if ( ff.accept(f) ) {
+				return f;
+			} else if ( f.isDirectory() ) {
+				for (File fl : f.listFiles()) {
+					ret = searchRecursive(fl, ff);
+					if ( null != ret ) {
+						break;
+					}
+				}
+			}
+		}
+		
+		return ret;
+	}
+
 }

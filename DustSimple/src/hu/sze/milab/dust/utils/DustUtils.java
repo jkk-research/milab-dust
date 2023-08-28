@@ -6,11 +6,10 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 
-import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
 
 @SuppressWarnings("unchecked")
-public class DustUtils implements DustConsts {
+public class DustUtils implements DustUtilsConsts {
 
 	public interface QueueContainer<MainType> {
 		void enqueue(MainType item, Object... hints);
@@ -157,6 +156,13 @@ public class DustUtils implements DustConsts {
 			return (row.length > ci) ? row[ci] : def;
 		}
 
+		public void set(Object[] row, String col, Object val) {
+			int ci = columns.getOrDefault(col, Integer.MAX_VALUE);
+			if (row.length > ci) {
+				row[ci] = val;
+			}
+		}
+
 		public void writeHead(PrintWriter out, String sep) {
 			boolean first = true;
 			
@@ -250,19 +256,19 @@ public class DustUtils implements DustConsts {
 		return (null == v1) ? (null == v2) ? 0 : 1 : (null == v2) ? 1 : ((Comparable) v1).compareTo(v2);
 	};
 
-	public static String getPostfix(String where, String pfSep) {
-		int sep = where.lastIndexOf(pfSep);
-		return where.substring(sep + 1);
+	public static String getPostfix(String strSrc, String pfSep) {
+		int sep = strSrc.lastIndexOf(pfSep);
+		return strSrc.substring(sep + 1);
 	}
 
-	public static String cutPostfix(String where, String pfSep) {
-		int sep = where.lastIndexOf(pfSep);
-		return where.substring(0, sep);
+	public static String cutPostfix(String strSrc, String pfSep) {
+		int sep = strSrc.lastIndexOf(pfSep);
+		return strSrc.substring(0, sep);
 	}
 
-	public static String replacePostfix(String where, String pfSep, String postfix) {
-		int sep = where.lastIndexOf(pfSep);
-		return where.substring(0, sep + 1) + postfix;
+	public static String replacePostfix(String strSrc, String pfSep, String postfix) {
+		int sep = strSrc.lastIndexOf(pfSep);
+		return strSrc.substring(0, sep + 1) + postfix;
 	}
 
 }
