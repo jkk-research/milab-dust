@@ -241,7 +241,7 @@ public class DustUtils implements DustUtilsConsts {
 			int ret = 0;
 
 			for (int i = 0; i < sfl; ++i) {
-				ret = safeCompare(o1.get(sf[i]), o2.get(sf[i]));
+				ret = sgn[i] * safeCompare(o1.get(sf[i]), o2.get(sf[i]));
 				if ( 0 != ret ) {
 					return ret;
 				}
