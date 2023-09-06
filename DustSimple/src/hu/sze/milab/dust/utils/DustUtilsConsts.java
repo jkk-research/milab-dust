@@ -2,6 +2,7 @@ package hu.sze.milab.dust.utils;
 
 import java.io.File;
 import java.io.FileFilter;
+import java.io.FilenameFilter;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,7 +13,7 @@ public interface DustUtilsConsts extends DustConsts {
 		Equals, Contains, EndsWith, StartsWith,
 	}
 
-	public static class DustFileFilter implements FileFilter {
+	public static class DustFileFilter implements FileFilter, FilenameFilter {
 		boolean ignoreCase;
 		StringMatch matchMode;
 
@@ -33,7 +34,12 @@ public interface DustUtilsConsts extends DustConsts {
 
 		@Override
 		public boolean accept(File f) {
-			String n = f.getName();
+			return accept(f.getParentFile(), f.getName());
+		}
+
+		@Override
+		public boolean accept(File dir, String n) {
+			
 			if ( ignoreCase ) {
 				n = n.toLowerCase();
 			}
