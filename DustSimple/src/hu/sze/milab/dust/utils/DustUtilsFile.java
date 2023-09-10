@@ -45,15 +45,25 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 
 		return ret;
 	}
+	
+	public static void ensureDir(File f) throws IOException {
+		if ( !f.isDirectory() && !f.mkdirs() ) {
+			throw new IOException("failed to create directory " + f);
+		}
+	}
 
-	public static String getHashName(String fileName) {
-		int hash = fileName.hashCode();
+	public static String getHashForID(String id) {
+		int hash = id.hashCode();
 
 		int mask = 255;
 		int firstDir = hash & mask;
 		int secondDir = (hash >> 8) & mask;
 
-		return String.format("%02x%s%02x%s%s", firstDir, File.separator, secondDir, File.separator, fileName);
+		return String.format("%02x%s%02x", firstDir, File.separator, secondDir);
+	}
+
+	public static String getHashName(String fileName) {
+		return getHashForID(fileName) + File.separator + fileName;
 	}
 
 	public static File getHashDir(File root, String dirName) {
