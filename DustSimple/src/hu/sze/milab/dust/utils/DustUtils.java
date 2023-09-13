@@ -58,6 +58,16 @@ public class DustUtils implements DustUtilsConsts {
 		return sb;
 	}
 
+	public static String csvEscape(String valStr, boolean addQuotes) {
+		String ret = valStr.replace("\"", "\"\"").replaceAll("\\s+", " ");
+
+		if ( addQuotes ) {
+			ret = "\"" + ret + "\"";
+		}
+
+		return ret;
+	}
+
 	public static <RetType> RetType createInstance(ClassLoader cl, String className) {
 		try {
 			return (RetType) cl.loadClass(className).getConstructor().newInstance();
@@ -103,7 +113,7 @@ public class DustUtils implements DustUtilsConsts {
 				columns.put(data[i], i);
 			}
 		}
-		
+
 		public int getSize() {
 			return columns.size();
 		}
@@ -132,6 +142,24 @@ public class DustUtils implements DustUtilsConsts {
 			return target;
 		}
 
+		public void set(Object[] row, Map<String, Object> source, String... cols) {
+			if ( 0 == cols.length ) {
+				for (int i = row.length; i-- > 0;) {
+					row[i] = source.get(headers[i]);
+				}
+			} else {
+				for (int i = row.length; i-- > 0;) {
+					row[i] = null;
+				}
+				for (int i = cols.length; i-- > 0;) {
+					int idx = getColIdx(cols[i]);
+					if ( -1 != idx ) {
+						row[idx] = source.get(cols[i]);
+					}
+				}
+			}
+		}
+
 		public Map<String, Object> get(Object[] row, Map<String, Object> target, String... cols) {
 			if ( null == target ) {
 				target = new HashMap<>();
@@ -158,23 +186,29 @@ public class DustUtils implements DustUtilsConsts {
 
 		public void set(Object[] row, String col, Object val) {
 			int ci = columns.getOrDefault(col, Integer.MAX_VALUE);
-			if (row.length > ci) {
+			if ( row.length > ci ) {
 				row[ci] = val;
 			}
 		}
 
 		public void writeHead(PrintWriter out, String sep) {
+			writeHeadPart(out, sep, Integer.MAX_VALUE);
+			out.println();
+		}
+
+		public void writeHeadPart(PrintWriter out, String sep, int lastCol) {
 			boolean first = true;
+
+			int l = Math.min(lastCol, headers.length);
 			
-			for ( String c : headers ) {
+			for (int i = 0; i < l; ++i) {
 				if ( first ) {
 					first = false;
 				} else {
 					out.print(sep);
 				}
-				out.print(c);
+				out.print(headers[i]);
 			}
-			out.println();
 		}
 
 		public int getColIdx(String col) {
