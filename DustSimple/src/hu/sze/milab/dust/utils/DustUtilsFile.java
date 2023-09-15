@@ -35,7 +35,7 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 					break;
 				}
 			}
-			
+
 			StringBuilder b = null;
 			for (int i = 0; i < ai; ++i) {
 				b = DustUtils.sbAppend(b, File.separator, true, items[i]);
@@ -45,7 +45,7 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 
 		return ret;
 	}
-	
+
 	public static void ensureDir(File f) throws IOException {
 		if ( !f.isDirectory() && !f.mkdirs() ) {
 			throw new IOException("failed to create directory " + f);
@@ -112,7 +112,7 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 			zis.closeEntry();
 		}
 	}
-	
+
 	public static File searchRecursive(File f, FileFilter ff) {
 		File ret = null;
 
@@ -128,8 +128,17 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 				}
 			}
 		}
-		
+
 		return ret;
+	}
+
+	public static void deleteRec(File f) {
+		if ( f.isDirectory() ) {
+			for (File fl : f.listFiles()) {
+				deleteRec(fl);
+			}
+		}
+		f.delete();
 	}
 
 }

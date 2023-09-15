@@ -200,7 +200,7 @@ public class DustUtils implements DustUtilsConsts {
 			boolean first = true;
 
 			int l = Math.min(lastCol, headers.length);
-			
+
 			for (int i = 0; i < l; ++i) {
 				if ( first ) {
 					first = false;
@@ -213,6 +213,23 @@ public class DustUtils implements DustUtilsConsts {
 
 		public int getColIdx(String col) {
 			return columns.getOrDefault(col, -1);
+		}
+
+		public <ValType> void writePart(ValType[] row, PrintWriter out, String sep, String... cols) {
+			boolean first = true;
+
+			for (String c : cols) {
+				if ( first ) {
+					first = false;
+				} else {
+					out.print(sep);
+				}
+				int ci = getColIdx(c);
+				ValType v = (-1 == ci) ? null : row[ci];
+				if ( null != v ) {
+					out.print(v);
+				}
+			}
 		}
 	}
 
