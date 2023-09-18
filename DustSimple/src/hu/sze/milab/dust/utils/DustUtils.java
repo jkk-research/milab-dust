@@ -164,6 +164,10 @@ public class DustUtils implements DustUtilsConsts {
 			if ( null == target ) {
 				target = new HashMap<>();
 			}
+			
+			if ( 0 == cols.length ) {
+				cols = headers;
+			}
 
 			for (String c : cols) {
 				Object v = get(row, c);
