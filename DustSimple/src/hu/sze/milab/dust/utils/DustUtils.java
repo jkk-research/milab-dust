@@ -265,6 +265,41 @@ public class DustUtils implements DustUtilsConsts {
 		}
 	}
 
+	public static class ProcessMonitor {
+		private String name;
+		private long segment;
+
+		private long tsStart;
+		private long tsLast;
+		
+		private long count;
+		
+		public ProcessMonitor(String name, long segment) {
+			reset(name, segment);
+		}
+		
+		public void reset(String name, long segment) {
+			this.name = name;
+			this.segment = segment;
+			tsStart = tsLast = System.currentTimeMillis();
+		}
+		
+		public void step() {
+			++count;
+			
+			if ( (0 != segment) && (0 == (count % segment)) ) {
+				long ts = System.currentTimeMillis();
+				System.out.println(name + " current count: " + count + " time: " + (ts - tsLast));
+				tsLast = ts;
+			}
+		}
+		
+		@Override
+		public String toString() {
+			return name + " total count: " + count + " time: " + (System.currentTimeMillis() - tsStart);
+		}
+	}
+
 	@SuppressWarnings("rawtypes")
 	public static class MapComparator implements Comparator<Map> {
 		String[] sf;
