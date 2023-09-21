@@ -284,14 +284,18 @@ public class DustUtils implements DustUtilsConsts {
 			tsStart = tsLast = System.currentTimeMillis();
 		}
 		
-		public void step() {
+		public boolean step() {
+			boolean ret = false;
 			++count;
 			
 			if ( (0 != segment) && (0 == (count % segment)) ) {
 				long ts = System.currentTimeMillis();
 				System.out.println(name + " current count: " + count + " time: " + (ts - tsLast));
 				tsLast = ts;
+				ret = true;
 			}
+			
+			return ret;
 		}
 		
 		@Override
@@ -359,6 +363,10 @@ public class DustUtils implements DustUtilsConsts {
 	public static String replacePostfix(String strSrc, String pfSep, String postfix) {
 		int sep = strSrc.lastIndexOf(pfSep);
 		return strSrc.substring(0, sep + 1) + postfix;
+	}
+
+	public static void breakpoint(Object ...params ) {
+		System.out.println("BREAKPOINT - " + sbAppend(null, " ", false, params));
 	}
 
 }
