@@ -9,6 +9,7 @@ public interface DustConsts {
 
 	String EXT_JAR = ".jar";
 	String EXT_JSON = ".json";
+	String EXT_CSV = ".csv";
 	String SEP = "_";
 	String SEP_ID = ":";
 

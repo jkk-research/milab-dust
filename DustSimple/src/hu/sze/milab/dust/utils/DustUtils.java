@@ -284,7 +284,7 @@ public class DustUtils implements DustUtilsConsts {
 			tsStart = tsLast = System.currentTimeMillis();
 		}
 		
-		public boolean step() {
+		public synchronized boolean step() {
 			boolean ret = false;
 			++count;
 			
@@ -296,6 +296,10 @@ public class DustUtils implements DustUtilsConsts {
 			}
 			
 			return ret;
+		}
+		
+		public long getCount() {
+			return count;
 		}
 		
 		@Override
