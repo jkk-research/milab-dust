@@ -156,6 +156,11 @@ public interface DustUtilsData extends DustUtilsConsts {
 				}
 			}
 		}
+		
+		@Override
+		public String toString() {
+			return DustUtils.sbAppend(null, ", ", true, (Object[]) headers).toString();
+		}
 	}
 
 	public static class TableIterator implements Closeable, Iterable<String[]>, Iterator<String[]> {
