@@ -11,6 +11,7 @@ public interface DustConsts {
 	String EXT_JSON = ".json";
 	String EXT_CSV = ".csv";
 	String EXT_XML = ".xml";
+	
 	String SEP = "_";
 	String SEP_ID = ":";
 
@@ -29,6 +30,10 @@ public interface DustConsts {
 		MindStatus agentExecAction(MindAction action) throws Exception;
 	}
 
+	interface DustThreadOwner {
+		boolean isCurrentThreadOwned();
+	}
+
 	enum MindValType {
 		tagValtypeInt, tagValtypeReal, tagValtypeHandle, tagValtypeBin;
 	};
@@ -42,7 +47,7 @@ public interface DustConsts {
 	};
 
 	enum MindContext {
-		Dialog, Self, Message
+		Dialog, Self, Message, LocalCtx
 	};
 
 	enum MindAction {

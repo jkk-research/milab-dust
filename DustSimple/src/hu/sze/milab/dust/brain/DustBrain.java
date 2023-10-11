@@ -13,20 +13,51 @@ import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAgent {
+public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAgent, DustConsts.DustThreadOwner {
 
 	static Map<MindHandle, Map> ctxBrain = new HashMap<>();
 	static Map brainRoot = new HashMap<>();
 	static DustBrainUtils utils = new DustBrainUtils();
+	static Map<DustThreadOwner, EnumMap<MindContext, MindHandle>> threadCtxInfo = new HashMap<>();
 
 	private boolean booting = true;
+	private Thread bootThread;
 
 	private static final ThreadLocal<EnumMap<MindContext, MindHandle>> threadCtx = new ThreadLocal<EnumMap<MindContext, MindHandle>>() {
 		@Override
 		protected EnumMap<MindContext, MindHandle> initialValue() {
-			return new EnumMap<>(MindContext.class);
+			EnumMap<MindContext, MindHandle> tc = null;
+			
+			for ( Map.Entry<DustThreadOwner, EnumMap<MindContext, MindHandle>> etci : threadCtxInfo.entrySet() ) {
+				if ( etci.getKey().isCurrentThreadOwned() ) {
+					if ( null == tc ) {
+						tc = etci.getValue();
+					} else {
+						return DustException.wrap(null, "Thread owner conflict!");
+					}
+				}
+			}
+			
+			if ( null == tc ) {
+				return DustException.wrap(null, "Thread owner not found!");
+			}
+			
+			EnumMap<MindContext, MindHandle> ret = new EnumMap<>(MindContext.class);
+			ret.putAll(tc);
+			
+			return ret;
 		}
 	};
+	
+	public DustBrain() {
+		bootThread = Thread.currentThread();
+		threadCtxInfo.put(this, new EnumMap<>(MindContext.class));
+	}
+	
+	@Override
+	public boolean isCurrentThreadOwned() {
+		return Thread.currentThread() == bootThread ;
+	}
 
 	@Override
 	public MindHandle resolveID(String id, MindHandle primaryAspect) {
@@ -138,14 +169,18 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 	public <RetType> RetType access(Object root, MindAccess cmd, Object val, Object... path) {
 		Object ret = null;
 
+		Object prev = null;
+		Object lastKey = null;
 		if ( root instanceof MindContext ) {
-			root = threadCtx.get().get((MindContext) root);
+			MindContext mc = (MindContext) root;
+			prev = threadCtx.get();
+			lastKey = mc;
+			
+			root = threadCtx.get().get(mc);
 //			root = access(brainRoot, MindAccess.Peek, null, DUST_ATT_BRAIN_THREADS, Thread.currentThread());
 		}
 
 		Object curr = root;
-		Object prev = null;
-		Object lastKey = null;
 
 		for (Object p : path) {
 			if ( p instanceof Enum ) {
@@ -220,6 +255,12 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 								a = (MindAgent) Class.forName(agentClass).newInstance();
 								a.agentExecAction(MindAction.Init);
 								Dust.access(h, MindAccess.Set, a, DUST_ATT_NATIVE_INSTANCE);
+								
+								if ( a instanceof DustThreadOwner ) {
+									EnumMap<MindContext, MindHandle> threadCtx = new EnumMap<>(MindContext.class);
+									threadCtx.put(MindContext.Self, h);
+									threadCtxInfo.put((DustThreadOwner) a, threadCtx);
+								}
 							} catch (Throwable e) {
 								DustException.wrap(e, hL, agentClass);
 							}
