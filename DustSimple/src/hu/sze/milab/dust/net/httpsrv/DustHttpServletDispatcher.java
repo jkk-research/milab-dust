@@ -25,7 +25,7 @@ class DustHttpServletDispatcher extends HttpServlet implements DustNetConsts, Du
 		
 		Object target = null;
 		for ( Object agent : agents ) {
-			String p = Dust.access(agent, MindAccess.Peek, Collections.EMPTY_LIST, STREAM_ATT_STREAM_PATH);
+			String p = Dust.access(agent, MindAccess.Peek, "@@@", TEXT_ATT_NAMED_NAME);
 			
 			if ( pathInfo.startsWith(p) ) {
 				target = agent;
@@ -62,8 +62,10 @@ class DustHttpServletDispatcher extends HttpServlet implements DustNetConsts, Du
 		}
 		
 		Dust.access(target, MindAccess.Commit, MindAction.Process);
+		
+		int status = Dust.access(MindContext.LocalCtx, MindAccess.Peek, HttpServletResponse.SC_OK, NET_ATT_SRVCALL_STATUS);
 
-		response.setStatus(HttpServletResponse.SC_OK);
+		response.setStatus(status);
 	}
 
 	private void optAdd(Object kind, String name, Object val) {

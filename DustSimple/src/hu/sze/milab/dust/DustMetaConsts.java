@@ -29,6 +29,7 @@ public interface DustMetaConsts extends DustConsts {
 	
 	public static MindHandle MIND_ASP_AGENT = Dust.resolveID(null, null);
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.resolveID(null, null);
+	public static MindHandle MISC_TAG_AGENT_SELFLISTENER = Dust.resolveID(null, null);
 		
 	public static MindHandle DUST_UNIT = Dust.resolveID(null, null);
 
@@ -57,6 +58,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_ATT_CONN_MEMBERSET = Dust.resolveID(null, null);
 	
 	public static MindHandle MISC_ASP_GEN = Dust.resolveID(null, null);
+	public static MindHandle MISC_ATT_GEN_ALIAS = Dust.resolveID(null, null);
 	public static MindHandle MISC_TAG_GEN_EMPTY = Dust.resolveID(null, null);
 	public static MindHandle MISC_TAG_GEN_ACTIVE = Dust.resolveID(null, null);
 	

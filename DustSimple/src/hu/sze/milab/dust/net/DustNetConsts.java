@@ -12,6 +12,7 @@ public interface DustNetConsts extends DustMetaConsts {
 	String MEDIATYPE_UTF8_TEXT = "text/plain" + CHARSET_POSTFIX_UTF8;
 	String MEDIATYPE_UTF8_HTML = "text/html" + CHARSET_POSTFIX_UTF8;
 	String MEDIATYPE_UTF8_CSV = "text/csv" + CHARSET_POSTFIX_UTF8;
+	String MEDIATYPE_UTF8_XML = "text/xml" + CHARSET_POSTFIX_UTF8;
 
 	String MEDIATYPE_JSON = "application/json";
 	String MEDIATYPE_JSONAPI = "application/vnd.api+json";
@@ -39,6 +40,10 @@ public interface DustNetConsts extends DustMetaConsts {
 	MindHandle NET_ATT_SRVCALL_HEADERS = Dust.resolveID(null, null);
 	MindHandle NET_ATT_SRVCALL_ATTRIBUTES = Dust.resolveID(null, null);
 
+	MindHandle NET_ATT_SRVCALL_STATUS = Dust.resolveID(null, null);
+
 	MindHandle NET_LOG_SRVJETTY = Dust.resolveID(null, null);
+	MindHandle NET_LOG_SVCFILES = Dust.resolveID(null, null);
+	MindHandle NET_LOG_SVCJSONAPI = Dust.resolveID(null, null);
 
 }

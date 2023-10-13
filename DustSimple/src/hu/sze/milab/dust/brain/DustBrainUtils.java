@@ -10,6 +10,8 @@ import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.dev.DustDevAgentDump;
 import hu.sze.milab.dust.dev.DustDevConsts;
 import hu.sze.milab.dust.net.DustNetConsts;
+import hu.sze.milab.dust.net.httpsrv.DustHttpAgentDirectFile;
+import hu.sze.milab.dust.net.httpsrv.DustHttpAgentJsonApi;
 import hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty;
 import hu.sze.milab.dust.stream.DustStreamConsts;
 import hu.sze.milab.dust.stream.json.DustStreamJsonApiAgentMessageReader;
@@ -100,6 +102,9 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 		brain.access(STREAM_LOG_JSONAPIREADER, MindAccess.Set, DustStreamJsonApiAgentMessageReader.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
 		
 		brain.access(NET_LOG_SRVJETTY, MindAccess.Set, DustHttpServerJetty.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
+		brain.access(NET_LOG_SVCFILES, MindAccess.Set, DustHttpAgentDirectFile.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
+		brain.access(NET_LOG_SVCJSONAPI, MindAccess.Set, DustHttpAgentJsonApi.class.getCanonicalName(), DUST_ATT_NATIVE_IMPLEMENTATION);
+		
 	}
 
 	public void loadConfigs() throws Exception {
