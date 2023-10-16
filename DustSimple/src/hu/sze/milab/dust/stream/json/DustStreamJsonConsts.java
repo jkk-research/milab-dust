@@ -25,12 +25,15 @@ public interface DustStreamJsonConsts extends DustStreamConsts {
 		
 		self, related,
 		href, rel, title, hreflang,
-		first, last, prev, next,
+		first, last, prev, next, 
+		
+		detail, count,
 		
 		;
 		
 		public static final EnumSet<JsonApiMember> TOP = EnumSet.of(jsonapi, data, errors, meta, links, included);
 		public static final EnumSet<JsonApiMember> DATA = EnumSet.of(data, included);
+		public static final EnumSet<JsonApiMember> HEADER = EnumSet.of(version, ext, profile);
 	};
 	
 	enum JsonApiParam {

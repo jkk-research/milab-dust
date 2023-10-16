@@ -53,7 +53,7 @@ public class DustStreamJsonAgentWriter implements DustMetaConsts, DustStreamJson
 			
 			switch ( coll ) {
 			case One:
-				line = "\"" + Dust.access(hTarget, MindAccess.Peek, MindColl.One, TEXT_ATT_NAMED_NAME) + "\": ";
+				line = "\"" + Dust.access(hTarget, MindAccess.Peek, MindColl.One, TEXT_ATT_NAME) + "\": ";
 				break;
 			case Arr:
 			case Set:

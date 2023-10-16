@@ -46,7 +46,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 				for (int a = ac; a-- > 0;) {
 					String attName = attributes.getQName(a);
 					String attVal = attributes.getValue(a);
-					Dust.access(hTarget, MindAccess.Set, attName, TEXT_ATT_NAMED_NAME);
+					Dust.access(hTarget, MindAccess.Set, attName, TEXT_ATT_NAME);
 					Dust.access(hTarget, MindAccess.Set, attVal, MISC_ATT_VARIANT_VALUE);
 					Dust.access(hTarget, MindAccess.Commit, MindAction.Process);
 				}
@@ -76,7 +76,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 //			Dust.access(hTarget, MindAccess.Reset, null);
 
 			Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAGS);
-			Dust.access(hTarget, MindAccess.Set, qName, TEXT_ATT_NAMED_NAME);
+			Dust.access(hTarget, MindAccess.Set, qName, TEXT_ATT_NAME);
 
 			MindAction action;
 
@@ -101,7 +101,7 @@ public class DustStreamXmlAgentParser implements DustStreamXmlConsts, DustConsts
 				Dust.access(hTarget, MindAccess.Set, null, MISC_ATT_VARIANT_VALUE);
 				// Dust.access(hTarget, MindAccess.Reset, null);
 				Dust.access(hTarget, MindAccess.Set, XmlData.Element, MIND_ATT_KNOWLEDGE_TAGS);
-				Dust.access(hTarget, MindAccess.Set, pendingElement, TEXT_ATT_NAMED_NAME);
+				Dust.access(hTarget, MindAccess.Set, pendingElement, TEXT_ATT_NAME);
 				Dust.access(hTarget, MindAccess.Commit, MindAction.Begin);
 				pendingElement = null;
 			}

@@ -25,7 +25,7 @@ class DustHttpServletDispatcher extends HttpServlet implements DustNetConsts, Du
 		
 		Object target = null;
 		for ( Object agent : agents ) {
-			String p = Dust.access(agent, MindAccess.Peek, "@@@", TEXT_ATT_NAMED_NAME);
+			String p = Dust.access(agent, MindAccess.Peek, "@@@", TEXT_ATT_NAME);
 			
 			if ( pathInfo.startsWith(p) ) {
 				target = agent;
@@ -41,6 +41,7 @@ class DustHttpServletDispatcher extends HttpServlet implements DustNetConsts, Du
 		Dust.access(MindContext.LocalCtx, MindAccess.Set, request, NET_ATT_SRVCALL_REQUEST);
 		Dust.access(MindContext.LocalCtx, MindAccess.Set, response, NET_ATT_SRVCALL_RESPONSE);
 		
+		Dust.access(MindContext.LocalCtx, MindAccess.Set, request.getMethod(), NET_ATT_SRVCALL_METHOD);
 		Dust.access(MindContext.LocalCtx, MindAccess.Set, pathInfo, NET_ATT_SRVCALL_PATHINFO);
 		
 		Enumeration<String> ee;

@@ -48,7 +48,7 @@ public class DustBrainUtils implements DustBrainConsts, DustStreamConsts, DustDe
 			String name = ke.getValue();
 			Map k = DustBrain.resolveKnowledge(bh, true);
 
-			k.put(TEXT_ATT_NAMED_NAME, name);
+			k.put(TEXT_ATT_NAME, name);
 
 			String[] nameParts = name.split(STR_IDSEP);
 

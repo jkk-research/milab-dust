@@ -30,7 +30,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 			optCloseElement();
 			ps.print(rowPrefix);
 			ps.print("<");
-			print(TEXT_ATT_NAMED_NAME);
+			print(TEXT_ATT_NAME);
 			elementPending = true;
 
 			rowPrefix.append("  ");
@@ -40,7 +40,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 
 			if ( itemType == XmlData.Attribute ) {
 				ps.print(" ");
-				print(TEXT_ATT_NAMED_NAME);
+				print(TEXT_ATT_NAME);
 				ps.print("=\"");
 				print(MISC_ATT_VARIANT_VALUE);
 				ps.print("\"");
@@ -53,7 +53,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 				optCloseElement();
 				ps.print(rowPrefix);
 				ps.print("<");
-				print(TEXT_ATT_NAMED_NAME);
+				print(TEXT_ATT_NAME);
 				ps.println("/>");
 			}
 			break;
@@ -62,7 +62,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 			rowPrefix.setLength(rowPrefix.length() - 2);
 			ps.print(rowPrefix);
 			ps.print("</");
-			print(TEXT_ATT_NAMED_NAME);
+			print(TEXT_ATT_NAME);
 			ps.println(">");
 			break;
 		default:
@@ -85,7 +85,7 @@ public class DustStreamXmlAgentWriter implements DustMetaConsts, DustStreamXmlCo
 		ps.print(action);
 
 		print(MIND_ATT_KNOWLEDGE_TAGS);
-		print(TEXT_ATT_NAMED_NAME);
+		print(TEXT_ATT_NAME);
 		print(MISC_ATT_VARIANT_VALUE);
 
 		ps.println();

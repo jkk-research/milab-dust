@@ -31,9 +31,9 @@ public class DustStreamJsonAgentParser implements DustStreamJsonConsts, DustCons
 
 		@Override
 		public boolean startObjectEntry(String name) throws ParseException, IOException {
-			Dust.access(hTarget, MindAccess.Set, name, TEXT_ATT_NAMED_NAME);
+			Dust.access(hTarget, MindAccess.Set, name, TEXT_ATT_NAME);
 			send(MindAction.Begin, null);
-			Dust.access(hTarget, MindAccess.Set, null, TEXT_ATT_NAMED_NAME);
+			Dust.access(hTarget, MindAccess.Set, null, TEXT_ATT_NAME);
 			return true;
 		}
 

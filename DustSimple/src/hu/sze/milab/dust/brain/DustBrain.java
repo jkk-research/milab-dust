@@ -86,7 +86,7 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 					ret = new DustBrainHandle();
 					access(ret, MindAccess.Set, primaryAspect, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 					access(ret, MindAccess.Set, id, MIND_ATT_KNOWLEDGE_ID);
-					access(ret, MindAccess.Set, ii[1], TEXT_ATT_NAMED_NAME);
+					access(ret, MindAccess.Set, ii[1], TEXT_ATT_NAME);
 					access(hUnit, MindAccess.Set, ret, MISC_ATT_CONN_MEMBERMAP, ii[1]);
 
 				}
@@ -119,7 +119,7 @@ public class DustBrain implements DustBrainConsts, Dust.Brain, DustConsts.MindAg
 
 	static public String handleToString(DustBrainHandle bh) {
 		Map k = resolveKnowledge(bh, false);
-		return (null == k) ? STR_UNKNOWN : (String) k.getOrDefault(DustMetaConsts.TEXT_ATT_NAMED_NAME, STR_UNKNOWN);
+		return (null == k) ? STR_UNKNOWN : (String) k.getOrDefault(DustMetaConsts.TEXT_ATT_NAME, STR_UNKNOWN);
 	}
 
 	static public void dumpHandle(String prefix, MindHandle bh) {

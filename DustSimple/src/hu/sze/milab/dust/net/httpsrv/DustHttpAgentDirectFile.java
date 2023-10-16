@@ -34,7 +34,7 @@ public class DustHttpAgentDirectFile implements DustNetConsts, DustStreamConsts,
 				File f = null;
 				
 				String reqPath = Dust.access(MindContext.LocalCtx, MindAccess.Peek, null, NET_ATT_SRVCALL_PATHINFO);
-				Map<String, String> alias = Dust.access(MindContext.Self, MindAccess.Peek, Collections.EMPTY_MAP, MISC_ATT_GEN_ALIAS);
+				Map<String, String> alias = Dust.access(MindContext.Self, MindAccess.Peek, Collections.EMPTY_MAP, MISC_ATT_ALIAS);
 				reqPath = alias.getOrDefault(reqPath, reqPath);
 
 				String path = Dust.access(MindContext.Self, MindAccess.Peek, null, STREAM_ATT_STREAM_PATH);

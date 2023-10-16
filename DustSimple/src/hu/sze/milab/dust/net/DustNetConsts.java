@@ -35,6 +35,7 @@ public interface DustNetConsts extends DustMetaConsts {
 	MindHandle NET_ASP_SRVCALL = Dust.resolveID(null, null);
 	MindHandle NET_ATT_SRVCALL_REQUEST = Dust.resolveID(null, null);
 	MindHandle NET_ATT_SRVCALL_RESPONSE = Dust.resolveID(null, null);
+	MindHandle NET_ATT_SRVCALL_METHOD = Dust.resolveID(null, null);
 	MindHandle NET_ATT_SRVCALL_PATHINFO = Dust.resolveID(null, null);
 	MindHandle NET_ATT_SRVCALL_PAYLOAD = Dust.resolveID(null, null);
 	MindHandle NET_ATT_SRVCALL_HEADERS = Dust.resolveID(null, null);

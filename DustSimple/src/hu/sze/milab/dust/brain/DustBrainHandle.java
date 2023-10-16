@@ -13,7 +13,7 @@ public class DustBrainHandle implements MindHandle {
 		String id = Dust.access(this, MindAccess.Peek, null, DustMetaConsts.MIND_ATT_KNOWLEDGE_ID);
 		
 		if ( null == id ) {
-			String lid = Dust.access(this, MindAccess.Peek, null, DustMetaConsts.TEXT_ATT_NAMED_NAME);
+			String lid = Dust.access(this, MindAccess.Peek, null, DustMetaConsts.TEXT_ATT_NAME);
 			String uid = Dust.access(this, MindAccess.Peek, null, DustMetaConsts.MIND_ATT_KNOWLEDGE_UNIT, DustMetaConsts.MIND_ATT_KNOWLEDGE_ID);
 			
 			id = uid + DustConsts.SEP_ID + lid;
