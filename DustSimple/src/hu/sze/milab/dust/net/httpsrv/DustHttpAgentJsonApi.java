@@ -1,11 +1,13 @@
 package hu.sze.milab.dust.net.httpsrv;
 
-import java.io.PrintWriter;
+import java.io.File;
+import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.json.simple.JSONValue;
@@ -14,10 +16,13 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.net.DustNetConsts;
+import hu.sze.milab.dust.stream.DustStreamUtils;
 import hu.sze.milab.dust.stream.json.DustStreamJsonConsts;
 
 public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts, DustMetaConsts, DustConsts.MindAgent {
-
+	
+	private static final DustStreamUtils.TempFileFactory TTF = new DustStreamUtils.TempFileFactory("jsonOutQueue");
+	
 	@Override
 	public MindStatus agentExecAction(MindAction action) throws Exception {
 		switch ( action ) {
@@ -74,7 +79,8 @@ public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts
 				}
 
 				response.setContentType(MEDIATYPE_JSONAPI);
-				PrintWriter out = response.getWriter();
+//				PrintWriter out = response.getWriter();
+				ServletOutputStream out = response.getOutputStream();
 
 				out.println("{\n");
 				Map<String, Object> fragment = new HashMap<>();
@@ -91,19 +97,39 @@ public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts
 					str = str.replace("\\/", "/");
 					out.print("\n   \"jsonapi\" : ");
 					out.print(str);
-					out.println(",");
 					fragment.clear();
 				}
 				
 				try {
+					DustStreamUtils.PrintWriterProvider pwp = new DustStreamUtils.PrintWriterProvider(TTF, EXT_JSON);
+					Dust.access(MindContext.LocalCtx, MindAccess.Set, pwp, JsonApiMember.jsonapi, STREAM_ATT_STREAM_PROVIDER);
+					
 					Dust.access(src, MindAccess.Commit, MindAction.Process);
+					
+					File f = pwp.getFile(JsonApiMember.data);
+					if ( null != f ) {
+						out.println(",\n   \"data\" : [");
+						Files.copy(f.toPath(), out);
+						out.print("\n   ]");
+						out.flush();
+						f.delete();
+					}
+					
+					f = pwp.getFile(JsonApiMember.included);
+					if ( null != f ) {
+						out.println(",\n   \"included\" : [");
+						Files.copy(f.toPath(), out);
+						out.print("\n   ]");
+						out.flush();
+						f.delete();
+					}
 					
 					Object cnt = Dust.access(MindContext.LocalCtx, MindAccess.Peek, null, JsonApiMember.jsonapi, MISC_ATT_COUNT);
 					if ( null != cnt ) {
 						Dust.access(fragment, MindAccess.Set, cnt, JsonApiMember.count);
-						out.print("\n   \"meta\" : ");
-
-						JSONValue.writeJSONString(fragment, out);
+						out.print(",\n   \"meta\" : ");
+						String str = JSONValue.toJSONString(fragment);
+						out.print(str);
 						fragment.clear();
 					}
 					
@@ -112,7 +138,8 @@ public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts
 					for ( StackTraceElement ste: e.getStackTrace() ) {
 						Dust.access(fragment, MindAccess.Insert, ste.toString(), JsonApiMember.errors, JsonApiMember.detail, KEY_ADD);
 					}
-					JSONValue.writeJSONString(fragment, out);
+					String str = JSONValue.toJSONString(fragment);
+					out.print(str);
 					fragment.clear();
 				}
 				

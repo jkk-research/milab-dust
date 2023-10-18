@@ -12,6 +12,7 @@ public interface DustStreamConsts extends DustMetaConsts {
 	public static MindHandle STREAM_ASP_STREAM = Dust.resolveID(null, null);
 	public static MindHandle STREAM_ATT_STREAM_PATH = Dust.resolveID(null, null);
 	public static MindHandle STREAM_ATT_STREAM_FILE = Dust.resolveID(null, null);
+	public static MindHandle STREAM_ATT_STREAM_PROVIDER = Dust.resolveID(null, null);
 
 	public static MindHandle STREAM_LOG_JSONPARSER = Dust.resolveID(null, null);
 	
@@ -20,5 +21,9 @@ public interface DustStreamConsts extends DustMetaConsts {
 
 	interface StreamProcessor {
 		public void processStream(InputStream is, String url) throws Exception;
+	}
+	
+	interface StreamProvider<StreamType> {
+		public StreamType getStream(Object id) throws Exception;
 	}
 }

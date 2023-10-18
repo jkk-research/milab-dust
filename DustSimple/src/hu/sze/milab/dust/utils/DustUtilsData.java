@@ -140,6 +140,18 @@ public interface DustUtilsData extends DustUtilsConsts {
 			return columns.getOrDefault(col, -1);
 		}
 
+		public <ValType> String format(ValType[] row, String sep, String... cols) {
+			StringBuilder sb = null;
+
+			for (String c : cols) {
+				int ci = getColIdx(c);
+				ValType v = (-1 == ci) ? null : row[ci];
+				sb = DustUtils.sbAppend(sb, sep, true, v);
+			}
+			
+			return (null == sb) ? "" : sb.toString();
+		}
+		
 		public <ValType> void writePart(ValType[] row, PrintWriter out, String sep, String... cols) {
 			boolean first = true;
 

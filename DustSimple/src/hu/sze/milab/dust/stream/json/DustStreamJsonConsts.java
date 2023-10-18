@@ -37,7 +37,7 @@ public interface DustStreamJsonConsts extends DustStreamConsts {
 	};
 	
 	enum JsonApiParam {
-		include, sort, filter, page, limit, offset
+		include, fields, sort, filter, page, limit, offset
 	}
 	
 	enum JsonFilterFunction {
