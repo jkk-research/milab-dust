@@ -135,10 +135,19 @@ public class DustStreamJsonapiUtils implements DustStreamJsonConsts {
 			for (PrintWriter pw : writers.values()) {
 				pw.close();
 			}
+			
+			writers.clear();
 		}
 	}
 
-	public static class Filter {
+	public static class Filter extends HashMap<String, Object> {
+		private static final long serialVersionUID = 1L;
+		
+		public void load(Map src) {
+			clear();
+			putAll(src);
+		}
+
 		public boolean equals(Object p1, Object p2) {
 			return DustUtils.isEqual(p1, p2);
 		}
@@ -161,6 +170,10 @@ public class DustStreamJsonapiUtils implements DustStreamJsonConsts {
 
 		public boolean greaterOrEqual(Object p1, Object p2) {
 			return 0 <= compare(p1, p2);
+		}
+
+		public boolean contains(String s1, String s2) {
+			return (null == s1) ? (null == s2) : -1 != s1.indexOf(s2);
 		}
 
 		public boolean containsx(String s1, String s2) {

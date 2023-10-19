@@ -100,8 +100,7 @@ public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts
 					fragment.clear();
 				}
 				
-				try {
-					DustStreamUtils.PrintWriterProvider pwp = new DustStreamUtils.PrintWriterProvider(TTF, EXT_JSON);
+				try (DustStreamUtils.PrintWriterProvider pwp = new DustStreamUtils.PrintWriterProvider(TTF, EXT_JSON) ){
 					Dust.access(MindContext.LocalCtx, MindAccess.Set, pwp, JsonApiMember.jsonapi, STREAM_ATT_STREAM_PROVIDER);
 					
 					Dust.access(src, MindAccess.Commit, MindAction.Process);
@@ -112,7 +111,6 @@ public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts
 						Files.copy(f.toPath(), out);
 						out.print("\n   ]");
 						out.flush();
-						f.delete();
 					}
 					
 					f = pwp.getFile(JsonApiMember.included);
@@ -121,7 +119,6 @@ public class DustHttpAgentJsonApi implements DustStreamJsonConsts, DustNetConsts
 						Files.copy(f.toPath(), out);
 						out.print("\n   ]");
 						out.flush();
-						f.delete();
 					}
 					
 					Object cnt = Dust.access(MindContext.LocalCtx, MindAccess.Peek, null, JsonApiMember.jsonapi, MISC_ATT_COUNT);

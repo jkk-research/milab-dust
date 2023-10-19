@@ -1,7 +1,9 @@
 package hu.sze.milab.dust.stream;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,6 +29,20 @@ public class DustStreamUtils implements DustStreamConsts {
 	
 	public static class TempFileFactory {
 		private File dir;
+		
+		private long lastFileID = 0;
+		
+		long getFileId() {
+			long l = System.currentTimeMillis();
+			
+			if ( l <= lastFileID ) {
+				l = ++lastFileID;
+			} else {
+				lastFileID = l;
+			}
+			
+			return l;
+		}
 				
 		public TempFileFactory(String queueDirPath) {
 			this(new File("."), queueDirPath);
@@ -38,11 +54,11 @@ public class DustStreamUtils implements DustStreamConsts {
 		}
 		
 		public synchronized File createFile(String ext) {
-			return new File(dir, System.currentTimeMillis() + ext);
+			return new File(dir, getFileId() + ext);
 		}
 	}
 	
-	public static class PrintWriterProvider implements StreamProvider<PrintWriter> {
+	public static class PrintWriterProvider implements StreamProvider<PrintWriter>, Closeable {
 		private TempFileFactory ff;
 		private String ext;
 		
@@ -75,6 +91,20 @@ public class DustStreamUtils implements DustStreamConsts {
 		public File getFile(Object id) {
 			return files.get(id);
 		}
-	}
+		
+		@Override
+		public void close() throws IOException {
+			for ( PrintWriter pw : streams.values() ) {
+				pw.close();
+			}
+			for ( File f : files.values() ) {
+				if ( f.exists() ) {
+					f.delete();
+				}
+			}
+			streams.clear();
+			files.clear();
+		}
+	}	
 
 }
