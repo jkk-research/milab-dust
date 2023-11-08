@@ -1,15 +1,20 @@
 package hu.sze.milab.dust.stream;
 
+import java.io.BufferedReader;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
 
 import hu.sze.milab.dust.DustException;
+import hu.sze.milab.dust.DustConsts.MindAgent;
+import hu.sze.milab.dust.utils.DustUtilsData;
 import hu.sze.milab.dust.utils.DustUtilsFactory;
+import hu.sze.milab.dust.utils.DustUtilsData.TableReader;
 
 public class DustStreamUtils implements DustStreamConsts {
 	
@@ -25,6 +30,34 @@ public class DustStreamUtils implements DustStreamConsts {
 			ns = ns.substring(nl - 31, nl);
 		}
 		return ns;
+	}
+	
+	static void readFile(File f, Map<String, Object> m, MindAgent agent) throws Exception {
+		readFile(f, "\t", m, agent);
+	}
+	
+	static void readFile(File f, String sep, Map<String, Object> m, MindAgent agent) throws Exception {
+		TableReader tr = null;
+		
+		if ( f.isFile() ) {
+			try (BufferedReader brEntity = new BufferedReader(new FileReader(f))) {
+				for (String lEntity; (lEntity = brEntity.readLine()) != null;) {
+					String[] rEntity = lEntity.split(sep);
+					if ( null == tr ) {
+						tr = new DustUtilsData.TableReader(rEntity);
+						agent.agentExecAction(MindAction.Begin);
+					} else {
+						m.clear();
+						tr.get(rEntity, m);
+						agent.agentExecAction(MindAction.Process);
+					}
+				}
+			} finally {
+				if ( null != tr ) {
+					agent.agentExecAction(MindAction.End);
+				}
+			}
+		}
 	}
 	
 	public static class TempFileFactory {

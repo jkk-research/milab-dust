@@ -21,7 +21,7 @@ public class DustStreamUrlCache implements DustStreamConsts {
 		this.useHash = useHash;
 	}
 	
-	public void access(String url, StreamProcessor proc) throws Exception {
+	public <ContentType> ContentType access(String url, StreamProcessor<ContentType> proc) throws Exception {
 		String fileName = url;
 		
 		int cut = fileName.indexOf("://");
@@ -29,10 +29,11 @@ public class DustStreamUrlCache implements DustStreamConsts {
 			fileName = fileName.substring(cut+3);
 		}
 		
-		access(url, fileName, proc);
+		return access(url, fileName, proc);
 	}
 	
-	public void access(String url, String fileName, StreamProcessor proc) throws Exception {
+	public <ContentType> ContentType access(String url, String fileName, StreamProcessor<ContentType> proc) throws Exception {
+		ContentType ret = null;
 		String fn = useHash ? DustUtilsFile.getHashName(fileName) : fileName;
 		File f = new File(root, fn);
 		
@@ -46,9 +47,11 @@ public class DustStreamUrlCache implements DustStreamConsts {
 		
 		if ( null != proc ) {
 			try (FileInputStream is = new FileInputStream(f)) {
-				proc.processStream(is, url);
+				ret = proc.processStream(is, url);
 			}
 		}
+		
+		return ret;
 		
 	}
 

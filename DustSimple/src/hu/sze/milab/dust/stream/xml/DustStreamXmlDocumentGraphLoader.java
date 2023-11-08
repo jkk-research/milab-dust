@@ -21,11 +21,12 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
 import hu.sze.milab.dust.Dust;
+import hu.sze.milab.dust.stream.DustStreamConsts;
 import hu.sze.milab.dust.stream.DustStreamUrlCache;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
-public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, DustUtils.QueueContainer<String> {
+public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, DustUtils.QueueContainer<String>, DustStreamConsts.StreamProcessor<Element> {
 
 	public interface XmlDocumentProcessor {
 		void documentLoaded(Element root, DustUtils.QueueContainer<String> loader);
@@ -34,72 +35,6 @@ public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, Du
 	DustStreamUrlCache cache;
 
 	DocumentBuilderFactory dbf;
-
-	class XmlDocumentLoader implements StreamProcessor {
-		Element root;
-
-		@Override
-		public void processStream(InputStream is, String myUrl) throws Exception {
-			if ( null == dbf ) {
-				dbf = DocumentBuilderFactory.newInstance();
-			}
-
-			DocumentBuilder db = dbf.newDocumentBuilder();
-			Document doc = db.parse(is);
-
-			root = doc.getDocumentElement();
-
-			myUrl = DustUtilsFile.optRemoveUpFromPath(myUrl);
-
-			root.setUserData(XML_DATA_DOCURL, myUrl, null);
-
-			Map<String, String> nsRefs = new TreeMap<>();
-
-			String schemaLoc[] = {};
-
-			if ( root.hasAttributes() ) {
-				NamedNodeMap nnm = root.getAttributes();
-
-				for (int ni = nnm.getLength(); ni-- > 0;) {
-					Node att = nnm.item(ni);
-
-					String name = att.getNodeName();
-					String sVal = att.getNodeValue();
-
-					if ( name.startsWith(XML_PREF_XMLNS) ) {
-						nsRefs.put(name.substring(XML_PREF_XMLNS.length()), sVal);
-					} else if ( name.endsWith(XML_ATT_SCHEMALOC) ) {
-						schemaLoc = sVal.trim().replaceAll("\\s+", " ").split(" ");
-					}
-				}
-			}
-
-			if ( !nsRefs.isEmpty() ) {
-				for (int i = 0; i < schemaLoc.length;) {
-					String uri = schemaLoc[i++].trim();
-					String url = schemaLoc[i++].trim();
-					enqueue(uri, url);
-				}
-
-				NodeList nl = root.getElementsByTagName("xsd:import");
-				for (int ni = nl.getLength(); ni-- > 0;) {
-					NamedNodeMap atts = nl.item(ni).getAttributes();
-					String uri = atts.getNamedItem("namespace").getNodeValue();
-
-					if ( !docById.containsKey(uri) ) {
-						String url = atts.getNamedItem("schemaLocation").getNodeValue();
-
-						if ( !url.startsWith("http") ) {
-							url = DustUtils.replacePostfix(myUrl, "/", url);
-						}
-						enqueue(uri, url);
-					}
-				}
-			}
-		}
-	};
-
-	XmlDocumentLoader docLoader = new XmlDocumentLoader();
 
 	Map<String, Element> docById = new TreeMap<>();
 	Map<String, Element> docByUrl = new TreeMap<>();
@@ -153,25 +88,21 @@ public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, Du
 
 			URL ref = null;
 			if ( null == f ) {
-				cache.access(url, docLoader);
+				eRoot = cache.access(url, this);
 				ref = new URL(url);
 			} else {
-				if ( !f.exists() ) {
-					Dust.dumpObs("HEH??");
-				}
 				ref = f.toURI().toURL();
 				try (FileInputStream is = new FileInputStream(f)) {
-					docLoader.processStream(is, ref.toString());
+					eRoot = processStream(is, ref.toString());
 				}
 			}
 
-			eRoot = docLoader.root;
 			docByUrl.put(url, eRoot);
 			if ( null != docProc ) {
 				docProc.documentLoaded(eRoot, this);
 			}
 		}
-		
+
 		return eRoot;
 	}
 
@@ -204,4 +135,65 @@ public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, Du
 		return ret;
 	}
 
+	public Element processStream(InputStream is, String myUrl) throws Exception {
+		Element root = null;
+		if ( null == dbf ) {
+			dbf = DocumentBuilderFactory.newInstance();
+		}
+
+		DocumentBuilder db = dbf.newDocumentBuilder();
+		Document doc = db.parse(is);
+
+		root = doc.getDocumentElement();
+
+		myUrl = DustUtilsFile.optRemoveUpFromPath(myUrl);
+
+		root.setUserData(XML_DATA_DOCURL, myUrl, null);
+
+		Map<String, String> nsRefs = new TreeMap<>();
+
+		String schemaLoc[] = {};
+
+		if ( root.hasAttributes() ) {
+			NamedNodeMap nnm = root.getAttributes();
+
+			for (int ni = nnm.getLength(); ni-- > 0;) {
+				Node att = nnm.item(ni);
+
+				String name = att.getNodeName();
+				String sVal = att.getNodeValue();
+
+				if ( name.startsWith(XML_PREF_XMLNS) ) {
+					nsRefs.put(name.substring(XML_PREF_XMLNS.length()), sVal);
+				} else if ( name.endsWith(XML_ATT_SCHEMALOC) ) {
+					schemaLoc = sVal.trim().replaceAll("\\s+", " ").split(" ");
+				}
+			}
+		}
+
+		if ( !nsRefs.isEmpty() ) {
+			for (int i = 0; i < schemaLoc.length;) {
+				String uri = schemaLoc[i++].trim();
+				String url = schemaLoc[i++].trim();
+				enqueue(uri, url);
+			}
+
+			NodeList nl = root.getElementsByTagName("xsd:import");
+			for (int ni = nl.getLength(); ni-- > 0;) {
+				NamedNodeMap atts = nl.item(ni).getAttributes();
+				String uri = atts.getNamedItem("namespace").getNodeValue();
+
+				if ( !docById.containsKey(uri) ) {
+					String url = atts.getNamedItem("schemaLocation").getNodeValue();
+
+					if ( !url.startsWith("http") ) {
+						url = DustUtils.replacePostfix(myUrl, "/", url);
+					}
+					enqueue(uri, url);
+				}
+			}
+		}
+
+		return root;
+	}
 }
