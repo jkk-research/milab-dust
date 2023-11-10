@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Paths;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -24,12 +23,14 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.stream.DustStreamConsts;
 import hu.sze.milab.dust.stream.DustStreamUrlCache;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsConsts.DustUrlResolver;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, DustUtils.QueueContainer<String>, DustStreamConsts.StreamProcessor<Element> {
 
 	public interface XmlDocumentProcessor {
 		void documentLoaded(Element root, DustUtils.QueueContainer<String> loader);
+		DustUrlResolver getUrlResolver();
 	}
 
 	DustStreamUrlCache cache;
@@ -41,9 +42,9 @@ public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, Du
 
 	Map<String, String> readQueue = new TreeMap<>();
 
-	File root;
-	@SuppressWarnings("unchecked")
-	Map<String, String> urlRewrite = Collections.EMPTY_MAP;
+//	File root;
+//	@SuppressWarnings("unchecked")
+//	Map<String, String> urlRewrite = Collections.EMPTY_MAP;
 	XmlDocumentProcessor docProc = null;
 
 	public DustStreamXmlDocumentGraphLoader(DustStreamUrlCache cache) {
@@ -70,20 +71,21 @@ public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, Du
 
 		if ( null == eRoot ) {
 			File f = null;
+			DustUrlResolver urlResolver = docProc.getUrlResolver();
 
 			if ( url.startsWith("file") ) {
 				f = Paths.get(new URL(url).toURI()).toFile();
 			} else if ( url.startsWith("http") ) {
-				for (Map.Entry<String, String> e : urlRewrite.entrySet()) {
+				for (Map.Entry<String, String> e : urlResolver.uriRewrite.entrySet()) {
 					String prefix = e.getKey();
 					if ( url.startsWith(prefix) ) {
-						f = new File(root, e.getValue());
+						f = new File(urlResolver.getRoot(), e.getValue());
 						f = new File(f, url.substring(prefix.length()));
 						break;
 					}
 				}
 			} else {
-				f = new File(root, url);
+				f = new File(urlResolver.getRoot(), url);
 			}
 
 			URL ref = null;
@@ -123,9 +125,9 @@ public class DustStreamXmlDocumentGraphLoader implements DustStreamXmlConsts, Du
 		return docById.get(uri);
 	}
 
-	public Element loadDocument(File root, String path, XmlDocumentProcessor proc, Map<String, String> urlRewrite) throws Exception {
-		this.root = root;
-		this.urlRewrite = urlRewrite;
+	public Element loadDocument(String path, XmlDocumentProcessor proc) throws Exception {
+//		this.root = root;
+//		this.urlRewrite = urlRewrite;
 		this.docProc = proc;
 
 		Element ret = resolveUrl(path);

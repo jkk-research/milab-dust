@@ -44,4 +44,8 @@ public class DustDevCounter implements Iterable<Map.Entry<Object, Long>> {
 		}
 		Dust.dumpObs("}\n");
 	}
+
+	public boolean contains(Object ob) {
+		return counts.containsKey(ob);
+	}
 }

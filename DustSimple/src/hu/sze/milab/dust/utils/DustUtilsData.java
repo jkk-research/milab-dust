@@ -141,12 +141,16 @@ public interface DustUtilsData extends DustUtilsConsts {
 		}
 
 		public <ValType> String format(ValType[] row, String sep, String... cols) {
+			return format(row, sep, true, cols);
+		}
+
+		public <ValType> String format(ValType[] row, String sep, boolean strict, String... cols) {
 			StringBuilder sb = null;
 
 			for (String c : cols) {
 				int ci = getColIdx(c);
 				ValType v = (-1 == ci) ? null : row[ci];
-				sb = DustUtils.sbAppend(sb, sep, true, v);
+				sb = DustUtils.sbAppend(sb, sep, strict, v);
 			}
 			
 			return (null == sb) ? "" : sb.toString();
@@ -271,6 +275,10 @@ public interface DustUtilsData extends DustUtilsConsts {
 			}
 
 			return ret;
+		}
+
+		public int peekIndex(KeyType ob) {
+			return indexes.getOrDefault(ob, -1);
 		}
 
 		public int getSize() {
