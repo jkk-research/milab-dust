@@ -48,4 +48,7 @@ public class DustDevCounter implements Iterable<Map.Entry<Object, Long>> {
 	public boolean contains(Object ob) {
 		return counts.containsKey(ob);
 	}
+	public Long peek(Object ob) {
+		return counts.getOrDefault(ob, 0L);
+	}
 }

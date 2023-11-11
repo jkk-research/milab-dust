@@ -6,8 +6,8 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -265,6 +265,7 @@ public interface DustUtilsData extends DustUtilsConsts {
 
 	public static class Indexer<KeyType> {
 		private Map<KeyType, Integer> indexes = new HashMap<>();
+		private ArrayList<KeyType> idxArr = new ArrayList<>();
 
 		public synchronized int getIndex(KeyType ob) {
 			Integer ret = indexes.get(ob);
@@ -272,6 +273,7 @@ public interface DustUtilsData extends DustUtilsConsts {
 			if ( null == ret ) {
 				ret = indexes.size();
 				indexes.put(ob, ret);
+				idxArr.add(ob);
 			}
 
 			return ret;
@@ -285,8 +287,8 @@ public interface DustUtilsData extends DustUtilsConsts {
 			return indexes.size();
 		}
 
-		public Collection<KeyType> keys() {
-			return indexes.keySet();
+		public Iterable<KeyType> keys() {
+			return idxArr;
 		}
 
 		@Override
