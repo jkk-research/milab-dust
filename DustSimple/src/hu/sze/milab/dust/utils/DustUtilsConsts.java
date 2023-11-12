@@ -1,8 +1,10 @@
 package hu.sze.milab.dust.utils;
 
+import java.io.Closeable;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
@@ -14,6 +16,10 @@ import hu.sze.milab.dust.dev.DustDevFolderCoverage;
 public interface DustUtilsConsts extends DustConsts {
 	public enum StringMatch {
 		Equals, Contains, EndsWith, StartsWith,
+	}
+	
+	public interface DustCloseableWalker<ItemType> extends Iterable<ItemType>, Iterator<ItemType>, Closeable {
+		
 	}
 
 	public static class DustFileFilter implements FileFilter, FilenameFilter {
