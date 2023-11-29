@@ -53,7 +53,7 @@ public class DustUtils implements DustUtilsConsts {
 	}
 
 	public static String csvEscape(String valStr, boolean addQuotes) {
-		String ret = valStr.replace("\"", "\"\"").replaceAll("\\s+", " ");
+		String ret = (null == valStr) ? "" : valStr.replace("\"", "\"\"").replaceAll("\\s+", " ");
 
 		if ( addQuotes ) {
 			ret = "\"" + ret + "\"";
