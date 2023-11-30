@@ -287,6 +287,10 @@ public interface DustUtilsData extends DustUtilsConsts {
 			return indexes.size();
 		}
 
+		public KeyType getKey(int idx) {
+			return idxArr.get(idx);
+		}
+
 		public Iterable<KeyType> keys() {
 			return idxArr;
 		}
