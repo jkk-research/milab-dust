@@ -4,8 +4,11 @@ public interface DustMetaConsts extends DustConsts {
 		
 	public static MindHandle MIND_UNIT = Dust.recall("1");
 	
+	public static MindHandle MIND_ASP_AUTHOR = Dust.recall("1:");
+	
 	public static MindHandle MIND_ASP_UNIT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_UNIT_HANDLES = Dust.recall("1:");
+	public static MindHandle MIND_ATT_UNIT_AUTHOR = Dust.recall("1:");
 	
 	public static MindHandle MIND_ASP_MEMORY = Dust.recall("1:");
 	public static MindHandle MIND_ATT_MEMORY_KNOWLEDGE = Dust.recall("1:");
@@ -81,6 +84,9 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_TAG_RESULT_ACCEPT = Dust.recall("1:");
 
 	
+	public static MindHandle MIND_AUTHOR_DUST = Dust.recall("1:");
+
+	
 	public static MindHandle DUST_UNIT = Dust.recall("2");
 
 	public static MindHandle DUST_ASP_MACHINE = Dust.recall("2:");
@@ -117,11 +123,23 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_ASP_VARIANT = Dust.recall("3:");
 	public static MindHandle MISC_ATT_VARIANT_VALUE = Dust.recall("3:");
 	
+	
 	public static MindHandle TEXT_UNIT = Dust.recall("4");
 	
-	public static MindHandle TEXT_ASP_NAMED = Dust.recall("4:");
-	public static MindHandle TEXT_ATT_NAME = Dust.recall("4:");	
+	public static MindHandle TEXT_TAG_LANGUAGE = Dust.recall("4:");
+	public static MindHandle TEXT_TAG_LANGUAGE_EN_US = Dust.recall("4:");
+
+	public static MindHandle TEXT_ATT_LANGUAGE_DEFAULT = Dust.recall("4:");
+
+	public static MindHandle TEXT_ASP_RESOURCE = Dust.recall("4:");	
+	public static MindHandle TEXT_ATT_RESOURCE_TOKENS = Dust.recall("4:");	
 	
+	public static MindHandle TEXT_ATT_TOKEN = Dust.recall("4:");	
+
+	public static MindHandle TEXT_TAG_TYPE = Dust.recall("4:");
+	public static MindHandle TEXT_TAG_TYPE_TOKEN = Dust.recall("4:");
+	public static MindHandle TEXT_TAG_TYPE_NAME = Dust.recall("4:");
+
 	public static MindHandle TEXT_ASP_PLAIN = Dust.recall("4:");
 	public static MindHandle TEXT_ATT_PLAIN_TEXT = Dust.recall("4:");	
 	
@@ -130,9 +148,13 @@ public interface DustMetaConsts extends DustConsts {
 
 	public static MindHandle EVENT_ASP_EVENT = Dust.recall("5:");
 
+	public static MindHandle EVENT_TAG_TYPE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONTHROWN = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONSWALLOWED = Dust.recall("5:");
 
 	public static MindHandle EVENT_TAG_TRACE = Dust.recall("5:");
+	
+	
+	public static MindHandle RESOURCE_UNIT = Dust.recall("6");
 
 }
