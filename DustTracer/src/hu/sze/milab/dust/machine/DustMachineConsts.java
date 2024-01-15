@@ -4,9 +4,19 @@ import java.util.Map;
 
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsConsts;
 
-interface DustMachineConsts extends DustMetaConsts {
+interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
+	
+	enum MachineAtts {
+		CreatorAccess
+	}
+	
+	enum MindAccess {
+		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
+	};
 
+	
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	class DustHandle implements MindHandle {
 		private static Map<MindHandle, MindHandle> TOSRT_TOKENMAP;

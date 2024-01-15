@@ -14,6 +14,12 @@ public interface DustConsts {
 	String DUST_EXT_JSON = ".json";
 	String DUST_EXT_CSV = ".csv";
 	String DUST_EXT_XML = ".xml";
+	
+	int KEY_ADD = -1;
+	int KEY_SIZE = -2;
+//	int KEY_ITER = -3;
+//	int KEY_KEYS = -4;
+
 
 	interface MindHandle {
 		MindHandle getUnit();

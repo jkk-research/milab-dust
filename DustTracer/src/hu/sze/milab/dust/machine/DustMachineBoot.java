@@ -12,6 +12,8 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsAttCache;
+import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -123,7 +125,17 @@ public class DustMachineBoot implements DustMachineConsts {
 		resRoot.put(TEXT_TAG_LANGUAGE_EN_US, langEn);
 		
 		machine.mainDialog.knowledge.put(TEXT_ATT_LANGUAGE_DEFAULT, TEXT_TAG_LANGUAGE_EN_US);
-
+		
+		machine.idRes = machine.mainDialog;
+		
+		DustUtilsEnumTranslator.register(MindAccess.class, 
+				MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, 
+				MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE, MIND_TAG_ACCESS_RESET, 
+				MIND_TAG_ACCESS_COMMIT);
+		
+		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, 
+				MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
+		
 		Class[] handleSources = new Class[] { DustMetaConsts.class };
 
 		for (Class constClass : handleSources) {
@@ -141,6 +153,16 @@ public class DustMachineBoot implements DustMachineConsts {
 		}
 
 		DustHandle.setTranslator(langEn, (Map<MindHandle, Map>) uRes.get(MIND_ATT_MEMORY_KNOWLEDGE));
+		
+		for (Class constClass : handleSources) {
+			for (Field f : constClass.getDeclaredFields()) {
+				Object ch = f.get(null);
+				if ( ch instanceof MindHandle ) {
+					String name = f.getName();
+					Dust.access(ch, MIND_TAG_ACCESS_SET, name, DEV_ATT_HINT);
+				}
+			}
+		}
 		
 		Map out = new HashMap<>();
 		Map jsonapi = new HashMap<>();
@@ -165,7 +187,6 @@ public class DustMachineBoot implements DustMachineConsts {
 			}
 		}
 
-		machine.idRes = machine.mainDialog;
 	}
 
 	public static Map createKnowledge(Map uk, MindHandle h, String localId) {

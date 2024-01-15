@@ -1,5 +1,7 @@
 package hu.sze.milab.dust.utils;
 
+import java.util.Map;
+
 @SuppressWarnings("unchecked")
 public class DustUtils implements DustUtilsConsts {
 
@@ -50,6 +52,17 @@ public class DustUtils implements DustUtilsConsts {
 		}
 
 		return sb;
+	}	
+	
+	public static <RetType> RetType safeGet(Object map, Object key, DustCreator<RetType> creator, Object... hints) {
+		synchronized (map) {
+			RetType ret = ((Map<Object, RetType>) map).get(key);
+			if ( null == ret ) {
+				ret = creator.create(key, hints);
+				((Map<Object, RetType>) map).put(key, ret);
+			}
+			return ret;
+		}
 	}
 
 
