@@ -1,18 +1,19 @@
 package hu.sze.milab.dust.utils;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
 
+@SuppressWarnings({"rawtypes", "unchecked"})
 public interface DustUtilsConsts extends DustConsts {
 	
 	interface DustCreator<Type> {
 		Type create(Object key, Object... hints);
 	}
 	
-	@SuppressWarnings({"rawtypes", "unchecked"})
 	class DustCreatorSimple<Type> implements DustCreator<Type> {
 		
 		Class cc;
@@ -31,7 +32,7 @@ public interface DustUtilsConsts extends DustConsts {
 		}
 	}
 	
-	@SuppressWarnings("rawtypes")
 	DustCreator<Map> MAP_CREATOR = new DustCreatorSimple<>(HashMap.class);
+	DustCreator<ArrayList> ARRAY_CREATOR = new DustCreatorSimple<>(ArrayList.class);
 
 }

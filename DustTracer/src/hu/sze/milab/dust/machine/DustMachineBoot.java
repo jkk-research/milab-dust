@@ -1,12 +1,9 @@
 package hu.sze.milab.dust.machine;
 
-import java.io.File;
-import java.io.FileWriter;
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.json.simple.JSONValue;
+import java.util.TreeMap;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
@@ -14,7 +11,6 @@ import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
-import hu.sze.milab.dust.utils.DustUtilsFile;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class DustMachineBoot implements DustMachineConsts {
@@ -66,7 +62,7 @@ public class DustMachineBoot implements DustMachineConsts {
 					}
 					mh = new DustHandle(recall(ii[0]), lid);
 				} else {
-					mh = new DustHandle();
+					mh = new DustHandle(id);
 					if ( !cnt.containsKey(id) ) {
 						cnt.put(id, 0);
 					}
@@ -88,6 +84,15 @@ public class DustMachineBoot implements DustMachineConsts {
 		machine.mainDialog.knowledge.put(MIND_ATT_ASSEMBLY_UNITS, units);
 		Map rootKnowledge = new HashMap();
 		machine.mainDialog.knowledge.put(MIND_ATT_MEMORY_KNOWLEDGE, rootKnowledge);
+
+		DustUtilsEnumTranslator.register(MindAccess.class, MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE,
+				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT);
+
+		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
+
+		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE);
+
+		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG);
 
 		Map k;
 		MindHandle h;
@@ -116,87 +121,78 @@ public class DustMachineBoot implements DustMachineConsts {
 			}
 		}
 
-		Map uRes = (Map) rootKnowledge.get(RESOURCE_UNIT);
-
-		Map resRoot = new HashMap();
-		uRes.put(TEXT_ATT_RESOURCE_TOKENS, resRoot);
-
-		Map langEn = new HashMap();
-		resRoot.put(TEXT_TAG_LANGUAGE_EN_US, langEn);
-		
-		machine.mainDialog.knowledge.put(TEXT_ATT_LANGUAGE_DEFAULT, TEXT_TAG_LANGUAGE_EN_US);
-		
 		machine.idRes = machine.mainDialog;
 		
-		DustUtilsEnumTranslator.register(MindAccess.class, 
-				MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, 
-				MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE, MIND_TAG_ACCESS_RESET, 
-				MIND_TAG_ACCESS_COMMIT);
-		
-		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, 
-				MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
 		
 		Class[] handleSources = new Class[] { DustMetaConsts.class };
+		Map<String, MindHandle> parents = new TreeMap<>();
 
-		for (Class constClass : handleSources) {
-			for (Field f : constClass.getDeclaredFields()) {
-				Object ch = f.get(null);
-				if ( ch instanceof MindHandle ) {
-					String name = f.getName();
-					Dust.log(null, name);
-					
-					Map token = createKnowledge(uRes, null, null);
-					token.put(TEXT_ATT_PLAIN_TEXT, name);
-					langEn.put(ch, token.get(MIND_ATT_KNOWLEDGE_HANDLE));
-				}
-			}
-		}
 
-		DustHandle.setTranslator(langEn, (Map<MindHandle, Map>) uRes.get(MIND_ATT_MEMORY_KNOWLEDGE));
-		
+
+		machine.mainDialog.knowledge.put(TEXT_ATT_LANGUAGE_DEFAULT, TEXT_TAG_LANGUAGE_EN_US);
+		Map uRes = (Map) rootKnowledge.get(RESOURCE_UNIT);
+
 		for (Class constClass : handleSources) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
 				if ( ch instanceof MindHandle ) {
 					String name = f.getName();
 					Dust.access(ch, MIND_TAG_ACCESS_SET, name, DEV_ATT_HINT);
+
+					String[] nn = name.split(DUST_SEP);
+					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
+
+					if ( "ASP".equals(nn[1]) || "TAG".equals(nn[1]) ) {
+						parents.put(name, (MindHandle) ch);
+					}
+
+					Map token = createKnowledge(uRes, null, null);
+					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
+					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
+					token.put(TEXT_TAG_LANGUAGE_EN_US, TEXT_TAG_LANGUAGE);
+					token.put(MISC_ATT_CONN_OWNER, ch);
+//					DustUtils.safeGet(token, MIND_ATT_KNOWLEDGE_TAGS, MAP_CREATOR).put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);
+
+					Dust.log(null, name, " -> ", tokenVal);
 				}
 			}
 		}
-		
-		Map out = new HashMap<>();
-		Map jsonapi = new HashMap<>();
-		
-		jsonapi.put("version", "1.1");
-		out.put("jsonapi", jsonapi);
-		
-		for ( Object u : units.values() ) {
-			String uName = u.toString().split(DUST_SEP)[0].toLowerCase();
-			String vName = ((Map) rootKnowledge.get(u)).get(MIND_ATT_UNIT_AUTHOR).toString();
-			
-			vName = DustUtils.getPostfix(vName, DUST_SEP).split(" ")[0].toLowerCase();
-			
-			File dir = new File("work/json/" + vName);
-			DustUtilsFile.ensureDir(dir);
-			
-			File f = new File(dir, uName + DUST_EXT_JSON);
-			
-			try ( FileWriter fw = new FileWriter(f)) {
-				JSONValue.writeJSONString(out, fw);
-				fw.flush();
+
+		for (Class constClass : handleSources) {
+			for (Field f : constClass.getDeclaredFields()) {
+				Object ch = f.get(null);
+				if ( ch instanceof MindHandle ) {
+					String name = f.getName();
+					String[] nn = name.split(DUST_SEP);
+					MindHandle hPA = DustUtilsAttCache.getAtt(MachineAtts.PrimaryAspectNames, nn[1], null);
+
+					Dust.access(ch, MIND_TAG_ACCESS_SET, hPA, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+
+					if ( "ATT".equals(nn[1]) || "TAG".equals(nn[1]) ) {
+						String pName = name.substring(0, nn[0].length() + nn[1].length() + nn[2].length() + 2);
+						pName = pName.replace("_ATT_", "_ASP_");
+						MindHandle hParent = parents.get(pName);
+
+						Dust.access(ch, MIND_TAG_ACCESS_SET, hParent, MISC_ATT_CONN_PARENT);
+					}
+				}
 			}
 		}
+
+		DustMachineTemp.test();
 
 	}
 
 	public static Map createKnowledge(Map uk, MindHandle h, String localId) {
-		if ( DustUtils.isEmpty(localId)) {
-			localId = "" + uk.size();
+		Map unitHandles = (Map) uk.get(MIND_ATT_UNIT_HANDLES);
+
+		if ( DustUtils.isEmpty(localId) ) {
+			localId = "" + unitHandles.size();
 		}
 		if ( null == h ) {
 			h = new DustHandle((DustHandle) uk.get(MIND_ATT_KNOWLEDGE_HANDLE), localId);
 		}
-		((Map) uk.get(MIND_ATT_UNIT_HANDLES)).put(localId, h);
+		unitHandles.put(localId, h);
 
 		Map k = new HashMap();
 		k.put(MIND_ATT_KNOWLEDGE_HANDLE, h);

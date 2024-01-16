@@ -1,1 +1,153 @@
-{"jsonapi":{"version":"1.1"}}
+{
+	"jsonapi": {
+		"version": "1.1"
+	},
+	"meta": {
+		"count": 9
+	},
+	"data": [
+		{
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"attributes": {
+				"3:3 (MISC_ATT_CONN_PARENT)": null,
+				"7:1 (DEV_ATT_HINT)": "TEXT_ATT_LANGUAGE_DEFAULT"
+			},
+			"id": "4:3 (TEXT_ATT_LANGUAGE_DEFAULT)",
+			"relationships": {
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			}
+		},
+		{
+			"type": "1:17 (MIND_ASP_TAG)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_TAG_TYPE"
+			},
+			"id": "4:5 (TEXT_TAG_TYPE)",
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:5 (TEXT_TAG_TYPE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:17 (MIND_ASP_TAG)"
+				}
+			}
+		},
+		{
+			"type": "1:15 (MIND_ASP_ASPECT)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_ASP_PLAIN"
+			},
+			"id": "4:8 (TEXT_ASP_PLAIN)",
+			"relationships": {
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:15 (MIND_ASP_ASPECT)"
+				}
+			}
+		},
+		{
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_ATT_PLAIN_TEXT"
+			},
+			"id": "4:9 (TEXT_ATT_PLAIN_TEXT)",
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			}
+		},
+		{
+			"type": "1:17 (MIND_ASP_TAG)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_TAG_TYPE_NAME"
+			},
+			"id": "4:7 (TEXT_TAG_TYPE_NAME)",
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:5 (TEXT_TAG_TYPE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:17 (MIND_ASP_TAG)"
+				}
+			}
+		},
+		{
+			"type": "1:17 (MIND_ASP_TAG)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_TAG_TYPE_TOKEN"
+			},
+			"id": "4:6 (TEXT_TAG_TYPE_TOKEN)",
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:5 (TEXT_TAG_TYPE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:17 (MIND_ASP_TAG)"
+				}
+			}
+		},
+		{
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"attributes": {
+				"3:3 (MISC_ATT_CONN_PARENT)": null,
+				"7:1 (DEV_ATT_HINT)": "TEXT_ATT_TOKEN"
+			},
+			"id": "4:4 (TEXT_ATT_TOKEN)",
+			"relationships": {
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			}
+		},
+		{
+			"type": "1:17 (MIND_ASP_TAG)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_TAG_LANGUAGE"
+			},
+			"id": "4:1 (TEXT_TAG_LANGUAGE)",
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:17 (MIND_ASP_TAG)"
+				}
+			}
+		},
+		{
+			"type": "1:17 (MIND_ASP_TAG)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "TEXT_TAG_LANGUAGE_EN_US"
+			},
+			"id": "4:2 (TEXT_TAG_LANGUAGE_EN_US)",
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:17 (MIND_ASP_TAG)"
+				}
+			}
+		}
+	]
+}

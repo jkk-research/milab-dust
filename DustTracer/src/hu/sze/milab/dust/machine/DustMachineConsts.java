@@ -1,40 +1,29 @@
 package hu.sze.milab.dust.machine;
 
-import java.util.Map;
-
+import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsConsts;
 
 interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
-	
+
 	enum MachineAtts {
-		CreatorAccess
+		CreatorAccess, PrimaryAspectNames, PersistentAtt
 	}
-	
+
 	enum MindAccess {
 		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
 	};
 
-	
-	@SuppressWarnings({ "rawtypes", "unchecked" })
 	class DustHandle implements MindHandle {
-		private static Map<MindHandle, MindHandle> TOSRT_TOKENMAP;
-		private static Map<MindHandle, Map> TOSRT_TOKENS;
-
-		public static void setTranslator(Map<MindHandle, MindHandle> tokenmap, Map<MindHandle, Map> tokenTexts) {
-			TOSRT_TOKENMAP = tokenmap;
-			TOSRT_TOKENS = tokenTexts;
-		}
-
 		private final DustHandle unit;
 		private final String id;
 
 		private String toStr;
 
-		public DustHandle() {
+		public DustHandle(String id) {
 			unit = this;
-			id = "0";
+			this.id = id;
 		}
 
 		public DustHandle(DustHandle unit, String id) {
@@ -54,13 +43,11 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 
 		@Override
 		public String toString() {
-			if ( (null != TOSRT_TOKENMAP) && (null == toStr) ) {
+			if ( null == toStr ) {
 				toStr = getId();
-				MindHandle hTxt = TOSRT_TOKENMAP.get(this);
-				if ( null != hTxt ) {
-					Map m = TOSRT_TOKENS.get(hTxt);
-					String str = (String) m.getOrDefault(TEXT_ATT_PLAIN_TEXT, "???");
-					toStr = DustUtils.sbAppend(null, "", false, str, " (", toStr, ")").toString();
+				String str = Dust.access(this, MIND_TAG_ACCESS_PEEK, null, DEV_ATT_HINT);
+				if ( !DustUtils.isEmpty(str) ) {
+					toStr = DustUtils.sbAppend(null, "", false, toStr, " (", str, ")").toString();
 				}
 			}
 

@@ -35,7 +35,6 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ASP_DIALOG = Dust.recall("1:");
 	public static MindHandle MIND_ATT_DIALOG_ASSEMBLY = Dust.recall("1:");
 	public static MindHandle MIND_ATT_DIALOG_LAUNCHPARAMS = Dust.recall("1:");
-	public static MindHandle MIND_ATT_DIALOG_KNOWLEDGE = Dust.recall("1:");
 
 	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:");
@@ -105,6 +104,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_UNIT = Dust.recall("3");
 	
 	public static MindHandle MISC_ASP_CONN = Dust.recall("3:");
+	public static MindHandle MISC_ATT_CONN_OWNER = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_PARENT = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_TARGET = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_REQUIRES = Dust.recall("3:");
@@ -131,8 +131,8 @@ public interface DustMetaConsts extends DustConsts {
 
 	public static MindHandle TEXT_ATT_LANGUAGE_DEFAULT = Dust.recall("4:");
 
-	public static MindHandle TEXT_ASP_RESOURCE = Dust.recall("4:");	
-	public static MindHandle TEXT_ATT_RESOURCE_TOKENS = Dust.recall("4:");	
+//	public static MindHandle TEXT_ASP_RESOURCE = Dust.recall("4:");	
+//	public static MindHandle TEXT_ATT_RESOURCE_TOKENS = Dust.recall("4:");	
 	
 	public static MindHandle TEXT_ATT_TOKEN = Dust.recall("4:");	
 

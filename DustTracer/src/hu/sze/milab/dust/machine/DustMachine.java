@@ -43,21 +43,10 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 	protected <RetType> RetType access(Object root, MindHandle cmd, Object val, Object... path) {
 		Object ret = null;
 
-		DustHandle hRoot;
-
-		if ( null == root ) {
-			hRoot = null;
-			// resolve from current Dialog
-		} else {
-			hRoot = (DustHandle) root;
-		}
-
 		MindAccess ac = DustUtilsEnumTranslator.getEnum(cmd, MindAccess.Peek);
-
-//		boolean createIfMissing = DustMachineUtils.isCreatorAccess(ac);
 		boolean createIfMissing = DustUtilsAttCache.getAtt(MachineAtts.CreatorAccess, cmd, false);
 
-		Object curr = hRoot;
+		Object curr = (null == root) ? mainDialog.knowledge : resolveKnowledge((MindHandle) root, createIfMissing);
 		Object prev = null;
 		Object lastKey = null;
 
@@ -114,6 +103,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		case Insert:
 			break;
 		case Peek:
+			ret = curr;
 			break;
 		case Reset:
 			break;

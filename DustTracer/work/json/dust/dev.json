@@ -1,0 +1,24 @@
+{
+	"jsonapi": {
+		"version": "1.1"
+	},
+	"meta": {
+		"count": 1
+	},
+	"data": [
+		{
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"attributes": {
+				"3:3 (MISC_ATT_CONN_PARENT)": null,
+				"7:1 (DEV_ATT_HINT)": "DEV_ATT_HINT"
+			},
+			"id": "7:1 (DEV_ATT_HINT)",
+			"relationships": {
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			}
+		}
+	]
+}
