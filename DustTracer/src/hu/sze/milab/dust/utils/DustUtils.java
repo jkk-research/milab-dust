@@ -1,5 +1,6 @@
 package hu.sze.milab.dust.utils;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 @SuppressWarnings("unchecked")
@@ -12,13 +13,12 @@ public class DustUtils implements DustUtilsConsts {
 	public static boolean isEqual(Object o1, Object o2) {
 		return (null == o1) ? (null == o2) : (null != o2) && o1.equals(o2);
 	}
-	
+
 	@SuppressWarnings("rawtypes")
 	public static int safeCompare(Object v1, Object v2) {
 		return (null == v1) ? (null == v2) ? 0 : 1 : (null == v2) ? 1 : ((Comparable) v1).compareTo(v2);
 	};
 
-	
 	public static String toString(Object ob) {
 		return toString(ob, ", ");
 	}
@@ -52,8 +52,31 @@ public class DustUtils implements DustUtilsConsts {
 		}
 
 		return sb;
-	}	
-	
+	}
+
+	@SuppressWarnings("rawtypes")
+	public static <RetType> RetType simpleGet(Object root, Object... path) {
+		Object curr = root;
+
+		for (Object p : path) {
+			if ( null == curr ) {
+				break;
+			}
+			if ( p instanceof Integer ) {
+				int idx = (Integer) p;
+				ArrayList l = (ArrayList) curr;
+				curr = ((0 < idx) && (idx < l.size())) ? l.get(idx) : null;
+			} else {
+				if ( p instanceof Enum ) {
+					p = p.toString();
+				}
+				curr = ((Map) curr).get(p);
+			}
+		}
+		
+		return (RetType) curr;
+	}
+
 	public static <RetType> RetType safeGet(Object map, Object key, DustCreator<RetType> creator, Object... hints) {
 		synchronized (map) {
 			RetType ret = ((Map<Object, RetType>) map).get(key);
@@ -64,7 +87,6 @@ public class DustUtils implements DustUtilsConsts {
 			return ret;
 		}
 	}
-
 
 	public static String getPostfix(String strSrc, String pfSep) {
 		int sep = strSrc.lastIndexOf(pfSep);

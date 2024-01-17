@@ -1,13 +1,10 @@
 package hu.sze.milab.dust.machine;
 
-import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
-import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
@@ -90,7 +87,7 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
 
-		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE);
+		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_MEMORY_KNOWLEDGE);
 
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG, "AUTHOR", MIND_ASP_AUTHOR);
 
@@ -123,63 +120,7 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.idRes = machine.mainDialog;
 		
-		
-		Class[] handleSources = new Class[] { DustMetaConsts.class };
-		Map<String, MindHandle> parents = new TreeMap<>();
-
-
-
-		machine.mainDialog.knowledge.put(TEXT_ATT_LANGUAGE_DEFAULT, TEXT_TAG_LANGUAGE_EN_US);
-		Map uRes = (Map) rootKnowledge.get(RESOURCE_UNIT);
-
-		for (Class constClass : handleSources) {
-			for (Field f : constClass.getDeclaredFields()) {
-				Object ch = f.get(null);
-				if ( ch instanceof MindHandle ) {
-					String name = f.getName();
-					Dust.access(ch, MIND_TAG_ACCESS_SET, name, DEV_ATT_HINT);
-
-					String[] nn = name.split(DUST_SEP);
-					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
-
-					if ( "ASP".equals(nn[1]) || "TAG".equals(nn[1]) ) {
-						parents.put(name, (MindHandle) ch);
-					}
-
-					Map token = createKnowledge(uRes, null, null);
-					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
-					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
-					token.put(TEXT_TAG_LANGUAGE_EN_US, TEXT_TAG_LANGUAGE);
-					token.put(MISC_ATT_CONN_OWNER, ch);
-
-					Dust.log(null, name, " -> ", tokenVal);
-				}
-			}
-		}
-
-		for (Class constClass : handleSources) {
-			for (Field f : constClass.getDeclaredFields()) {
-				Object ch = f.get(null);
-				if ( ch instanceof MindHandle ) {
-					String name = f.getName();
-					String[] nn = name.split(DUST_SEP);
-					MindHandle hPA = DustUtilsAttCache.getAtt(MachineAtts.PrimaryAspectNames, nn[1], null);
-
-					Dust.access(ch, MIND_TAG_ACCESS_SET, hPA, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
-
-					if ( "ATT".equals(nn[1]) || "TAG".equals(nn[1]) ) {
-						String pName = name.substring(0, nn[0].length() + nn[1].length() + nn[2].length() + 2);
-						pName = pName.replace("_ATT_", "_ASP_");
-						MindHandle hParent = parents.get(pName);
-
-						Dust.access(ch, MIND_TAG_ACCESS_SET, hParent, MISC_ATT_CONN_PARENT);
-					}
-				}
-			}
-		}
-
 		DustMachineTempUtils.test();
-
 	}
 
 	public static Map createKnowledge(Map uk, MindHandle h, String localId) {

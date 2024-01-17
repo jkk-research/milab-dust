@@ -50,6 +50,8 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		Object prev = null;
 		Object lastKey = null;
 
+		Map prevMap = null;
+		ArrayList prevArr = null;
 		for (Object p : path) {
 			if ( curr instanceof DustHandle ) {
 				curr = resolveKnowledge((DustHandle) curr, createIfMissing);
@@ -57,21 +59,24 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 				if ( createIfMissing ) {
 					curr = (p instanceof Integer) ? new ArrayList() : new HashMap();
 
-					if ( prev instanceof ArrayList ) {
+					if ( null != prevArr ) {
 						if ( KEY_ADD == (Integer) lastKey ) {
-							((ArrayList) prev).add(curr);
+							prevArr.add(curr);
 						} else {
-							((ArrayList) prev).set((Integer) lastKey, curr);
+							prevArr.set((Integer) lastKey, curr);
 						}
-					} else if ( prev instanceof Map ) {
-						((Map) prev).put(lastKey, curr);
+					} else if ( null != prevMap ) {
+						prevMap.put(lastKey, curr);
 					}
 				} else {
 					break;
 				}
 			}
-			
+
 			prev = curr;
+			prevArr = (prev instanceof ArrayList) ? (ArrayList) prev : null;
+			prevMap = (prev instanceof Map) ? (Map) prev : null;
+
 			lastKey = p;
 
 			if ( curr instanceof ArrayList ) {
@@ -89,7 +94,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 				curr = null;
 			}
 		}
-		
+
 		switch ( ac ) {
 		case Check:
 			break;
@@ -109,18 +114,20 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			break;
 		case Set:
 			if ( null != lastKey ) {
-				if ( prev instanceof Map ) {
-					((Map) prev).put(lastKey, val);
-				} else if ( prev instanceof ArrayList ) {
+				if ( null != prevMap ) {
+					if ( !DustUtils.isEqual(curr, val) ) {
+						prevMap.put(lastKey, val);
+					}
+				} else if ( null != prevArr ) {
 					if ( KEY_ADD == (Integer) lastKey ) {
-						((ArrayList) prev).add(val);
+						prevArr.add(val);
 					} else {
-						((ArrayList) prev).set((Integer) lastKey, val);
+						prevArr.set((Integer) lastKey, val);
 					}
 				}
 			}
 
-			break;		
+			break;
 		}
 
 		return (RetType) ret;

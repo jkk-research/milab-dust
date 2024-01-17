@@ -1,269 +1,23 @@
 {
-	"jsonapi": {
-		"version": "1.1"
-	},
-	"meta": {
-		"count": 110
-	},
 	"data": [
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_LISTENERS"
-			},
-			"id": "6:13",
 			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:13 (MIND_ATT_KNOWLEDGE_LISTENERS)"
+				"1:4 (MIND_ATT_UNIT_AUTHOR)": {
+					"type": "1:1 (MIND_ASP_AUTHOR)",
+					"id": "1:63 (MIND_AUTHOR_DUST)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+					"id": "1:2 (MIND_ASP_UNIT)"
 				}
-			}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "RESOURCE_UNIT"
+			},
+			"type": "1:2 (MIND_ASP_UNIT)",
+			"id": "6 (RESOURCE_UNIT)"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_EXCEPTIONTHROWN"
-			},
-			"id": "6:104",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "5:3 (EVENT_TAG_TYPE_EXCEPTIONTHROWN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AGENT_SELFLISTENER"
-			},
-			"id": "6:26",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:26 (MIND_TAG_AGENT_SELFLISTENER)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_COMMIT"
-			},
-			"id": "6:45",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:45 (MIND_TAG_ACCESS_COMMIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_BEGIN"
-			},
-			"id": "6:48",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:48 (MIND_TAG_ACTION_BEGIN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_BIN"
-			},
-			"id": "6:31",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:31 (MIND_TAG_VALTYPE_BIN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_TARGET"
-			},
-			"id": "6:78",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:4 (MISC_ATT_CONN_TARGET)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LOGIC"
-			},
-			"id": "6:18",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:18 (MIND_ASP_LOGIC)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_ACCEPT"
-			},
-			"id": "6:62",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:62 (MIND_TAG_RESULT_ACCEPT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_GET"
-			},
-			"id": "6:40",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:40 (MIND_TAG_ACCESS_GET)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ALIAS"
-			},
-			"id": "6:84",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:10 (MISC_ATT_ALIAS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VARIANT_VALUE"
-			},
-			"id": "6:90",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:16 (MISC_ATT_VARIANT_VALUE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE"
-			},
-			"id": "6:10",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -277,1043 +31,14 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:10"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_WAITING"
-			},
-			"id": "6:55",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:55 (MIND_TAG_STATUS_WAITING)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_HANDLE"
-			},
-			"id": "6:30",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:30 (MIND_TAG_VALTYPE_HANDLE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HINT"
-			},
-			"id": "6:109",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "7:1 (DEV_ATT_HINT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CUSTOM"
-			},
-			"id": "6:86",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:12 (MISC_ATT_CUSTOM)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESOURCE"
-			},
-			"id": "6:107",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:2 (MIND_ASP_UNIT)",
-					"id": "6 (RESOURCE_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_SET"
-			},
-			"id": "6:41",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:41 (MIND_TAG_ACCESS_SET)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT"
-			},
-			"id": "6:57",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:57 (MIND_TAG_RESULT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_EXCEPTIONSWALLOWED"
-			},
-			"id": "6:105",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "5:4 (EVENT_TAG_TYPE_EXCEPTIONSWALLOWED)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE"
-			},
-			"id": "6:103",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "5:2 (EVENT_TAG_TYPE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE"
-			},
-			"id": "6:70",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:6 (DUST_ASP_NATIVE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "GEN"
-			},
-			"id": "6:83",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "3:9 (MISC_ASP_GEN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_MEMBERARR"
-			},
-			"id": "6:81",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:7 (MISC_ATT_CONN_MEMBERARR)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_REJECT"
-			},
-			"id": "6:58",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:58 (MIND_TAG_RESULT_REJECT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE"
-			},
-			"id": "6:32",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:32 (MIND_TAG_COLLTYPE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ASSEMBLY"
-			},
-			"id": "6:19",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:19 (MIND_ASP_ASSEMBLY)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DUST"
-			},
-			"id": "6:63",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "",
-					"id": "1:63 (MIND_AUTHOR_DUST)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "PLAIN"
-			},
-			"id": "6:99",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_PROCESS"
-			},
-			"id": "6:49",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:49 (MIND_TAG_ACTION_PROCESS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE"
-			},
-			"id": "6:96",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:5 (TEXT_TAG_TYPE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_TAGS"
-			},
-			"id": "6:12",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:12 (MIND_ATT_KNOWLEDGE_TAGS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ASPECT"
-			},
-			"id": "6:15",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:15 (MIND_ASP_ASPECT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_PARENT"
-			},
-			"id": "6:77",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:3 (MISC_ATT_CONN_PARENT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN"
-			},
-			"id": "6:75",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "3:1 (MISC_ASP_CONN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TRACE"
-			},
-			"id": "6:106",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "5:5 (EVENT_TAG_TRACE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_INSERT"
-			},
-			"id": "6:42",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:42 (MIND_TAG_ACCESS_INSERT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AGENT_LOGIC"
-			},
-			"id": "6:25",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:25 (MIND_ATT_AGENT_LOGIC)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MEMORY_KNOWLEDGE"
-			},
-			"id": "6:6",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:6 (MIND_ATT_MEMORY_KNOWLEDGE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LANGUAGE_DEFAULT"
-			},
-			"id": "6:94",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "4:3 (TEXT_ATT_LANGUAGE_DEFAULT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_INIT"
-			},
-			"id": "6:47",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:47 (MIND_TAG_ACTION_INIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_PROCESSING"
-			},
-			"id": "6:54",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:54 (MIND_TAG_STATUS_PROCESSING)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DIALOG_ASSEMBLY"
-			},
-			"id": "6:22",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:22 (MIND_ATT_DIALOG_ASSEMBLY)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TAG"
-			},
-			"id": "6:17",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:17 (MIND_ASP_TAG)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DIALOG_LAUNCHPARAMS"
-			},
-			"id": "6:23",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:23 (MIND_ATT_DIALOG_LAUNCHPARAMS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION"
-			},
-			"id": "6:46",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:46 (MIND_TAG_ACTION)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_ERROR"
-			},
-			"id": "6:56",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:56 (MIND_TAG_STATUS_ERROR)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LANGUAGE_EN_US"
-			},
-			"id": "6:93",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:2 (TEXT_TAG_LANGUAGE_EN_US)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE"
-			},
-			"id": "6:27",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:27 (MIND_TAG_VALTYPE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_ARR"
-			},
-			"id": "6:35",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:35 (MIND_TAG_COLLTYPE_ARR)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "THREAD"
-			},
-			"id": "6:69",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:5 (DUST_ASP_THREAD)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "EVENT"
-			},
-			"id": "6:102",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "5:1 (EVENT_ASP_EVENT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_OWNER"
-			},
-			"id": "6:76",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:2 (MISC_ATT_CONN_OWNER)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MISC"
-			},
-			"id": "6:74",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:2 (MIND_ASP_UNIT)",
-					"id": "3 (MISC_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DUST"
-			},
-			"id": "6:64",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:2 (MIND_ASP_UNIT)",
-					"id": "2 (DUST_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_READACCEPT"
-			},
-			"id": "6:61",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:61 (MIND_TAG_RESULT_READACCEPT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TEXT"
-			},
-			"id": "6:91",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:2 (MIND_ASP_UNIT)",
-					"id": "4 (TEXT_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE_INSTANCE"
-			},
-			"id": "6:72",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "2:8 (DUST_ATT_NATIVE_INSTANCE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_DELETE"
-			},
-			"id": "6:43",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:43 (MIND_TAG_ACCESS_DELETE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_READ"
-			},
-			"id": "6:60",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:60 (MIND_TAG_RESULT_READ)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS"
-			},
-			"id": "6:52",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:52 (MIND_TAG_STATUS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "EVENT"
-			},
-			"id": "6:101",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:2 (MIND_ASP_UNIT)",
@@ -1327,186 +52,18 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "EVENT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:101"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DIALOG"
-			},
-			"id": "6:21",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:21 (MIND_ASP_DIALOG)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LANGUAGE"
-			},
-			"id": "6:92",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE"
-			},
-			"id": "6:65",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:1 (DUST_ASP_MACHINE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_RELEASE"
-			},
-			"id": "6:51",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:51 (MIND_TAG_ACTION_RELEASE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_NAME"
-			},
-			"id": "6:98",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:7 (TEXT_TAG_TYPE_NAME)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "UNIT"
-			},
-			"id": "6:2",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:2 (MIND_ASP_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_ONE"
-			},
-			"id": "6:33",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:33 (MIND_TAG_COLLTYPE_ONE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS"
-			},
-			"id": "6:37",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:37 (MIND_TAG_ACCESS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE_DIALOGS"
-			},
-			"id": "6:67",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "2:3 (DUST_ATT_MACHINE_DIALOGS)"
+					"id": "1:23 (MIND_ATT_DIALOG_LAUNCHPARAMS)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -1516,60 +73,18 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DIALOG_LAUNCHPARAMS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:23"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HANDLE_UNIT"
-			},
-			"id": "6:8",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:8 (MIND_ATT_HANDLE_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HANDLE_ID"
-			},
-			"id": "6:9",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:9 (MIND_ATT_HANDLE_ID)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_RESET"
-			},
-			"id": "6:44",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:44 (MIND_TAG_ACCESS_RESET)"
+					"id": "1:42 (MIND_TAG_ACCESS_INSERT)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -1579,18 +94,18 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_INSERT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:42"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_REAL"
-			},
-			"id": "6:29",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:29 (MIND_TAG_VALTYPE_REAL)"
+					"id": "1:45 (MIND_TAG_ACCESS_COMMIT)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -1600,560 +115,14 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_COMMIT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:45"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_MEMBERSET"
-			},
-			"id": "6:82",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:8 (MISC_ATT_CONN_MEMBERSET)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_PASS"
-			},
-			"id": "6:59",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:59 (MIND_TAG_RESULT_PASS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE_ASSEMBLIES"
-			},
-			"id": "6:66",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "2:2 (DUST_ATT_MACHINE_ASSEMBLIES)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VARIANT"
-			},
-			"id": "6:89",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "3:15 (MISC_ASP_VARIANT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MIND"
-			},
-			"id": "6:0",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:2 (MIND_ASP_UNIT)",
-					"id": "1 (MIND_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE_CONTEXT"
-			},
-			"id": "6:73",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "2:9 (DUST_ATT_NATIVE_CONTEXT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_PRIMARYASPECT"
-			},
-			"id": "6:14",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE_THREADS"
-			},
-			"id": "6:68",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "2:4 (DUST_ATT_MACHINE_THREADS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_MEMBERMAP"
-			},
-			"id": "6:80",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:6 (MISC_ATT_CONN_MEMBERMAP)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HANDLE"
-			},
-			"id": "6:7",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:7 (MIND_ASP_HANDLE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MEMORY"
-			},
-			"id": "6:5",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:5 (MIND_ASP_MEMORY)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE_IMPLEMENTATION"
-			},
-			"id": "6:71",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "2:7 (DUST_ATT_NATIVE_IMPLEMENTATION)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "UNIT_AUTHOR"
-			},
-			"id": "6:4",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:4 (MIND_ATT_UNIT_AUTHOR)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_END"
-			},
-			"id": "6:50",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:50 (MIND_TAG_ACTION_END)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_HANDLE"
-			},
-			"id": "6:11",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:11 (MIND_ATT_KNOWLEDGE_HANDLE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DEV"
-			},
-			"id": "6:108",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:2 (MIND_ASP_UNIT)",
-					"id": "7 (DEV_UNIT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_CHECK"
-			},
-			"id": "6:38",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:38 (MIND_TAG_ACCESS_CHECK)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_IDLE"
-			},
-			"id": "6:53",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:53 (MIND_TAG_STATUS_IDLE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_MAP"
-			},
-			"id": "6:36",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:36 (MIND_TAG_COLLTYPE_MAP)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TOKEN"
-			},
-			"id": "6:95",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "4:4 (TEXT_ATT_TOKEN)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "UNIT_HANDLES"
-			},
-			"id": "6:3",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:3 (MIND_ATT_UNIT_HANDLES)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AUTHOR"
-			},
-			"id": "6:1",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:1 (MIND_ASP_AUTHOR)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ATTRIBUTE"
-			},
-			"id": "6:16",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "GEN_EMPTY"
-			},
-			"id": "6:87",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "3:13 (MISC_TAG_GEN_EMPTY)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ASSEMBLY_UNITS"
-			},
-			"id": "6:20",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "1:20 (MIND_ATT_ASSEMBLY_UNITS)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COUNT"
-			},
-			"id": "6:85",
-			"relationships": {
-				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:11 (MISC_ATT_COUNT)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "4:8 (TEXT_ASP_PLAIN)"
-				},
-				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:1 (TEXT_TAG_LANGUAGE)"
-				}
-			}
-		},
-		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_INT"
-			},
-			"id": "6:28",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:17 (MIND_ASP_TAG)",
@@ -2167,18 +136,18 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_INT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:28"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_TOKEN"
-			},
-			"id": "6:97",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
-					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "4:6 (TEXT_TAG_TYPE_TOKEN)"
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "3:1 (MISC_ASP_CONN)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -2188,14 +157,329 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:75"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "PLAIN_TEXT"
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:15 (MIND_ASP_ASPECT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
 			},
-			"id": "6:100",
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ASPECT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:15"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:59 (MIND_TAG_RESULT_PASS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_PASS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:59"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:37 (MIND_TAG_ACCESS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:37"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:7 (MISC_ATT_CONN_MEMBERARR)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_MEMBERARR"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:81"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:2 (MIND_ASP_UNIT)",
+					"id": "6 (RESOURCE_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESOURCE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:108"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "3:13 (MISC_TAG_GEN_EMPTY)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "GEN_EMPTY"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:87"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:7 (MIND_ASP_HANDLE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HANDLE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:7"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:52 (MIND_TAG_STATUS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:52"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:27 (MIND_TAG_VALTYPE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:27"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "5:5 (EVENT_TAG_TYPE_TRACE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_TRACE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:106"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "3:9 (MISC_ASP_GEN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "GEN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:83"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "5:3 (EVENT_TAG_TYPE_EXCEPTIONTHROWN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_EXCEPTIONTHROWN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:104"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:38 (MIND_TAG_ACCESS_CHECK)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_CHECK"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:38"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:54 (MIND_TAG_STATUS_PROCESSING)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_PROCESSING"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:54"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "5:1 (EVENT_ASP_EVENT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "EVENT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:102"
+		},
+		{
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
@@ -2209,14 +493,350 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "PLAIN_TEXT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:100"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_PEEK"
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "2:3 (DUST_ATT_MACHINE_DIALOGS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
 			},
-			"id": "6:39",
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE_DIALOGS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:67"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:6 (MISC_ATT_CONN_MEMBERMAP)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_MEMBERMAP"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:80"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:4 (MISC_ATT_CONN_TARGET)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_TARGET"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:78"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:55 (MIND_TAG_STATUS_WAITING)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_WAITING"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:55"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:29 (MIND_TAG_VALTYPE_REAL)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_REAL"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:29"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ATTRIBUTE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:16"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:60 (MIND_TAG_RESULT_READ)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_READ"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:60"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:5 (TEXT_TAG_TYPE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:96"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:46 (MIND_TAG_ACTION)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:46"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:2 (TEXT_TAG_LANGUAGE_EN_US)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LANGUAGE_EN_US"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:93"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:9 (MIND_ATT_HANDLE_ID)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HANDLE_ID"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:9"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:12 (MIND_ATT_KNOWLEDGE_TAGS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_TAGS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:12"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:2 (MIND_ASP_UNIT)",
+					"id": "3 (MISC_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MISC"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:74"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "2:8 (DUST_ATT_NATIVE_INSTANCE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE_INSTANCE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:72"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "5:6 (EVENT_TAG_TYPE_BREAKPOINT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_BREAKPOINT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:107"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "5:2 (EVENT_TAG_TYPE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:103"
+		},
+		{
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:17 (MIND_ASP_TAG)",
@@ -2230,18 +850,18 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_PEEK"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:39"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_REQUIRES"
-			},
-			"id": "6:79",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-					"id": "3:5 (MISC_ATT_CONN_REQUIRES)"
+					"id": "1:22 (MIND_ATT_DIALOG_ASSEMBLY)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -2251,14 +871,224 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DIALOG_ASSEMBLY"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:22"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AGENT"
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:3 (MIND_ATT_UNIT_HANDLES)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
 			},
-			"id": "6:24",
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "UNIT_HANDLES"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:3"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:2 (MIND_ASP_UNIT)",
+					"id": "4 (TEXT_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TEXT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:91"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:44 (MIND_TAG_ACCESS_RESET)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_RESET"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:44"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:51 (MIND_TAG_ACTION_RELEASE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_RELEASE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:51"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:19 (MIND_ASP_ASSEMBLY)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ASSEMBLY"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:19"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_PRIMARYASPECT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:14"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:20 (MIND_ATT_ASSEMBLY_UNITS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ASSEMBLY_UNITS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:20"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:43 (MIND_TAG_ACCESS_DELETE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_DELETE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:43"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:53 (MIND_TAG_STATUS_IDLE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_IDLE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:53"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:16 (MISC_ATT_VARIANT_VALUE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VARIANT_VALUE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:90"
+		},
+		{
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -2272,18 +1102,18 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AGENT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:24"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_SET"
-			},
-			"id": "6:34",
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:17 (MIND_ASP_TAG)",
-					"id": "1:34 (MIND_TAG_COLLTYPE_SET)"
+					"id": "1:32 (MIND_TAG_COLLTYPE)"
 				},
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
@@ -2293,14 +1123,161 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:32"
 		},
 		{
-			"type": "4:8 (TEXT_ASP_PLAIN)",
-			"attributes": {
-				"4:9 (TEXT_ATT_PLAIN_TEXT)": "GEN_ACTIVE"
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "2:2 (DUST_ATT_MACHINE_ASSEMBLIES)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
 			},
-			"id": "6:88",
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE_ASSEMBLIES"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:66"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:2 (MIND_ASP_UNIT)",
+					"id": "7 (DEV_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DEV"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:109"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "PLAIN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:99"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "2:9 (DUST_ATT_NATIVE_CONTEXT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE_CONTEXT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:73"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "2:7 (DUST_ATT_NATIVE_IMPLEMENTATION)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE_IMPLEMENTATION"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:71"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:61 (MIND_TAG_RESULT_READACCEPT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_READACCEPT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:61"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:58 (MIND_TAG_RESULT_REJECT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_REJECT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:58"
+		},
+		{
 			"relationships": {
 				"3:2 (MISC_ATT_CONN_OWNER)": {
 					"type": "1:17 (MIND_ASP_TAG)",
@@ -2314,7 +1291,1068 @@
 					"type": "1:17 (MIND_ASP_TAG)",
 					"id": "4:1 (TEXT_TAG_LANGUAGE)"
 				}
-			}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "GEN_ACTIVE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:88"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:5 (DUST_ASP_THREAD)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "THREAD"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:69"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:40 (MIND_TAG_ACCESS_GET)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_GET"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:40"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:57 (MIND_TAG_RESULT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:57"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:49 (MIND_TAG_ACTION_PROCESS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_PROCESS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:49"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:7 (TEXT_TAG_TYPE_NAME)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_NAME"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:98"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:18 (MIND_ASP_LOGIC)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LOGIC"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:18"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "3:15 (MISC_ASP_VARIANT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VARIANT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:89"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:62 (MIND_TAG_RESULT_ACCEPT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "RESULT_ACCEPT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:62"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:48 (MIND_TAG_ACTION_BEGIN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_BEGIN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:48"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "4:4 (TEXT_ATT_TOKEN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TOKEN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:95"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:30 (MIND_TAG_VALTYPE_HANDLE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_HANDLE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:30"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:34 (MIND_TAG_COLLTYPE_SET)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_SET"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:34"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:2 (MIND_ASP_UNIT)",
+					"id": "2 (DUST_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DUST"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:64"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:5 (MIND_ASP_MEMORY)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MEMORY"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:5"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:6 (MIND_ATT_MEMORY_KNOWLEDGE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MEMORY_KNOWLEDGE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:6"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:41 (MIND_TAG_ACCESS_SET)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACCESS_SET"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:41"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:26 (MIND_TAG_AGENT_SELFLISTENER)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AGENT_SELFLISTENER"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:26"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:5 (MISC_ATT_CONN_REQUIRES)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_REQUIRES"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:79"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:56 (MIND_TAG_STATUS_ERROR)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "STATUS_ERROR"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:56"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:1 (MIND_ASP_AUTHOR)",
+					"id": "1:63 (MIND_AUTHOR_DUST)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DUST"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:63"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:12 (MISC_ATT_CUSTOM)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CUSTOM"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:86"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:6 (DUST_ASP_NATIVE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "NATIVE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:70"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:11 (MIND_ATT_KNOWLEDGE_HANDLE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_HANDLE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:11"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:1 (DUST_ASP_MACHINE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:65"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:3 (MISC_ATT_CONN_PARENT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_PARENT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:77"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:4 (MIND_ATT_UNIT_AUTHOR)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "UNIT_AUTHOR"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:4"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:2 (MIND_ASP_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "UNIT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:2"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "2:4 (DUST_ATT_MACHINE_THREADS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MACHINE_THREADS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:68"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:1 (MIND_ASP_AUTHOR)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AUTHOR"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:1"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:47 (MIND_TAG_ACTION_INIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_INIT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:47"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:8 (MIND_ATT_HANDLE_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HANDLE_UNIT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:8"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "5:4 (EVENT_TAG_TYPE_EXCEPTIONSWALLOWED)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_EXCEPTIONSWALLOWED"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:105"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:35 (MIND_TAG_COLLTYPE_ARR)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_ARR"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:35"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:50 (MIND_TAG_ACTION_END)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ACTION_END"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:50"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:33 (MIND_TAG_COLLTYPE_ONE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_ONE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:33"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LANGUAGE"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:92"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:2 (MIND_ASP_UNIT)",
+					"id": "1 (MIND_UNIT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "MIND"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:0"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:13 (MIND_ATT_KNOWLEDGE_LISTENERS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "KNOWLEDGE_LISTENERS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:13"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "7:1 (DEV_ATT_HINT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "HINT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:110"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:10 (MISC_ATT_ALIAS)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "ALIAS"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:84"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:17 (MIND_ASP_TAG)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TAG"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:17"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:8 (MISC_ATT_CONN_MEMBERSET)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_MEMBERSET"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:82"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "1:25 (MIND_ATT_AGENT_LOGIC)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "AGENT_LOGIC"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:25"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "4:3 (TEXT_ATT_LANGUAGE_DEFAULT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "LANGUAGE_DEFAULT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:94"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:6 (TEXT_TAG_TYPE_TOKEN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "TYPE_TOKEN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:97"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:36 (MIND_TAG_COLLTYPE_MAP)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COLLTYPE_MAP"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:36"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:2 (MISC_ATT_CONN_OWNER)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "CONN_OWNER"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:76"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:21 (MIND_ASP_DIALOG)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "DIALOG"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:21"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "1:31 (MIND_TAG_VALTYPE_BIN)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "VALTYPE_BIN"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:31"
+		},
+		{
+			"relationships": {
+				"3:2 (MISC_ATT_CONN_OWNER)": {
+					"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+					"id": "3:11 (MISC_ATT_COUNT)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "4:8 (TEXT_ASP_PLAIN)"
+				},
+				"4:2 (TEXT_TAG_LANGUAGE_EN_US)": {
+					"type": "1:17 (MIND_ASP_TAG)",
+					"id": "4:1 (TEXT_TAG_LANGUAGE)"
+				}
+			},
+			"attributes": {
+				"4:9 (TEXT_ATT_PLAIN_TEXT)": "COUNT"
+			},
+			"type": "4:8 (TEXT_ASP_PLAIN)",
+			"id": "6:85"
 		}
-	]
+	],
+	"meta": {
+		"count": 111
+	},
+	"jsonapi": {
+		"version": "1.1"
+	}
 }

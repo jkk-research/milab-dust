@@ -1,151 +1,168 @@
 {
-	"jsonapi": {
-		"version": "1.1"
-	},
-	"meta": {
-		"count": 9
-	},
 	"data": [
 		{
-			"type": "1:15 (MIND_ASP_ASPECT)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ASP_NATIVE"
+			"relationships": {
+				"1:4 (MIND_ATT_UNIT_AUTHOR)": {
+					"type": "1:1 (MIND_ASP_AUTHOR)",
+					"id": "1:63 (MIND_AUTHOR_DUST)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:2 (MIND_ASP_UNIT)"
+				}
 			},
-			"id": "2:6 (DUST_ASP_NATIVE)",
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_UNIT"
+			},
+			"type": "1:2 (MIND_ASP_UNIT)",
+			"id": "2 (DUST_UNIT)"
+		},
+		{
 			"relationships": {
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
 					"id": "1:15 (MIND_ASP_ASPECT)"
 				}
-			}
-		},
-		{
-			"type": "1:15 (MIND_ASP_ASPECT)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ASP_MACHINE"
 			},
-			"id": "2:1 (DUST_ASP_MACHINE)",
-			"relationships": {
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:15 (MIND_ASP_ASPECT)"
-				}
-			}
-		},
-		{
-			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ATT_NATIVE_INSTANCE"
-			},
-			"id": "2:8 (DUST_ATT_NATIVE_INSTANCE)",
-			"relationships": {
-				"3:3 (MISC_ATT_CONN_PARENT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:6 (DUST_ASP_NATIVE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				}
-			}
-		},
-		{
-			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ATT_MACHINE_THREADS"
-			},
-			"id": "2:4 (DUST_ATT_MACHINE_THREADS)",
-			"relationships": {
-				"3:3 (MISC_ATT_CONN_PARENT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:1 (DUST_ASP_MACHINE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				}
-			}
-		},
-		{
-			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ATT_NATIVE_CONTEXT"
-			},
-			"id": "2:9 (DUST_ATT_NATIVE_CONTEXT)",
-			"relationships": {
-				"3:3 (MISC_ATT_CONN_PARENT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:6 (DUST_ASP_NATIVE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				}
-			}
-		},
-		{
-			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ATT_MACHINE_DIALOGS"
-			},
-			"id": "2:3 (DUST_ATT_MACHINE_DIALOGS)",
-			"relationships": {
-				"3:3 (MISC_ATT_CONN_PARENT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:1 (DUST_ASP_MACHINE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				}
-			}
-		},
-		{
-			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ATT_MACHINE_ASSEMBLIES"
-			},
-			"id": "2:2 (DUST_ATT_MACHINE_ASSEMBLIES)",
-			"relationships": {
-				"3:3 (MISC_ATT_CONN_PARENT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:1 (DUST_ASP_MACHINE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				}
-			}
-		},
-		{
-			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
-			"attributes": {
-				"7:1 (DEV_ATT_HINT)": "DUST_ATT_NATIVE_IMPLEMENTATION"
-			},
-			"id": "2:7 (DUST_ATT_NATIVE_IMPLEMENTATION)",
-			"relationships": {
-				"3:3 (MISC_ATT_CONN_PARENT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "2:6 (DUST_ASP_NATIVE)"
-				},
-				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
-					"type": "1:15 (MIND_ASP_ASPECT)",
-					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
-				}
-			}
-		},
-		{
-			"type": "1:15 (MIND_ASP_ASPECT)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "DUST_ASP_THREAD"
 			},
-			"id": "2:5 (DUST_ASP_THREAD)",
+			"type": "1:15 (MIND_ASP_ASPECT)",
+			"id": "2:5 (DUST_ASP_THREAD)"
+		},
+		{
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:6 (DUST_ASP_NATIVE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ATT_NATIVE_IMPLEMENTATION"
+			},
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"id": "2:7 (DUST_ATT_NATIVE_IMPLEMENTATION)"
+		},
+		{
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:1 (DUST_ASP_MACHINE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ATT_MACHINE_DIALOGS"
+			},
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"id": "2:3 (DUST_ATT_MACHINE_DIALOGS)"
+		},
+		{
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:6 (DUST_ASP_NATIVE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ATT_NATIVE_INSTANCE"
+			},
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"id": "2:8 (DUST_ATT_NATIVE_INSTANCE)"
+		},
+		{
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:1 (DUST_ASP_MACHINE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ATT_MACHINE_ASSEMBLIES"
+			},
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"id": "2:2 (DUST_ATT_MACHINE_ASSEMBLIES)"
+		},
+		{
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:6 (DUST_ASP_NATIVE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ATT_NATIVE_CONTEXT"
+			},
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"id": "2:9 (DUST_ATT_NATIVE_CONTEXT)"
+		},
+		{
 			"relationships": {
 				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
 					"type": "1:15 (MIND_ASP_ASPECT)",
 					"id": "1:15 (MIND_ASP_ASPECT)"
 				}
-			}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ASP_MACHINE"
+			},
+			"type": "1:15 (MIND_ASP_ASPECT)",
+			"id": "2:1 (DUST_ASP_MACHINE)"
+		},
+		{
+			"relationships": {
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:15 (MIND_ASP_ASPECT)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ASP_NATIVE"
+			},
+			"type": "1:15 (MIND_ASP_ASPECT)",
+			"id": "2:6 (DUST_ASP_NATIVE)"
+		},
+		{
+			"relationships": {
+				"3:3 (MISC_ATT_CONN_PARENT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "2:1 (DUST_ASP_MACHINE)"
+				},
+				"1:14 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
+					"type": "1:15 (MIND_ASP_ASPECT)",
+					"id": "1:16 (MIND_ASP_ATTRIBUTE)"
+				}
+			},
+			"attributes": {
+				"7:1 (DEV_ATT_HINT)": "DUST_ATT_MACHINE_THREADS"
+			},
+			"type": "1:16 (MIND_ASP_ATTRIBUTE)",
+			"id": "2:4 (DUST_ATT_MACHINE_THREADS)"
 		}
-	]
+	],
+	"meta": {
+		"count": 9
+	},
+	"jsonapi": {
+		"version": "1.1"
+	}
 }
