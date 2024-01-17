@@ -21,18 +21,18 @@ public class DustMachineBoot implements DustMachineConsts {
 		try {
 			boot(machine);
 
-			Dust.log(EVENT_TAG_TRACE, "Machine initializing...");
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Machine initializing...");
 			machine.agentInit();
-			Dust.log(EVENT_TAG_TRACE, "Thinking start...");
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Thinking start...");
 			machine.agentProcess();
-			Dust.log(EVENT_TAG_TRACE, "Thinking complete.");
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Thinking complete.");
 		} catch (Exception e) {
 			DustException.swallow(e, "Uncaught exception in the thinking process, exiting.");
 		} finally {
-			Dust.log(EVENT_TAG_TRACE, "Releasing Machine...");
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Releasing Machine...");
 			try {
 				machine.agentRelease();
-				Dust.log(EVENT_TAG_TRACE, "Machine released.");
+				Dust.log(EVENT_TAG_TYPE_TRACE, "Machine released.");
 			} catch (Exception e) {
 				DustException.swallow(e, "Uncaught exception during Machine release.");
 			}
@@ -92,7 +92,7 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE);
 
-		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG);
+		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG, "AUTHOR", MIND_ASP_AUTHOR);
 
 		Map k;
 		MindHandle h;
@@ -151,7 +151,6 @@ public class DustMachineBoot implements DustMachineConsts {
 					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
 					token.put(TEXT_TAG_LANGUAGE_EN_US, TEXT_TAG_LANGUAGE);
 					token.put(MISC_ATT_CONN_OWNER, ch);
-//					DustUtils.safeGet(token, MIND_ATT_KNOWLEDGE_TAGS, MAP_CREATOR).put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);
 
 					Dust.log(null, name, " -> ", tokenVal);
 				}
@@ -179,7 +178,7 @@ public class DustMachineBoot implements DustMachineConsts {
 			}
 		}
 
-		DustMachineTemp.test();
+		DustMachineTempUtils.test();
 
 	}
 

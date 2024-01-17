@@ -4,12 +4,12 @@ public abstract class DustAgent implements DustConsts.MindAgent, DustMetaConsts 
 
 	@Override
 	public MindHandle agentInit() throws Exception {
-		return MIND_TAG_RESULT_ACCEPT;
+		return MIND_TAG_RESULT_READACCEPT;
 	}
 
 	@Override
 	public MindHandle agentBegin() throws Exception {
-		return MIND_TAG_RESULT_ACCEPT;
+		return MIND_TAG_RESULT_READACCEPT;
 	}
 
 	@Override
@@ -19,6 +19,6 @@ public abstract class DustAgent implements DustConsts.MindAgent, DustMetaConsts 
 
 	@Override
 	public MindHandle agentRelease() throws Exception {
-		return MIND_TAG_RESULT_ACCEPT;
+		return MIND_TAG_RESULT_READACCEPT;
 	}
 }

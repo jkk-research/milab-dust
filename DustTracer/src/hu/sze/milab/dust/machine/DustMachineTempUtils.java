@@ -16,10 +16,11 @@ import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DustMachineTemp implements DustJsonConsts {
+public class DustMachineTempUtils implements DustJsonConsts {
 
 	public static void test(Object... params) throws Exception {
-		dumpUnits();
+//		dumpUnits();
+		writeMeta();
 	}
 
 	public static void dumpUnits() throws Exception {
@@ -28,6 +29,27 @@ public class DustMachineTemp implements DustJsonConsts {
 		for (Object u : units.values()) {
 			writeUnit(u);
 		}
+	}
+
+	public static void writeMeta() throws Exception {
+
+		DustMachineTempJavaMeta metaWriter = null;
+
+		Map units = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_ASSEMBLY_UNITS);
+		for (Object u : units.values()) {
+			if ( null == metaWriter ) {
+				metaWriter = new DustMachineTempJavaMeta("gen", "hu.sze.milab.dust", "DustMetaConsts", 
+						MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AUTHOR);
+				metaWriter.agentBegin();
+			}
+			metaWriter.unitToAdd = (MindHandle) u;
+			metaWriter.agentProcess();
+		}
+
+		if ( null != metaWriter ) {
+			metaWriter.agentEnd();
+		}
+
 	}
 
 	public static Map handleToMap(MindHandle ih) throws Exception {
@@ -82,7 +104,7 @@ public class DustMachineTemp implements DustJsonConsts {
 
 				data.add(item);
 			}
-			
+
 			DustUtils.safeGet(out, JsonApiMember.meta, MAP_CREATOR).put(JsonApiMember.count, items.size());
 
 			JSONValue.writeJSONString(out, fw);
