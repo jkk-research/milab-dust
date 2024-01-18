@@ -2,6 +2,14 @@ package hu.sze.milab.dust;
 
 public interface DustMetaConsts extends DustConsts {
 
+	public static MindHandle APP_UNIT = Dust.recall("0");
+
+	public static MindHandle APP_MACHINE_MAIN = Dust.recall("0:1");
+
+	public static MindHandle APP_MODULE_MAIN = Dust.recall("0:2");
+
+	public static MindHandle APP_ASSEMBLY_MAIN = Dust.recall("0:3");
+
 	public static MindHandle MIND_UNIT = Dust.recall("1");
 
 	public static MindHandle MIND_ASP_UNIT = Dust.recall("1:1");
@@ -102,8 +110,9 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle DUST_ATT_THREAD_DIALOG = Dust.recall("2:14");
 
 	public static MindHandle DUST_ASP_NATIVELOGIC = Dust.recall("2:15");
-	public static MindHandle DUST_ATT_NATIVELOGIC_IMPLEMENTATION = Dust.recall("2:16");
-	public static MindHandle DUST_ATT_NATIVELOGIC_INSTANCE = Dust.recall("2:17");
+	public static MindHandle DUST_ATT_NATIVELOGIC_LOGIC = Dust.recall("2:16");
+	public static MindHandle DUST_ATT_NATIVELOGIC_IMPLEMENTATION = Dust.recall("2:17");
+	public static MindHandle DUST_ATT_NATIVELOGIC_INSTANCE = Dust.recall("2:18");
 
 	public static MindHandle MISC_UNIT = Dust.recall("3");
 

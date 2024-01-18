@@ -80,7 +80,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		machine.idRes = bh;
 
 		Map units = new HashMap();
-		machine.mainDialog.context.put(MIND_ATT_ASSEMBLY_UNITS, units);
+		machine.mainDialog.context.put(DUST_ATT_MACHINE_UNITS, units);
 		Map rootKnowledge = new HashMap();
 		machine.mainDialog.context.put(MIND_ATT_DIALOG_KNOWLEDGE, rootKnowledge);
 
@@ -89,7 +89,8 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
 		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE);
-		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG, "AUTHOR", MIND_ASP_AUTHOR);
+		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
+				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
 
 		Map k;
 		MindHandle h;
@@ -118,7 +119,13 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.idRes = machine.mainDialog;
 		
+		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
+		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
+		
 		DustMachineTempUtils.test();
+		
+		machine.agentBegin();
+
 	}
 
 	public static Map createKnowledge(DustHandle hUnit, MindHandle h, String localId) {

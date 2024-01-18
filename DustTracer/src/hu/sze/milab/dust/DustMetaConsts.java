@@ -1,13 +1,21 @@
 package hu.sze.milab.dust;
 
 public interface DustMetaConsts extends DustConsts {
-		
-	public static MindHandle MIND_UNIT = Dust.recall("1");
+
+	public static MindHandle APP_UNIT = Dust.recall("0");
 	
+	public static MindHandle APP_MACHINE_MAIN = Dust.recall("0:");
+
+	public static MindHandle APP_MODULE_MAIN = Dust.recall("0:");
+	
+	public static MindHandle APP_ASSEMBLY_MAIN = Dust.recall("0:");
+
+	public static MindHandle MIND_UNIT = Dust.recall("1");
+
 	public static MindHandle MIND_ASP_UNIT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_UNIT_HANDLES = Dust.recall("1:");
 	public static MindHandle MIND_ATT_UNIT_AUTHOR = Dust.recall("1:");
-		
+
 	public static MindHandle MIND_ASP_HANDLE = Dust.recall("1:");
 	public static MindHandle MIND_ATT_HANDLE_UNIT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_HANDLE_ID = Dust.recall("1:");
@@ -17,7 +25,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ATT_KNOWLEDGE_TAGS = Dust.recall("1:");
 	public static MindHandle MIND_ATT_KNOWLEDGE_LISTENERS = Dust.recall("1:");
 	public static MindHandle MIND_ATT_KNOWLEDGE_PRIMARYASPECT = Dust.recall("1:");
-	
+
 	public static MindHandle MIND_ASP_ASPECT = Dust.recall("1:");
 	public static MindHandle MIND_ASP_ATTRIBUTE = Dust.recall("1:");
 	public static MindHandle MIND_ASP_TAG = Dust.recall("1:");
@@ -34,8 +42,8 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:");
 
-	public static MindHandle MIND_TAG_AGENT_SELFLISTENER = Dust.recall("1:");	
-	
+	public static MindHandle MIND_TAG_AGENT_SELFLISTENER = Dust.recall("1:");
+
 	public static MindHandle MIND_TAG_VALTYPE = Dust.recall("1:");
 	public static MindHandle MIND_TAG_VALTYPE_INT = Dust.recall("1:");
 	public static MindHandle MIND_TAG_VALTYPE_REAL = Dust.recall("1:");
@@ -77,11 +85,11 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_TAG_RESULT_READ = Dust.recall("1:");
 	public static MindHandle MIND_TAG_RESULT_READACCEPT = Dust.recall("1:");
 	public static MindHandle MIND_TAG_RESULT_ACCEPT = Dust.recall("1:");
-	
+
 	public static MindHandle MIND_ASP_AUTHOR = Dust.recall("1:");
 
 	public static MindHandle MIND_AUTHOR_DUST = Dust.recall("1:");
-	
+
 	public static MindHandle DUST_UNIT = Dust.recall("2");
 
 	public static MindHandle DUST_ASP_MACHINE = Dust.recall("2:");
@@ -92,21 +100,22 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle DUST_ATT_MACHINE_DIALOGS = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MACHINE_MAINDIALOG = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MACHINE_THREADS = Dust.recall("2:");
-	
+
 	public static MindHandle DUST_ASP_MODULE = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MODULE_UNITS = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MODULE_NATIVELOGICS = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MODULE_LIBRARIES = Dust.recall("2:");
-	
+
 	public static MindHandle DUST_ASP_THREAD = Dust.recall("2:");
 	public static MindHandle DUST_ATT_THREAD_DIALOG = Dust.recall("2:");
-	
+
 	public static MindHandle DUST_ASP_NATIVELOGIC = Dust.recall("2:");
+	public static MindHandle DUST_ATT_NATIVELOGIC_LOGIC = Dust.recall("2:");
 	public static MindHandle DUST_ATT_NATIVELOGIC_IMPLEMENTATION = Dust.recall("2:");
 	public static MindHandle DUST_ATT_NATIVELOGIC_INSTANCE = Dust.recall("2:");
-	
+
 	public static MindHandle MISC_UNIT = Dust.recall("3");
-	
+
 	public static MindHandle MISC_ASP_CONN = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_OWNER = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_PARENT = Dust.recall("3:");
@@ -115,34 +124,34 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_ATT_CONN_MEMBERMAP = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_MEMBERARR = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_MEMBERSET = Dust.recall("3:");
-	
+
 	public static MindHandle MISC_ASP_GEN = Dust.recall("3:");
 	public static MindHandle MISC_ATT_ALIAS = Dust.recall("3:");
 	public static MindHandle MISC_ATT_COUNT = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CUSTOM = Dust.recall("3:");
-	
+
 	public static MindHandle MISC_TAG_GEN_EMPTY = Dust.recall("3:");
-	
+
 	public static MindHandle MISC_TAG_GEN_ACTIVE = Dust.recall("3:");
-	
+
 	public static MindHandle MISC_ASP_VARIANT = Dust.recall("3:");
 	public static MindHandle MISC_ATT_VARIANT_VALUE = Dust.recall("3:");
-	
+
 	public static MindHandle TEXT_UNIT = Dust.recall("4");
-	
+
 	public static MindHandle TEXT_TAG_LANGUAGE = Dust.recall("4:");
 	public static MindHandle TEXT_TAG_LANGUAGE_EN_US = Dust.recall("4:");
 
 	public static MindHandle TEXT_ATT_LANGUAGE_DEFAULT = Dust.recall("4:");
-	public static MindHandle TEXT_ATT_TOKEN = Dust.recall("4:");	
+	public static MindHandle TEXT_ATT_TOKEN = Dust.recall("4:");
 
 	public static MindHandle TEXT_TAG_TYPE = Dust.recall("4:");
 	public static MindHandle TEXT_TAG_TYPE_TOKEN = Dust.recall("4:");
 	public static MindHandle TEXT_TAG_TYPE_NAME = Dust.recall("4:");
 
 	public static MindHandle TEXT_ASP_PLAIN = Dust.recall("4:");
-	public static MindHandle TEXT_ATT_PLAIN_TEXT = Dust.recall("4:");	
-	
+	public static MindHandle TEXT_ATT_PLAIN_TEXT = Dust.recall("4:");
+
 	public static MindHandle EVENT_UNIT = Dust.recall("5");
 
 	public static MindHandle EVENT_ASP_EVENT = Dust.recall("5:");
@@ -152,9 +161,9 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONSWALLOWED = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_TRACE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.recall("5:");
-	
+
 	public static MindHandle RESOURCE_UNIT = Dust.recall("6");
-	
+
 	public static MindHandle DEV_UNIT = Dust.recall("7");
 
 	public static MindHandle DEV_ATT_HINT = Dust.recall("7:");

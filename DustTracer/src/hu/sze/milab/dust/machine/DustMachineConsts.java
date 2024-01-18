@@ -1,5 +1,8 @@
 package hu.sze.milab.dust.machine;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.utils.DustUtils;
@@ -54,5 +57,15 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 			return toStr;
 		}
 	}
+
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	DustCreator<Map> KNOWLEDGE_CREATOR = new DustCreatorSimple<Map>(HashMap.class) {
+		@Override
+		public Map create(Object key, Object... hints) {
+			Map m = super.create(key, hints);
+			m.put(MIND_ATT_KNOWLEDGE_HANDLE, key);
+			return m;
+		}
+	};
 
 }

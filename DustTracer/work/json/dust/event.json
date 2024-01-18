@@ -4,10 +4,10 @@
 	},
 	"data": [
 		{
-			"type": "1:1 (MIND_ASP_UNIT)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_UNIT"
 			},
+			"type": "1:1 (MIND_ASP_UNIT)",
 			"id": "5 (EVENT_UNIT)",
 			"relationships": {
 				"1:3 (MIND_ATT_UNIT_AUTHOR)": {
@@ -21,10 +21,10 @@
 			}
 		},
 		{
-			"type": "1:12 (MIND_ASP_ASPECT)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_ASP_EVENT"
 			},
+			"type": "1:12 (MIND_ASP_ASPECT)",
 			"id": "5:1 (EVENT_ASP_EVENT)",
 			"relationships": {
 				"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)": {
@@ -34,10 +34,10 @@
 			}
 		},
 		{
-			"type": "1:14 (MIND_ASP_TAG)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_TAG_TYPE"
 			},
+			"type": "1:14 (MIND_ASP_TAG)",
 			"id": "5:2 (EVENT_TAG_TYPE)",
 			"relationships": {
 				"3:3 (MISC_ATT_CONN_PARENT)": {
@@ -51,10 +51,10 @@
 			}
 		},
 		{
-			"type": "1:14 (MIND_ASP_TAG)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_TAG_TYPE_EXCEPTIONTHROWN"
 			},
+			"type": "1:14 (MIND_ASP_TAG)",
 			"id": "5:3 (EVENT_TAG_TYPE_EXCEPTIONTHROWN)",
 			"relationships": {
 				"3:3 (MISC_ATT_CONN_PARENT)": {
@@ -68,10 +68,10 @@
 			}
 		},
 		{
-			"type": "1:14 (MIND_ASP_TAG)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_TAG_TYPE_EXCEPTIONSWALLOWED"
 			},
+			"type": "1:14 (MIND_ASP_TAG)",
 			"id": "5:4 (EVENT_TAG_TYPE_EXCEPTIONSWALLOWED)",
 			"relationships": {
 				"3:3 (MISC_ATT_CONN_PARENT)": {
@@ -85,10 +85,10 @@
 			}
 		},
 		{
-			"type": "1:14 (MIND_ASP_TAG)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_TAG_TYPE_TRACE"
 			},
+			"type": "1:14 (MIND_ASP_TAG)",
 			"id": "5:5 (EVENT_TAG_TYPE_TRACE)",
 			"relationships": {
 				"3:3 (MISC_ATT_CONN_PARENT)": {
@@ -102,10 +102,10 @@
 			}
 		},
 		{
-			"type": "1:14 (MIND_ASP_TAG)",
 			"attributes": {
 				"7:1 (DEV_ATT_HINT)": "EVENT_TAG_TYPE_BREAKPOINT"
 			},
+			"type": "1:14 (MIND_ASP_TAG)",
 			"id": "5:6 (EVENT_TAG_TYPE_BREAKPOINT)",
 			"relationships": {
 				"3:3 (MISC_ATT_CONN_PARENT)": {
@@ -120,6 +120,6 @@
 		}
 	],
 	"meta": {
-		"count": 6
+		"count": 7
 	}
 }

@@ -5,7 +5,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -18,19 +20,23 @@ import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.machine.DustMachineConsts.MachineAtts;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
+import hu.sze.milab.dust.test.DustTestBootSimple;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
-@SuppressWarnings({ "rawtypes", "unchecked", "unused" })
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DustMachineTempUtils implements DustJsonConsts {
 
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-//		initFromInterfaces(DustMetaConsts.class);
+		initFromInterfaces(DustMetaConsts.class);
+		
+		DustTestBootSimple.helloWorld();
+		
 //		dumpUnits();
-		readUnits();
+//		readUnits();
 		writeJavaMeta();
 	}
 
@@ -47,7 +53,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	}
 
 	public static void dumpUnits() throws Exception {
-		Map units = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_ASSEMBLY_UNITS);
+		Map units = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_MACHINE_UNITS);
 
 		for (Object u : units.values()) {
 //			if ( u.toString().contains("DEV") ) 
@@ -109,8 +115,17 @@ public class DustMachineTempUtils implements DustJsonConsts {
 				Map<String, Object> refs = DustUtils.simpleGet(item, JsonApiMember.relationships);
 				for (Map.Entry<String, Object> re : refs.entrySet()) {
 					MindHandle hA = handleFromKey(re.getKey());
-					MindHandle hV = handleFromMap(re.getValue());
-					Dust.access(hI, MIND_TAG_ACCESS_SET, hV, hA);
+					Object rv = re.getValue();
+
+					if ( rv instanceof List ) {
+						for (Object ro : (List) rv) {
+							MindHandle hV = handleFromMap(ro);
+							Dust.access(hI, MIND_TAG_ACCESS_SET, hV, hA, KEY_ADD);
+						}
+					} else {
+						MindHandle hV = handleFromMap(rv);
+						Dust.access(hI, MIND_TAG_ACCESS_SET, hV, hA);
+					}
 				}
 			}
 		}
@@ -151,13 +166,13 @@ public class DustMachineTempUtils implements DustJsonConsts {
 			data.add(knowledgeToMap(localPrefix, unit, unitData));
 
 			Map<Object, MindHandle> items = Dust.access(unit, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_UNIT_HANDLES);
-			for ( MindHandle hItem : items.values() ) {
+			for (MindHandle hItem : items.values()) {
 				Map<MindHandle, Object> itemData = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_KNOWLEDGE, hItem);
 				Map item = knowledgeToMap(localPrefix, hItem, itemData);
 				data.add(item);
 			}
 
-			DustUtils.safeGet(out, JsonApiMember.meta, MAP_CREATOR).put(JsonApiMember.count, items.size());
+			DustUtils.safeGet(out, JsonApiMember.meta, MAP_CREATOR).put(JsonApiMember.count, data.size());
 
 			JSONValue.writeJSONString(out, fw);
 			fw.flush();
@@ -174,11 +189,40 @@ public class DustMachineTempUtils implements DustJsonConsts {
 				String key = hAtt.toString();
 				Object val = ce.getValue();
 
+				Object mem = JsonApiMember.attributes;
+
 				if ( val instanceof MindHandle ) {
-					DustUtils.safeGet(item, JsonApiMember.relationships, MAP_CREATOR).put(key, handleToMap((MindHandle) val, localPrefix));
-				} else {
-					DustUtils.safeGet(item, JsonApiMember.attributes, MAP_CREATOR).put(key, val);
+					mem = JsonApiMember.relationships;
+					val = handleToMap((MindHandle) val, localPrefix);
+				} else if ( val instanceof Map ) {
+					Map mp = new HashMap();
+					for (Map.Entry<Object, Object> ee : ((Map<Object, Object>) val).entrySet()) {
+						Object mk = ee.getKey();
+						if ( mk instanceof MindHandle ) {
+							mk = mk.toString();
+						}
+						Object mv = ee.getValue();
+						if ( mv instanceof MindHandle ) {
+							mem = JsonApiMember.relationships;
+							mk = handleToMap((MindHandle) mv, localPrefix);
+						}
+						mp.put(mk, mv);
+					}
+					val = mp;
 				}
+				if ( val instanceof Collection ) {
+					ArrayList al = new ArrayList();
+					for (Object oo : ((Collection) val)) {
+						if ( oo instanceof MindHandle ) {
+							mem = JsonApiMember.relationships;
+							oo = handleToMap((MindHandle) oo, localPrefix);
+						}
+						al.add(oo);
+					}
+					val = al;
+				}
+
+				DustUtils.safeGet(item, mem, MAP_CREATOR).put(key, val);
 			}
 		}
 		return item;
@@ -187,10 +231,12 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static void writeJavaMeta() throws Exception {
 		DustMachineTempJavaMeta metaWriter = null;
 
-		Map units = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_ASSEMBLY_UNITS);
+		Map units = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_MACHINE_UNITS);
 		for (Object u : units.values()) {
 			if ( null == metaWriter ) {
-				metaWriter = new DustMachineTempJavaMeta("gen", "hu.sze.milab.dust", "DustMetaConsts", MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AUTHOR);
+				metaWriter = new DustMachineTempJavaMeta("gen", "hu.sze.milab.dust", "DustMetaConsts", 
+						MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, 
+						MIND_ASP_AUTHOR, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY, DUST_ASP_MACHINE);
 				metaWriter.agentBegin();
 			}
 			metaWriter.unitToAdd = (MindHandle) u;
@@ -205,9 +251,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static void initFromInterfaces(Class... ifClasses) throws IllegalAccessException {
 		Map<String, MindHandle> parents = new TreeMap<>();
 
-//		machine.mainDialog.knowledge.put(TEXT_ATT_LANGUAGE_DEFAULT, TEXT_TAG_LANGUAGE_EN_US);
 		Dust.access(null, MIND_TAG_ACCESS_SET, TEXT_TAG_LANGUAGE_EN_US, TEXT_ATT_LANGUAGE_DEFAULT);
-		Map uRes = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_KNOWLEDGE, RESOURCE_UNIT);
 
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
@@ -226,7 +270,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 					Map token = DustMachineBoot.createKnowledge((DustHandle) RESOURCE_UNIT, null, null);
 					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
 					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
-					token.put(TEXT_TAG_LANGUAGE_EN_US, TEXT_TAG_LANGUAGE);
+					token.put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);
 					token.put(MISC_ATT_CONN_OWNER, ch);
 
 					Dust.log(null, name, " -> ", tokenVal);
