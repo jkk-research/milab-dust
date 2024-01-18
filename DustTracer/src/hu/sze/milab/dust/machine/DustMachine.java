@@ -26,17 +26,8 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 	}
 
 	Map resolveKnowledge(MindHandle h, boolean createIfMissing) {
-		MindHandle hu = h.getUnit();
-
-		Map k = DustUtils.safeGet(mainDialog.knowledge, MIND_ATT_MEMORY_KNOWLEDGE, MAP_CREATOR);
-		k = DustUtils.safeGet(k, hu, MAP_CREATOR);
-
-		if ( hu != h ) {
-			k = DustUtils.safeGet(k, MIND_ATT_MEMORY_KNOWLEDGE, MAP_CREATOR);
-			k = DustUtils.safeGet(k, h, MAP_CREATOR);
-		}
-
-		return k;
+		Map knowledge = DustUtils.safeGet(mainDialog.context, MIND_ATT_DIALOG_KNOWLEDGE, MAP_CREATOR);
+		return  DustUtils.safeGet(knowledge, h, createIfMissing ? MAP_CREATOR : null);
 	}
 
 	@Override
@@ -46,7 +37,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		MindAccess ac = DustUtilsEnumTranslator.getEnum(cmd, MindAccess.Peek);
 		boolean createIfMissing = DustUtilsAttCache.getAtt(MachineAtts.CreatorAccess, cmd, false);
 
-		Object curr = (null == root) ? mainDialog.knowledge : resolveKnowledge((MindHandle) root, createIfMissing);
+		Object curr = (null == root) ? mainDialog.context : resolveKnowledge((MindHandle) root, createIfMissing);
 		Object prev = null;
 		Object lastKey = null;
 

@@ -15,6 +15,7 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustDevUtils;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.DustMetaConsts;
+import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.machine.DustMachineConsts.MachineAtts;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
 import hu.sze.milab.dust.utils.DustUtils;
@@ -49,7 +50,10 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		Map units = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_ASSEMBLY_UNITS);
 
 		for (Object u : units.values()) {
-			writeUnit((MindHandle) u);
+//			if ( u.toString().contains("DEV") ) 
+			{
+				writeUnit((MindHandle) u);
+			}
 		}
 	}
 
@@ -115,11 +119,11 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static MindHandle handleFromKey(String key) {
 		String id = key.split(" ")[0];
 		MindHandle ret = Dust.recall(id);
-		
+
 		if ( null == ret ) {
 			DustDevUtils.breakpoint("No handle found for key", key);
 		}
-		
+
 		return ret;
 	}
 
@@ -142,15 +146,14 @@ public class DustMachineTempUtils implements DustJsonConsts {
 
 			String localPrefix = unit.getId() + DUST_SEP_ID;
 			localPrefix = null;
-			
-			Map<MindHandle, Object> unitData =  Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_MEMORY_KNOWLEDGE, unit);
+
+			Map<MindHandle, Object> unitData = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_KNOWLEDGE, unit);
 			data.add(knowledgeToMap(localPrefix, unit, unitData));
-			
-			Map<MindHandle, Map<MindHandle, Object>> items = Dust.access(unit, MIND_TAG_ACCESS_PEEK, "???", MIND_ATT_MEMORY_KNOWLEDGE);
 
-			for (Map.Entry<MindHandle, Map<MindHandle, Object>> ie : items.entrySet()) {
-				Map item = knowledgeToMap(localPrefix, ie.getKey(), ie.getValue());
-
+			Map<Object, MindHandle> items = Dust.access(unit, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_UNIT_HANDLES);
+			for ( MindHandle hItem : items.values() ) {
+				Map<MindHandle, Object> itemData = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_KNOWLEDGE, hItem);
+				Map item = knowledgeToMap(localPrefix, hItem, itemData);
 				data.add(item);
 			}
 
@@ -198,13 +201,13 @@ public class DustMachineTempUtils implements DustJsonConsts {
 			metaWriter.agentEnd();
 		}
 	}
-	
+
 	public static void initFromInterfaces(Class... ifClasses) throws IllegalAccessException {
 		Map<String, MindHandle> parents = new TreeMap<>();
 
 //		machine.mainDialog.knowledge.put(TEXT_ATT_LANGUAGE_DEFAULT, TEXT_TAG_LANGUAGE_EN_US);
 		Dust.access(null, MIND_TAG_ACCESS_SET, TEXT_TAG_LANGUAGE_EN_US, TEXT_ATT_LANGUAGE_DEFAULT);
-		Map uRes = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_MEMORY_KNOWLEDGE, RESOURCE_UNIT);
+		Map uRes = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_KNOWLEDGE, RESOURCE_UNIT);
 
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
@@ -220,7 +223,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						parents.put(name, (MindHandle) ch);
 					}
 
-					Map token = DustMachineBoot.createKnowledge(uRes, null, null);
+					Map token = DustMachineBoot.createKnowledge((DustHandle) RESOURCE_UNIT, null, null);
 					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
 					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
 					token.put(TEXT_TAG_LANGUAGE_EN_US, TEXT_TAG_LANGUAGE);
