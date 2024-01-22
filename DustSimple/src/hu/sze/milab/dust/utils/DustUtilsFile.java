@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -18,6 +19,13 @@ import java.util.zip.ZipInputStream;
 import org.apache.commons.compress.utils.IOUtils;
 
 public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
+
+	public static final FilenameFilter FF_NOMAC = new FilenameFilter() {
+		@Override
+		public boolean accept(File dir, String name) {
+			return !".DS_Store".equals(name);
+		}
+	};
 
 	public static String optRemoveUpFromPath(String path) {
 		String ret = path;
@@ -142,26 +150,43 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 	}
 
 	public static void deleteRec(File f) {
+		deleteRec(f, false);
+	}
+
+	public static void deleteRec(File f, boolean onlyEmpty) {
 		if ( f.isDirectory() ) {
 			for (File fl : f.listFiles()) {
-				deleteRec(fl);
+				deleteRec(fl, onlyEmpty);
 			}
 		}
+
+		if ( onlyEmpty ) {
+			if ( f.isFile() ) {
+				if ( !f.isHidden() ) {
+					return;
+				}
+			} else {
+				if ( 0 < f.list().length ) {
+					return;
+				}
+			}
+		}
+
 		f.delete();
 	}
 
 	public static void download(String url, File file, String... headers) throws Exception {
 		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
-	
+
 		for (String h : headers) {
 			int s = h.indexOf(":");
 			String key = h.substring(0, s).trim();
 			String val = h.substring(s + 1).trim();
 			conn.setRequestProperty(key, val);
 		}
-	
+
 		InputStream is = conn.getInputStream();
-	
+
 		if ( "gzip".equals(conn.getContentEncoding()) ) {
 			try (GZIPInputStream i = new GZIPInputStream(is)) {
 				OutputStream o = Files.newOutputStream(file.toPath());
