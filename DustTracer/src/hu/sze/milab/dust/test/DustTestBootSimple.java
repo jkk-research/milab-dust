@@ -1,8 +1,15 @@
 package hu.sze.milab.dust.test;
 
 import hu.sze.milab.dust.Dust;
+import hu.sze.milab.dust.machine.DustMachineTempUtils;
 
 public class DustTestBootSimple implements DustTestConsts {
+	
+	public static void boot(String[] launchParams) throws Exception {
+		DustMachineTempUtils.test();
+		
+		helloWorld();
+	}
 	
 	public static void helloWorld() throws Exception {
 		MindHandle hLogHelloWorld = Dust.recall("0:");
@@ -22,7 +29,6 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(hAgtHelloWorld, MIND_TAG_ACCESS_SET, hLogHelloWorld, MIND_ATT_AGENT_LOGIC);
 
 		Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_SET, hAgtHelloWorld, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
-
 	}
-
+	
 }

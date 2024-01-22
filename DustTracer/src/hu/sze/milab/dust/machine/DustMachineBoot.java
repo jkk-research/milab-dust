@@ -1,5 +1,6 @@
 package hu.sze.milab.dust.machine;
 
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustMachine machine = THE_MACHINE = new DustMachine();
 
 		try {
-			boot(machine);
+			boot(machine, args);
 
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Machine initializing...");
 			machine.agentInit();
@@ -74,7 +75,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		}
 	}
 
-	static void boot(DustMachine machine) throws Exception {
+	static void boot(DustMachine machine, String[] args) throws Exception {
 		BootHandles bh = new BootHandles();
 
 		machine.idRes = bh;
@@ -88,6 +89,7 @@ public class DustMachineBoot implements DustMachineConsts {
 				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT);
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
+		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
 		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
 				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
@@ -122,7 +124,16 @@ public class DustMachineBoot implements DustMachineConsts {
 		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
 		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
 		
-		DustMachineTempUtils.test();
+		String bootClass = System.getProperty("DustBootClass");
+		
+		if ( !DustUtils.isEmpty(bootClass)) {
+			Class bc = Class.forName(bootClass);
+			Method bm = bc.getMethod("boot", String[].class);
+			Object[] params = { args };
+			bm.invoke(null, params);
+		} else {
+			Dust.log(EVENT_TAG_TYPE_INFO, "Launch without boot class");
+		}
 		
 		machine.agentBegin();
 

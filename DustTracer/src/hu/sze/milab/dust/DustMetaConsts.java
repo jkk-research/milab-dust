@@ -38,6 +38,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ATT_DIALOG_ASSEMBLY = Dust.recall("1:");
 	public static MindHandle MIND_ATT_DIALOG_KNOWLEDGE = Dust.recall("1:");
 	public static MindHandle MIND_ATT_DIALOG_LAUNCHPARAMS = Dust.recall("1:");
+	public static MindHandle DUST_ATT_DIALOG_ACTIVEAGENT = Dust.recall("1:");
 
 	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:");
@@ -159,6 +160,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle EVENT_TAG_TYPE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONTHROWN = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONSWALLOWED = Dust.recall("5:");
+	public static MindHandle EVENT_TAG_TYPE_INFO = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_TRACE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.recall("5:");
 

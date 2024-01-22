@@ -31,14 +31,13 @@ public interface DustConsts {
 	};
 
 	interface MindAgent {
-		MindHandle agentInit() throws Exception;
-
 		MindHandle agentBegin() throws Exception;
-
 		MindHandle agentProcess() throws Exception;
-
 		MindHandle agentEnd() throws Exception;
+	}
 
+	interface MindAgentServer extends MindAgent {
+		MindHandle agentInit() throws Exception;
 		MindHandle agentRelease() throws Exception;
 	}
 

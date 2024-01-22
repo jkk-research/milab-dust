@@ -6,13 +6,12 @@ import java.util.Map;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
-import hu.sze.milab.dust.DustConsts.MindAgent;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.MindAgent {
+class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.MindAgentServer {
 
 	Dust.IdResolver idRes;
 	final DustMachineDialog mainDialog;
@@ -28,7 +27,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 	Map resolveKnowledge(MindHandle h, boolean createIfMissing) {
 		Map knowledge = DustUtils.safeGet(mainDialog.context, MIND_ATT_DIALOG_KNOWLEDGE, MAP_CREATOR);
-		return  DustUtils.safeGet(knowledge, h, createIfMissing ? KNOWLEDGE_CREATOR : null);
+		return DustUtils.safeGet(knowledge, h, createIfMissing ? KNOWLEDGE_CREATOR : null);
 	}
 
 	@Override
@@ -142,45 +141,56 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 	@Override
 	public MindHandle agentBegin() throws Exception {
-		
+
 		ArrayList allNatLog = new ArrayList();
 		ArrayList mods = Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_PEEK, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES);
-		for ( Object m : mods ) {
+		for (Object m : mods) {
 			ArrayList nls = Dust.access(m, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_MODULE_NATIVELOGICS);
 			if ( null != nls ) {
-				for ( Object nl : nls ) {
+				for (Object nl : nls) {
 					allNatLog.add(nl);
 				}
 			}
 		}
-		
+
 		ArrayList sa = Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_ASSEMBLY_STARTAGENTS);
 		if ( null != sa ) {
-			for ( Object a : sa ) {
+			for (Object a : sa) {
 				Object l = Dust.access(a, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_AGENT_LOGIC);
 				Object n = null;
-				for ( Object nl : allNatLog ) {
-					if ( l == Dust.access(nl, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_LOGIC)) {
+				for (Object nl : allNatLog) {
+					if ( l == Dust.access(nl, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_LOGIC) ) {
 						n = nl;
 						break;
 					}
 				}
 				if ( null != n ) {
 					MindAgent agent = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_INSTANCE);
-					
+					Dust.access(null, MIND_TAG_ACCESS_SET, a, DUST_ATT_DIALOG_ACTIVEAGENT);
+
 					if ( null == agent ) {
 						String ac = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
 						agent = (MindAgent) Class.forName(ac).newInstance();
-						agent.agentInit();
+						if ( agent instanceof MindAgentServer ) {
+							((MindAgentServer) agent).agentInit();
+						}
 						Dust.access(n, MIND_TAG_ACCESS_SET, agent, DUST_ATT_NATIVELOGIC_INSTANCE);
 					}
-					
+
 					if ( null != agent ) {
-						agent.agentProcess();
+						try {
+							if ( DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentBegin(), false) ) {
+								do {
+								} while (DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(), false));
+							}
+						} finally {
+							agent.agentEnd();
+						}
 					}
 				}
 			}
-		}		return null;
+		}
+		return null;
 	}
 
 	@Override

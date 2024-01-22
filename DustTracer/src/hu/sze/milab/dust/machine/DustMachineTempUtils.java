@@ -20,7 +20,6 @@ import hu.sze.milab.dust.DustMetaConsts;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.machine.DustMachineConsts.MachineAtts;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
-import hu.sze.milab.dust.test.DustTestBootSimple;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsFile;
@@ -31,13 +30,13 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-		initFromInterfaces(DustMetaConsts.class);
-		
-		DustTestBootSimple.helloWorld();
+//		initFromInterfaces(DustMetaConsts.class);
 		
 //		dumpUnits();
+		
 //		readUnits();
-		writeJavaMeta();
+		
+//		writeJavaMeta();
 	}
 
 	public static void readUnits() throws Exception {

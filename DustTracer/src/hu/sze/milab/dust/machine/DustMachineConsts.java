@@ -11,7 +11,7 @@ import hu.sze.milab.dust.utils.DustUtilsConsts;
 interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 
 	enum MachineAtts {
-		CreatorAccess, PrimaryAspectNames, PersistentAtt
+		CreatorAccess, PrimaryAspectNames, PersistentAtt, CanContinue
 	}
 
 	enum MindAccess {

@@ -6,9 +6,13 @@
     <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
         <listEntry value="1"/>
     </listAttribute>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+    </listAttribute>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_EXCLUDE_TEST_CODE" value="true"/>
     <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
     <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="hu.sze.milab.dust.machine.DustMachineBoot"/>
     <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="DustTracer"/>
     <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="DustTracer"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-DDustBootClass=hu.sze.milab.dust.test.DustTestBootSimple"/>
 </launchConfiguration>

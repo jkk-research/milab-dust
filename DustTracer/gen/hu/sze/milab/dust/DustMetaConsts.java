@@ -38,57 +38,58 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ATT_DIALOG_ASSEMBLY = Dust.recall("1:20");
 	public static MindHandle MIND_ATT_DIALOG_KNOWLEDGE = Dust.recall("1:21");
 	public static MindHandle MIND_ATT_DIALOG_LAUNCHPARAMS = Dust.recall("1:22");
+	public static MindHandle DUST_ATT_DIALOG_ACTIVEAGENT = Dust.recall("1:23");
 
-	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:23");
-	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:24");
+	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:24");
+	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:25");
 
-	public static MindHandle MIND_TAG_AGENT_SELFLISTENER = Dust.recall("1:25");
+	public static MindHandle MIND_TAG_AGENT_SELFLISTENER = Dust.recall("1:26");
 
-	public static MindHandle MIND_TAG_VALTYPE = Dust.recall("1:26");
-	public static MindHandle MIND_TAG_VALTYPE_INT = Dust.recall("1:27");
-	public static MindHandle MIND_TAG_VALTYPE_REAL = Dust.recall("1:28");
-	public static MindHandle MIND_TAG_VALTYPE_HANDLE = Dust.recall("1:29");
-	public static MindHandle MIND_TAG_VALTYPE_BIN = Dust.recall("1:30");
+	public static MindHandle MIND_TAG_VALTYPE = Dust.recall("1:27");
+	public static MindHandle MIND_TAG_VALTYPE_INT = Dust.recall("1:28");
+	public static MindHandle MIND_TAG_VALTYPE_REAL = Dust.recall("1:29");
+	public static MindHandle MIND_TAG_VALTYPE_HANDLE = Dust.recall("1:30");
+	public static MindHandle MIND_TAG_VALTYPE_BIN = Dust.recall("1:31");
 
-	public static MindHandle MIND_TAG_COLLTYPE = Dust.recall("1:31");
-	public static MindHandle MIND_TAG_COLLTYPE_ONE = Dust.recall("1:32");
-	public static MindHandle MIND_TAG_COLLTYPE_SET = Dust.recall("1:33");
-	public static MindHandle MIND_TAG_COLLTYPE_ARR = Dust.recall("1:34");
-	public static MindHandle MIND_TAG_COLLTYPE_MAP = Dust.recall("1:35");
+	public static MindHandle MIND_TAG_COLLTYPE = Dust.recall("1:32");
+	public static MindHandle MIND_TAG_COLLTYPE_ONE = Dust.recall("1:33");
+	public static MindHandle MIND_TAG_COLLTYPE_SET = Dust.recall("1:34");
+	public static MindHandle MIND_TAG_COLLTYPE_ARR = Dust.recall("1:35");
+	public static MindHandle MIND_TAG_COLLTYPE_MAP = Dust.recall("1:36");
 
-	public static MindHandle MIND_TAG_ACCESS = Dust.recall("1:36");
-	public static MindHandle MIND_TAG_ACCESS_CHECK = Dust.recall("1:37");
-	public static MindHandle MIND_TAG_ACCESS_PEEK = Dust.recall("1:38");
-	public static MindHandle MIND_TAG_ACCESS_GET = Dust.recall("1:39");
-	public static MindHandle MIND_TAG_ACCESS_SET = Dust.recall("1:40");
-	public static MindHandle MIND_TAG_ACCESS_INSERT = Dust.recall("1:41");
-	public static MindHandle MIND_TAG_ACCESS_DELETE = Dust.recall("1:42");
-	public static MindHandle MIND_TAG_ACCESS_RESET = Dust.recall("1:43");
-	public static MindHandle MIND_TAG_ACCESS_COMMIT = Dust.recall("1:44");
+	public static MindHandle MIND_TAG_ACCESS = Dust.recall("1:37");
+	public static MindHandle MIND_TAG_ACCESS_CHECK = Dust.recall("1:38");
+	public static MindHandle MIND_TAG_ACCESS_PEEK = Dust.recall("1:39");
+	public static MindHandle MIND_TAG_ACCESS_GET = Dust.recall("1:40");
+	public static MindHandle MIND_TAG_ACCESS_SET = Dust.recall("1:41");
+	public static MindHandle MIND_TAG_ACCESS_INSERT = Dust.recall("1:42");
+	public static MindHandle MIND_TAG_ACCESS_DELETE = Dust.recall("1:43");
+	public static MindHandle MIND_TAG_ACCESS_RESET = Dust.recall("1:44");
+	public static MindHandle MIND_TAG_ACCESS_COMMIT = Dust.recall("1:45");
 
-	public static MindHandle MIND_TAG_ACTION = Dust.recall("1:45");
-	public static MindHandle MIND_TAG_ACTION_INIT = Dust.recall("1:46");
-	public static MindHandle MIND_TAG_ACTION_BEGIN = Dust.recall("1:47");
-	public static MindHandle MIND_TAG_ACTION_PROCESS = Dust.recall("1:48");
-	public static MindHandle MIND_TAG_ACTION_END = Dust.recall("1:49");
-	public static MindHandle MIND_TAG_ACTION_RELEASE = Dust.recall("1:50");
+	public static MindHandle MIND_TAG_ACTION = Dust.recall("1:46");
+	public static MindHandle MIND_TAG_ACTION_INIT = Dust.recall("1:47");
+	public static MindHandle MIND_TAG_ACTION_BEGIN = Dust.recall("1:48");
+	public static MindHandle MIND_TAG_ACTION_PROCESS = Dust.recall("1:49");
+	public static MindHandle MIND_TAG_ACTION_END = Dust.recall("1:50");
+	public static MindHandle MIND_TAG_ACTION_RELEASE = Dust.recall("1:51");
 
-	public static MindHandle MIND_TAG_STATUS = Dust.recall("1:51");
-	public static MindHandle MIND_TAG_STATUS_IDLE = Dust.recall("1:52");
-	public static MindHandle MIND_TAG_STATUS_PROCESSING = Dust.recall("1:53");
-	public static MindHandle MIND_TAG_STATUS_WAITING = Dust.recall("1:54");
-	public static MindHandle MIND_TAG_STATUS_ERROR = Dust.recall("1:55");
+	public static MindHandle MIND_TAG_STATUS = Dust.recall("1:52");
+	public static MindHandle MIND_TAG_STATUS_IDLE = Dust.recall("1:53");
+	public static MindHandle MIND_TAG_STATUS_PROCESSING = Dust.recall("1:54");
+	public static MindHandle MIND_TAG_STATUS_WAITING = Dust.recall("1:55");
+	public static MindHandle MIND_TAG_STATUS_ERROR = Dust.recall("1:56");
 
-	public static MindHandle MIND_TAG_RESULT = Dust.recall("1:56");
-	public static MindHandle MIND_TAG_RESULT_REJECT = Dust.recall("1:57");
-	public static MindHandle MIND_TAG_RESULT_PASS = Dust.recall("1:58");
-	public static MindHandle MIND_TAG_RESULT_READ = Dust.recall("1:59");
-	public static MindHandle MIND_TAG_RESULT_READACCEPT = Dust.recall("1:60");
-	public static MindHandle MIND_TAG_RESULT_ACCEPT = Dust.recall("1:61");
+	public static MindHandle MIND_TAG_RESULT = Dust.recall("1:57");
+	public static MindHandle MIND_TAG_RESULT_REJECT = Dust.recall("1:58");
+	public static MindHandle MIND_TAG_RESULT_PASS = Dust.recall("1:59");
+	public static MindHandle MIND_TAG_RESULT_READ = Dust.recall("1:60");
+	public static MindHandle MIND_TAG_RESULT_READACCEPT = Dust.recall("1:61");
+	public static MindHandle MIND_TAG_RESULT_ACCEPT = Dust.recall("1:62");
 
-	public static MindHandle MIND_ASP_AUTHOR = Dust.recall("1:62");
+	public static MindHandle MIND_ASP_AUTHOR = Dust.recall("1:63");
 
-	public static MindHandle MIND_AUTHOR_DUST = Dust.recall("1:63");
+	public static MindHandle MIND_AUTHOR_DUST = Dust.recall("1:64");
 
 	public static MindHandle DUST_UNIT = Dust.recall("2");
 
