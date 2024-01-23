@@ -30,13 +30,13 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-//		initFromInterfaces(DustMetaConsts.class);
+		initFromInterfaces(DustMetaConsts.class);
 		
-//		dumpUnits();
+		dumpUnits();
 		
 //		readUnits();
 		
-//		writeJavaMeta();
+		writeJavaMeta();
 	}
 
 	public static void readUnits() throws Exception {

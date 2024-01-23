@@ -38,12 +38,17 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ATT_DIALOG_ASSEMBLY = Dust.recall("1:");
 	public static MindHandle MIND_ATT_DIALOG_KNOWLEDGE = Dust.recall("1:");
 	public static MindHandle MIND_ATT_DIALOG_LAUNCHPARAMS = Dust.recall("1:");
-	public static MindHandle DUST_ATT_DIALOG_ACTIVEAGENT = Dust.recall("1:");
+	public static MindHandle MIND_ATT_DIALOG_ACTIVEAGENT = Dust.recall("1:");
 
 	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:");
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:");
+	public static MindHandle MIND_ATT_AGENT_TARGET = Dust.recall("1:");
 
-	public static MindHandle MIND_TAG_AGENT_SELFLISTENER = Dust.recall("1:");
+	public static MindHandle MIND_TAG_CONTEXT = Dust.recall("1:");
+	public static MindHandle MIND_TAG_CONTEXT_DIALOG = Dust.recall("1:");
+	public static MindHandle MIND_TAG_CONTEXT_SELF = Dust.recall("1:");
+	public static MindHandle MIND_TAG_CONTEXT_TARGET = Dust.recall("1:");
+	public static MindHandle MIND_TAG_CONTEXT_DIRECT = Dust.recall("1:");
 
 	public static MindHandle MIND_TAG_VALTYPE = Dust.recall("1:");
 	public static MindHandle MIND_TAG_VALTYPE_INT = Dust.recall("1:");
@@ -101,6 +106,8 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle DUST_ATT_MACHINE_DIALOGS = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MACHINE_MAINDIALOG = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MACHINE_THREADS = Dust.recall("2:");
+	public static MindHandle DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS = Dust.recall("2:");
+	public static MindHandle DUST_ATT_MACHINE_ACTIVE_SERVERS = Dust.recall("2:");
 
 	public static MindHandle DUST_ASP_MODULE = Dust.recall("2:");
 	public static MindHandle DUST_ATT_MODULE_UNITS = Dust.recall("2:");
@@ -126,10 +133,10 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_ATT_CONN_MEMBERARR = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_MEMBERSET = Dust.recall("3:");
 
+	public static MindHandle MISC_ASP_ALIAS = Dust.recall("3:");
+
 	public static MindHandle MISC_ASP_GEN = Dust.recall("3:");
-	public static MindHandle MISC_ATT_ALIAS = Dust.recall("3:");
-	public static MindHandle MISC_ATT_COUNT = Dust.recall("3:");
-	public static MindHandle MISC_ATT_CUSTOM = Dust.recall("3:");
+	public static MindHandle MISC_ATT_GEN_COUNT = Dust.recall("3:");
 
 	public static MindHandle MISC_TAG_GEN_EMPTY = Dust.recall("3:");
 

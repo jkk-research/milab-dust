@@ -1,11 +1,16 @@
 package hu.sze.milab.dust.machine;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
+import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
@@ -15,6 +20,19 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 	Dust.IdResolver idRes;
 	final DustMachineDialog mainDialog;
+
+	private final Thread shutdownHook = new Thread() {
+		@Override
+		public synchronized void run() {
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Releasing Machine...");
+			try {
+				agentRelease();
+				Dust.log(EVENT_TAG_TYPE_TRACE, "Machine released.");
+			} catch (Exception e) {
+				DustException.swallow(e, "Uncaught exception during Machine release.");
+			}
+		}
+	};
 
 	public DustMachine() {
 		mainDialog = new DustMachineDialog();
@@ -37,12 +55,37 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		MindAccess ac = DustUtilsEnumTranslator.getEnum(cmd, MindAccess.Peek);
 		boolean createIfMissing = DustUtilsAttCache.getAtt(MachineAtts.CreatorAccess, cmd, false);
 
-		Object curr = (null == root) ? mainDialog.context : resolveKnowledge((MindHandle) root, createIfMissing);
+		Object curr;
+
+		if ( null == root ) {
+			curr = mainDialog.context;
+		} else {
+			MindContext ctx = DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
+
+			switch ( ctx ) {
+			case Dialog:
+				curr = mainDialog.context;
+				break;
+			case Self:
+				curr = resolveKnowledge(MIND_ATT_DIALOG_ACTIVEAGENT, createIfMissing);
+				break;
+			case Target:
+				curr = resolveKnowledge(MIND_ATT_DIALOG_ACTIVEAGENT, createIfMissing);
+				curr = DustUtils.safeGet(curr, MISC_ATT_CONN_TARGET, createIfMissing ? KNOWLEDGE_CREATOR : null);
+				break;
+			default:
+				curr = resolveKnowledge((MindHandle) root, createIfMissing);
+				break;
+			}
+		}
+
 		Object prev = null;
 		Object lastKey = null;
 
 		Map prevMap = null;
 		ArrayList prevArr = null;
+		Set prevSet = null;
+
 		for (Object p : path) {
 			if ( curr instanceof DustHandle ) {
 				curr = resolveKnowledge((DustHandle) curr, createIfMissing);
@@ -51,13 +94,11 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 					curr = (p instanceof Integer) ? new ArrayList() : new HashMap();
 
 					if ( null != prevArr ) {
-						if ( KEY_ADD == (Integer) lastKey ) {
-							prevArr.add(curr);
-						} else {
-							prevArr.set((Integer) lastKey, curr);
-						}
+						DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
 					} else if ( null != prevMap ) {
 						prevMap.put(lastKey, curr);
+					} else if ( null != prevSet ) {
+						prevSet.add(curr);
 					}
 				} else {
 					break;
@@ -67,6 +108,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			prev = curr;
 			prevArr = (prev instanceof ArrayList) ? (ArrayList) prev : null;
 			prevMap = (prev instanceof Map) ? (Map) prev : null;
+			prevSet = (prev instanceof Set) ? (Set) prev : null;
 
 			lastKey = p;
 
@@ -90,6 +132,25 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		case Check:
 			break;
 		case Commit:
+			if ( curr instanceof Map ) {
+				ArrayList listeners = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_LISTENERS, null);
+				if ( null != listeners ) {
+					Object oldAgent = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_ACTIVEAGENT);
+					for (Object a : listeners) {
+						try {
+							MindAgent agent = selectAgent(a);
+							if ( null != agent ) {
+								Dust.access(null, MIND_TAG_ACCESS_SET, a, MIND_ATT_DIALOG_ACTIVEAGENT);
+								agent.agentProcess();
+							}
+						} catch (Throwable e) {
+							DustException.swallow(e);
+						}
+					}
+					Dust.access(null, MIND_TAG_ACCESS_SET, oldAgent, MIND_ATT_DIALOG_ACTIVEAGENT);
+				}
+			}
+
 			break;
 		case Delete:
 			break;
@@ -97,6 +158,17 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			ret = curr;
 			break;
 		case Insert:
+			if ( !DustUtils.isEqual(curr, val) ) {
+				if ( null != prevArr ) {
+					DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
+				} else if ( null != prevSet ) {
+					prevSet.add(val);
+				} else {
+					Set s = new HashSet();
+					s.add(val);
+					prevMap.put(lastKey, s);
+				}
+			}
 			break;
 		case Peek:
 			ret = curr;
@@ -110,11 +182,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 						prevMap.put(lastKey, val);
 					}
 				} else if ( null != prevArr ) {
-					if ( KEY_ADD == (Integer) lastKey ) {
-						prevArr.add(val);
-					} else {
-						prevArr.set((Integer) lastKey, val);
-					}
+					DustUtils.safePut(prevArr, (Integer) lastKey, val, true);
 				}
 			}
 
@@ -135,62 +203,85 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 	@Override
 	public MindHandle agentInit() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Runtime.getRuntime().addShutdownHook(shutdownHook);
+		return MIND_TAG_RESULT_ACCEPT;
 	}
 
 	@Override
 	public MindHandle agentBegin() throws Exception {
 
-		ArrayList allNatLog = new ArrayList();
+		MindHandle ret = MIND_TAG_RESULT_REJECT;
+
 		ArrayList mods = Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_PEEK, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES);
 		for (Object m : mods) {
-			ArrayList nls = Dust.access(m, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_MODULE_NATIVELOGICS);
-			if ( null != nls ) {
-				for (Object nl : nls) {
-					allNatLog.add(nl);
-				}
+			ArrayList nls = Dust.access(m, MIND_TAG_ACCESS_PEEK, Collections.EMPTY_LIST, DUST_ATT_MODULE_NATIVELOGICS);
+			for (Object nl : nls) {
+				Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_INSERT, nl, DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
 			}
 		}
 
 		ArrayList sa = Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_ASSEMBLY_STARTAGENTS);
-		if ( null != sa ) {
+		if ( null == sa ) {
+			ret = MIND_TAG_RESULT_PASS;
+		} else {
 			for (Object a : sa) {
-				Object l = Dust.access(a, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_AGENT_LOGIC);
-				Object n = null;
-				for (Object nl : allNatLog) {
-					if ( l == Dust.access(nl, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_LOGIC) ) {
-						n = nl;
-						break;
-					}
-				}
-				if ( null != n ) {
-					MindAgent agent = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_INSTANCE);
-					Dust.access(null, MIND_TAG_ACCESS_SET, a, DUST_ATT_DIALOG_ACTIVEAGENT);
+				MindAgent agent = selectAgent(a);
 
-					if ( null == agent ) {
-						String ac = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
-						agent = (MindAgent) Class.forName(ac).newInstance();
-						if ( agent instanceof MindAgentServer ) {
-							((MindAgentServer) agent).agentInit();
-						}
-						Dust.access(n, MIND_TAG_ACCESS_SET, agent, DUST_ATT_NATIVELOGIC_INSTANCE);
-					}
+				if ( null != agent ) {
+					Dust.access(null, MIND_TAG_ACCESS_SET, a, MIND_ATT_DIALOG_ACTIVEAGENT);
 
-					if ( null != agent ) {
-						try {
-							if ( DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentBegin(), false) ) {
-								do {
-								} while (DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(), false));
-							}
-						} finally {
-							agent.agentEnd();
+					try {
+						if ( DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentBegin(), false) ) {
+							do {
+							} while (DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(), false));
 						}
+					} finally {
+						agent.agentEnd();
 					}
 				}
 			}
+
+			ret = (null == Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_MACHINE_ACTIVE_SERVERS)) ? MIND_TAG_RESULT_ACCEPT : MIND_TAG_RESULT_READACCEPT;
 		}
-		return null;
+
+		return ret;
+	}
+
+	public MindAgent selectAgent(Object a) throws Exception {
+		MindAgent agent = Dust.access(a, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_INSTANCE);
+
+		if ( null == agent ) {
+			Object l = Dust.access(a, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_AGENT_LOGIC);
+			Object n = null;
+			Collection allNatLog = Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_PEEK, Collections.EMPTY_SET, DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
+			for (Object nl : allNatLog) {
+				if ( l == Dust.access(nl, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_LOGIC) ) {
+					n = nl;
+					break;
+				}
+			}
+
+			if ( null != n ) {
+				agent = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_INSTANCE);
+				Dust.access(null, MIND_TAG_ACCESS_SET, a, MIND_ATT_DIALOG_ACTIVEAGENT);
+
+				if ( null == agent ) {
+					String ac = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+					agent = (MindAgent) Class.forName(ac).newInstance();
+					if ( agent instanceof MindAgentServer ) {
+						((MindAgentServer) agent).agentInit();
+						Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_INSERT, agent, DUST_ATT_MACHINE_ACTIVE_SERVERS, 0);
+					}
+					Dust.access(n, MIND_TAG_ACCESS_SET, agent, DUST_ATT_NATIVELOGIC_INSTANCE);
+				}
+			}
+
+			Dust.access(a, MIND_TAG_ACCESS_SET, agent, DUST_ATT_NATIVELOGIC_INSTANCE);
+		} else {
+			Dust.access(null, MIND_TAG_ACCESS_SET, a, MIND_ATT_DIALOG_ACTIVEAGENT);
+		}
+
+		return agent;
 	}
 
 	@Override
@@ -207,7 +298,26 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 	@Override
 	public MindHandle agentRelease() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		MindHandle ret = MIND_TAG_RESULT_PASS;
+
+		Collection servers = Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_MACHINE_ACTIVE_SERVERS);
+		if ( null == servers ) {
+			ret = MIND_TAG_RESULT_PASS;
+		} else {
+			ret = MIND_TAG_RESULT_ACCEPT;
+
+			for (Object s : servers) {
+				try {
+					((MindAgentServer) s).agentRelease();
+				} catch (Throwable e) {
+					DustException.swallow(e, "Machnie release");
+					ret = MIND_TAG_RESULT_REJECT;
+				}
+			}
+
+			Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_RESET, null, DUST_ATT_MACHINE_ACTIVE_SERVERS);
+		}
+
+		return ret;
 	}
 }

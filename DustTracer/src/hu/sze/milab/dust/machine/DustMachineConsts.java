@@ -18,6 +18,10 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
 	};
 
+	enum MindContext {
+		Dialog, Self, Target, Direct
+	};
+
 	class DustHandle implements MindHandle {
 		private final DustHandle unit;
 		private final String id;

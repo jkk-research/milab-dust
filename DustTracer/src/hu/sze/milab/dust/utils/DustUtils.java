@@ -3,7 +3,7 @@ package hu.sze.milab.dust.utils;
 import java.util.ArrayList;
 import java.util.Map;
 
-@SuppressWarnings("unchecked")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class DustUtils implements DustUtilsConsts {
 
 	public static boolean isEmpty(String str) {
@@ -14,9 +14,34 @@ public class DustUtils implements DustUtilsConsts {
 		return (null == o1) ? (null == o2) : (null != o2) && o1.equals(o2);
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static int safeCompare(Object v1, Object v2) {
 		return (null == v1) ? (null == v2) ? 0 : 1 : (null == v2) ? 1 : ((Comparable) v1).compareTo(v2);
+	};
+
+	public static int safePut(ArrayList arr, int index, Object value, boolean overwrite) {
+		int idx;
+		int s = arr.size();
+
+		if ( KEY_ADD == index ) {
+			idx = s;
+			arr.add(value);
+		} else {
+			if ( index < s ) {
+				if ( overwrite ) {
+					arr.set(index, value);
+				} else {
+					arr.add(index, value);
+				}
+			} else {
+				for (idx = s; idx <= index; ++idx) {
+					arr.add(null);
+				}
+				arr.set(index, value);
+			}
+			idx = index;
+		}
+
+		return idx;
 	};
 
 	public static String toString(Object ob) {
@@ -54,7 +79,6 @@ public class DustUtils implements DustUtilsConsts {
 		return sb;
 	}
 
-	@SuppressWarnings("rawtypes")
 	public static <RetType> RetType simpleGet(Object root, Object... path) {
 		Object curr = root;
 
@@ -73,7 +97,7 @@ public class DustUtils implements DustUtilsConsts {
 				curr = ((Map) curr).get(p);
 			}
 		}
-		
+
 		return (RetType) curr;
 	}
 

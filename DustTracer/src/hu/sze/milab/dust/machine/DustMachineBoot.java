@@ -24,18 +24,10 @@ public class DustMachineBoot implements DustMachineConsts {
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Machine initializing...");
 			machine.agentInit();
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Thinking start...");
-			machine.agentProcess();
+			machine.agentBegin();
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Thinking complete.");
 		} catch (Exception e) {
 			DustException.swallow(e, "Uncaught exception in the thinking process, exiting.");
-		} finally {
-			Dust.log(EVENT_TAG_TYPE_TRACE, "Releasing Machine...");
-			try {
-				machine.agentRelease();
-				Dust.log(EVENT_TAG_TYPE_TRACE, "Machine released.");
-			} catch (Exception e) {
-				DustException.swallow(e, "Uncaught exception during Machine release.");
-			}
 		}
 	}
 
@@ -88,9 +80,11 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustUtilsEnumTranslator.register(MindAccess.class, MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE,
 				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT);
 
+		DustUtilsEnumTranslator.register(MindContext.class, MIND_TAG_CONTEXT_DIALOG, MIND_TAG_CONTEXT_SELF, MIND_TAG_CONTEXT_TARGET, MIND_TAG_CONTEXT_DIRECT);
+
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
-		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE);
+		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE, DUST_ATT_NATIVELOGIC_INSTANCE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
 				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
 
@@ -134,9 +128,6 @@ public class DustMachineBoot implements DustMachineConsts {
 		} else {
 			Dust.log(EVENT_TAG_TYPE_INFO, "Launch without boot class");
 		}
-		
-		machine.agentBegin();
-
 	}
 
 	public static Map createKnowledge(DustHandle hUnit, MindHandle h, String localId) {
