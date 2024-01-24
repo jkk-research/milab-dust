@@ -53,11 +53,10 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 		if ( !zipArchiveEntry.isDirectory() ) {
 			++ count;
 			String name = zipArchiveEntry.getName();
-			String[] ss = DustUtils.cutPostfix(name, ".").split("-");
-
-			if ( ss.length > 1 ) {
-				Dust.log(EVENT_TAG_TYPE_TRACE, "multifile", ss[0]);
-			}
+			
+			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, zipArchiveEntry, MISC_ATT_CONN_TARGET, RESOURCE_ASP_STREAM);
+			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, name, MISC_ATT_CONN_TARGET, RESOURCE_ATT_URL_PATH);
+			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_PROCESS, MISC_ATT_CONN_TARGET);
 		}
 		return zipEnum.hasMoreElements() ? MIND_TAG_RESULT_READACCEPT : MIND_TAG_RESULT_ACCEPT;
 	}

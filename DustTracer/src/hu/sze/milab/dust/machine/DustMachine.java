@@ -60,22 +60,28 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		if ( null == root ) {
 			curr = mainDialog.context;
 		} else {
-			MindContext ctx = DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
+			MindHandle activeAgent = (MindHandle) mainDialog.context.get(MIND_ATT_DIALOG_ACTIVEAGENT);
 
-			switch ( ctx ) {
-			case Dialog:
-				curr = mainDialog.context;
-				break;
-			case Self:
-				curr = resolveKnowledge(MIND_ATT_DIALOG_ACTIVEAGENT, createIfMissing);
-				break;
-			case Target:
-				curr = resolveKnowledge(MIND_ATT_DIALOG_ACTIVEAGENT, createIfMissing);
-				curr = DustUtils.safeGet(curr, MISC_ATT_CONN_TARGET, createIfMissing ? KNOWLEDGE_CREATOR : null);
-				break;
-			default:
+			if ( null == activeAgent ) {
 				curr = resolveKnowledge((MindHandle) root, createIfMissing);
-				break;
+			} else {
+				MindContext ctx = DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
+
+				switch ( ctx ) {
+				case Dialog:
+					curr = mainDialog.context;
+					break;
+				case Self:
+					curr = resolveKnowledge(activeAgent, createIfMissing);
+					break;
+				case Target:
+					curr = resolveKnowledge(activeAgent, createIfMissing);
+					curr = DustUtils.safeGet(curr, MIND_ATT_AGENT_TARGET, createIfMissing ? KNOWLEDGE_CREATOR : null);
+					break;
+				default:
+					curr = resolveKnowledge((MindHandle) root, createIfMissing);
+					break;
+				}
 			}
 		}
 
@@ -132,14 +138,19 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		case Check:
 			break;
 		case Commit:
+			if ( curr instanceof DustHandle ) {
+				curr = resolveKnowledge((DustHandle) curr, createIfMissing);
+			}
 			if ( curr instanceof Map ) {
 				ArrayList listeners = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_LISTENERS, null);
 				if ( null != listeners ) {
+					Object hTarget = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_HANDLE, null);
 					Object oldAgent = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 					for (Object a : listeners) {
 						try {
 							MindAgent agent = selectAgent(a);
 							if ( null != agent ) {
+								Dust.access(a, MIND_TAG_ACCESS_SET, hTarget, MIND_ATT_AGENT_TARGET);
 								Dust.access(null, MIND_TAG_ACCESS_SET, a, MIND_ATT_DIALOG_ACTIVEAGENT);
 								agent.agentProcess();
 							}
@@ -158,6 +169,9 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			ret = curr;
 			break;
 		case Insert:
+			if ( curr instanceof Set ) {
+				prevSet = (Set) curr;
+			}
 			if ( !DustUtils.isEqual(curr, val) ) {
 				if ( null != prevArr ) {
 					DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
@@ -171,7 +185,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			}
 			break;
 		case Peek:
-			ret = curr;
+			ret = (null == curr) ? val : curr;
 			break;
 		case Reset:
 			break;
@@ -212,9 +226,9 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 		MindHandle ret = MIND_TAG_RESULT_REJECT;
 
-		ArrayList mods = Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_PEEK, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES);
+		Collection mods = Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_PEEK, Collections.EMPTY_LIST, DUST_ATT_MACHINE_MODULES);
 		for (Object m : mods) {
-			ArrayList nls = Dust.access(m, MIND_TAG_ACCESS_PEEK, Collections.EMPTY_LIST, DUST_ATT_MODULE_NATIVELOGICS);
+			Collection nls = Dust.access(m, MIND_TAG_ACCESS_PEEK, Collections.EMPTY_LIST, DUST_ATT_MODULE_NATIVELOGICS);
 			for (Object nl : nls) {
 				Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_INSERT, nl, DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
 			}

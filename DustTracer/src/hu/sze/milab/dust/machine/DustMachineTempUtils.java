@@ -32,7 +32,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static void test(Object... params) throws Exception {
 		initFromInterfaces(DustMetaConsts.class);
 		
-		dumpUnits();
+//		dumpUnits();
 		
 //		readUnits();
 		
@@ -255,8 +255,9 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
-				if ( ch instanceof MindHandle ) {
+				if ( ch instanceof DustHandle ) {
 					String name = f.getName();
+					((DustHandle)ch).setStr(name);
 					Dust.access(ch, MIND_TAG_ACCESS_SET, name, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);
@@ -266,7 +267,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						parents.put(name, (MindHandle) ch);
 					}
 
-					Map token = DustMachineBoot.createKnowledge((DustHandle) RESOURCE_UNIT, null, null);
+					Map token = DustMachineBoot.createKnowledge((DustHandle) L10N_UNIT, null, null);
 					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
 					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
 					token.put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);

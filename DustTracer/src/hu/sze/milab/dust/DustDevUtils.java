@@ -23,7 +23,33 @@ public class DustDevUtils implements DustMetaConsts {
 		}
 	};
 
+	public static MindHandle registerHandle(String unit, MindHandle hPrimaryAspect) {
+		MindHandle h = Dust.recall(unit + DUST_SEP_ID);
+		
+		Dust.access(h, MIND_TAG_ACCESS_SET, hPrimaryAspect, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
+		return h;
+	};
+
+	public static MindHandle registerAgent(String unit, MindHandle hLogic) {
+		MindHandle hAgent = registerHandle(unit, MIND_ASP_AGENT);
+		
+		Dust.access(hAgent, MIND_TAG_ACCESS_SET, hLogic, MIND_ATT_AGENT_LOGIC);
+		
+		return hAgent;
+	};
+
+	public static MindHandle registerLogic(String unit, String nativeClassName) {
+		MindHandle hLogic = registerHandle(unit, MIND_ASP_LOGIC);
+		MindHandle hNative = registerHandle(unit, DUST_ASP_NATIVELOGIC);
+		
+		Dust.access(hNative, MIND_TAG_ACCESS_SET, hLogic, DUST_ATT_NATIVELOGIC_LOGIC);
+		Dust.access(hNative, MIND_TAG_ACCESS_SET, nativeClassName, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+		
+		Dust.access(APP_MODULE_MAIN, MIND_TAG_ACCESS_SET, hNative, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
+		
+		return hLogic;
+	}
 
 	public static void breakpoint(Object... objects) {
 		Dust.log(EVENT_TAG_TYPE_BREAKPOINT, objects);

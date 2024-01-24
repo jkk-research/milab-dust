@@ -134,7 +134,6 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_ATT_CONN_MEMBERSET = Dust.recall("3:");
 
 	public static MindHandle MISC_ASP_ALIAS = Dust.recall("3:");
-
 	public static MindHandle MISC_ASP_GEN = Dust.recall("3:");
 	public static MindHandle MISC_ATT_GEN_COUNT = Dust.recall("3:");
 
@@ -170,11 +169,26 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle EVENT_TAG_TYPE_INFO = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_TRACE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.recall("5:");
-
+	
 	public static MindHandle RESOURCE_UNIT = Dust.recall("6");
+	
+	public static MindHandle RESOURCE_ASP_URL = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_URL_SCHEME = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_URL_USERINFO = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_URL_HOST = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_URL_PATH = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_URL_QUERY = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_URL_FRAGMENT = Dust.recall("6:");
+	
+	public static MindHandle RESOURCE_ASP_STREAM = Dust.recall("6:");
+
+	public static MindHandle RESOURCE_TAG_STREAMTYPE = Dust.recall("6:");
+	public static MindHandle RESOURCE_TAG_STREAMTYPE_ZIPENTRY = Dust.recall("6:");
 
 	public static MindHandle DEV_UNIT = Dust.recall("7");
 
 	public static MindHandle DEV_ATT_HINT = Dust.recall("7:");
+
+	public static MindHandle L10N_UNIT = Dust.recall("8");
 
 }

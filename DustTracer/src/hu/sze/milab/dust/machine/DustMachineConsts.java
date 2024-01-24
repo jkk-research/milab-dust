@@ -47,6 +47,10 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		public String getId() {
 			return (this == unit) ? id : unit.id + DUST_SEP_ID + id;
 		}
+		
+		void setStr(String hint) {
+			toStr = DustUtils.sbAppend(null, "", false, getId(), " (", hint, ")").toString();
+		}
 
 		@Override
 		public String toString() {
