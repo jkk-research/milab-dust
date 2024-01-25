@@ -127,4 +127,14 @@ public class DustUtils implements DustUtilsConsts {
 		return strSrc.substring(0, sep + 1) + postfix;
 	}
 
+	public static String getHash2(String str, String sep) {
+		int hash = str.hashCode();
+
+		int mask = 255;
+		int h1 = hash & mask;
+		int h2 = (hash >> 8) & mask;
+
+		return String.format("%02x%s%02x", h1, sep, h2);
+	}
+
 }

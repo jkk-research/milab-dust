@@ -17,6 +17,10 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 	enum MindAccess {
 		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
 	};
+	
+	enum MindAction {
+		Init, Begin, Process, End, Release,
+	};
 
 	enum MindContext {
 		Dialog, Self, Target, Direct

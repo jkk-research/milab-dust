@@ -146,13 +146,29 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 				if ( null != listeners ) {
 					Object hTarget = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_HANDLE, null);
 					Object oldAgent = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_ACTIVEAGENT);
+					MindAction action = DustUtilsEnumTranslator.getEnum((MindHandle) val, MindAction.Process);
+					
 					for (Object a : listeners) {
 						try {
 							MindAgent agent = selectAgent(a);
 							if ( null != agent ) {
 								Dust.access(a, MIND_TAG_ACCESS_SET, hTarget, MIND_ATT_AGENT_TARGET);
 								Dust.access(null, MIND_TAG_ACCESS_SET, a, MIND_ATT_DIALOG_ACTIVEAGENT);
-								agent.agentProcess();
+								switch ( action ) {
+								case Begin:
+									agent.agentBegin();
+									break;
+								case Process:
+									agent.agentProcess();
+									break;
+								case End:
+									agent.agentEnd();
+									break;
+								case Init:
+								case Release:
+									DustException.wrap(null, "Invalid commit action", val);
+									break;
+								}
 							}
 						} catch (Throwable e) {
 							DustException.swallow(e);

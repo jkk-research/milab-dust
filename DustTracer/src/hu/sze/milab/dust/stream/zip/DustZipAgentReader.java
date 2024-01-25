@@ -8,11 +8,11 @@ import org.apache.commons.compress.archivers.zip.ZipFile;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 	String path;
-	
+
 	ZipFile zipFile;
 	Enumeration<ZipArchiveEntry> zipEnum;
 	ZipArchiveEntry zipArchiveEntry;
@@ -24,22 +24,23 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 	public MindHandle agentBegin() throws Exception {
 		MindHandle ret = MIND_TAG_RESULT_REJECT;
 
-		String fileName = System.getProperty("TestParam01");
+		File f = DustUtilsFile.getFile(MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE, RESOURCE_ATT_URL_PATH);
 
-		Dust.log(EVENT_TAG_TYPE_TRACE, "Accessing file", fileName);
+		if ( f.isFile() ) {
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Opening file", path = f.getCanonicalPath());
 
-		if ( !DustUtils.isEmpty(fileName) ) {
-			File home = new File(System.getProperty("user.home"));
-			File f = new File(home, fileName);
+			long t = System.currentTimeMillis();
+			zipFile = new ZipFile(f);
+			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, zipFile, MISC_ATT_CONN_TARGET, MISC_ATT_VARIANT_VALUE);
 
-			if ( f.isFile() ) {
-				Dust.log(EVENT_TAG_TYPE_TRACE, "Opening file", path = f.getCanonicalPath());
+			zipEnum = zipFile.getEntries();
+			openTime = System.currentTimeMillis() - t;
 
-				long t = System.currentTimeMillis();
-				zipFile = new ZipFile(f);
-				zipEnum = zipFile.getEntries();
-				ret = zipEnum.hasMoreElements() ? MIND_TAG_RESULT_READACCEPT : MIND_TAG_RESULT_PASS;
-				openTime = System.currentTimeMillis() - t;
+			if ( zipEnum.hasMoreElements() ) {
+				Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_BEGIN, MISC_ATT_CONN_TARGET);
+				ret = MIND_TAG_RESULT_READACCEPT;
+			} else {
+				ret = MIND_TAG_RESULT_PASS;
 			}
 		}
 
@@ -51,9 +52,9 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 		zipArchiveEntry = zipEnum.nextElement();
 
 		if ( !zipArchiveEntry.isDirectory() ) {
-			++ count;
+			++count;
 			String name = zipArchiveEntry.getName();
-			
+
 			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, zipArchiveEntry, MISC_ATT_CONN_TARGET, RESOURCE_ASP_STREAM);
 			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, name, MISC_ATT_CONN_TARGET, RESOURCE_ATT_URL_PATH);
 			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_PROCESS, MISC_ATT_CONN_TARGET);
@@ -69,7 +70,7 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 			zipFile.close();
 			zipFile = null;
 		}
-		
+
 		Dust.log(EVENT_TAG_TYPE_TRACE, path, "Open time", openTime, "File count", count);
 
 		return MIND_TAG_RESULT_ACCEPT;

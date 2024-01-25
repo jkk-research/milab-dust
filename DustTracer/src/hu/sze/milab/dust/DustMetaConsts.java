@@ -127,6 +127,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MISC_ASP_CONN = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_OWNER = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_PARENT = Dust.recall("3:");
+	public static MindHandle MISC_ATT_CONN_SOURCE = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_TARGET = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_REQUIRES = Dust.recall("3:");
 	public static MindHandle MISC_ATT_CONN_MEMBERMAP = Dust.recall("3:");
@@ -166,6 +167,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle EVENT_TAG_TYPE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONTHROWN = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONSWALLOWED = Dust.recall("5:");
+	public static MindHandle EVENT_TAG_TYPE_ERROR = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_INFO = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_TRACE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.recall("5:");

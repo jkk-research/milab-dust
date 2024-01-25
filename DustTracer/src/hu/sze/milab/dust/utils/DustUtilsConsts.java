@@ -6,9 +6,10 @@ import java.util.Map;
 
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
+import hu.sze.milab.dust.DustMetaConsts;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
-public interface DustUtilsConsts extends DustConsts {
+public interface DustUtilsConsts extends DustConsts, DustMetaConsts {
 	
 	interface DustCreator<Type> {
 		Type create(Object key, Object... hints);
