@@ -72,6 +72,8 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 		}
 
 		Dust.log(EVENT_TAG_TYPE_TRACE, path, "Open time", openTime, "File count", count);
+		
+		Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_END, MISC_ATT_CONN_TARGET);
 
 		return MIND_TAG_RESULT_ACCEPT;
 	}

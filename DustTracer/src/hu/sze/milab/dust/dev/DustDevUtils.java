@@ -1,6 +1,9 @@
-package hu.sze.milab.dust;
+package hu.sze.milab.dust.dev;
 
 import java.util.Comparator;
+
+import hu.sze.milab.dust.Dust;
+import hu.sze.milab.dust.DustMetaConsts;
 
 public class DustDevUtils implements DustMetaConsts {
 	

@@ -10,7 +10,7 @@ import java.util.TreeMap;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.DustDevUtils;
+import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustMachineTempJavaMeta extends DustAgent implements DustMachineConsts {

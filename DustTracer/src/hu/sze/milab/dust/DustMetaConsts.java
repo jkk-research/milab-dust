@@ -168,6 +168,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONTHROWN = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_EXCEPTIONSWALLOWED = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_ERROR = Dust.recall("5:");
+	public static MindHandle EVENT_TAG_TYPE_WARNING = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_INFO = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_TRACE = Dust.recall("5:");
 	public static MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.recall("5:");

@@ -38,8 +38,7 @@ public interface DustMetaConsts extends DustConsts {
 	public static MindHandle MIND_ATT_DIALOG_ASSEMBLY = Dust.recall("1:20");
 	public static MindHandle MIND_ATT_DIALOG_KNOWLEDGE = Dust.recall("1:21");
 	public static MindHandle MIND_ATT_DIALOG_LAUNCHPARAMS = Dust.recall("1:22");
-
-	public static MindHandle MIND_TAG_CONTEXT_SELF = Dust.recall("1:23");
+	public static MindHandle MIND_ATT_DIALOG_ACTIVEAGENT = Dust.recall("1:23");
 
 	public static MindHandle MIND_ASP_AGENT = Dust.recall("1:24");
 	public static MindHandle MIND_ATT_AGENT_LOGIC = Dust.recall("1:25");
@@ -173,8 +172,23 @@ public interface DustMetaConsts extends DustConsts {
 
 	public static MindHandle RESOURCE_UNIT = Dust.recall("6");
 
+	public static MindHandle RESOURCE_ASP_URL = Dust.recall("6:1");
+	public static MindHandle RESOURCE_ATT_URL_SCHEME = Dust.recall("6:2");
+	public static MindHandle RESOURCE_ATT_URL_USERINFO = Dust.recall("6:3");
+	public static MindHandle RESOURCE_ATT_URL_HOST = Dust.recall("6:4");
+	public static MindHandle RESOURCE_ATT_URL_PATH = Dust.recall("6:5");
+	public static MindHandle RESOURCE_ATT_URL_QUERY = Dust.recall("6:6");
+	public static MindHandle RESOURCE_ATT_URL_FRAGMENT = Dust.recall("6:7");
+
+	public static MindHandle RESOURCE_ASP_STREAM = Dust.recall("6:8");
+
+	public static MindHandle RESOURCE_TAG_STREAMTYPE = Dust.recall("6:9");
+	public static MindHandle RESOURCE_TAG_STREAMTYPE_ZIPENTRY = Dust.recall("6:10");
+
 	public static MindHandle DEV_UNIT = Dust.recall("7");
 
 	public static MindHandle DEV_ATT_HINT = Dust.recall("7:1");
+
+	public static MindHandle L10N_UNIT = Dust.recall("8");
 
 }

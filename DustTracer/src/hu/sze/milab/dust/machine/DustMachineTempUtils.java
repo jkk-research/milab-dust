@@ -14,9 +14,9 @@ import java.util.TreeMap;
 import org.json.simple.JSONValue;
 
 import hu.sze.milab.dust.Dust;
-import hu.sze.milab.dust.DustDevUtils;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.DustMetaConsts;
+import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.machine.DustMachineConsts.MachineAtts;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
