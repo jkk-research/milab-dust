@@ -1,9 +1,28 @@
 package hu.sze.milab.dust.stream;
 
-import hu.sze.milab.dust.DustConsts;
-import hu.sze.milab.dust.utils.DustUtils;
+import java.io.File;
 
-public class DustUtilsSream implements DustConsts {
+import hu.sze.milab.dust.Dust;
+import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsFile;
+
+public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
+
+	public static File getFile(MindHandle ctx, Object... path) throws Exception {
+
+		String fileName = Dust.access(ctx, MIND_TAG_ACCESS_PEEK, null, path);
+		Dust.log(EVENT_TAG_TYPE_TRACE, "Accessing file", fileName);
+		
+		File f;
+		if ( fileName.startsWith(File.separator) ) {
+			f = new File(fileName);
+		} else {
+			File home = new File(System.getProperty("user.home"));
+			f = DustUtils.isEmpty(fileName) ? home : new File(home, fileName);
+		}
+		
+		return f;
+	}
 	
 	public static String csvEscape(String valStr, boolean addQuotes) {
 		String ret = (null == valStr) ? "" : valStr.replace("\"", "\"\"").replaceAll("\\s+", " ");

@@ -4,7 +4,7 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.DustConsts;
 
-public class DustTestAgentHelloWorld extends DustAgent implements DustTestConsts, DustConsts.MindAgentServer {
+public class DustTestAgentHelloWorld extends DustAgent implements DustTestConsts, DustConsts.MindServer {
 
 	@Override
 	public MindHandle agentProcess() throws Exception {

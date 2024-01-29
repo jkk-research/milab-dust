@@ -2,10 +2,9 @@ package hu.sze.milab.dust.stream.json;
 
 import java.util.EnumSet;
 
-import hu.sze.milab.dust.DustMetaConsts;
-import hu.sze.milab.dust.utils.DustUtilsConsts;
+import hu.sze.milab.dust.stream.DustStreamConsts;
 
-public interface DustJsonConsts extends DustMetaConsts, DustUtilsConsts {
+public interface DustJsonConsts extends DustStreamConsts {
 	
 	String JSONCONST_NULL = "null";
 	String JSONCONST_TRUE = "true";

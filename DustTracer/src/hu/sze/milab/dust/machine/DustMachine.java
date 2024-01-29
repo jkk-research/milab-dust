@@ -16,7 +16,7 @@ import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.MindAgentServer {
+class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.MindServer {
 
 	Dust.IdResolver idRes;
 	final DustMachineDialog mainDialog;
@@ -41,6 +41,11 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 	@Override
 	public DustHandle recall(String id) {
 		return (DustHandle) idRes.recall(id);
+	}
+
+	@Override
+	public MindHandle recall(MindHandle hUnit, String itemId) {
+		return (DustHandle) idRes.recall(hUnit, itemId);
 	}
 
 	Map resolveKnowledge(MindHandle h, boolean createIfMissing) {
@@ -147,7 +152,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 					Object hTarget = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_HANDLE, null);
 					Object oldAgent = Dust.access(null, MIND_TAG_ACCESS_PEEK, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 					MindAction action = DustUtilsEnumTranslator.getEnum((MindHandle) val, MindAction.Process);
-					
+
 					for (Object a : listeners) {
 						try {
 							MindAgent agent = selectAgent(a);
@@ -298,8 +303,8 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 				if ( null == agent ) {
 					String ac = Dust.access(n, MIND_TAG_ACCESS_PEEK, null, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
 					agent = (MindAgent) Class.forName(ac).newInstance();
-					if ( agent instanceof MindAgentServer ) {
-						((MindAgentServer) agent).agentInit();
+					if ( agent instanceof MindServer ) {
+						((MindServer) agent).agentInit();
 						Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_INSERT, agent, DUST_ATT_MACHINE_ACTIVE_SERVERS, 0);
 					}
 					Dust.access(n, MIND_TAG_ACCESS_SET, agent, DUST_ATT_NATIVELOGIC_INSTANCE);
@@ -338,7 +343,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 			for (Object s : servers) {
 				try {
-					((MindAgentServer) s).agentRelease();
+					((MindServer) s).agentRelease();
 				} catch (Throwable e) {
 					DustException.swallow(e, "Machnie release");
 					ret = MIND_TAG_RESULT_REJECT;

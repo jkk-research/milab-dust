@@ -8,7 +8,6 @@ import org.apache.commons.compress.archivers.zip.ZipFile;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 	String path;
@@ -23,8 +22,9 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 	@Override
 	public MindHandle agentBegin() throws Exception {
 		MindHandle ret = MIND_TAG_RESULT_REJECT;
-
-		File f = DustUtilsFile.getFile(MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE, RESOURCE_ATT_URL_PATH);
+		
+		Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_PROCESS, MISC_ATT_CONN_SOURCE);
+		File f = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_CONN_SOURCE, MISC_ATT_VARIANT_VALUE);
 
 		if ( f.isFile() ) {
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Opening file", path = f.getCanonicalPath());

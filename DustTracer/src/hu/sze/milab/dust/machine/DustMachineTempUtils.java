@@ -234,7 +234,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		for (Object u : units.values()) {
 			if ( null == metaWriter ) {
 				metaWriter = new DustMachineTempJavaMeta("gen", "hu.sze.milab.dust", "DustMetaConsts", 
-						MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, 
+						MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, 
 						MIND_ASP_AUTHOR, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY, DUST_ASP_MACHINE);
 				metaWriter.agentBegin();
 			}

@@ -6,6 +6,10 @@ import java.util.Map;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
+import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.stream.DustStreamFilesystemServer;
+import hu.sze.milab.dust.stream.json.DustJsonDomAgent;
+import hu.sze.milab.dust.stream.zip.DustZipAgentReader;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
@@ -65,6 +69,11 @@ public class DustMachineBoot implements DustMachineConsts {
 
 			return mh;
 		}
+
+		@Override
+		public MindHandle recall(MindHandle hUnit, String itemId) {
+			return DustException.wrap(null, "Should not get here!" );
+		}
 	}
 
 	static void boot(DustMachine machine, String[] args) throws Exception {
@@ -89,6 +98,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
 		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE, DUST_ATT_NATIVELOGIC_INSTANCE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
+				, "AGT", MIND_ASP_AGENT, "SRV", MIND_ASP_AGENT
 				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
 
 		Map k;
@@ -120,6 +130,10 @@ public class DustMachineBoot implements DustMachineConsts {
 		
 		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
 		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
+		
+		DustDevUtils.registerNative(RESOURCE_SRV_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_AGT_ZIPREADER, DUSTJAVA_UNIT, DustZipAgentReader.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_AGT_JSON_DOM, DUSTJAVA_UNIT, DustJsonDomAgent.class.getCanonicalName());
 		
 		String bootClass = System.getProperty("DustBootClass");
 		

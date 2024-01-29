@@ -34,6 +34,14 @@ public class DustDevUtils implements DustMetaConsts {
 		return h;
 	};
 
+	public static MindHandle registerHandle(MindHandle hUnit, MindHandle hPrimaryAspect) {
+		MindHandle h = Dust.recall(hUnit, "");
+		
+		Dust.access(h, MIND_TAG_ACCESS_SET, hPrimaryAspect, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+
+		return h;
+	};
+
 	public static MindHandle registerAgent(String unit, MindHandle hLogic) {
 		MindHandle hAgent = registerHandle(unit, MIND_ASP_AGENT);
 		
@@ -45,6 +53,17 @@ public class DustDevUtils implements DustMetaConsts {
 	public static MindHandle registerLogic(String unit, String nativeClassName) {
 		MindHandle hLogic = registerHandle(unit, MIND_ASP_LOGIC);
 		MindHandle hNative = registerHandle(unit, DUST_ASP_NATIVELOGIC);
+		
+		Dust.access(hNative, MIND_TAG_ACCESS_SET, hLogic, DUST_ATT_NATIVELOGIC_LOGIC);
+		Dust.access(hNative, MIND_TAG_ACCESS_SET, nativeClassName, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+		
+		Dust.access(APP_MODULE_MAIN, MIND_TAG_ACCESS_SET, hNative, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
+		
+		return hLogic;
+	}
+
+	public static MindHandle registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName) {
+		MindHandle hNative = registerHandle(hUnit, DUST_ASP_NATIVELOGIC);
 		
 		Dust.access(hNative, MIND_TAG_ACCESS_SET, hLogic, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(hNative, MIND_TAG_ACCESS_SET, nativeClassName, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
