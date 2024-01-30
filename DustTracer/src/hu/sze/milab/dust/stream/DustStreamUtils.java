@@ -24,6 +24,15 @@ public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 		return f;
 	}
 	
+	public static String csvOptEscape(String valStr, String sepChar) {
+		String ret = valStr;
+		
+		if ( valStr.contains(sepChar) || valStr.contains("\"") || valStr.contains("\n") ) {
+			ret = csvEscape(valStr, true);
+		}
+		return ret;
+	}
+	
 	public static String csvEscape(String valStr, boolean addQuotes) {
 		String ret = (null == valStr) ? "" : valStr.replace("\"", "\"\"").replaceAll("\\s+", " ");
 
@@ -34,7 +43,7 @@ public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 		return ret;
 	}
 
-	public static String csvUnEscape(String valStr, boolean removeQuotes) {
+	public static String csvOptUnEscape(String valStr, boolean removeQuotes) {
 		if ( DustUtils.isEmpty(valStr) || !valStr.contains("\"")) {
 			return valStr;
 		}

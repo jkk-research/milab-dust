@@ -200,7 +200,10 @@ public interface DustMetaConsts extends DustConsts {
 	
 	public static MindHandle RESOURCE_SRV_FILESYSTEM = Dust.recall("6:");
 	public static MindHandle RESOURCE_AGT_ZIPREADER = Dust.recall("6:");
-	public static MindHandle RESOURCE_AGT_JSON_DOM = Dust.recall("6:");
+	public static MindHandle RESOURCE_AGT_JSONDOM = Dust.recall("6:");
+	
+	public static MindHandle RESOURCE_AGT_CSVSAX = Dust.recall("6:");
+	public static MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.recall("6:");
 
 	public static MindHandle DEV_UNIT = Dust.recall("7");
 
