@@ -4,14 +4,7 @@ public class Dust implements DustConsts {
 
 	private static Machine MACHINE;
 
-	public interface IdResolver {
-		MindHandle recall(String id);
-
-		MindHandle recall(MindHandle hUnit, String itemId);
-	}
-
-	public static abstract class Machine implements IdResolver {
-
+	public static abstract class Machine {
 		protected Machine() {
 			if ( null != MACHINE ) {
 				DustException.wrap(null, "Multiple Dust machine initialization");
@@ -20,25 +13,23 @@ public class Dust implements DustConsts {
 			MACHINE = this;
 		}
 
-		protected abstract <RetType> RetType access(Object root, MindHandle cmd, Object val, Object... path);
-
-		protected abstract void log(MindHandle event, Object... params);
+		protected abstract <RetType> RetType access(MindAccess cmd, Object val, Object root, Object... path);
 	}
 
-	public static MindHandle recall(String id) {
-		return MACHINE.recall(id);
+	public static <RetType> RetType access(MindAccess cmd, Object val, Object root, Object... path) {
+		return MACHINE.access(cmd, val, root, path);
 	}
 
-	public static MindHandle recall(MindHandle hUnit, String itemId) {
-		return MACHINE.recall(hUnit, itemId);
+	public static MindHandle lookup(String id) {
+		return MACHINE.access(MindAccess.Lookup, id, null);
 	}
 
-	public static <RetType> RetType access(Object root, MindHandle cmd, Object val, Object... path) {
-		return MACHINE.access(root, cmd, val, path);
+	public static MindHandle lookup(MindHandle hUnit, String itemId) {
+		return MACHINE.access(MindAccess.Lookup, itemId, hUnit);
 	}
 
 	public static void log(MindHandle event, Object... params) {
-		MACHINE.log(event, params);
+		MACHINE.access(MindAccess.Broadcast, event, null, params);
 	}
 
 }

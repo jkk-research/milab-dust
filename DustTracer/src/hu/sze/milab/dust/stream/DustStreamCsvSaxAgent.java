@@ -15,18 +15,18 @@ import hu.sze.milab.dust.utils.DustUtils;
 public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts {
 
 	@Override
-	public MindHandle agentBegin() throws Exception {
+	protected MindHandle agentBegin() throws Exception {
 		MindHandle ret = MIND_TAG_RESULT_PASS;
 
-		Object hData = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_DATA);
-		Object hStream = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_STREAM);
-		Object current = Dust.access(MIND_TAG_CONTEXT_TARGET, MIND_TAG_ACCESS_PEEK, null);
+		Object hData = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_DATA);
+		Object hStream = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_STREAM);
+		Object current = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
 
 		if ( null != current ) {
-			Object s = Dust.access(hStream, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_VARIANT_VALUE);
+			Object s = Dust.access(MindAccess.Peek, null, hStream, MISC_ATT_VARIANT_VALUE);
 
 			if ( s instanceof FileWriter ) {
-				String sep = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, "\t", RESOURCE_ATT_CSVSAX_SEP);
+				String sep = Dust.access(MindAccess.Peek, "\t", MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_CSVSAX_SEP);
 
 				write(hData, sep, (FileWriter) s, true);
 
@@ -38,15 +38,15 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 	}
 
 	@Override
-	public MindHandle agentProcess() throws Exception {
-		Object hData = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_DATA);
-		Object hStream = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_STREAM);
+	protected MindHandle agentProcess() throws Exception {
+		Object hData = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_DATA);
+		Object hStream = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_STREAM);
 
-		Object current = Dust.access(MIND_TAG_CONTEXT_TARGET, MIND_TAG_ACCESS_PEEK, null);
+		Object current = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
 
 		if ( null != current ) {
-			Object s = Dust.access(hStream, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_VARIANT_VALUE);
-			String sep = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, "\t", RESOURCE_ATT_CSVSAX_SEP);
+			Object s = Dust.access(MindAccess.Peek, null, hStream, MISC_ATT_VARIANT_VALUE);
+			String sep = Dust.access(MindAccess.Peek, "\t", MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_CSVSAX_SEP);
 
 			if ( DustUtils.isEqual(hStream, current) ) {
 				if ( s instanceof File ) {
@@ -61,20 +61,20 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 
 								for (int i = len; i-- > 0;) {
 									cols[i] = DustStreamUtils.csvOptUnEscape(cols[i], true);
-									Dust.access(hData, MIND_TAG_ACCESS_SET, cols[i], MISC_ATT_CONN_MEMBERARR, i);
+									Dust.access(MindAccess.Set, cols[i], hData, MISC_ATT_CONN_MEMBERARR, i);
 								}
-								Dust.access(hData, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_BEGIN);
+								Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, hData);
 
 								for (line = br.readLine(); null != line;) {
 									String[] values = line.split(sep);
 									for (int i = len; i-- > 0;) {
 										String val = DustStreamUtils.csvOptUnEscape(values[i], true);
-										Dust.access(hData, MIND_TAG_ACCESS_SET, val, MISC_ATT_CONN_MEMBERMAP, cols[i]);
+										Dust.access(MindAccess.Set, val, hData, MISC_ATT_CONN_MEMBERMAP, cols[i]);
 									}
-									Dust.access(hData, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_PROCESS);
+									Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hData);
 								}
 
-								Dust.access(hData, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_END);
+								Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, hData);
 							}
 						}
 					}
@@ -90,11 +90,11 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 	}
 
 	public void write(Object hData, String sep, FileWriter fw, boolean head) throws IOException {
-		Collection cols = Dust.access(hData, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_CONN_MEMBERARR);
+		Collection cols = Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERARR);
 		int l = cols.size();
 		int i = 0;
 		for (Object ch : cols) {
-			String val = head ? DustUtils.toString(ch) : Dust.access(hData, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_CONN_MEMBERMAP, ch);
+			String val = head ? DustUtils.toString(ch) : Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERMAP, ch);
 			val = DustStreamUtils.csvOptEscape(val, sep);
 			fw.write(val);
 			fw.write(((++i) < l) ? sep : "\n");
@@ -103,15 +103,15 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 	}
 
 	@Override
-	public MindHandle agentEnd() throws Exception {
+	protected MindHandle agentEnd() throws Exception {
 		MindHandle ret = MIND_TAG_RESULT_PASS;
 
-		FileWriter fw = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_DATA, MISC_ATT_VARIANT_VALUE);
+		FileWriter fw = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_DATA, MISC_ATT_VARIANT_VALUE);
 
 		if ( null != fw ) {
 			fw.flush();
 			fw.close();
-			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, null, RESOURCE_ATT_PROCESSOR_DATA, MISC_ATT_VARIANT_VALUE);
+			Dust.access(MindAccess.Set, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_DATA, MISC_ATT_VARIANT_VALUE);
 			ret = MIND_TAG_RESULT_ACCEPT;
 		}
 

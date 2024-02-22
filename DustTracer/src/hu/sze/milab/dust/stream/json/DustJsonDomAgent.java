@@ -16,21 +16,21 @@ import hu.sze.milab.dust.utils.DustUtils;
 public class DustJsonDomAgent extends DustAgent implements DustJsonConsts {
 
 	@Override
-	public MindHandle agentBegin() throws Exception {
+	protected MindHandle agentBegin() throws Exception {
 		// TODO Auto-generated method stub
 		return super.agentBegin();
 	}
 
 	@Override
-	public MindHandle agentProcess() throws Exception {
-		Object hData = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_DATA);
-		Object hStream = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, RESOURCE_ATT_PROCESSOR_STREAM);
+	protected MindHandle agentProcess() throws Exception {
+		Object hData = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_DATA);
+		Object hStream = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_STREAM);
 
-		Object current = Dust.access(MIND_TAG_CONTEXT_TARGET, MIND_TAG_ACCESS_PEEK, null);
+		Object current = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
 
 		if ( null != current ) {
-			Object s = Dust.access(hStream, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_VARIANT_VALUE);
-			Object d = Dust.access(hData, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_VARIANT_VALUE);
+			Object s = Dust.access(MindAccess.Peek, null, hStream, MISC_ATT_VARIANT_VALUE);
+			Object d = Dust.access(MindAccess.Peek, null, hData, MISC_ATT_VARIANT_VALUE);
 
 			if ( s instanceof File ) {
 				File f = (File) s;
@@ -51,7 +51,7 @@ public class DustJsonDomAgent extends DustAgent implements DustJsonConsts {
 						}
 					}
 
-					Dust.access(hData, MIND_TAG_ACCESS_SET, d, MISC_ATT_VARIANT_VALUE);
+					Dust.access(MindAccess.Set, d, hData, MISC_ATT_VARIANT_VALUE);
 				}
 			}
 		}
@@ -60,7 +60,7 @@ public class DustJsonDomAgent extends DustAgent implements DustJsonConsts {
 	}
 
 	@Override
-	public MindHandle agentEnd() throws Exception {
+	protected MindHandle agentEnd() throws Exception {
 		// TODO Auto-generated method stub
 		return super.agentEnd();
 	}

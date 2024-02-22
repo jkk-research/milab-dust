@@ -11,20 +11,8 @@ import hu.sze.milab.dust.utils.DustUtilsConsts;
 interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 
 	enum MachineAtts {
-		CreatorAccess, PrimaryAspectNames, PersistentAtt, CanContinue
+		CreatorAccess, PrimaryAspectNames, PersistentAtt, CanContinue,
 	}
-
-	enum MindAccess {
-		Check, Peek, Get, Set, Insert, Delete, Reset, Commit,
-	};
-	
-	enum MindAction {
-		Init, Begin, Process, End, Release,
-	};
-
-	enum MindContext {
-		Dialog, Self, Target, Direct
-	};
 
 	class DustHandle implements MindHandle {
 		private final DustHandle unit;
@@ -51,7 +39,7 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		public String getId() {
 			return (this == unit) ? id : unit.id + DUST_SEP_ID + id;
 		}
-		
+
 		void setStr(String hint) {
 			toStr = DustUtils.sbAppend(null, "", false, getId(), " (", hint, ")").toString();
 		}
@@ -60,7 +48,7 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		public String toString() {
 			if ( null == toStr ) {
 				toStr = getId();
-				String str = Dust.access(this, MIND_TAG_ACCESS_PEEK, null, DEV_ATT_HINT);
+				String str = Dust.access(MindAccess.Peek, null, this, DEV_ATT_HINT);
 				if ( !DustUtils.isEmpty(str) ) {
 					toStr = DustUtils.sbAppend(null, "", false, toStr, " (", str, ")").toString();
 				}
@@ -80,4 +68,9 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		}
 	};
 
+	public interface IdResolver {
+		MindHandle recall(String id);
+
+		MindHandle recall(MindHandle hUnit, String itemId);
+	}
 }

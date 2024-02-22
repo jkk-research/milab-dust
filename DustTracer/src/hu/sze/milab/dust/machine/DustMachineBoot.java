@@ -36,7 +36,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		}
 	}
 
-	static class BootHandles extends HashMap<String, DustHandle> implements Dust.IdResolver {
+	static class BootHandles extends HashMap<String, DustHandle> implements IdResolver {
 		private static final long serialVersionUID = 1L;
 
 		Map<String, Integer> cnt = new HashMap<>();
@@ -88,14 +88,15 @@ public class DustMachineBoot implements DustMachineConsts {
 		machine.mainDialog.context.put(MIND_ATT_DIALOG_KNOWLEDGE, rootKnowledge);
 
 		DustUtilsEnumTranslator.register(MindAccess.class, MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE,
-				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT);
+				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACCESS_BROADCAST, MIND_TAG_ACCESS_LOOKUP);
 
 		DustUtilsEnumTranslator.register(MindAction.class, MIND_TAG_ACTION_INIT, MIND_TAG_ACTION_BEGIN, MIND_TAG_ACTION_PROCESS, 
 				MIND_TAG_ACTION_END, MIND_TAG_ACTION_RELEASE);
 		
 		DustUtilsEnumTranslator.register(MindContext.class, MIND_TAG_CONTEXT_DIALOG, MIND_TAG_CONTEXT_SELF, MIND_TAG_CONTEXT_TARGET, MIND_TAG_CONTEXT_DIRECT);
 
-		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
+//		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
+		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MindAccess.Get, MindAccess.Set, MindAccess.Insert);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
 		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE, DUST_ATT_NATIVELOGIC_INSTANCE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
@@ -129,10 +130,10 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.idRes = machine.mainDialog;
 		
-		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
-		Dust.access(APP_MACHINE_MAIN, MIND_TAG_ACCESS_SET, APP_MODULE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
+		Dust.access(MindAccess.Set, APP_ASSEMBLY_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
+		Dust.access(MindAccess.Set, APP_MODULE_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
 		
-		DustDevUtils.registerNative(RESOURCE_SRV_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_SRV_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName(), true);
 		DustDevUtils.registerNative(RESOURCE_AGT_ZIPREADER, DUSTJAVA_UNIT, DustZipAgentReader.class.getCanonicalName());
 		DustDevUtils.registerNative(RESOURCE_AGT_JSONDOM, DUSTJAVA_UNIT, DustJsonDomAgent.class.getCanonicalName());
 		DustDevUtils.registerNative(RESOURCE_AGT_CSVSAX, DUSTJAVA_UNIT, DustStreamCsvSaxAgent.class.getCanonicalName());

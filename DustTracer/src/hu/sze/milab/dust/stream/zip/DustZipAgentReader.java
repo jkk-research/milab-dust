@@ -20,24 +20,24 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 	long count;
 
 	@Override
-	public MindHandle agentBegin() throws Exception {
+	protected MindHandle agentBegin() throws Exception {
 		MindHandle ret = MIND_TAG_RESULT_REJECT;
 		
-		Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_PROCESS, MISC_ATT_CONN_SOURCE);
-		File f = Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_PEEK, null, MISC_ATT_CONN_SOURCE, MISC_ATT_VARIANT_VALUE);
+		Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE);
+		File f = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE, MISC_ATT_VARIANT_VALUE);
 
 		if ( f.isFile() ) {
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Opening file", path = f.getCanonicalPath());
 
 			long t = System.currentTimeMillis();
 			zipFile = new ZipFile(f);
-			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, zipFile, MISC_ATT_CONN_TARGET, MISC_ATT_VARIANT_VALUE);
+			Dust.access(MindAccess.Set, zipFile, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET, MISC_ATT_VARIANT_VALUE);
 
 			zipEnum = zipFile.getEntries();
 			openTime = System.currentTimeMillis() - t;
 
 			if ( zipEnum.hasMoreElements() ) {
-				Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_BEGIN, MISC_ATT_CONN_TARGET);
+				Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET);
 				ret = MIND_TAG_RESULT_READACCEPT;
 			} else {
 				ret = MIND_TAG_RESULT_PASS;
@@ -48,22 +48,22 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 	}
 
 	@Override
-	public MindHandle agentProcess() throws Exception {
+	protected MindHandle agentProcess() throws Exception {
 		zipArchiveEntry = zipEnum.nextElement();
 
 		if ( !zipArchiveEntry.isDirectory() ) {
 			++count;
 			String name = zipArchiveEntry.getName();
 
-			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, zipArchiveEntry, MISC_ATT_CONN_TARGET, RESOURCE_ASP_STREAM);
-			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_SET, name, MISC_ATT_CONN_TARGET, RESOURCE_ATT_URL_PATH);
-			Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_PROCESS, MISC_ATT_CONN_TARGET);
+			Dust.access(MindAccess.Set, zipArchiveEntry, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET, RESOURCE_ASP_STREAM);
+			Dust.access(MindAccess.Set, name, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET, RESOURCE_ATT_URL_PATH);
+			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET);
 		}
 		return zipEnum.hasMoreElements() ? MIND_TAG_RESULT_READACCEPT : MIND_TAG_RESULT_ACCEPT;
 	}
 
 	@Override
-	public MindHandle agentEnd() throws Exception {
+	protected MindHandle agentEnd() throws Exception {
 		zipArchiveEntry = null;
 
 		if ( null != zipFile ) {
@@ -73,7 +73,7 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 
 		Dust.log(EVENT_TAG_TYPE_TRACE, path, "Open time", openTime, "File count", count);
 		
-		Dust.access(MIND_TAG_CONTEXT_SELF, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACTION_END, MISC_ATT_CONN_TARGET);
+		Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET);
 
 		return MIND_TAG_RESULT_ACCEPT;
 	}

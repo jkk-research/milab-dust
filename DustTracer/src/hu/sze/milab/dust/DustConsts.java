@@ -18,7 +18,18 @@ public interface DustConsts {
 	String DUST_EXT_JAVA = ".java";
 	String DUST_EXT_CLASS = ".class";
 	
+	enum MindAccess {
+		Check, Peek, Get, Set, Insert, Delete, Reset, Commit, Broadcast, Lookup, 
+	};
 	
+	enum MindAction {
+		Init, Begin, Process, End, Release,
+	};
+
+	enum MindContext {
+		Dialog, Self, Target, Direct, 
+	};
+
 	int KEY_ADD = -1;
 	int KEY_SIZE = -2;
 //	int KEY_ITER = -3;
@@ -31,14 +42,7 @@ public interface DustConsts {
 	};
 
 	interface MindAgent {
-		MindHandle agentBegin() throws Exception;
-		MindHandle agentProcess() throws Exception;
-		MindHandle agentEnd() throws Exception;
-	}
-
-	interface MindServer extends MindAgent {
-		MindHandle agentInit() throws Exception;
-		MindHandle agentRelease() throws Exception;
+		MindHandle agentProcess(MindAction action) throws Exception;
 	}
 
 	interface DustThreadOwner {

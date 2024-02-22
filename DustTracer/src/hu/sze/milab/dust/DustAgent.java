@@ -1,15 +1,43 @@
 package hu.sze.milab.dust;
 
 public abstract class DustAgent implements DustConsts.MindAgent, DustMetaConsts {
-
+	
 	@Override
-	public MindHandle agentBegin() throws Exception {
+	public final MindHandle agentProcess(MindAction action) throws Exception {
+		switch ( action) {
+		case Begin:
+			return agentBegin();
+		case End:
+			return agentEnd();
+		case Init:
+			return agentInit();
+		case Process:
+			return agentProcess();
+		case Release:
+			return agentRelease();
+		}
+		
+		return null;
+	}
+
+	protected MindHandle agentInit() throws Exception {
 		return MIND_TAG_RESULT_READACCEPT;
 	}
 
-	@Override
-	public MindHandle agentEnd() throws Exception {
+	protected MindHandle agentBegin() throws Exception {
+		return MIND_TAG_RESULT_READACCEPT;
+	}
+
+	protected MindHandle agentProcess() throws Exception {
+		return MIND_TAG_RESULT_READACCEPT;
+	}
+
+	protected MindHandle agentEnd() throws Exception {
 		return MIND_TAG_RESULT_ACCEPT;
+	}
+
+	protected MindHandle agentRelease() throws Exception {
+		return MIND_TAG_RESULT_READACCEPT;
 	}
 
 }

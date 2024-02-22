@@ -12,23 +12,24 @@ public class DustTestBootSimple implements DustTestConsts {
 	}
 	
 	public static void helloWorld() throws Exception {
-		MindHandle hLogHelloWorld = Dust.recall("0:");
-		Dust.access(hLogHelloWorld, MIND_TAG_ACCESS_SET, MIND_ASP_LOGIC, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+		MindHandle hLogHelloWorld = Dust.lookup("0:");
+		Dust.access(MindAccess.Set, MIND_ASP_LOGIC, hLogHelloWorld, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
-		MindHandle hNatHelloWorld = Dust.recall("0:");
-		Dust.access(hNatHelloWorld, MIND_TAG_ACCESS_SET, DUST_ASP_NATIVELOGIC, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+		MindHandle hNatHelloWorld = Dust.lookup("0:");
+		Dust.access(MindAccess.Set, DUST_ASP_NATIVELOGIC, hNatHelloWorld, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 		
-		Dust.access(hNatHelloWorld, MIND_TAG_ACCESS_SET, hLogHelloWorld, DUST_ATT_NATIVELOGIC_LOGIC);
-		Dust.access(hNatHelloWorld, MIND_TAG_ACCESS_SET, DustTestAgentHelloWorld.class.getCanonicalName(), DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+		Dust.access(MindAccess.Set, hLogHelloWorld, hNatHelloWorld, DUST_ATT_NATIVELOGIC_LOGIC);
+		Dust.access(MindAccess.Set, DustTestAgentHelloWorld.class.getCanonicalName(), hNatHelloWorld, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+		Dust.access(MindAccess.Set, true, hNatHelloWorld, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
 		
-		Dust.access(APP_MODULE_MAIN, MIND_TAG_ACCESS_SET, hNatHelloWorld, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
+		Dust.access(MindAccess.Set, hNatHelloWorld, APP_MODULE_MAIN, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
 
-		MindHandle hAgtHelloWorld = Dust.recall("0:");
-		Dust.access(hAgtHelloWorld, MIND_TAG_ACCESS_SET, MIND_ASP_AGENT, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+		MindHandle hAgtHelloWorld = Dust.lookup("0:");
+		Dust.access(MindAccess.Set, MIND_ASP_AGENT, hAgtHelloWorld, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
-		Dust.access(hAgtHelloWorld, MIND_TAG_ACCESS_SET, hLogHelloWorld, MIND_ATT_AGENT_LOGIC);
+		Dust.access(MindAccess.Set, hLogHelloWorld, hAgtHelloWorld, MIND_ATT_AGENT_LOGIC);
 
-		Dust.access(APP_ASSEMBLY_MAIN, MIND_TAG_ACCESS_SET, hAgtHelloWorld, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
+		Dust.access(MindAccess.Set, hAgtHelloWorld, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}
 	
 }

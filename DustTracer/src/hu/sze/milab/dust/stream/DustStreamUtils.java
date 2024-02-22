@@ -10,7 +10,7 @@ public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 
 	public static File getFile(MindHandle ctx, Object... path) throws Exception {
 
-		String fileName = Dust.access(ctx, MIND_TAG_ACCESS_PEEK, null, path);
+		String fileName = Dust.access(MindAccess.Peek, null, ctx, path);
 		Dust.log(EVENT_TAG_TYPE_TRACE, "Accessing file", fileName);
 		
 		File f;

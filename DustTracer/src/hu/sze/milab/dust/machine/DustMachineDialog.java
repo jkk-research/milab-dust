@@ -3,11 +3,10 @@ package hu.sze.milab.dust.machine;
 import java.util.HashMap;
 import java.util.Map;
 
-import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.utils.DustUtils;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-class DustMachineDialog implements DustMachineConsts, Dust.IdResolver {
+class DustMachineDialog implements DustMachineConsts, DustMachineConsts.IdResolver {
 
 	Map<MindHandle, Object> context = new HashMap<>();
 

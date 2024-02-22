@@ -2,9 +2,8 @@ package hu.sze.milab.dust.test;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.DustConsts;
 
-public class DustTestAgentHelloWorld extends DustAgent implements DustTestConsts, DustConsts.MindServer {
+public class DustTestAgentHelloWorld extends DustAgent implements DustTestConsts {
 
 	@Override
 	public MindHandle agentProcess() throws Exception {
