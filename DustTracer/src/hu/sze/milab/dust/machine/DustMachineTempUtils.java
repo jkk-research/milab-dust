@@ -32,9 +32,9 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static void test(Object... params) throws Exception {
 		initFromInterfaces(DustMetaConsts.class);
 		
-		dumpUnits();
+//		dumpUnits();
 		
-		readUnits();
+//		readUnits();
 		
 		writeJavaMeta();
 	}
