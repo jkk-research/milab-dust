@@ -45,35 +45,53 @@ public class DustMachineBoot implements DustMachineConsts {
 		public DustHandle recall(String id) {
 			DustHandle mh = get(id);
 
-			if ( null == mh ) {
-				if ( id.contains(DUST_SEP_ID) ) {
-					String[] ii = id.split(DUST_SEP_ID);
-					String lid;
-					if ( 1 == ii.length ) {
-						Integer c = cnt.getOrDefault(ii[0], 0);
-						cnt.put(ii[0], ++c);
-						lid = "" + c;
-						id += lid;
-					} else {
-						lid = ii[1];
-					}
-					mh = new DustHandle(recall(ii[0]), lid);
-				} else {
+			if ( null == mh ) {				
+				String[] ii = id.split(DUST_SEP_ID);
+				
+				if ( 2 == ii.length ) {
 					mh = new DustHandle(id);
+//					mh = isEmpty() ? MACHINE_UNIT : new DustHandle(id);
 					if ( !cnt.containsKey(id) ) {
 						cnt.put(id, 0);
 					}
+				} else {
+					String locID = ii[2];
+					String pID = DustUtils.cutPostfix(id, DUST_SEP_ID);
+					
+					Integer c = cnt.getOrDefault(pID, 0);
+					if ( "?".equals(locID) ) {
+						locID = c.toString();
+						id = pID + DUST_SEP_ID + locID;
+					}
+					cnt.put(pID, ++c);
+
+					DustHandle ph = recall(pID);
+					mh = new DustHandle(id);
+//					mh = new DustHandle(ph, locID);
 				}
+				
+//				if ( id.contains(DUST_SEP_ID) ) {
+//					String lid;
+//					if ( 1 == ii.length ) {
+//						Integer c = cnt.getOrDefault(ii[0], 0);
+//						cnt.put(ii[0], ++c);
+//						lid = "" + c;
+//						id += lid;
+//					} else {
+//						lid = ii[1];
+//					}
+//					mh = new DustHandle(recall(ii[0]), lid);
+//				} else {
+//					mh = new DustHandle(id);
+//					if ( !cnt.containsKey(id) ) {
+//						cnt.put(id, 0);
+//					}
+//				}
 
 				put(id, mh);
 			}
 
 			return mh;
-		}
-
-		@Override
-		public MindHandle recall(MindHandle hUnit, String itemId) {
-			return DustException.wrap(null, "Should not get here!" );
 		}
 	}
 
@@ -82,10 +100,10 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.idRes = bh;
 
-		Map units = new HashMap();
-		machine.mainDialog.context.put(DUST_ATT_MACHINE_UNITS, units);
-		Map rootKnowledge = new HashMap();
-		machine.mainDialog.context.put(MIND_ATT_DIALOG_KNOWLEDGE, rootKnowledge);
+//		Map units = new HashMap();
+//		machine.mainDialog.context.put(DUST_ATT_MACHINE_UNITS, units);
+//		Map rootKnowledge = new HashMap();
+//		machine.mainDialog.context.put(MIND_ATT_UNIT_KNOWLEDGE, rootKnowledge);
 
 		DustUtilsEnumTranslator.register(MindAccess.class, MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE,
 				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACCESS_BROADCAST, MIND_TAG_ACCESS_LOOKUP);
@@ -98,37 +116,41 @@ public class DustMachineBoot implements DustMachineConsts {
 //		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT);
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MindAccess.Get, MindAccess.Set, MindAccess.Insert);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
-		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_DIALOG_KNOWLEDGE, DUST_ATT_NATIVELOGIC_INSTANCE);
+		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_KNOWLEDGE, DUST_ATT_NATIVELOGIC_INSTANCE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
 				, "AGT", MIND_ASP_AGENT, "SRV", MIND_ASP_AGENT
 				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
 
-		Map k;
-		MindHandle h;
+//		Map k;
+//		MindHandle h;
+//
+//		for (String ui : bh.cnt.keySet()) {
+//			h = bh.get(ui);
+//			units.put(ui, h);
+//
+//			k = new HashMap();
+//			k.put(MIND_ATT_KNOWLEDGE_HANDLE, h);
+////			k.put(MIND_ATT_UNIT_AUTHOR, MIND_AUTHOR_GISKARD);
+//			k.put(MIND_ATT_UNIT_HANDLES, new HashMap());
+//			rootKnowledge.put(h, k);
+//		}
+//
+//		for (String id : bh.keySet()) {
+//			if ( id.contains(DUST_SEP_ID) ) {
+//				String[] ii = id.split(DUST_SEP_ID);
+//				DustHandle hUnit = bh.get(ii[0]);
+//
+//				h = bh.get(id);
+//
+//				k = createKnowledge(hUnit, h, ii[1]);
+//			}
+//		}
 
-		for (String ui : bh.cnt.keySet()) {
-			h = bh.get(ui);
-			units.put(ui, h);
-
-			k = new HashMap();
-			k.put(MIND_ATT_KNOWLEDGE_HANDLE, h);
-			k.put(MIND_ATT_UNIT_AUTHOR, MIND_AUTHOR_DUST);
-			k.put(MIND_ATT_UNIT_HANDLES, new HashMap());
-			rootKnowledge.put(h, k);
-		}
-
-		for (String id : bh.keySet()) {
-			if ( id.contains(DUST_SEP_ID) ) {
-				String[] ii = id.split(DUST_SEP_ID);
-				DustHandle hUnit = bh.get(ii[0]);
-
-				h = bh.get(id);
-
-				k = createKnowledge(hUnit, h, ii[1]);
-			}
-		}
-
-		machine.idRes = machine.mainDialog;
+		machine.idRes = machine;
+		
+//		for (String ui : bh.keySet()) {
+//			machine.idRes.recall(ui);
+//		}
 		
 		Dust.access(MindAccess.Set, APP_ASSEMBLY_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
 		Dust.access(MindAccess.Set, APP_MODULE_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
@@ -150,22 +172,23 @@ public class DustMachineBoot implements DustMachineConsts {
 		}
 	}
 
-	public static Map createKnowledge(DustHandle hUnit, MindHandle h, String localId) {
-		Map rootKnowledge = DustUtils.simpleGet(THE_MACHINE.mainDialog.context, MIND_ATT_DIALOG_KNOWLEDGE);
-		Map unitHandles = DustUtils.simpleGet(rootKnowledge, hUnit, MIND_ATT_UNIT_HANDLES);
-
-		if ( DustUtils.isEmpty(localId) ) {
-			localId = "" + unitHandles.size();
-		}
-		if ( null == h ) {
-			h = new DustHandle(hUnit, localId);
-		}
-		unitHandles.put(localId, h);
-
-		Map k = new HashMap();
-		k.put(MIND_ATT_KNOWLEDGE_HANDLE, h);
-		rootKnowledge.put(h, k);
-		return k;
-	}
+//	public static Map createKnowledge(DustHandle hUnit, MindHandle h, String localId) {
+//		Map rootKnowledge = DustUtils.simpleGet(THE_MACHINE.mainDialog.context, MIND_ATT_UNIT_KNOWLEDGE);
+//		Map unitHandles = DustUtils.simpleGet(rootKnowledge, hUnit, MIND_ATT_UNIT_HANDLES);
+//
+//		if ( DustUtils.isEmpty(localId) ) {
+//			localId = "" + unitHandles.size();
+//		}
+//		if ( null == h ) {
+////			h = new DustHandle(hUnit, localId);
+//			h = new DustHandle(localId);
+//		}
+//		unitHandles.put(localId, h);
+//
+//		Map k = new HashMap();
+//		k.put(MIND_ATT_KNOWLEDGE_HANDLE, h);
+//		rootKnowledge.put(h, k);
+//		return k;
+//	}
 
 }

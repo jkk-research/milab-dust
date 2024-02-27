@@ -1,1 +1,313 @@
-{"meta":{"count":21},"jsonapi":{"version":"1.1"},"data":[{"id":"6 (RESOURCE_UNIT)","relationships":{"1:3 (MIND_ATT_UNIT_AUTHOR)":{"id":"1:71 (MIND_AUTHOR_DUST)","type":"1:70 (MIND_ASP_AUTHOR)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:1 (MIND_ASP_UNIT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:1 (MIND_ASP_UNIT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_UNIT"}},{"id":"6:11 (RESOURCE_TAG_STREAMTYPE_TEXT)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:9 (RESOURCE_TAG_STREAMTYPE)","type":"1:14 (MIND_ASP_TAG)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:14 (MIND_ASP_TAG)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:14 (MIND_ASP_TAG)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_TAG_STREAMTYPE_TEXT"}},{"id":"6:12 (RESOURCE_TAG_STREAMTYPE_ZIPENTRY)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:9 (RESOURCE_TAG_STREAMTYPE)","type":"1:14 (MIND_ASP_TAG)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:14 (MIND_ASP_TAG)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:14 (MIND_ASP_TAG)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_TAG_STREAMTYPE_ZIPENTRY"}},{"id":"6:13 (RESOURCE_ASP_PROCESSOR)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:12 (MIND_ASP_ASPECT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:12 (MIND_ASP_ASPECT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ASP_PROCESSOR"}},{"id":"6:14 (RESOURCE_ATT_PROCESSOR_STREAM)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:13 (RESOURCE_ASP_PROCESSOR)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_PROCESSOR_STREAM"}},{"id":"6:15 (RESOURCE_ATT_PROCESSOR_DATA)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:13 (RESOURCE_ASP_PROCESSOR)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_PROCESSOR_DATA"}},{"id":"6:16 (RESOURCE_SRV_FILESYSTEM)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:24 (MIND_ASP_AGENT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:24 (MIND_ASP_AGENT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_SRV_FILESYSTEM"}},{"id":"6:17 (RESOURCE_AGT_ZIPREADER)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:24 (MIND_ASP_AGENT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:24 (MIND_ASP_AGENT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_AGT_ZIPREADER"}},{"id":"6:18 (RESOURCE_AGT_JSONDOM)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:24 (MIND_ASP_AGENT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:24 (MIND_ASP_AGENT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_AGT_JSONDOM"}},{"id":"6:19 (RESOURCE_AGT_CSVSAX)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:24 (MIND_ASP_AGENT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:24 (MIND_ASP_AGENT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_AGT_CSVSAX"}},{"id":"6:1 (RESOURCE_ASP_URL)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:12 (MIND_ASP_ASPECT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:12 (MIND_ASP_ASPECT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ASP_URL"}},{"id":"6:2 (RESOURCE_ATT_URL_SCHEME)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:1 (RESOURCE_ASP_URL)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_URL_SCHEME"}},{"id":"6:3 (RESOURCE_ATT_URL_USERINFO)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:1 (RESOURCE_ASP_URL)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_URL_USERINFO"}},{"id":"6:4 (RESOURCE_ATT_URL_HOST)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:1 (RESOURCE_ASP_URL)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_URL_HOST"}},{"id":"6:5 (RESOURCE_ATT_URL_PATH)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:1 (RESOURCE_ASP_URL)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_URL_PATH"}},{"id":"6:6 (RESOURCE_ATT_URL_QUERY)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:1 (RESOURCE_ASP_URL)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_URL_QUERY"}},{"id":"6:7 (RESOURCE_ATT_URL_FRAGMENT)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:1 (RESOURCE_ASP_URL)","type":"1:12 (MIND_ASP_ASPECT)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_URL_FRAGMENT"}},{"id":"6:8 (RESOURCE_ASP_STREAM)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:12 (MIND_ASP_ASPECT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:12 (MIND_ASP_ASPECT)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ASP_STREAM"}},{"id":"6:9 (RESOURCE_TAG_STREAMTYPE)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:9 (RESOURCE_TAG_STREAMTYPE)","type":"1:14 (MIND_ASP_TAG)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:14 (MIND_ASP_TAG)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:14 (MIND_ASP_TAG)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_TAG_STREAMTYPE"}},{"id":"6:20 (RESOURCE_ATT_CSVSAX_SEP)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:13 (MIND_ASP_ATTRIBUTE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:13 (MIND_ASP_ATTRIBUTE)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_ATT_CSVSAX_SEP"}},{"id":"6:10 (RESOURCE_TAG_STREAMTYPE_RAW)","relationships":{"3:3 (MISC_ATT_CONN_PARENT)":{"id":"6:9 (RESOURCE_TAG_STREAMTYPE)","type":"1:14 (MIND_ASP_TAG)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:14 (MIND_ASP_TAG)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:14 (MIND_ASP_TAG)","attributes":{"7:1 (DEV_ATT_HINT)":"RESOURCE_TAG_STREAMTYPE_RAW"}}]}
+{
+  "meta" : {
+    "count" : 21
+  },
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "data" : [ {
+    "id" : "6 (RESOURCE_UNIT)",
+    "relationships" : {
+      "1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "1:71 (MIND_AUTHOR_DUST)",
+        "type" : "1:70 (MIND_ASP_AUTHOR)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:1 (MIND_ASP_UNIT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:1 (MIND_ASP_UNIT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_UNIT"
+    }
+  }, {
+    "id" : "6:11 (RESOURCE_TAG_STREAMTYPE_TEXT)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:9 (RESOURCE_TAG_STREAMTYPE)",
+        "type" : "1:14 (MIND_ASP_TAG)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:14 (MIND_ASP_TAG)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:14 (MIND_ASP_TAG)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_TAG_STREAMTYPE_TEXT"
+    }
+  }, {
+    "id" : "6:12 (RESOURCE_TAG_STREAMTYPE_ZIPENTRY)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:9 (RESOURCE_TAG_STREAMTYPE)",
+        "type" : "1:14 (MIND_ASP_TAG)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:14 (MIND_ASP_TAG)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:14 (MIND_ASP_TAG)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_TAG_STREAMTYPE_ZIPENTRY"
+    }
+  }, {
+    "id" : "6:13 (RESOURCE_ASP_PROCESSOR)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:12 (MIND_ASP_ASPECT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:12 (MIND_ASP_ASPECT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ASP_PROCESSOR"
+    }
+  }, {
+    "id" : "6:14 (RESOURCE_ATT_PROCESSOR_STREAM)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:13 (RESOURCE_ASP_PROCESSOR)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_PROCESSOR_STREAM"
+    }
+  }, {
+    "id" : "6:15 (RESOURCE_ATT_PROCESSOR_DATA)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:13 (RESOURCE_ASP_PROCESSOR)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_PROCESSOR_DATA"
+    }
+  }, {
+    "id" : "6:16 (RESOURCE_SRV_FILESYSTEM)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:24 (MIND_ASP_AGENT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:24 (MIND_ASP_AGENT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_SRV_FILESYSTEM"
+    }
+  }, {
+    "id" : "6:17 (RESOURCE_AGT_ZIPREADER)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:24 (MIND_ASP_AGENT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:24 (MIND_ASP_AGENT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_AGT_ZIPREADER"
+    }
+  }, {
+    "id" : "6:18 (RESOURCE_AGT_JSONDOM)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:24 (MIND_ASP_AGENT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:24 (MIND_ASP_AGENT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_AGT_JSONDOM"
+    }
+  }, {
+    "id" : "6:19 (RESOURCE_AGT_CSVSAX)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:24 (MIND_ASP_AGENT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:24 (MIND_ASP_AGENT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_AGT_CSVSAX"
+    }
+  }, {
+    "id" : "6:1 (RESOURCE_ASP_URL)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:12 (MIND_ASP_ASPECT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:12 (MIND_ASP_ASPECT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ASP_URL"
+    }
+  }, {
+    "id" : "6:2 (RESOURCE_ATT_URL_SCHEME)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:1 (RESOURCE_ASP_URL)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_URL_SCHEME"
+    }
+  }, {
+    "id" : "6:3 (RESOURCE_ATT_URL_USERINFO)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:1 (RESOURCE_ASP_URL)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_URL_USERINFO"
+    }
+  }, {
+    "id" : "6:4 (RESOURCE_ATT_URL_HOST)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:1 (RESOURCE_ASP_URL)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_URL_HOST"
+    }
+  }, {
+    "id" : "6:5 (RESOURCE_ATT_URL_PATH)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:1 (RESOURCE_ASP_URL)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_URL_PATH"
+    }
+  }, {
+    "id" : "6:6 (RESOURCE_ATT_URL_QUERY)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:1 (RESOURCE_ASP_URL)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_URL_QUERY"
+    }
+  }, {
+    "id" : "6:7 (RESOURCE_ATT_URL_FRAGMENT)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:1 (RESOURCE_ASP_URL)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_URL_FRAGMENT"
+    }
+  }, {
+    "id" : "6:8 (RESOURCE_ASP_STREAM)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:12 (MIND_ASP_ASPECT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:12 (MIND_ASP_ASPECT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ASP_STREAM"
+    }
+  }, {
+    "id" : "6:9 (RESOURCE_TAG_STREAMTYPE)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:9 (RESOURCE_TAG_STREAMTYPE)",
+        "type" : "1:14 (MIND_ASP_TAG)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:14 (MIND_ASP_TAG)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:14 (MIND_ASP_TAG)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_TAG_STREAMTYPE"
+    }
+  }, {
+    "id" : "6:20 (RESOURCE_ATT_CSVSAX_SEP)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:13 (MIND_ASP_ATTRIBUTE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_ATT_CSVSAX_SEP"
+    }
+  }, {
+    "id" : "6:10 (RESOURCE_TAG_STREAMTYPE_RAW)",
+    "relationships" : {
+      "3:3 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "6:9 (RESOURCE_TAG_STREAMTYPE)",
+        "type" : "1:14 (MIND_ASP_TAG)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:14 (MIND_ASP_TAG)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:14 (MIND_ASP_TAG)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "RESOURCE_TAG_STREAMTYPE_RAW"
+    }
+  } ]
+}

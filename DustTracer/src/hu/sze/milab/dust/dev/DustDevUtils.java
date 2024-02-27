@@ -37,7 +37,8 @@ public class DustDevUtils implements DustMetaConsts {
 	};
 
 	public static MindHandle registerHandle(MindHandle hUnit, MindHandle hPrimaryAspect) {
-		MindHandle h = Dust.lookup(hUnit, "");
+//		MindHandle h = Dust.lookup(hUnit, "");
+		MindHandle h = null;
 
 		Dust.access(MindAccess.Set, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 

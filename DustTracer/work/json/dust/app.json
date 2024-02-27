@@ -1,1 +1,82 @@
-{"meta":{"count":4},"jsonapi":{"version":"1.1"},"data":[{"id":"0 (APP_UNIT)","relationships":{"1:3 (MIND_ATT_UNIT_AUTHOR)":{"id":"1:71 (MIND_AUTHOR_DUST)","type":"1:70 (MIND_ASP_AUTHOR)"},"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:1 (MIND_ASP_UNIT)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:1 (MIND_ASP_UNIT)","attributes":{"7:1 (DEV_ATT_HINT)":"APP_UNIT"}},{"id":"0:1 (APP_MACHINE_MAIN)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"2:1 (DUST_ASP_MACHINE)","type":"1:12 (MIND_ASP_ASPECT)"},"2:4 (DUST_ATT_MACHINE_MAINASSEMBLY)":{"id":"0:3 (APP_ASSEMBLY_MAIN)","type":"1:16 (MIND_ASP_ASSEMBLY)"},"2:5 (DUST_ATT_MACHINE_MODULES)":[{"id":"0:2 (APP_MODULE_MAIN)","type":"2:11 (DUST_ASP_MODULE)"}]},"type":"2:1 (DUST_ASP_MACHINE)","attributes":{"7:1 (DEV_ATT_HINT)":"APP_MACHINE_MAIN"}},{"id":"0:2 (APP_MODULE_MAIN)","relationships":{"2:13 (DUST_ATT_MODULE_NATIVELOGICS)":[{"id":"8:1","type":"2:17 (DUST_ASP_NATIVELOGIC)"},{"id":"8:2","type":"2:17 (DUST_ASP_NATIVELOGIC)"},{"id":"8:3","type":"2:17 (DUST_ASP_NATIVELOGIC)"},{"id":"8:4","type":"2:17 (DUST_ASP_NATIVELOGIC)"}],"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"2:11 (DUST_ASP_MODULE)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"2:11 (DUST_ASP_MODULE)","attributes":{"7:1 (DEV_ATT_HINT)":"APP_MODULE_MAIN"}},{"id":"0:3 (APP_ASSEMBLY_MAIN)","relationships":{"1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)":{"id":"1:16 (MIND_ASP_ASSEMBLY)","type":"1:12 (MIND_ASP_ASPECT)"}},"type":"1:16 (MIND_ASP_ASSEMBLY)","attributes":{"7:1 (DEV_ATT_HINT)":"APP_ASSEMBLY_MAIN"}}]}
+{
+  "meta" : {
+    "count" : 4
+  },
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "data" : [ {
+    "id" : "0 (APP_UNIT)",
+    "relationships" : {
+      "1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "1:71 (MIND_AUTHOR_DUST)",
+        "type" : "1:70 (MIND_ASP_AUTHOR)"
+      },
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:1 (MIND_ASP_UNIT)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:1 (MIND_ASP_UNIT)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "APP_UNIT"
+    }
+  }, {
+    "id" : "0:1 (APP_MACHINE_MAIN)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "2:1 (DUST_ASP_MACHINE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      },
+      "2:4 (DUST_ATT_MACHINE_MAINASSEMBLY)" : {
+        "id" : "0:3 (APP_ASSEMBLY_MAIN)",
+        "type" : "1:16 (MIND_ASP_ASSEMBLY)"
+      },
+      "2:5 (DUST_ATT_MACHINE_MODULES)" : [ {
+        "id" : "0:2 (APP_MODULE_MAIN)",
+        "type" : "2:11 (DUST_ASP_MODULE)"
+      } ]
+    },
+    "type" : "2:1 (DUST_ASP_MACHINE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "APP_MACHINE_MAIN"
+    }
+  }, {
+    "id" : "0:2 (APP_MODULE_MAIN)",
+    "relationships" : {
+      "2:13 (DUST_ATT_MODULE_NATIVELOGICS)" : [ {
+        "id" : "8:1",
+        "type" : "2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "8:2",
+        "type" : "2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "8:3",
+        "type" : "2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "8:4",
+        "type" : "2:17 (DUST_ASP_NATIVELOGIC)"
+      } ],
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "2:11 (DUST_ASP_MODULE)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "2:11 (DUST_ASP_MODULE)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "APP_MODULE_MAIN"
+    }
+  }, {
+    "id" : "0:3 (APP_ASSEMBLY_MAIN)",
+    "relationships" : {
+      "1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "1:16 (MIND_ASP_ASSEMBLY)",
+        "type" : "1:12 (MIND_ASP_ASPECT)"
+      }
+    },
+    "type" : "1:16 (MIND_ASP_ASSEMBLY)",
+    "attributes" : {
+      "7:1 (DEV_ATT_HINT)" : "APP_ASSEMBLY_MAIN"
+    }
+  } ]
+}

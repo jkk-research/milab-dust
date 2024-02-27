@@ -37,7 +37,7 @@ public interface DustConsts {
 
 
 	interface MindHandle {
-		MindHandle getUnit();
+//		MindHandle getUnit();
 		String getId();
 	};
 

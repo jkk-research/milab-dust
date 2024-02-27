@@ -24,9 +24,9 @@ public class Dust implements DustConsts {
 		return MACHINE.access(MindAccess.Lookup, id, null);
 	}
 
-	public static MindHandle lookup(MindHandle hUnit, String itemId) {
-		return MACHINE.access(MindAccess.Lookup, itemId, hUnit);
-	}
+//	public static MindHandle lookup(MindHandle hUnit, String itemId) {
+//		return MACHINE.access(MindAccess.Lookup, itemId, hUnit);
+//	}
 
 	public static void log(MindHandle event, Object... params) {
 		MACHINE.access(MindAccess.Broadcast, event, null, params);

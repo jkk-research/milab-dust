@@ -36,7 +36,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		
 //		readUnits();
 		
-		writeJavaMeta();
+//		writeJavaMeta();
 	}
 
 	public static void readUnits() throws Exception {
@@ -161,12 +161,12 @@ public class DustMachineTempUtils implements DustJsonConsts {
 			String localPrefix = unit.getId() + DUST_SEP_ID;
 			localPrefix = null;
 
-			Map<MindHandle, Object> unitData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_DIALOG_KNOWLEDGE, unit);
+			Map<MindHandle, Object> unitData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_KNOWLEDGE, unit);
 			data.add(knowledgeToMap(localPrefix, unit, unitData));
 
 			Map<Object, MindHandle> items = Dust.access(MindAccess.Peek, null, unit, MIND_ATT_UNIT_HANDLES);
 			for (MindHandle hItem : items.values()) {
-				Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_DIALOG_KNOWLEDGE, hItem);
+				Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_KNOWLEDGE, hItem);
 				Map item = knowledgeToMap(localPrefix, hItem, itemData);
 				data.add(item);
 			}
@@ -250,14 +250,14 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static void initFromInterfaces(Class... ifClasses) throws IllegalAccessException {
 		Map<String, MindHandle> parents = new TreeMap<>();
 
-		Dust.access(MindAccess.Set, TEXT_TAG_LANGUAGE_EN_US, null, TEXT_ATT_LANGUAGE_DEFAULT);
+//		Dust.access(MindAccess.Set, TEXT_TAG_LANGUAGE_EN_US, null, TEXT_ATT_LANGUAGE_DEFAULT);
 
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
 				if ( ch instanceof DustHandle ) {
 					String name = f.getName();
-					((DustHandle)ch).setStr(name);
+//					((DustHandle)ch).setStr(name);
 					Dust.access(MindAccess.Set, name, ch, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);
@@ -267,11 +267,11 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						parents.put(name, (MindHandle) ch);
 					}
 
-					Map token = DustMachineBoot.createKnowledge((DustHandle) L10N_UNIT, null, null);
-					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
-					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
-					token.put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);
-					token.put(MISC_ATT_CONN_OWNER, ch);
+//					Map token = DustMachineBoot.createKnowledge((DustHandle) L10N_UNIT, null, null);
+//					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
+//					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
+//					token.put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);
+//					token.put(MISC_ATT_CONN_OWNER, ch);
 
 					Dust.log(null, name, " -> ", tokenVal);
 				}
