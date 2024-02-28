@@ -31,72 +31,6 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		}
 	}
 
-//	class DustHandle implements MindHandle {
-//		private final DustHandle unit;
-//		private final String id;
-//
-//		private String toStr;
-//
-//		public DustHandle(String id) {
-//			unit = this;
-//			this.id = id;
-//		}
-//
-//		public DustHandle(DustHandle unit, String id) {
-//			this.unit = unit;
-//			this.id = id;
-//		}
-//
-//		@Override
-//		public DustHandle getUnit() {
-//			return unit;
-//		}
-//
-//		@Override
-//		public String getId() {
-//			return (this == unit) ? id : id + DUST_SEP_ID + unit.id;
-//		}
-//
-//		void setStr(String hint) {
-//			toStr = DustUtils.sbAppend(null, "", false, getId(), " (", hint, ")").toString();
-//		}
-//
-//		@Override
-//		public String toString() {
-//			if (null == toStr) {
-//				toStr = getId();
-////				String str = Dust.access(MindAccess.Peek, null, this, DEV_ATT_HINT);
-////				if (!DustUtils.isEmpty(str)) {
-////					toStr = DustUtils.sbAppend(null, "", false, toStr, " (", str, ")").toString();
-////				}
-//			}
-//
-//			return toStr;
-//		}
-//	}
-
-//	DustHandle MACHINE_UNIT = new DustHandle("") {
-//		public String getId() {
-//			return "";
-//		};
-//
-//		void setStr(String hint) {
-//			DustException.wrap(null, "Invalid call");
-//		};
-//
-//		@Override
-//		public String toString() {
-//			return "<MACHINE>";
-//		}
-//	};
-
-//	DustCreator<DustHandle> HANDLE_CREATOR = new DustCreator<DustHandle>() {
-//		@Override
-//		public DustHandle create(Object key, Object... hints) {
-//			return new DustHandle((DustHandle) hints[0], (String) key);
-//		}
-//	};
-
 	DustCreator<DustHandle> HANDLE_CREATOR = new DustCreator<DustHandle>() {
 		@Override
 		public DustHandle create(Object key, Object... hints) {
@@ -120,7 +54,7 @@ interface DustMachineConsts extends DustMetaConsts, DustUtilsConsts {
 		public Map create(Object key, Object... hints) {
 			Map m = super.create(key, hints);
 			
-			String id = (0 == hints.length) ? (String) key : DustUtils.sbAppend(null, DUST_SEP_ID, true, key, hints[0]).toString();
+			String id = (0 == hints.length) ? (String) key : DustUtils.sbAppend(null, DUST_SEP_ID, true, hints[0], key).toString();
 
 			DustHandle h = new DustHandle(id);
 

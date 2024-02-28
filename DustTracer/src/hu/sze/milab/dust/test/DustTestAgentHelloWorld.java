@@ -11,9 +11,22 @@ public class DustTestAgentHelloWorld extends DustAgent implements DustTestConsts
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 	
+	
 	@Override
 	public MindHandle agentInit() throws Exception {
 		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_INIT);
+		return MIND_TAG_RESULT_ACCEPT;
+	}
+
+	@Override
+	public MindHandle agentBegin() throws Exception {
+		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_BEGIN);
+		return MIND_TAG_RESULT_READACCEPT;
+	}
+
+	@Override
+	public MindHandle agentEnd() throws Exception {
+		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_END);
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 

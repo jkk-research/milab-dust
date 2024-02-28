@@ -25,6 +25,11 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		}
 	};
 	
+//	long lastId = 100000L;
+//	private synchronized String getTempId() {
+//		return String.valueOf( ++lastId );
+//	}
+	
 	private final Thread shutdownHook = new Thread() {
 		@Override
 		public synchronized void run() {
@@ -52,6 +57,11 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		if ( ii.length == 3 ) {
 			Map m = getUnit(ii[0], ii[1]);
 			m = DustUtils.simpleGet(m, MIND_ATT_UNIT_HANDLES);
+			
+			if ( ITEMID_NEW.equals(ii[2]) ) {
+				id = DustUtils.sbAppend(null, DUST_SEP_ID, true, ii[0], ii[1], m.size()).toString();
+			}
+
 			h = DustUtils.safeGet(m, id, HANDLE_CREATOR);
 		} else {
 			Map m = getUnit(ii[0], ii[1]);
