@@ -11,11 +11,12 @@ import java.util.TreeMap;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustMachineTempJavaMeta extends DustAgent implements DustMachineConsts {
 
-	private static final String IF_FMT_BEGIN = "package {0};\n" + "\n" + "public interface {1} extends DustConsts '{'\n" + "";
+	private static final String IF_FMT_BEGIN = "package {0};\n" + "\n" + "public interface {1} extends DustConsts '{'\n\t// Generated: {2}\n\n";
 	private static final String IF_FMT_LINE = "	public static MindHandle {0} = Dust.lookup(\"{1}\");";
 	private static final String IF_END = "\n}";
 
@@ -25,15 +26,15 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 
 	Set<MindHandle> paToWrite = new HashSet<>();
 
-	public MindHandle unitToAdd;
+	public Map<String, MindHandle> unitToAdd;
 
 	private Map<String, MindHandle> items = new TreeMap<>(DustDevUtils.ID_COMP);
 	private PrintWriter fw;
 
-	public DustMachineTempJavaMeta(String srcDir, String packageName, String interfaceName, MindHandle... paToWrite) {
+	public DustMachineTempJavaMeta(String srcDir, String interfaceCanonicalName, MindHandle... paToWrite) {
 		this.srcDir = srcDir;
-		this.packageName = packageName;
-		this.interfaceName = interfaceName;
+		this.packageName = DustUtils.cutPostfix(interfaceCanonicalName, ".");
+		this.interfaceName = DustUtils.getPostfix(interfaceCanonicalName, ".");
 		for (MindHandle h : paToWrite) {
 			this.paToWrite.add(h);
 		}
@@ -47,7 +48,7 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 
 			fw = new PrintWriter(new File(f, interfaceName + DUST_EXT_JAVA));
 
-			fw.print(MessageFormat.format(IF_FMT_BEGIN, packageName, interfaceName));
+			fw.print(MessageFormat.format(IF_FMT_BEGIN, packageName, interfaceName, DustDevUtils.getTimeStr()));
 		}
 
 		return MIND_TAG_RESULT_READACCEPT;
@@ -56,20 +57,20 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 	@Override
 	protected MindHandle agentProcess() throws Exception {
 
-		Map<String, MindHandle> ui = Dust.access(MindAccess.Peek, null, unitToAdd, MIND_ATT_UNIT_HANDLES);
+//		Map<String, MindHandle> ui = Dust.access(MindAccess.Peek, null, unitToAdd, MIND_ATT_UNIT_HANDLES);
 
-		if ( null != ui ) {
-			if ( paToWrite.contains(MIND_ASP_UNIT) ) {
-				items.put(unitToAdd.getId(), unitToAdd);
-			}
-			for (Map.Entry<String, MindHandle> ue : ui.entrySet()) {
+//		if ( null != ui ) {
+//			if ( paToWrite.contains(MIND_ASP_UNIT) ) {
+//				items.put(unitToAdd.getId(), unitToAdd);
+//			}
+			for (Map.Entry<String, MindHandle> ue : unitToAdd.entrySet()) {
 				MindHandle he = ue.getValue();
 				MindHandle pa = Dust.access(MindAccess.Peek, null, he, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 				if ( paToWrite.contains(pa) ) {
 					items.put(he.getId(), he);
 				}
 			}
-		}
+//		}
 
 		return MIND_TAG_RESULT_READACCEPT;
 	}

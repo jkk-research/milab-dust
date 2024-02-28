@@ -42,9 +42,18 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			}
 		}
 	};
+	
+	public void bootInit() {
+		idRes = this;
+		
+		Dust.access(MindAccess.Set, APP_ASSEMBLY_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
+		Dust.access(MindAccess.Set, APP_MODULE_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
+		Dust.access(MindAccess.Set, memex, APP_MACHINE_MAIN, DUST_ATT_MACHINE_AUTHORS);
+	}
 
 	Map getUnit(String authorID, String unitID) {
 		Map m = DustUtils.safeGet(memex, authorID, UNIT_CREATOR);
+		m = DustUtils.safeGet(m, MIND_ATT_AUTHOR_UNITS, MAP_CREATOR);
 		m = DustUtils.safeGet(m, unitID, UNIT_CREATOR, authorID);
 		return m;
 	}
@@ -115,7 +124,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 	protected MindHandle agentBegin() throws Exception {
 
 		MindHandle ret = MIND_TAG_RESULT_REJECT;
-
+		
 		Collection mods = Dust.access(MindAccess.Peek, Collections.EMPTY_LIST, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MODULES);
 		for (Object m : mods) {
 			Collection nls = Dust.access(MindAccess.Peek, Collections.EMPTY_LIST, m, DUST_ATT_MODULE_NATIVELOGICS);
@@ -240,4 +249,5 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 		return ret;
 	}
+
 }

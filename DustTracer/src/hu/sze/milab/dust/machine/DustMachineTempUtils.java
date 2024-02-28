@@ -31,12 +31,12 @@ public class DustMachineTempUtils implements DustJsonConsts {
 
 	public static void test(Object... params) throws Exception {
 		initFromInterfaces(DustMetaConsts.class);
-		
+
 //		dumpUnits();
-		
+
 //		readUnits();
-		
-//		writeJavaMeta();
+
+		writeJavaMeta("giskard.me", "hu.sze.milab.dust.DustMetaConsts");
 	}
 
 	public static void readUnits() throws Exception {
@@ -227,18 +227,22 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		return item;
 	}
 
-	public static void writeJavaMeta() throws Exception {
+	public static void writeJavaMeta(String authorID, String targetInterfaceName) throws Exception {
 		DustMachineTempJavaMeta metaWriter = null;
 
-		Map units = Dust.access(MindAccess.Peek, null, null, DUST_ATT_MACHINE_UNITS);
+		Map units = Dust.access(MindAccess.Peek, null, APP_MACHINE_MAIN, DUST_ATT_MACHINE_AUTHORS, authorID, MIND_ATT_AUTHOR_UNITS);
+
+//		Map units = Dust.access(MindAccess.Peek, null, null, DUST_ATT_MACHINE_UNITS);
 		for (Object u : units.values()) {
 			if ( null == metaWriter ) {
-				metaWriter = new DustMachineTempJavaMeta("gen", "hu.sze.milab.dust", "DustMetaConsts", 
-						MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, 
-						MIND_ASP_AUTHOR, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY, DUST_ASP_MACHINE);
+				metaWriter = new DustMachineTempJavaMeta("gen", targetInterfaceName, MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_AUTHOR, DUST_ASP_MODULE,
+						MIND_ASP_ASSEMBLY, DUST_ASP_MACHINE);
 				metaWriter.agentBegin();
 			}
-			metaWriter.unitToAdd = (MindHandle) u;
+			Map<String, MindHandle> hU = DustUtils.simpleGet(u, MIND_ATT_UNIT_HANDLES);
+			if ( null != hU ) {
+				metaWriter.unitToAdd = hU;
+			}
 			metaWriter.agentProcess(MindAction.Process);
 		}
 

@@ -28,6 +28,7 @@ class DustMachineDialog implements DustMachineConsts {
 	public DustMachineDialog(DustMachine machine) {
 		this.machine = machine;
 		context.put(MIND_ATT_UNIT_KNOWLEDGE, new HashMap());
+		context.put(MIND_ATT_UNIT_KNOWLEDGE, new HashMap());
 	}
 	
 

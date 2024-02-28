@@ -96,7 +96,7 @@ public interface DustMetaConsts extends DustConsts {
 
 	MindHandle MIND_ASP_AUTHOR = Dust.lookup("giskard.me:1:?");
 
-	MindHandle MIND_ATT_AUTHOR_UNITS = Dust.lookup("giskard.me:2:?");
+	MindHandle MIND_ATT_AUTHOR_UNITS = Dust.lookup("giskard.me:1:?");
 
 	//	MindHandle MIND_AUTHOR_GISKARD = Dust.lookup("giskard.me:1:?");
 
@@ -218,6 +218,6 @@ public interface DustMetaConsts extends DustConsts {
 
 	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard.me:8");
 
-	MindHandle L10N_UNIT = Dust.lookup("giskard.me:9");
+//	MindHandle L10N_UNIT = Dust.lookup("giskard.me:9");
 
 }
