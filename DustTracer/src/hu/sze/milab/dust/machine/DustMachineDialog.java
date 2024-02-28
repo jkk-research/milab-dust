@@ -208,38 +208,4 @@ class DustMachineDialog implements DustMachineConsts {
 		return (RetType) ret;
 	}
 
-
-////	@Override
-//	public DustHandle recall(DustHandle hUnit, String itemId) {
-//		DustHandle hItem = null;
-//
-//		Map knowledge = DustUtils.simpleGet(context, MIND_ATT_UNIT_KNOWLEDGE);
-//		Map m = DustUtils.simpleGet(knowledge, hUnit, MIND_ATT_UNIT_HANDLES);
-//
-//		if ( DustUtils.isEmpty(itemId) ) {
-//			itemId = "" + (m.size() + 1);
-//		} else {
-//			hItem = DustUtils.simpleGet(m, itemId);
-//		}
-//
-//		if ( null == hItem ) {
-////			hItem = new DustHandle((DustHandle) hUnit, itemId);
-//			hItem = new DustHandle(itemId);
-//			m.put(itemId, hItem);
-//
-//			DustUtils.safeGet(knowledge, hItem, KNOWLEDGE_CREATOR);
-//		}
-//
-//		return hItem;
-//	}
-//
-//	@Override
-//	public DustHandle recall(String id) {
-//		String[] ss = (id + " ").split(DUST_SEP_ID);
-//
-//		DustHandle hUnit = DustUtils.simpleGet(context, DUST_ATT_MACHINE_UNITS, ss[0].trim());
-//
-//		return (ss.length == 1) ? hUnit : recall(hUnit, ss[1].trim());
-//
-//	}
 }

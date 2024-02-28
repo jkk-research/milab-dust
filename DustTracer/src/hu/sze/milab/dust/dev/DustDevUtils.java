@@ -28,34 +28,29 @@ public class DustDevUtils implements DustMetaConsts {
 		}
 	};
 
-	public static MindHandle registerHandle(String unit, MindHandle hPrimaryAspect) {
-		MindHandle h = Dust.lookup(unit + DUST_SEP_ID);
+	public static MindHandle newHandle(MindHandle hUnit, MindHandle hPrimaryAspect) {
+		return newHandle(hUnit.getId(), hPrimaryAspect);
+	};
+
+	public static MindHandle newHandle(String unit, MindHandle hPrimaryAspect) {
+		MindHandle h = Dust.lookup(unit + DUST_SEP_ID + ITEMID_NEW);
 
 		Dust.access(MindAccess.Set, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
 		return h;
 	};
 
-	public static MindHandle registerHandle(MindHandle hUnit, MindHandle hPrimaryAspect) {
-//		MindHandle h = Dust.lookup(hUnit, "");
-		MindHandle h = null;
-
-		Dust.access(MindAccess.Set, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
-
-		return h;
-	};
-
-	public static MindHandle registerAgent(String unit, MindHandle hLogic) {
-		MindHandle hAgent = registerHandle(unit, MIND_ASP_AGENT);
+	public static MindHandle registerAgent(MindHandle hUnit, MindHandle hLogic) {
+		MindHandle hAgent = newHandle(hUnit, MIND_ASP_AGENT);
 
 		Dust.access(MindAccess.Set, hLogic, hAgent, MIND_ATT_AGENT_LOGIC);
 
 		return hAgent;
 	};
 
-	public static MindHandle registerLogic(String unit, String nativeClassName) {
-		MindHandle hLogic = registerHandle(unit, MIND_ASP_LOGIC);
-		MindHandle hNative = registerHandle(unit, DUST_ASP_NATIVELOGIC);
+	public static MindHandle registerLogic(MindHandle hUnit, String nativeClassName) {
+		MindHandle hLogic = newHandle(hUnit, MIND_ASP_LOGIC);
+		MindHandle hNative = newHandle(hUnit, DUST_ASP_NATIVELOGIC);
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
@@ -70,7 +65,7 @@ public class DustDevUtils implements DustMetaConsts {
 	}
 
 	public static MindHandle registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName, boolean srv) {
-		MindHandle hNative = registerHandle(hUnit, DUST_ASP_NATIVELOGIC);
+		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVELOGIC);
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);

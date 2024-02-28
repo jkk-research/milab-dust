@@ -35,6 +35,7 @@ public interface DustConsts {
 //	int KEY_ITER = -3;
 //	int KEY_KEYS = -4;
 
+	String ITEMID_NEW = "?";
 
 	interface MindHandle {
 //		MindHandle getUnit();
