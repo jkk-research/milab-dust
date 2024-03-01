@@ -26,7 +26,7 @@ public interface DustUtilsConsts extends DustConsts, DustMetaConsts {
 		@Override
 		public Type create(Object key, Object... hints) {
 			try {
-				return (Type) cc.newInstance();
+				return (Type) cc.getDeclaredConstructor().newInstance();
 			} catch (Throwable e) {
 				return DustException.wrap(e, key, hints);
 			}

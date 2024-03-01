@@ -27,13 +27,13 @@ class DustMachineDialog implements DustMachineConsts {
 	
 	public DustMachineDialog(DustMachine machine) {
 		this.machine = machine;
-		context.put(MIND_ATT_UNIT_KNOWLEDGE, new HashMap());
-		context.put(MIND_ATT_UNIT_KNOWLEDGE, new HashMap());
+		context.put(MIND_ATT_UNIT_CONTENT, new HashMap());
+		context.put(MIND_ATT_UNIT_CONTENT, new HashMap());
 	}
 	
 
 	Map resolveKnowledge(MindHandle h, boolean createIfMissing) {
-		Map knowledge = DustUtils.simpleGet(context, MIND_ATT_UNIT_KNOWLEDGE);
+		Map knowledge = DustUtils.simpleGet(context, MIND_ATT_UNIT_CONTENT);
 		return DustUtils.safeGet(knowledge, h, createIfMissing ? memexLoader : null);
 	}
 
@@ -63,7 +63,7 @@ class DustMachineDialog implements DustMachineConsts {
 					break;
 				case Target:
 					curr = resolveKnowledge(activeAgent, createIfMissing);
-					curr = DustUtils.safeGet(curr, MIND_ATT_AGENT_TARGET, createIfMissing ? KNOWLEDGE_CREATOR : null);
+					curr = DustUtils.safeGet(curr, MIND_ATT_AGENT_TARGET, null);
 					break;
 				default:
 					curr = resolveKnowledge((MindHandle) root, createIfMissing);

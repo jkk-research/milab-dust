@@ -16,8 +16,8 @@ import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustMachineTempJavaMeta extends DustAgent implements DustMachineConsts {
 
-	private static final String IF_FMT_BEGIN = "package {0};\n" + "\n" + "public interface {1} extends DustConsts '{'\n\t// Generated: {2}\n\n";
-	private static final String IF_FMT_LINE = "	public static MindHandle {0} = Dust.lookup(\"{1}\");";
+	private static final String IF_FMT_BEGIN = "package {0};\n" + "\n" + "public interface {1} extends DustConsts '{'\n\t// Generated: {2}\n";
+	private static final String IF_FMT_LINE = "	MindHandle {0} = Dust.lookup(\"{1}\");";
 	private static final String IF_END = "\n}";
 
 	String srcDir;
@@ -94,7 +94,7 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 					split = true;
 
 					if ( MIND_ASP_ATTRIBUTE == pa ) {
-						split = (MIND_ASP_ASPECT != lastPA);
+						split = !((MIND_ASP_ASPECT == lastPA) || (MIND_ASP_AGENT == lastPA));
 					}
 				}
 				lastPA = pa;

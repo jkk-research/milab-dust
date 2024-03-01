@@ -12,18 +12,27 @@ public class DustDevUtils implements DustMetaConsts {
 	public static final Comparator<String> ID_COMP = new Comparator<String>() {
 		@Override
 		public int compare(String o1, String o2) {
+			if ( o1.equals(o2) ) {
+				return 0;
+			}
+			
 			String[] s1 = o1.split(DUST_SEP_ID);
 			String[] s2 = o2.split(DUST_SEP_ID);
 
-			int ret = Integer.valueOf(s1[0]) - Integer.valueOf(s2[0]);
-
-			if ( 0 == ret ) {
-				ret = s1.length - s2.length;
-				if ( (0 == ret) && (s1.length == 2) ) {
-					ret = Integer.valueOf(s1[1]) - Integer.valueOf(s2[1]);
-				}
+			int ret = s1[0].compareTo(s2[0]);
+			int m1 = s1.length - 1;
+			int m2 = s2.length - 1;
+			
+			for ( int i = 1; (0 == ret) && (i < 3); ++i ) {
+				if ( i > m1 ) {
+					ret = -1;
+				} else if ( i > m2 ) {
+					ret = 1;
+				} else {
+					ret = Integer.valueOf(s1[i]) - Integer.valueOf(s2[i]);
+				}  
 			}
-
+			
 			return ret;
 		}
 	};

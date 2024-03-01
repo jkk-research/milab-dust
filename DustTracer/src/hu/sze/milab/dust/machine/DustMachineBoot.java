@@ -62,7 +62,6 @@ public class DustMachineBoot implements DustMachineConsts {
 					}
 					cnt.put(pID, ++c);
 
-//					DustHandle ph = recall(pID);
 					mh = new DustHandle(id);
 				}
 
@@ -88,14 +87,14 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MindAccess.Get, MindAccess.Set, MindAccess.Insert);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
-		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_KNOWLEDGE, DUST_ATT_NATIVELOGIC_INSTANCE);
+		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_CONTENT, DUST_ATT_NATIVELOGIC_INSTANCE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
-				, "AGT", MIND_ASP_AGENT, "SRV", MIND_ASP_AGENT
+				, "AGT", MIND_ASP_AGENT
 				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
 
-		machine.bootInit();
+		machine.bootInit(bh);
 		
-		DustDevUtils.registerNative(RESOURCE_SRV_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName(), true);
+		DustDevUtils.registerNative(RESOURCE_AGT_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName(), true);
 		DustDevUtils.registerNative(RESOURCE_AGT_ZIPREADER, DUSTJAVA_UNIT, DustZipAgentReader.class.getCanonicalName());
 		DustDevUtils.registerNative(RESOURCE_AGT_JSONDOM, DUSTJAVA_UNIT, DustJsonDomAgent.class.getCanonicalName());
 		DustDevUtils.registerNative(RESOURCE_AGT_CSVSAX, DUSTJAVA_UNIT, DustStreamCsvSaxAgent.class.getCanonicalName());

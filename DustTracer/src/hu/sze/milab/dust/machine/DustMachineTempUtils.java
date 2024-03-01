@@ -161,12 +161,12 @@ public class DustMachineTempUtils implements DustJsonConsts {
 			String localPrefix = unit.getId() + DUST_SEP_ID;
 			localPrefix = null;
 
-			Map<MindHandle, Object> unitData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_KNOWLEDGE, unit);
+			Map<MindHandle, Object> unitData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_CONTENT, unit);
 			data.add(knowledgeToMap(localPrefix, unit, unitData));
 
 			Map<Object, MindHandle> items = Dust.access(MindAccess.Peek, null, unit, MIND_ATT_UNIT_HANDLES);
 			for (MindHandle hItem : items.values()) {
-				Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_KNOWLEDGE, hItem);
+				Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_CONTENT, hItem);
 				Map item = knowledgeToMap(localPrefix, hItem, itemData);
 				data.add(item);
 			}
@@ -230,20 +230,23 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	public static void writeJavaMeta(String authorID, String targetInterfaceName) throws Exception {
 		DustMachineTempJavaMeta metaWriter = null;
 
-		Map units = Dust.access(MindAccess.Peek, null, APP_MACHINE_MAIN, DUST_ATT_MACHINE_AUTHORS, authorID, MIND_ATT_AUTHOR_UNITS);
-
+		Map<Object, Object> units = Dust.access(MindAccess.Peek, null, APP_UNIT, MIND_ATT_UNIT_CONTENT);
+		
+//		Map units = Dust.access(MindAccess.Peek, null, APP_MACHINE_MAIN, DUST_ATT_MACHINE_AUTHORS, authorID, MIND_ATT_AUTHOR_UNITS);
 //		Map units = Dust.access(MindAccess.Peek, null, null, DUST_ATT_MACHINE_UNITS);
-		for (Object u : units.values()) {
+		for (Map.Entry<Object, Object> ue : units.entrySet()) {
 			if ( null == metaWriter ) {
 				metaWriter = new DustMachineTempJavaMeta("gen", targetInterfaceName, MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_AUTHOR, DUST_ASP_MODULE,
 						MIND_ASP_ASSEMBLY, DUST_ASP_MACHINE);
 				metaWriter.agentBegin();
 			}
-			Map<String, MindHandle> hU = DustUtils.simpleGet(u, MIND_ATT_UNIT_HANDLES);
+			
+			Map<String, MindHandle> hU = DustUtils.simpleGet(ue.getValue(), MIND_ATT_UNIT_HANDLES);
 			if ( null != hU ) {
+				Dust.log(null, "Unit found", ue.getKey(), hU.size());
 				metaWriter.unitToAdd = hU;
+				metaWriter.agentProcess(MindAction.Process);
 			}
-			metaWriter.agentProcess(MindAction.Process);
 		}
 
 		if ( null != metaWriter ) {
@@ -261,7 +264,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 				Object ch = f.get(null);
 				if ( ch instanceof DustHandle ) {
 					String name = f.getName();
-//					((DustHandle)ch).setStr(name);
+					((DustHandle)ch).setHint(name);
 					Dust.access(MindAccess.Set, name, ch, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);
