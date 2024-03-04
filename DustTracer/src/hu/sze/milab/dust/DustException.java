@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 import hu.sze.milab.dust.utils.DustUtils;
 
-public final class DustException extends RuntimeException implements DustMetaConsts {
+public final class DustException extends RuntimeException implements DustHandles {
 	private static final long serialVersionUID = 1L;
 
 	static PrintStream DUMP_STACK_TRACE = System.err;

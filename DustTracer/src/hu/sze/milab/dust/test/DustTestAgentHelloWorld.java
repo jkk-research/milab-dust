@@ -7,7 +7,7 @@ public class DustTestAgentHelloWorld extends DustAgent implements DustTestConsts
 
 	@Override
 	public MindHandle agentProcess() throws Exception {
-		System.out.println("\n*** Hello, world! ***\n");
+		Dust.log(EVENT_TAG_TYPE_TRACE, "\n\n*** Hello, world! ***\n\n", MIND_TAG_ACTION_PROCESS);
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 	

@@ -1,0 +1,249 @@
+{
+  "meta" : {
+    "count" : 15
+  },
+  "data" : [ {
+    "id" : "giskard.me:0 (APP_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "APP_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:4 (TEXT_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "TEXT_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:0:0 (APP_MACHINE_MAIN)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "APP_MACHINE_MAIN"
+    },
+    "type" : "giskard.me:2:0 (DUST_ASP_MACHINE)",
+    "relationships" : {
+      "giskard.me:2:5 (DUST_ATT_MACHINE_MODULES)" : [ {
+        "id" : "giskard.me:0:1 (APP_MODULE_MAIN)",
+        "type" : "giskard.me:2:11 (DUST_ASP_MODULE)"
+      } ],
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:2:0 (DUST_ASP_MACHINE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:2:4 (DUST_ATT_MACHINE_MAINASSEMBLY)" : {
+        "id" : "giskard.me:0:2 (APP_ASSEMBLY_MAIN)",
+        "type" : "giskard.me:1:16 (MIND_ASP_ASSEMBLY)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:3 (MISC_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "MISC_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:2 (DUST_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "DUST_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:0:2 (APP_ASSEMBLY_MAIN)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "APP_ASSEMBLY_MAIN"
+    },
+    "type" : "giskard.me:1:16 (MIND_ASP_ASSEMBLY)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:16 (MIND_ASP_ASSEMBLY)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:1 (MIND_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "MIND_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:0:1 (APP_MODULE_MAIN)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "APP_MODULE_MAIN"
+    },
+    "type" : "giskard.me:2:11 (DUST_ASP_MODULE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:2:11 (DUST_ASP_MODULE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:2:13 (DUST_ATT_MODULE_NATIVELOGICS)" : [ {
+        "id" : "giskard.me:8:1 (giskard.me:8:1)",
+        "type" : "giskard.me:2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "giskard.me:8:2 (giskard.me:8:2)",
+        "type" : "giskard.me:2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "giskard.me:8:3 (giskard.me:8:3)",
+        "type" : "giskard.me:2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "giskard.me:8:4 (giskard.me:8:4)",
+        "type" : "giskard.me:2:17 (DUST_ASP_NATIVELOGIC)"
+      }, {
+        "id" : "giskard.me:8:5 (giskard.me:8:5)",
+        "type" : "giskard.me:2:17 (DUST_ASP_NATIVELOGIC)"
+      } ]
+    }
+  }, {
+    "id" : "giskard.me:0 (APP_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "APP_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me (giskard.me)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "giskard.me"
+    },
+    "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:69 (MIND_ASP_AUTHOR)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:8 (DUSTJAVA_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "DUSTJAVA_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:7 (DEV_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "DEV_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:6 (RESOURCE_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "RESOURCE_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:5 (EVENT_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "EVENT_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10 (NET_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  }
+}

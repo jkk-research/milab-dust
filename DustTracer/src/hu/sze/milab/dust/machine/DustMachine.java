@@ -4,13 +4,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.stream.json.DustJsonApiDomAgent;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
@@ -31,6 +34,9 @@ class DustMachine extends Dust.Machine
 			return "{...}";
 		}
 	}
+
+//	boolean loadUnits = false;
+	boolean loadUnits = true;
 
 	IdResolver idRes;
 	private final Map rootUnit = new KnowledgeMap();
@@ -85,41 +91,47 @@ class DustMachine extends Dust.Machine
 		initUnit(rootUnit, APP_UNIT);
 		Map rootHandles = DustUtils.simpleGet(rootUnit, MIND_ATT_UNIT_HANDLES);
 		Map rootContent = DustUtils.simpleGet(rootUnit, MIND_ATT_UNIT_CONTENT);
-		
+
 		Map<String, Map> unitHandles = new TreeMap<>();
-		
-		for ( Map.Entry<String, DustHandle> be : bh.entrySet()) {
+
+		Set<MindHandle> units = new HashSet();
+		units.add(APP_UNIT);
+
+		for (Map.Entry<String, DustHandle> be : bh.entrySet()) {
 			String id = be.getKey();
-			
+
 			String[] ids = id.split(DUST_SEP_ID);
 			int idl = ids.length;
-			
-			if ( idl < 3 ) {
+
+			if (idl < 3) {
 				DustHandle h = be.getValue();
 				rootHandles.put(id, h);
-				
-				if ( APP_UNIT == h ) {
+
+				if (APP_UNIT == h) {
 					unitHandles.put(id, rootHandles);
 					continue;
 				}
-												
-				if ( idl == 2 ) {
+
+				if (idl == 2) {
 					Map m = DustUtils.safeGet(rootContent, h, crtKnowledge);
 					DustHandle hAuthor = bh.get(ids[0]);
-					if ( null == hAuthor ) {
+					if (null == hAuthor) {
 						hAuthor = lookup(rootUnit, ids[0]);
+						Map mA = DustUtils.safeGet(rootContent, hAuthor, crtKnowledge);
+						mA.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, MIND_ASP_AUTHOR);
 					}
 					initUnit(m, h, hAuthor);
-					
+					units.add(h);
+
 					unitHandles.put(id, (Map) m.get(MIND_ATT_UNIT_HANDLES));
 				}
 			}
 		}
 
-		for ( Map.Entry<String, DustHandle> be : bh.entrySet()) {
+		for (Map.Entry<String, DustHandle> be : bh.entrySet()) {
 			String id = be.getKey();
-			
-			if ( 3 == id.split(DUST_SEP_ID).length ) {
+
+			if (3 == id.split(DUST_SEP_ID).length) {
 				DustHandle h = be.getValue();
 				String unitId = DustUtils.cutPostfix(id, DUST_SEP_ID);
 				unitHandles.get(unitId).put(id, h);
@@ -127,6 +139,10 @@ class DustMachine extends Dust.Machine
 		}
 
 		idRes = this;
+
+		for (MindHandle hu : units) {
+			optLoadUnit(hu);
+		}
 
 		Dust.access(MindAccess.Set, APP_ASSEMBLY_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);
 		Dust.access(MindAccess.Set, APP_MODULE_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MODULES, KEY_ADD);
@@ -146,6 +162,22 @@ class DustMachine extends Dust.Machine
 		if (0 < hints.length) {
 			m.put(MIND_ATT_UNIT_AUTHOR, hints[0]);
 		}
+
+		optLoadUnit(h);
+	}
+
+	boolean canLoadUnit = true;
+	private void optLoadUnit(MindHandle h) {
+		if (loadUnits && canLoadUnit && (this == idRes)) {
+			try {
+				canLoadUnit = false;
+				DustJsonApiDomAgent.readUnit(DustMachineUtils.getUnitFile(h));
+			} catch (Exception e) {
+				DustException.swallow(e, "Loading unit", h);
+			} finally {
+				canLoadUnit = true;
+			}
+		}
 	}
 
 	DustHandle lookup(Map unit, String id) {
@@ -161,6 +193,9 @@ class DustMachine extends Dust.Machine
 	}
 
 	Map getUnit(String unitID, MindHandle hAuthor) {
+		if ( "giskard.me:10".equals(unitID) ) {
+			DustDevUtils.breakpoint("hipp");
+		}
 		MindHandle hUnit = lookup(rootUnit, unitID);
 		Map m = (Map) rootUnit.get(MIND_ATT_UNIT_CONTENT);
 		Map ret = DustUtils.safeGet(m, hUnit, crtUnit, hAuthor);
@@ -196,16 +231,17 @@ class DustMachine extends Dust.Machine
 		String id = h.getId();
 		String[] ii = id.split(DUST_SEP_ID);
 		Map unit = null;
+		DustHandle hAuthor = null;
 
 		if (ii.length < 3) {
 			unit = rootUnit;
 		} else {
-			DustHandle hAuthor = lookup(rootUnit, ii[0]);
+			hAuthor = lookup(rootUnit, ii[0]);
 			unit = getUnit(DustUtils.cutPostfix(id, DUST_SEP_ID), hAuthor);
 		}
 
 		Map m = DustUtils.simpleGet(unit, MIND_ATT_UNIT_CONTENT);
-		return DustUtils.safeGet(m, h, createIfMissing ? crtKnowledge : null);
+		return DustUtils.safeGet(m, h, createIfMissing ? (ii.length == 2) ? crtUnit : crtKnowledge  : null, hAuthor);
 	}
 
 	@Override

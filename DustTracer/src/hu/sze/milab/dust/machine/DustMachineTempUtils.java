@@ -1,255 +1,99 @@
 package hu.sze.milab.dust.machine;
 
 import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.TreeMap;
-
-import org.json.simple.JSONValue;
+import java.util.TreeSet;
 
 import hu.sze.milab.dust.Dust;
-import hu.sze.milab.dust.DustException;
-import hu.sze.milab.dust.DustMetaConsts;
-import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.DustMetaHandles;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.machine.DustMachineConsts.MachineAtts;
+import hu.sze.milab.dust.net.DustNetHandles;
+import hu.sze.milab.dust.stream.json.DustJsonApiDomAgent;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsFile;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
+@SuppressWarnings({ "rawtypes" })
 public class DustMachineTempUtils implements DustJsonConsts {
 
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-		initFromInterfaces(DustMetaConsts.class);
+//		initFromInterfaces(DustMetaHandles.class, DustNetHandles.class);
 
 //		dumpUnits();
 
 //		readUnits();
-
-		writeJavaMeta("giskard.me", "hu.sze.milab.dust.DustMetaConsts");
+		
+//		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
+		
+		writeJavaMeta("giskard.me", "hu.sze.milab.dust.DustHandles");
 	}
 
 	public static void readUnits() throws Exception {
-		File dir = new File(MODULE_DIR, "dust");
+		File dir = new File(MODULE_DIR, "giskard.me");
 
-		if ( dir.isDirectory() ) {
+		if (dir.isDirectory()) {
 			for (File f : dir.listFiles()) {
-				if ( f.getName().toLowerCase().endsWith(DUST_EXT_JSON) ) {
-					readUnit(f);
+				if (f.getName().toLowerCase().endsWith(DUST_EXT_JSON)) {
+					DustJsonApiDomAgent.readUnit(f);
 				}
 			}
 		}
 	}
 
 	public static void dumpUnits() throws Exception {
-		Map units = Dust.access(MindAccess.Peek, null, null, DUST_ATT_MACHINE_UNITS);
 
-		for (Object u : units.values()) {
-//			if ( u.toString().contains("DEV") ) 
-			{
-				writeUnit((MindHandle) u);
+		Map<Object, MindHandle> units = Dust.access(MindAccess.Peek, null, APP_UNIT, MIND_ATT_UNIT_HANDLES);
+
+		for (MindHandle h : units.values()) {
+			if (null != Dust.access(MindAccess.Peek, null, h, MIND_ATT_UNIT_HANDLES)) {
+				File f = getUnitFile(h);
+				DustJsonApiDomAgent.writeUnit(h, f, MachineAtts.PersistentAtt);
 			}
 		}
-	}
-
-	public static Map handleToMap(MindHandle ih, String localPrefix) throws Exception {
-		Map item = new HashMap<>();
-
-		String hId = ih.toString();
-		if ( (null != localPrefix) && hId.startsWith(localPrefix) ) {
-			hId = hId.substring(localPrefix.length());
-		}
-		item.put(JsonApiMember.id, hId);
-		String pa = DustUtils.toString(Dust.access(MindAccess.Peek, "???", ih, MIND_ATT_KNOWLEDGE_PRIMARYASPECT));
-		item.put(JsonApiMember.type, pa);
-
-		return item;
 	}
 
 	public static File getUnitFile(MindHandle unit) throws Exception {
-		String uName = Dust.access(MindAccess.Peek, "???", unit, DEV_ATT_HINT);
-		uName = uName.split(DUST_SEP)[0].toLowerCase();
-		String vName = Dust.access(MindAccess.Peek, "???", unit, MIND_ATT_UNIT_AUTHOR, DEV_ATT_HINT);
+		String[] ids = unit.getId().split(DUST_SEP_ID);
 
-		vName = DustUtils.getPostfix(vName, DUST_SEP).toLowerCase();
-
-		File dir = new File(MODULE_DIR, vName);
+		File dir = new File(MODULE_DIR, ids[0]);
 		DustUtilsFile.ensureDir(dir);
 
-		File f = new File(dir, uName + DUST_EXT_JSON);
+		File f = new File(dir, ids[1] + DUST_EXT_JSON);
 
 		return f;
-	}
-
-	public static void readUnit(File f) throws Exception {
-		try (FileReader fr = new FileReader(f)) {
-			Object jsonRoot = JSONValue.parse(fr);
-
-			Object ob = DustUtils.simpleGet(jsonRoot, JsonApiMember.jsonapi, JsonApiMember.version);
-			if ( !DustUtils.isEqual(JSONAPI_VERSION, ob) ) {
-				DustException.wrap(null, "Invalid JSON:API version", ob);
-			}
-
-			ArrayList data = DustUtils.simpleGet(jsonRoot, JsonApiMember.data);
-
-			for (Object item : data) {
-				MindHandle hI = handleFromMap(item);
-
-				Map<String, Object> atts = DustUtils.simpleGet(item, JsonApiMember.attributes);
-				for (Map.Entry<String, Object> ae : atts.entrySet()) {
-					MindHandle hA = handleFromKey(ae.getKey());
-					Dust.access(MindAccess.Set, ae.getValue(), hI, hA);
-				}
-
-				Map<String, Object> refs = DustUtils.simpleGet(item, JsonApiMember.relationships);
-				for (Map.Entry<String, Object> re : refs.entrySet()) {
-					MindHandle hA = handleFromKey(re.getKey());
-					Object rv = re.getValue();
-
-					if ( rv instanceof List ) {
-						for (Object ro : (List) rv) {
-							MindHandle hV = handleFromMap(ro);
-							Dust.access(MindAccess.Set, hV, hI, hA, KEY_ADD);
-						}
-					} else {
-						MindHandle hV = handleFromMap(rv);
-						Dust.access(MindAccess.Set, hV, hI, hA);
-					}
-				}
-			}
-		}
-	}
-
-	public static MindHandle handleFromKey(String key) {
-		String id = key.split(" ")[0];
-		MindHandle ret = Dust.lookup(id);
-
-		if ( null == ret ) {
-			DustDevUtils.breakpoint("No handle found for key", key);
-		}
-
-		return ret;
-	}
-
-	public static MindHandle handleFromMap(Object item) {
-		String id = DustUtils.simpleGet(item, JsonApiMember.id);
-		return handleFromKey(id);
-	}
-
-	public static void writeUnit(MindHandle unit) throws Exception {
-
-		File f = getUnitFile(unit);
-
-		try (FileWriter fw = new FileWriter(f)) {
-			Map out = new HashMap<>();
-
-			Map jsonapi = DustUtils.safeGet(out, JsonApiMember.jsonapi, MAP_CREATOR);
-			jsonapi.put(JsonApiMember.version, JSONAPI_VERSION);
-
-			ArrayList data = DustUtils.safeGet(out, JsonApiMember.data, ARRAY_CREATOR);
-
-			String localPrefix = unit.getId() + DUST_SEP_ID;
-			localPrefix = null;
-
-			Map<MindHandle, Object> unitData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_CONTENT, unit);
-			data.add(knowledgeToMap(localPrefix, unit, unitData));
-
-			Map<Object, MindHandle> items = Dust.access(MindAccess.Peek, null, unit, MIND_ATT_UNIT_HANDLES);
-			for (MindHandle hItem : items.values()) {
-				Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, null, null, MIND_ATT_UNIT_CONTENT, hItem);
-				Map item = knowledgeToMap(localPrefix, hItem, itemData);
-				data.add(item);
-			}
-
-			DustUtils.safeGet(out, JsonApiMember.meta, MAP_CREATOR).put(JsonApiMember.count, data.size());
-
-			JSONValue.writeJSONString(out, fw);
-			fw.flush();
-		}
-	}
-
-	public static Map knowledgeToMap(String localPrefix, MindHandle hItem, Map<MindHandle, Object> itemData) throws Exception {
-		Map item = handleToMap(hItem, localPrefix);
-
-		for (Map.Entry<MindHandle, Object> ce : itemData.entrySet()) {
-			MindHandle hAtt = ce.getKey();
-
-			if ( DustUtilsAttCache.getAtt(MachineAtts.PersistentAtt, hAtt, true) ) {
-				String key = hAtt.toString();
-				Object val = ce.getValue();
-
-				Object mem = JsonApiMember.attributes;
-
-				if ( val instanceof MindHandle ) {
-					mem = JsonApiMember.relationships;
-					val = handleToMap((MindHandle) val, localPrefix);
-				} else if ( val instanceof Map ) {
-					Map mp = new HashMap();
-					for (Map.Entry<Object, Object> ee : ((Map<Object, Object>) val).entrySet()) {
-						Object mk = ee.getKey();
-						if ( mk instanceof MindHandle ) {
-							mk = mk.toString();
-						}
-						Object mv = ee.getValue();
-						if ( mv instanceof MindHandle ) {
-							mem = JsonApiMember.relationships;
-							mk = handleToMap((MindHandle) mv, localPrefix);
-						}
-						mp.put(mk, mv);
-					}
-					val = mp;
-				}
-				if ( val instanceof Collection ) {
-					ArrayList al = new ArrayList();
-					for (Object oo : ((Collection) val)) {
-						if ( oo instanceof MindHandle ) {
-							mem = JsonApiMember.relationships;
-							oo = handleToMap((MindHandle) oo, localPrefix);
-						}
-						al.add(oo);
-					}
-					val = al;
-				}
-
-				DustUtils.safeGet(item, mem, MAP_CREATOR).put(key, val);
-			}
-		}
-		return item;
 	}
 
 	public static void writeJavaMeta(String authorID, String targetInterfaceName) throws Exception {
 		DustMachineTempJavaMeta metaWriter = null;
 
 		Map<Object, Object> units = Dust.access(MindAccess.Peek, null, APP_UNIT, MIND_ATT_UNIT_CONTENT);
-		
+
 //		Map units = Dust.access(MindAccess.Peek, null, APP_MACHINE_MAIN, DUST_ATT_MACHINE_AUTHORS, authorID, MIND_ATT_AUTHOR_UNITS);
 //		Map units = Dust.access(MindAccess.Peek, null, null, DUST_ATT_MACHINE_UNITS);
 		for (Map.Entry<Object, Object> ue : units.entrySet()) {
-			if ( null == metaWriter ) {
-				metaWriter = new DustMachineTempJavaMeta("gen", targetInterfaceName, MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_AUTHOR, DUST_ASP_MODULE,
-						MIND_ASP_ASSEMBLY, DUST_ASP_MACHINE);
+			if (null == metaWriter) {
+				metaWriter = new DustMachineTempJavaMeta("gen", targetInterfaceName, MIND_ASP_UNIT, MIND_ASP_ASPECT,
+						MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_LOGIC, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY,
+						DUST_ASP_MACHINE);
 				metaWriter.agentBegin();
 			}
-			
+
 			Map<String, MindHandle> hU = DustUtils.simpleGet(ue.getValue(), MIND_ATT_UNIT_HANDLES);
-			if ( null != hU ) {
+			if (null != hU) {
 				Dust.log(null, "Unit found", ue.getKey(), hU.size());
 				metaWriter.unitToAdd = hU;
 				metaWriter.agentProcess(MindAction.Process);
 			}
 		}
 
-		if ( null != metaWriter ) {
+		if (null != metaWriter) {
 			metaWriter.agentEnd();
 		}
 	}
@@ -259,18 +103,28 @@ public class DustMachineTempUtils implements DustJsonConsts {
 
 //		Dust.access(MindAccess.Set, TEXT_TAG_LANGUAGE_EN_US, null, TEXT_ATT_LANGUAGE_DEFAULT);
 
+		Set<String> authors = new TreeSet<>();
+		
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
-				if ( ch instanceof DustHandle ) {
+				if (ch instanceof DustHandle) {
 					String name = f.getName();
-					((DustHandle)ch).setHint(name);
+					DustHandle hItem = (DustHandle) ch;
+//					hItem.setHint(name);
 					Dust.access(MindAccess.Set, name, ch, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);
 					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
+					
+					String aId = hItem.getId().split(DUST_SEP_ID)[0];
+					if ( authors.add(aId) ) {
+						MindHandle hA = Dust.lookup(aId);
+						Dust.access(MindAccess.Set, aId, hA, DEV_ATT_HINT);
+						Dust.access(MindAccess.Set, MIND_ASP_AUTHOR, hA, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+					}
 
-					if ( "ASP".equals(nn[1]) || "TAG".equals(nn[1]) ) {
+					if ("ASP".equals(nn[1]) || "TAG".equals(nn[1])) {
 						parents.put(name, (MindHandle) ch);
 					}
 
@@ -288,14 +142,14 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
-				if ( ch instanceof MindHandle ) {
+				if (ch instanceof MindHandle) {
 					String name = f.getName();
 					String[] nn = name.split(DUST_SEP);
 					MindHandle hPA = DustUtilsAttCache.getAtt(MachineAtts.PrimaryAspectNames, nn[1], null);
 
 					Dust.access(MindAccess.Set, hPA, ch, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
-					if ( "ATT".equals(nn[1]) || "TAG".equals(nn[1]) ) {
+					if ("ATT".equals(nn[1]) || "TAG".equals(nn[1])) {
 						String pName = name.substring(0, nn[0].length() + nn[1].length() + nn[2].length() + 2);
 						pName = pName.replace("_ATT_", "_ASP_");
 						MindHandle hParent = parents.get(pName);

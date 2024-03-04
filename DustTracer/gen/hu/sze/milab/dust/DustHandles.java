@@ -1,7 +1,7 @@
 package hu.sze.milab.dust;
 
-public interface DustMetaConsts extends DustConsts {
-	// Generated: 2024-03-04T11_42_53
+public interface DustHandles extends DustConsts {
+	// Generated: 2024-03-04T17_05_57
 
 	MindHandle APP_UNIT = Dust.lookup("giskard.me:0");
 
@@ -202,10 +202,11 @@ public interface DustMetaConsts extends DustConsts {
 	MindHandle RESOURCE_ATT_PROCESSOR_STREAM = Dust.lookup("giskard.me:6:13");
 	MindHandle RESOURCE_ATT_PROCESSOR_DATA = Dust.lookup("giskard.me:6:14");
 
-	MindHandle RESOURCE_AGT_FILESYSTEM = Dust.lookup("giskard.me:6:15");
-	MindHandle RESOURCE_AGT_ZIPREADER = Dust.lookup("giskard.me:6:16");
-	MindHandle RESOURCE_AGT_JSONDOM = Dust.lookup("giskard.me:6:17");
-	MindHandle RESOURCE_AGT_CSVSAX = Dust.lookup("giskard.me:6:18");
+	MindHandle RESOURCE_LOG_FILESYSTEM = Dust.lookup("giskard.me:6:15");
+	MindHandle RESOURCE_LOG_ZIPREADER = Dust.lookup("giskard.me:6:16");
+	MindHandle RESOURCE_LOG_JSONDOM = Dust.lookup("giskard.me:6:17");
+	MindHandle RESOURCE_LOG_CSVSAX = Dust.lookup("giskard.me:6:18");
+
 	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard.me:6:19");
 
 	MindHandle DEV_UNIT = Dust.lookup("giskard.me:7");
@@ -213,5 +214,31 @@ public interface DustMetaConsts extends DustConsts {
 	MindHandle DEV_ATT_HINT = Dust.lookup("giskard.me:7:0");
 
 	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard.me:8");
+
+	MindHandle NET_UNIT = Dust.lookup("giskard.me:10");
+
+	MindHandle NET_ASP_HOST = Dust.lookup("giskard.me:10:1");
+	MindHandle NET_ATT_HOST_PORT = Dust.lookup("giskard.me:10:2");
+	MindHandle NET_ATT_HOST_IPV4 = Dust.lookup("giskard.me:10:3");
+
+	MindHandle NET_ASP_SSLINFO = Dust.lookup("giskard.me:10:4");
+	MindHandle NET_ATT_SSLINFO_PORT = Dust.lookup("giskard.me:10:5");
+	MindHandle NET_ATT_SSLINFO_STOREPATH = Dust.lookup("giskard.me:10:6");
+	MindHandle NET_ATT_SSLINFO_STOREPASS = Dust.lookup("giskard.me:10:7");
+	MindHandle NET_ATT_SSLINFO_KEYMANAGERPASS = Dust.lookup("giskard.me:10:8");
+
+	MindHandle NET_ASP_SRVCALL = Dust.lookup("giskard.me:10:9");
+	MindHandle NET_ATT_SRVCALL_REQUEST = Dust.lookup("giskard.me:10:10");
+	MindHandle NET_ATT_SRVCALL_RESPONSE = Dust.lookup("giskard.me:10:11");
+	MindHandle NET_ATT_SRVCALL_METHOD = Dust.lookup("giskard.me:10:12");
+	MindHandle NET_ATT_SRVCALL_PATHINFO = Dust.lookup("giskard.me:10:13");
+	MindHandle NET_ATT_SRVCALL_PAYLOAD = Dust.lookup("giskard.me:10:14");
+	MindHandle NET_ATT_SRVCALL_HEADERS = Dust.lookup("giskard.me:10:15");
+	MindHandle NET_ATT_SRVCALL_ATTRIBUTES = Dust.lookup("giskard.me:10:16");
+	MindHandle NET_ATT_SRVCALL_STATUS = Dust.lookup("giskard.me:10:17");
+
+	MindHandle NET_LOG_HTTPSRV = Dust.lookup("giskard.me:10:18");
+	MindHandle NET_LOG_HTTPSVCFILES = Dust.lookup("giskard.me:10:19");
+	MindHandle NET_LOG_HTTPSVCJSONAPI = Dust.lookup("giskard.me:10:20");
 
 }

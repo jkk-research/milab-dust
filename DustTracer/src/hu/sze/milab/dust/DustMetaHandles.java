@@ -1,6 +1,6 @@
 package hu.sze.milab.dust;
 
-public interface DustMetaConsts extends DustConsts {
+public interface DustMetaHandles extends DustConsts {
 	// Original
 
 	MindHandle APP_UNIT = Dust.lookup("giskard.me:0");
@@ -202,10 +202,10 @@ public interface DustMetaConsts extends DustConsts {
 	MindHandle RESOURCE_ATT_PROCESSOR_STREAM = Dust.lookup("giskard.me:6:?");
 	MindHandle RESOURCE_ATT_PROCESSOR_DATA = Dust.lookup("giskard.me:6:?");
 
-	MindHandle RESOURCE_AGT_FILESYSTEM = Dust.lookup("giskard.me:6:?");
-	MindHandle RESOURCE_AGT_ZIPREADER = Dust.lookup("giskard.me:6:?");
-	MindHandle RESOURCE_AGT_JSONDOM = Dust.lookup("giskard.me:6:?");
-	MindHandle RESOURCE_AGT_CSVSAX = Dust.lookup("giskard.me:6:?");
+	MindHandle RESOURCE_LOG_FILESYSTEM = Dust.lookup("giskard.me:6:?");
+	MindHandle RESOURCE_LOG_ZIPREADER = Dust.lookup("giskard.me:6:?");
+	MindHandle RESOURCE_LOG_JSONDOM = Dust.lookup("giskard.me:6:?");
+	MindHandle RESOURCE_LOG_CSVSAX = Dust.lookup("giskard.me:6:?");
 	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard.me:6:?");
 
 	MindHandle DEV_UNIT = Dust.lookup("giskard.me:7");

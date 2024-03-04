@@ -16,7 +16,8 @@ import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustMachineTempJavaMeta extends DustAgent implements DustMachineConsts {
 
-	private static final String IF_FMT_BEGIN = "package {0};\n" + "\n" + "public interface {1} extends DustConsts '{'\n\t// Generated: {2}\n";
+	private static final String IF_FMT_BEGIN = "package {0};\n" + "\n"
+			+ "public interface {1} extends DustConsts '{'\n\t// Generated: {2}\n";
 	private static final String IF_FMT_LINE = "	MindHandle {0} = Dust.lookup(\"{1}\");";
 	private static final String IF_END = "\n}";
 
@@ -42,7 +43,7 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 
 	@Override
 	protected MindHandle agentBegin() throws Exception {
-		if ( null == fw ) {
+		if (null == fw) {
 			File f = new File(srcDir, packageName.replace(".", "/"));
 			DustUtilsFile.ensureDir(f);
 
@@ -57,27 +58,20 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 	@Override
 	protected MindHandle agentProcess() throws Exception {
 
-//		Map<String, MindHandle> ui = Dust.access(MindAccess.Peek, null, unitToAdd, MIND_ATT_UNIT_HANDLES);
-
-//		if ( null != ui ) {
-//			if ( paToWrite.contains(MIND_ASP_UNIT) ) {
-//				items.put(unitToAdd.getId(), unitToAdd);
-//			}
-			for (Map.Entry<String, MindHandle> ue : unitToAdd.entrySet()) {
-				MindHandle he = ue.getValue();
-				MindHandle pa = Dust.access(MindAccess.Peek, null, he, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
-				if ( paToWrite.contains(pa) ) {
-					items.put(he.getId(), he);
-				}
+		for (Map.Entry<String, MindHandle> ue : unitToAdd.entrySet()) {
+			MindHandle he = ue.getValue();
+			MindHandle pa = Dust.access(MindAccess.Peek, null, he, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+			if (paToWrite.contains(pa)) {
+				items.put(he.getId(), he);
 			}
-//		}
+		}
 
 		return MIND_TAG_RESULT_READACCEPT;
 	}
 
 	@Override
 	protected MindHandle agentEnd() throws Exception {
-		if ( null != fw ) {
+		if (null != fw) {
 			MindHandle lastTagParent = null;
 			MindHandle lastPA = null;
 			for (Map.Entry<String, MindHandle> ue : items.entrySet()) {
@@ -85,23 +79,23 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 				MindHandle he = ue.getValue();
 				MindHandle pa = Dust.access(MindAccess.Peek, null, he, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
-				if ( id.equals("7:1") ) {
+				if (id.equals("7:1")) {
 					DustDevUtils.breakpoint();
 				}
 
 				boolean split = MIND_ASP_UNIT == pa;
-				if ( !split && (lastPA != pa) ) {
+				if (!split && (lastPA != pa)) {
 					split = true;
 
-					if ( MIND_ASP_ATTRIBUTE == pa ) {
+					if (MIND_ASP_ATTRIBUTE == pa) {
 						split = !((MIND_ASP_ASPECT == lastPA) || (MIND_ASP_AGENT == lastPA));
 					}
 				}
 				lastPA = pa;
 
-				if ( MIND_ASP_TAG == pa ) {
+				if (MIND_ASP_TAG == pa) {
 					MindHandle tagParent = Dust.access(MindAccess.Peek, null, he, MISC_ATT_CONN_PARENT);
-					if ( !split ) {
+					if (!split) {
 						split = !((tagParent == lastPA) || (tagParent == lastTagParent));
 					}
 					lastTagParent = (null == tagParent) ? he : tagParent;
@@ -110,7 +104,7 @@ public class DustMachineTempJavaMeta extends DustAgent implements DustMachineCon
 				String name = Dust.access(MindAccess.Peek, null, he, DEV_ATT_HINT);
 				String line = MessageFormat.format(IF_FMT_LINE, name, id);
 
-				if ( split ) {
+				if (split) {
 					fw.println();
 				}
 				fw.println(line);

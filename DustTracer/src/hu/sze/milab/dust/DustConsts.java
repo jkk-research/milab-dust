@@ -38,7 +38,6 @@ public interface DustConsts {
 	String ITEMID_NEW = "?";
 
 	interface MindHandle {
-//		MindHandle getUnit();
 		String getId();
 	};
 

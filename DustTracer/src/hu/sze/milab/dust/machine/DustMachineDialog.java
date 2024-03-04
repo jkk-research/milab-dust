@@ -52,7 +52,7 @@ class DustMachineDialog implements DustMachineConsts {
 			if ( null == activeAgent ) {
 				curr = resolveKnowledge((MindHandle) root, createIfMissing);
 			} else {
-				MindContext ctx = DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
+				MindContext ctx = (root instanceof MindContext) ? (MindContext) root : DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
 
 				switch ( ctx ) {
 				case Dialog:

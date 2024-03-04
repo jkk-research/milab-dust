@@ -7,6 +7,7 @@ import java.util.Map;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty;
 import hu.sze.milab.dust.stream.DustStreamCsvSaxAgent;
 import hu.sze.milab.dust.stream.DustStreamFilesystemServer;
 import hu.sze.milab.dust.stream.json.DustJsonDomAgent;
@@ -89,16 +90,21 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
 		DustUtilsAttCache.set(MachineAtts.PersistentAtt, false, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_CONTENT, DUST_ATT_NATIVELOGIC_INSTANCE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
-				, "AGT", MIND_ASP_AGENT
+				, "AGT", MIND_ASP_AGENT, "LOG", MIND_ASP_LOGIC
 				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_ASP_MACHINE);
+		
+		// TODO not good... fix: ensure getUnit call on units when resolving from file...
+		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
 
 		machine.bootInit(bh);
 		
-		DustDevUtils.registerNative(RESOURCE_AGT_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(RESOURCE_AGT_ZIPREADER, DUSTJAVA_UNIT, DustZipAgentReader.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_AGT_JSONDOM, DUSTJAVA_UNIT, DustJsonDomAgent.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_AGT_CSVSAX, DUSTJAVA_UNIT, DustStreamCsvSaxAgent.class.getCanonicalName());
-		
+		DustDevUtils.registerNative(RESOURCE_LOG_FILESYSTEM, DUSTJAVA_UNIT, DustStreamFilesystemServer.class.getCanonicalName(), true);
+		DustDevUtils.registerNative(RESOURCE_LOG_ZIPREADER, DUSTJAVA_UNIT, DustZipAgentReader.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_LOG_JSONDOM, DUSTJAVA_UNIT, DustJsonDomAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_LOG_CSVSAX, DUSTJAVA_UNIT, DustStreamCsvSaxAgent.class.getCanonicalName());
+
+		DustDevUtils.registerNative(NET_LOG_HTTPSRV, DUSTJAVA_UNIT, DustHttpServerJetty.class.getCanonicalName(), true);
+
 		String bootClass = System.getProperty("DustBootClass");
 		
 		if ( !DustUtils.isEmpty(bootClass)) {

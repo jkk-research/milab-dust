@@ -1,6 +1,6 @@
 package hu.sze.milab.dust;
 
-public abstract class DustAgent implements DustConsts.MindAgent, DustMetaConsts {
+public abstract class DustAgent implements DustConsts.MindAgent, DustHandles {
 	
 	@Override
 	public final MindHandle agentProcess(MindAction action) throws Exception {

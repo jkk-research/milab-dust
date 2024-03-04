@@ -10,6 +10,8 @@ public class DustTestBootSimple implements DustTestConsts {
 		DustMachineTempUtils.test();
 		
 		helloWorld();
+//		startPortal();
+//		helloWorld();
 	}
 	
 	public static void helloWorld() throws Exception {
@@ -18,6 +20,14 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hAgtHelloWorld = DustDevUtils.registerAgent(TEST0_UNIT, hLogHelloWorld); 	
 
 		Dust.access(MindAccess.Set, hAgtHelloWorld, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
+	}
+	
+	public static void startPortal() throws Exception {
+		MindHandle hAgtSrv = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSRV); 	
+		
+		Dust.access(MindAccess.Set, 8090L, hAgtSrv, NET_ATT_HOST_PORT);
+		
+		Dust.access(MindAccess.Set, hAgtSrv, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}
 	
 }

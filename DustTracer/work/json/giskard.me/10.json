@@ -1,0 +1,321 @@
+{
+  "meta" : {
+    "count" : 21
+  },
+  "data" : [ {
+    "id" : "giskard.me:10 (NET_UNIT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_UNIT"
+    },
+    "type" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:0 (MIND_ASP_UNIT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:1:3 (MIND_ATT_UNIT_AUTHOR)" : {
+        "id" : "giskard.me (giskard.me)",
+        "type" : "giskard.me:1:69 (MIND_ASP_AUTHOR)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:12 (NET_ATT_SRVCALL_METHOD)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_METHOD"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:11 (NET_ATT_SRVCALL_RESPONSE)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_RESPONSE"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:10 (NET_ATT_SRVCALL_REQUEST)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_REQUEST"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:20 (NET_LOG_HTTPSVCJSONAPI)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_LOG_HTTPSVCJSONAPI"
+    },
+    "type" : "giskard.me:1:15 (MIND_ASP_LOGIC)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:15 (MIND_ASP_LOGIC)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:1 (NET_ASP_HOST)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ASP_HOST"
+    },
+    "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:12 (MIND_ASP_ASPECT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:4 (NET_ASP_SSLINFO)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ASP_SSLINFO"
+    },
+    "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:12 (MIND_ASP_ASPECT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:5 (NET_ATT_SSLINFO_PORT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SSLINFO_PORT"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:4 (NET_ASP_SSLINFO)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:2 (NET_ATT_HOST_PORT)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_HOST_PORT"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:1 (NET_ASP_HOST)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:3 (NET_ATT_HOST_IPV4)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_HOST_IPV4"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:1 (NET_ASP_HOST)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:8 (NET_ATT_SSLINFO_KEYMANAGERPASS)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SSLINFO_KEYMANAGERPASS"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:4 (NET_ASP_SSLINFO)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ASP_SRVCALL"
+    },
+    "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:12 (MIND_ASP_ASPECT)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:19 (NET_LOG_HTTPSVCFILES)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_LOG_HTTPSVCFILES"
+    },
+    "type" : "giskard.me:1:15 (MIND_ASP_LOGIC)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:15 (MIND_ASP_LOGIC)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:6 (NET_ATT_SSLINFO_STOREPATH)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SSLINFO_STOREPATH"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:4 (NET_ASP_SSLINFO)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:18 (NET_LOG_HTTPSRV)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_LOG_HTTPSRV"
+    },
+    "type" : "giskard.me:1:15 (MIND_ASP_LOGIC)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:15 (MIND_ASP_LOGIC)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:7 (NET_ATT_SSLINFO_STOREPASS)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SSLINFO_STOREPASS"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:4 (NET_ASP_SSLINFO)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:17 (NET_ATT_SRVCALL_STATUS)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_STATUS"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:16 (NET_ATT_SRVCALL_ATTRIBUTES)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_ATTRIBUTES"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:15 (NET_ATT_SRVCALL_HEADERS)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_HEADERS"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:14 (NET_ATT_SRVCALL_PAYLOAD)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_PAYLOAD"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  }, {
+    "id" : "giskard.me:10:13 (NET_ATT_SRVCALL_PATHINFO)",
+    "attributes" : {
+      "giskard.me:7:0 (DEV_ATT_HINT)" : "NET_ATT_SRVCALL_PATHINFO"
+    },
+    "type" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+    "relationships" : {
+      "giskard.me:1:11 (MIND_ATT_KNOWLEDGE_PRIMARYASPECT)" : {
+        "id" : "giskard.me:1:13 (MIND_ASP_ATTRIBUTE)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      },
+      "giskard.me:3:2 (MISC_ATT_CONN_PARENT)" : {
+        "id" : "giskard.me:10:9 (NET_ASP_SRVCALL)",
+        "type" : "giskard.me:1:12 (MIND_ASP_ASPECT)"
+      }
+    }
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  }
+}

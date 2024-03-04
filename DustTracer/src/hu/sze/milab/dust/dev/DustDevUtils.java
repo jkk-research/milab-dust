@@ -5,34 +5,34 @@ import java.util.Comparator;
 import java.util.Date;
 
 import hu.sze.milab.dust.Dust;
-import hu.sze.milab.dust.DustMetaConsts;
+import hu.sze.milab.dust.DustHandles;
 
-public class DustDevUtils implements DustMetaConsts {
+public class DustDevUtils implements DustHandles {
 
 	public static final Comparator<String> ID_COMP = new Comparator<String>() {
 		@Override
 		public int compare(String o1, String o2) {
-			if ( o1.equals(o2) ) {
+			if (o1.equals(o2)) {
 				return 0;
 			}
-			
+
 			String[] s1 = o1.split(DUST_SEP_ID);
 			String[] s2 = o2.split(DUST_SEP_ID);
 
 			int ret = s1[0].compareTo(s2[0]);
 			int m1 = s1.length - 1;
 			int m2 = s2.length - 1;
-			
-			for ( int i = 1; (0 == ret) && (i < 3); ++i ) {
-				if ( i > m1 ) {
+
+			for (int i = 1; (0 == ret) && (i < 3); ++i) {
+				if (i > m1) {
 					ret = -1;
-				} else if ( i > m2 ) {
+				} else if (i > m2) {
 					ret = 1;
 				} else {
 					ret = Integer.valueOf(s1[i]) - Integer.valueOf(s2[i]);
-				}  
+				}
 			}
-			
+
 			return ret;
 		}
 	};
@@ -69,22 +69,20 @@ public class DustDevUtils implements DustMetaConsts {
 		return hLogic;
 	}
 
-	public static MindHandle registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName) {
-		return registerNative(hLogic, hUnit, nativeClassName, false);
+	public static void registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName) {
+		registerNative(hLogic, hUnit, nativeClassName, false);
 	}
 
-	public static MindHandle registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName, boolean srv) {
+	public static void registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName, boolean srv) {
 		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVELOGIC);
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
 
 		Dust.access(MindAccess.Set, hNative, APP_MODULE_MAIN, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
-		if ( srv ) {
+		if (srv) {
 			Dust.access(MindAccess.Set, true, hNative, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
 		}
-
-		return hLogic;
 	}
 
 	public static void breakpoint(Object... objects) {
