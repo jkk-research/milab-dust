@@ -11,7 +11,7 @@ import hu.sze.milab.dust.utils.DustUtils;
 public class DustJsonUtils implements DustJsonConsts {
 	
 	public static MindHandle handleFromKey(String key) {
-		String id = key.split(" ")[0];
+		String id = key.split(" ")[0].replace(JSONAPI_IDSEP, DUST_SEP_ID);
 		MindHandle ret = Dust.lookup(id);
 
 		if (null == ret) {
@@ -30,7 +30,7 @@ public class DustJsonUtils implements DustJsonConsts {
 
 		String hId = ih.getId();
 
-		return hId + " (" + ih.toString() + ")";
+		return hId.replace(DUST_SEP_ID, JSONAPI_IDSEP) + " " + ih.toString();
 	}
 
 	public static Map handleToMap(MindHandle ih) throws Exception {

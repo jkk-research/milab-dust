@@ -35,8 +35,8 @@ class DustMachine extends Dust.Machine
 		}
 	}
 
-//	boolean loadUnits = false;
-	boolean loadUnits = true;
+	boolean loadUnits = false;
+//	boolean loadUnits = true;
 
 	IdResolver idRes;
 	private final Map rootUnit = new KnowledgeMap();
@@ -193,9 +193,9 @@ class DustMachine extends Dust.Machine
 	}
 
 	Map getUnit(String unitID, MindHandle hAuthor) {
-		if ( "giskard.me:10".equals(unitID) ) {
-			DustDevUtils.breakpoint("hipp");
-		}
+//		if ( "giskard:10".equals(unitID) ) {
+//			DustDevUtils.breakpoint("hipp");
+//		}
 		MindHandle hUnit = lookup(rootUnit, unitID);
 		Map m = (Map) rootUnit.get(MIND_ATT_UNIT_CONTENT);
 		Map ret = DustUtils.safeGet(m, hUnit, crtUnit, hAuthor);

@@ -24,19 +24,18 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-//		initFromInterfaces(DustMetaHandles.class, DustNetHandles.class);
+		initFromInterfaces(DustMetaHandles.class, DustNetHandles.class);
 
 //		dumpUnits();
-
-//		readUnits();
 		
 //		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
+//		readUnits();
 		
-		writeJavaMeta("giskard.me", "hu.sze.milab.dust.DustHandles");
+//		writeJavaMeta("giskard", "hu.sze.milab.dust.DustHandles");
 	}
 
 	public static void readUnits() throws Exception {
-		File dir = new File(MODULE_DIR, "giskard.me");
+		File dir = new File(MODULE_DIR, "giskard");
 
 		if (dir.isDirectory()) {
 			for (File f : dir.listFiles()) {
@@ -111,7 +110,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 				if (ch instanceof DustHandle) {
 					String name = f.getName();
 					DustHandle hItem = (DustHandle) ch;
-//					hItem.setHint(name);
+					hItem.setHint(name);
 					Dust.access(MindAccess.Set, name, ch, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);

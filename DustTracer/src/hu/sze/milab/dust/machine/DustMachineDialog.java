@@ -28,7 +28,6 @@ class DustMachineDialog implements DustMachineConsts {
 	public DustMachineDialog(DustMachine machine) {
 		this.machine = machine;
 		context.put(MIND_ATT_UNIT_CONTENT, new HashMap());
-		context.put(MIND_ATT_UNIT_CONTENT, new HashMap());
 	}
 	
 
@@ -50,7 +49,7 @@ class DustMachineDialog implements DustMachineConsts {
 			MindHandle activeAgent = (MindHandle) context.get(MIND_ATT_DIALOG_ACTIVEAGENT);
 
 			if ( null == activeAgent ) {
-				curr = resolveKnowledge((MindHandle) root, createIfMissing);
+				curr = (root instanceof MindContext) ? DustUtils.safeGet(context, root, MAP_CREATOR): resolveKnowledge((MindHandle) root, createIfMissing);
 			} else {
 				MindContext ctx = (root instanceof MindContext) ? (MindContext) root : DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
 
@@ -133,7 +132,7 @@ class DustMachineDialog implements DustMachineConsts {
 				if ( null != listeners ) {
 					Object hTarget = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_HANDLE, null);
 					Object oldAgent = Dust.access(MindAccess.Peek, null, null, MIND_ATT_DIALOG_ACTIVEAGENT);
-					MindAction action = DustUtilsEnumTranslator.getEnum((MindHandle) val, MindAction.Process);
+					MindAction action = (val instanceof MindAction) ? (MindAction)val : DustUtilsEnumTranslator.getEnum((MindHandle) val, MindAction.Process);
 
 					for (Object a : listeners) {
 						try {

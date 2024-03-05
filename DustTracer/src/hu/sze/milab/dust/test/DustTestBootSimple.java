@@ -9,8 +9,7 @@ public class DustTestBootSimple implements DustTestConsts {
 	public static void boot(String[] launchParams) throws Exception {
 		DustMachineTempUtils.test();
 		
-		helloWorld();
-//		startPortal();
+		startPortal();
 //		helloWorld();
 	}
 	
@@ -24,8 +23,14 @@ public class DustTestBootSimple implements DustTestConsts {
 	
 	public static void startPortal() throws Exception {
 		MindHandle hAgtSrv = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSRV); 	
+		MindHandle hRequest = DustDevUtils.newHandle(TEST0_UNIT, NET_ASP_SRVCALL);
 		
 		Dust.access(MindAccess.Set, 8090L, hAgtSrv, NET_ATT_HOST_PORT);
+		Dust.access(MindAccess.Set, "/admin", hAgtSrv, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Set, hRequest, hAgtSrv, MISC_ATT_CONN_TARGET);
+		
+		Dust.access(MindAccess.Insert, hAgtSrv, hAgtSrv, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+		Dust.access(MindAccess.Insert, hAgtSrv, hAgtSrv, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		
 		Dust.access(MindAccess.Set, hAgtSrv, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}

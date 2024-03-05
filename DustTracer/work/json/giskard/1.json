@@ -1,0 +1,1101 @@
+{
+  "data" : [ {
+    "type" : "giskard-1-0 MIND_ASP_UNIT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      },
+      "giskard-1-3 MIND_ATT_UNIT_AUTHOR" : {
+        "type" : "giskard-1-69 MIND_ASP_AUTHOR",
+        "id" : "giskard giskard"
+      }
+    },
+    "id" : "giskard-1 MIND_UNIT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_STATUS_PROCESSING"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-58 MIND_TAG_STATUS"
+      }
+    },
+    "id" : "giskard-1-60 MIND_TAG_STATUS_PROCESSING"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_STATUS_WAITING"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-58 MIND_TAG_STATUS"
+      }
+    },
+    "id" : "giskard-1-61 MIND_TAG_STATUS_WAITING"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_STATUS_ERROR"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-58 MIND_TAG_STATUS"
+      }
+    },
+    "id" : "giskard-1-62 MIND_TAG_STATUS_ERROR"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_RESULT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-63 MIND_TAG_RESULT"
+      }
+    },
+    "id" : "giskard-1-63 MIND_TAG_RESULT"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_AGENT_LOGIC"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-23 MIND_ASP_AGENT"
+      }
+    },
+    "id" : "giskard-1-24 MIND_ATT_AGENT_LOGIC"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_RESULT_ACCEPT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-63 MIND_TAG_RESULT"
+      }
+    },
+    "id" : "giskard-1-68 MIND_TAG_RESULT_ACCEPT"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_AGENT_TARGET"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-23 MIND_ASP_AGENT"
+      }
+    },
+    "id" : "giskard-1-25 MIND_ATT_AGENT_TARGET"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_AUTHOR"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-69 MIND_ASP_AUTHOR"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_CONTEXT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-26 MIND_TAG_CONTEXT"
+      }
+    },
+    "id" : "giskard-1-26 MIND_TAG_CONTEXT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_CONTEXT_DIALOG"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-26 MIND_TAG_CONTEXT"
+      }
+    },
+    "id" : "giskard-1-27 MIND_TAG_CONTEXT_DIALOG"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_DIALOG_ASSEMBLY"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-19 MIND_ASP_DIALOG"
+      }
+    },
+    "id" : "giskard-1-20 MIND_ATT_DIALOG_ASSEMBLY"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_RESULT_REJECT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-63 MIND_TAG_RESULT"
+      }
+    },
+    "id" : "giskard-1-64 MIND_TAG_RESULT_REJECT"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_DIALOG_LAUNCHPARAMS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-19 MIND_ASP_DIALOG"
+      }
+    },
+    "id" : "giskard-1-21 MIND_ATT_DIALOG_LAUNCHPARAMS"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_RESULT_PASS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-63 MIND_TAG_RESULT"
+      }
+    },
+    "id" : "giskard-1-65 MIND_TAG_RESULT_PASS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_DIALOG_ACTIVEAGENT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-19 MIND_ASP_DIALOG"
+      }
+    },
+    "id" : "giskard-1-22 MIND_ATT_DIALOG_ACTIVEAGENT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_RESULT_READ"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-63 MIND_TAG_RESULT"
+      }
+    },
+    "id" : "giskard-1-66 MIND_TAG_RESULT_READ"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_AGENT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-23 MIND_ASP_AGENT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_RESULT_READACCEPT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-63 MIND_TAG_RESULT"
+      }
+    },
+    "id" : "giskard-1-67 MIND_TAG_RESULT_READACCEPT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_CONTEXT_SELF"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-26 MIND_TAG_CONTEXT"
+      }
+    },
+    "id" : "giskard-1-28 MIND_TAG_CONTEXT_SELF"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_CONTEXT_TARGET"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-26 MIND_TAG_CONTEXT"
+      }
+    },
+    "id" : "giskard-1-29 MIND_TAG_CONTEXT_TARGET"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_BROADCAST"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-50 MIND_TAG_ACCESS_BROADCAST"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_LOOKUP"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-51 MIND_TAG_ACCESS_LOOKUP"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACTION"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-52 MIND_TAG_ACTION"
+      }
+    },
+    "id" : "giskard-1-52 MIND_TAG_ACTION"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_ATTRIBUTE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACTION_RELEASE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-52 MIND_TAG_ACTION"
+      }
+    },
+    "id" : "giskard-1-57 MIND_TAG_ACTION_RELEASE"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_TAG"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-14 MIND_ASP_TAG"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_STATUS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-58 MIND_TAG_STATUS"
+      }
+    },
+    "id" : "giskard-1-58 MIND_TAG_STATUS"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_LOGIC"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-15 MIND_ASP_LOGIC"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_STATUS_IDLE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-58 MIND_TAG_STATUS"
+      }
+    },
+    "id" : "giskard-1-59 MIND_TAG_STATUS_IDLE"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_ASSEMBLY"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-16 MIND_ASP_ASSEMBLY"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACTION_INIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-52 MIND_TAG_ACTION"
+      }
+    },
+    "id" : "giskard-1-53 MIND_TAG_ACTION_INIT"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_KNOWLEDGE_LISTENERS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-7 MIND_ASP_KNOWLEDGE"
+      }
+    },
+    "id" : "giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACTION_BEGIN"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-52 MIND_TAG_ACTION"
+      }
+    },
+    "id" : "giskard-1-54 MIND_TAG_ACTION_BEGIN"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_KNOWLEDGE_PRIMARYASPECT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-7 MIND_ASP_KNOWLEDGE"
+      }
+    },
+    "id" : "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACTION_PROCESS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-52 MIND_TAG_ACTION"
+      }
+    },
+    "id" : "giskard-1-55 MIND_TAG_ACTION_PROCESS"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_ASPECT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-12 MIND_ASP_ASPECT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACTION_END"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-52 MIND_TAG_ACTION"
+      }
+    },
+    "id" : "giskard-1-56 MIND_TAG_ACTION_END"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_ASSEMBLY_UNITS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-16 MIND_ASP_ASSEMBLY"
+      }
+    },
+    "id" : "giskard-1-17 MIND_ATT_ASSEMBLY_UNITS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_ASSEMBLY_STARTAGENTS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-16 MIND_ASP_ASSEMBLY"
+      }
+    },
+    "id" : "giskard-1-18 MIND_ATT_ASSEMBLY_STARTAGENTS"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_DIALOG"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-19 MIND_ASP_DIALOG"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_COLLTYPE_MAP"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-36 MIND_TAG_COLLTYPE"
+      }
+    },
+    "id" : "giskard-1-40 MIND_TAG_COLLTYPE_MAP"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-41 MIND_TAG_ACCESS"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_INSERT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-46 MIND_TAG_ACCESS_INSERT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_DELETE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-47 MIND_TAG_ACCESS_DELETE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_RESET"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-48 MIND_TAG_ACCESS_RESET"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_COMMIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-49 MIND_TAG_ACCESS_COMMIT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_CHECK"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-42 MIND_TAG_ACCESS_CHECK"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_PEEK"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-43 MIND_TAG_ACCESS_PEEK"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_GET"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-44 MIND_TAG_ACCESS_GET"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_ACCESS_SET"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-41 MIND_TAG_ACCESS"
+      }
+    },
+    "id" : "giskard-1-45 MIND_TAG_ACCESS_SET"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_CONTEXT_DIRECT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-26 MIND_TAG_CONTEXT"
+      }
+    },
+    "id" : "giskard-1-30 MIND_TAG_CONTEXT_DIRECT"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-0 MIND_ASP_UNIT"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_UNIT_HANDLES"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      }
+    },
+    "id" : "giskard-1-1 MIND_ATT_UNIT_HANDLES"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_VALTYPE_BIN"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-31 MIND_TAG_VALTYPE"
+      }
+    },
+    "id" : "giskard-1-35 MIND_TAG_VALTYPE_BIN"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_UNIT_CONTENT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      }
+    },
+    "id" : "giskard-1-2 MIND_ATT_UNIT_CONTENT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_COLLTYPE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-36 MIND_TAG_COLLTYPE"
+      }
+    },
+    "id" : "giskard-1-36 MIND_TAG_COLLTYPE"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_UNIT_AUTHOR"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      }
+    },
+    "id" : "giskard-1-3 MIND_ATT_UNIT_AUTHOR"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_COLLTYPE_ONE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-36 MIND_TAG_COLLTYPE"
+      }
+    },
+    "id" : "giskard-1-37 MIND_TAG_COLLTYPE_ONE"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_HANDLE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-4 MIND_ASP_HANDLE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_COLLTYPE_SET"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-36 MIND_TAG_COLLTYPE"
+      }
+    },
+    "id" : "giskard-1-38 MIND_TAG_COLLTYPE_SET"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_HANDLE_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-4 MIND_ASP_HANDLE"
+      }
+    },
+    "id" : "giskard-1-5 MIND_ATT_HANDLE_UNIT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_VALTYPE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-31 MIND_TAG_VALTYPE"
+      }
+    },
+    "id" : "giskard-1-31 MIND_TAG_VALTYPE"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_HANDLE_ID"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-4 MIND_ASP_HANDLE"
+      }
+    },
+    "id" : "giskard-1-6 MIND_ATT_HANDLE_ID"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_VALTYPE_INT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-31 MIND_TAG_VALTYPE"
+      }
+    },
+    "id" : "giskard-1-32 MIND_TAG_VALTYPE_INT"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ASP_KNOWLEDGE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-1-7 MIND_ASP_KNOWLEDGE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_VALTYPE_REAL"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-31 MIND_TAG_VALTYPE"
+      }
+    },
+    "id" : "giskard-1-33 MIND_TAG_VALTYPE_REAL"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_KNOWLEDGE_HANDLE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-7 MIND_ASP_KNOWLEDGE"
+      }
+    },
+    "id" : "giskard-1-8 MIND_ATT_KNOWLEDGE_HANDLE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_VALTYPE_HANDLE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-31 MIND_TAG_VALTYPE"
+      }
+    },
+    "id" : "giskard-1-34 MIND_TAG_VALTYPE_HANDLE"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_ATT_KNOWLEDGE_TAGS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-7 MIND_ASP_KNOWLEDGE"
+      }
+    },
+    "id" : "giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "MIND_TAG_COLLTYPE_ARR"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-1-36 MIND_TAG_COLLTYPE"
+      }
+    },
+    "id" : "giskard-1-39 MIND_TAG_COLLTYPE_ARR"
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "meta" : {
+    "count" : 71
+  }
+}

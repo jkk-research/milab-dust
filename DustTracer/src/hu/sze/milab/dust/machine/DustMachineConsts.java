@@ -17,9 +17,12 @@ interface DustMachineConsts extends DustHandles, DustUtilsConsts {
 		private final String id;
 
 		private static final Set<String> IDS = new TreeSet<>();
+		
+		String str;
 
 		public DustHandle(String id) {
 			this.id = id;
+			setHint(id);
 
 			if (!IDS.add(id)) {
 				Dust.log(null, "Creating handle", this);
@@ -33,9 +36,13 @@ interface DustMachineConsts extends DustHandles, DustUtilsConsts {
 
 		@Override
 		public String toString() {
-			String str = Dust.access(MindAccess.Peek, id, this, DEV_ATT_HINT);
+//			String str = Dust.access(MindAccess.Peek, id, this, DEV_ATT_HINT);
 			
 			return str;
+		}
+
+		public void setHint(String hint) {
+			str = hint;
 		}
 	}
 

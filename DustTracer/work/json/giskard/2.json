@@ -1,0 +1,357 @@
+{
+  "data" : [ {
+    "type" : "giskard-1-0 MIND_ASP_UNIT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      },
+      "giskard-1-3 MIND_ATT_UNIT_AUTHOR" : {
+        "type" : "giskard-1-69 MIND_ASP_AUTHOR",
+        "id" : "giskard giskard"
+      }
+    },
+    "id" : "giskard-2 DUST_UNIT"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_NATIVELOGIC_INSTANCE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      }
+    },
+    "id" : "giskard-2-20 DUST_ATT_NATIVELOGIC_INSTANCE"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ASP_MACHINE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-2-0 DUST_ASP_MACHINE"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_AUTHORS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-1 DUST_ATT_MACHINE_AUTHORS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MODULE_LIBRARIES"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-11 DUST_ASP_MODULE"
+      }
+    },
+    "id" : "giskard-2-14 DUST_ATT_MODULE_LIBRARIES"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_UNITS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-2 DUST_ATT_MACHINE_UNITS"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ASP_THREAD"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-2-15 DUST_ASP_THREAD"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_ASSEMBLIES"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-3 DUST_ATT_MACHINE_ASSEMBLIES"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_THREAD_DIALOG"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-15 DUST_ASP_THREAD"
+      }
+    },
+    "id" : "giskard-2-16 DUST_ATT_THREAD_DIALOG"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_MAINASSEMBLY"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-4 DUST_ATT_MACHINE_MAINASSEMBLY"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ASP_NATIVELOGIC"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_MODULES"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-5 DUST_ATT_MACHINE_MODULES"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_ACTIVE_SERVERS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-10 DUST_ATT_MACHINE_ACTIVE_SERVERS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_DIALOGS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-6 DUST_ATT_MACHINE_DIALOGS"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ASP_MODULE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-2-11 DUST_ASP_MODULE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_TAG_NATIVELOGIC_SERVER"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      }
+    },
+    "id" : "giskard-2-21 DUST_TAG_NATIVELOGIC_SERVER"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_MAINDIALOG"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-7 DUST_ATT_MACHINE_MAINDIALOG"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MODULE_UNITS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-11 DUST_ASP_MODULE"
+      }
+    },
+    "id" : "giskard-2-12 DUST_ATT_MODULE_UNITS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_THREADS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-8 DUST_ATT_MACHINE_THREADS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MODULE_NATIVELOGICS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-11 DUST_ASP_MODULE"
+      }
+    },
+    "id" : "giskard-2-13 DUST_ATT_MODULE_NATIVELOGICS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-0 DUST_ASP_MACHINE"
+      }
+    },
+    "id" : "giskard-2-9 DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_NATIVELOGIC_LOGIC"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      }
+    },
+    "id" : "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUST_ATT_NATIVELOGIC_IMPLEMENTATION"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      }
+    },
+    "id" : "giskard-2-19 DUST_ATT_NATIVELOGIC_IMPLEMENTATION"
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "meta" : {
+    "count" : 23
+  }
+}

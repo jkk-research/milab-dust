@@ -1,0 +1,165 @@
+{
+  "data" : [ {
+    "type" : "giskard-1-0 MIND_ASP_UNIT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      },
+      "giskard-1-3 MIND_ATT_UNIT_AUTHOR" : {
+        "type" : "giskard-1-69 MIND_ASP_AUTHOR",
+        "id" : "giskard giskard"
+      }
+    },
+    "id" : "giskard-5 EVENT_UNIT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_INFO"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-6 EVENT_TAG_TYPE_INFO"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_TRACE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-7 EVENT_TAG_TYPE_TRACE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_BREAKPOINT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-8 EVENT_TAG_TYPE_BREAKPOINT"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_ASP_EVENT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-5-0 EVENT_ASP_EVENT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-1 EVENT_TAG_TYPE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_EXCEPTIONTHROWN"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-2 EVENT_TAG_TYPE_EXCEPTIONTHROWN"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_EXCEPTIONSWALLOWED"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-3 EVENT_TAG_TYPE_EXCEPTIONSWALLOWED"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_ERROR"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-4 EVENT_TAG_TYPE_ERROR"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "EVENT_TAG_TYPE_WARNING"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-5-1 EVENT_TAG_TYPE"
+      }
+    },
+    "id" : "giskard-5-5 EVENT_TAG_TYPE_WARNING"
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "meta" : {
+    "count" : 10
+  }
+}

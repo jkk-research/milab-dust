@@ -45,8 +45,8 @@ public interface DustConsts {
 		MindHandle agentProcess(MindAction action) throws Exception;
 	}
 
-	interface DustThreadOwner {
-		boolean isCurrentThreadOwned();
-	}
+//	interface DustThreadOwner {
+//		boolean isCurrentThreadOwned();
+//	}
 
 }

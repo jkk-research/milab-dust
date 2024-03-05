@@ -1,0 +1,111 @@
+{
+  "data" : [ {
+    "type" : "giskard-1-0 MIND_ASP_UNIT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "DUSTJAVA_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      },
+      "giskard-1-3 MIND_ATT_UNIT_AUTHOR" : {
+        "type" : "giskard-1-69 MIND_ASP_AUTHOR",
+        "id" : "giskard giskard"
+      }
+    },
+    "id" : "giskard-8 DUSTJAVA_UNIT"
+  }, {
+    "type" : "giskard-2-17 DUST_ASP_NATIVELOGIC",
+    "attributes" : {
+      "giskard-2-19 DUST_ATT_NATIVELOGIC_IMPLEMENTATION" : "hu.sze.milab.dust.stream.json.DustJsonDomAgent"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      },
+      "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
+        "type" : "giskard-1-15 MIND_ASP_LOGIC",
+        "id" : "giskard-6-17 RESOURCE_LOG_JSONDOM"
+      }
+    },
+    "id" : "giskard-8-3 giskard:8:3"
+  }, {
+    "type" : "giskard-2-17 DUST_ASP_NATIVELOGIC",
+    "attributes" : {
+      "giskard-2-19 DUST_ATT_NATIVELOGIC_IMPLEMENTATION" : "hu.sze.milab.dust.stream.DustStreamCsvSaxAgent"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      },
+      "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
+        "type" : "giskard-1-15 MIND_ASP_LOGIC",
+        "id" : "giskard-6-18 RESOURCE_LOG_CSVSAX"
+      }
+    },
+    "id" : "giskard-8-4 giskard:8:4"
+  }, {
+    "type" : "giskard-2-17 DUST_ASP_NATIVELOGIC",
+    "attributes" : {
+      "giskard-2-19 DUST_ATT_NATIVELOGIC_IMPLEMENTATION" : "hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty",
+      "giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS" : {
+        "giskard-2-21 DUST_TAG_NATIVELOGIC_SERVER" : true
+      }
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      },
+      "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
+        "type" : "giskard-1-15 MIND_ASP_LOGIC",
+        "id" : "giskard-10-17 NET_LOG_HTTPSRV"
+      }
+    },
+    "id" : "giskard-8-5 giskard:8:5"
+  }, {
+    "type" : "giskard-2-17 DUST_ASP_NATIVELOGIC",
+    "attributes" : {
+      "giskard-2-19 DUST_ATT_NATIVELOGIC_IMPLEMENTATION" : "hu.sze.milab.dust.stream.DustStreamFilesystemServer",
+      "giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS" : {
+        "giskard-2-21 DUST_TAG_NATIVELOGIC_SERVER" : true
+      }
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      },
+      "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
+        "type" : "giskard-1-15 MIND_ASP_LOGIC",
+        "id" : "giskard-6-15 RESOURCE_LOG_FILESYSTEM"
+      }
+    },
+    "id" : "giskard-8-1 giskard:8:1"
+  }, {
+    "type" : "giskard-2-17 DUST_ASP_NATIVELOGIC",
+    "attributes" : {
+      "giskard-2-19 DUST_ATT_NATIVELOGIC_IMPLEMENTATION" : "hu.sze.milab.dust.stream.zip.DustZipAgentReader"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-2-17 DUST_ASP_NATIVELOGIC"
+      },
+      "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
+        "type" : "giskard-1-15 MIND_ASP_LOGIC",
+        "id" : "giskard-6-16 RESOURCE_LOG_ZIPREADER"
+      }
+    },
+    "id" : "giskard-8-2 giskard:8:2"
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "meta" : {
+    "count" : 6
+  }
+}

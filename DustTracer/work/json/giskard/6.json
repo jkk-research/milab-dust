@@ -1,0 +1,313 @@
+{
+  "data" : [ {
+    "type" : "giskard-1-0 MIND_ASP_UNIT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_UNIT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-0 MIND_ASP_UNIT"
+      },
+      "giskard-1-3 MIND_ATT_UNIT_AUTHOR" : {
+        "type" : "giskard-1-69 MIND_ASP_AUTHOR",
+        "id" : "giskard giskard"
+      }
+    },
+    "id" : "giskard-6 RESOURCE_UNIT"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ASP_PROCESSOR"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-6-12 RESOURCE_ASP_PROCESSOR"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_PROCESSOR_STREAM"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-12 RESOURCE_ASP_PROCESSOR"
+      }
+    },
+    "id" : "giskard-6-13 RESOURCE_ATT_PROCESSOR_STREAM"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_TAG_STREAMTYPE_TEXT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-6-8 RESOURCE_TAG_STREAMTYPE"
+      }
+    },
+    "id" : "giskard-6-10 RESOURCE_TAG_STREAMTYPE_TEXT"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_TAG_STREAMTYPE_ZIPENTRY"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-6-8 RESOURCE_TAG_STREAMTYPE"
+      }
+    },
+    "id" : "giskard-6-11 RESOURCE_TAG_STREAMTYPE_ZIPENTRY"
+  }, {
+    "type" : "giskard-1-15 MIND_ASP_LOGIC",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_CSVSAX"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-15 MIND_ASP_LOGIC"
+      }
+    },
+    "id" : "giskard-6-18 RESOURCE_LOG_CSVSAX"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ASP_URL"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-6-0 RESOURCE_ASP_URL"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_CSVSAX_SEP"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      }
+    },
+    "id" : "giskard-6-19 RESOURCE_ATT_CSVSAX_SEP"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_URL_SCHEME"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-0 RESOURCE_ASP_URL"
+      }
+    },
+    "id" : "giskard-6-1 RESOURCE_ATT_URL_SCHEME"
+  }, {
+    "type" : "giskard-1-15 MIND_ASP_LOGIC",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_ZIPREADER"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-15 MIND_ASP_LOGIC"
+      }
+    },
+    "id" : "giskard-6-16 RESOURCE_LOG_ZIPREADER"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_URL_USERINFO"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-0 RESOURCE_ASP_URL"
+      }
+    },
+    "id" : "giskard-6-2 RESOURCE_ATT_URL_USERINFO"
+  }, {
+    "type" : "giskard-1-15 MIND_ASP_LOGIC",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_JSONDOM"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-15 MIND_ASP_LOGIC"
+      }
+    },
+    "id" : "giskard-6-17 RESOURCE_LOG_JSONDOM"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_URL_HOST"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-0 RESOURCE_ASP_URL"
+      }
+    },
+    "id" : "giskard-6-3 RESOURCE_ATT_URL_HOST"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_PROCESSOR_DATA"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-12 RESOURCE_ASP_PROCESSOR"
+      }
+    },
+    "id" : "giskard-6-14 RESOURCE_ATT_PROCESSOR_DATA"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_URL_PATH"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-0 RESOURCE_ASP_URL"
+      }
+    },
+    "id" : "giskard-6-4 RESOURCE_ATT_URL_PATH"
+  }, {
+    "type" : "giskard-1-15 MIND_ASP_LOGIC",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_FILESYSTEM"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-15 MIND_ASP_LOGIC"
+      }
+    },
+    "id" : "giskard-6-15 RESOURCE_LOG_FILESYSTEM"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_URL_QUERY"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-0 RESOURCE_ASP_URL"
+      }
+    },
+    "id" : "giskard-6-5 RESOURCE_ATT_URL_QUERY"
+  }, {
+    "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ATT_URL_FRAGMENT"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-13 MIND_ASP_ATTRIBUTE"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-6-0 RESOURCE_ASP_URL"
+      }
+    },
+    "id" : "giskard-6-6 RESOURCE_ATT_URL_FRAGMENT"
+  }, {
+    "type" : "giskard-1-12 MIND_ASP_ASPECT",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_ASP_STREAM"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-12 MIND_ASP_ASPECT"
+      }
+    },
+    "id" : "giskard-6-7 RESOURCE_ASP_STREAM"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_TAG_STREAMTYPE"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-6-8 RESOURCE_TAG_STREAMTYPE"
+      }
+    },
+    "id" : "giskard-6-8 RESOURCE_TAG_STREAMTYPE"
+  }, {
+    "type" : "giskard-1-14 MIND_ASP_TAG",
+    "attributes" : {
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_TAG_STREAMTYPE_RAW"
+    },
+    "relationships" : {
+      "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
+        "type" : "giskard-1-12 MIND_ASP_ASPECT",
+        "id" : "giskard-1-14 MIND_ASP_TAG"
+      },
+      "giskard-3-2 MISC_ATT_CONN_PARENT" : {
+        "type" : "giskard-1-14 MIND_ASP_TAG",
+        "id" : "giskard-6-8 RESOURCE_TAG_STREAMTYPE"
+      }
+    },
+    "id" : "giskard-6-9 RESOURCE_TAG_STREAMTYPE_RAW"
+  } ],
+  "jsonapi" : {
+    "version" : "1.1"
+  },
+  "meta" : {
+    "count" : 21
+  }
+}

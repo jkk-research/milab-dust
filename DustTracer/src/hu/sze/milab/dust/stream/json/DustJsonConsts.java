@@ -6,6 +6,8 @@ import hu.sze.milab.dust.stream.DustStreamConsts;
 
 public interface DustJsonConsts extends DustStreamConsts {
 	
+	String JSONAPI_IDSEP = "-";
+	
 	String JSONCONST_NULL = "null";
 	String JSONCONST_TRUE = "true";
 	String JSONCONST_FALSE = "false";

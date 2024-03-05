@@ -1,13 +1,10 @@
 package hu.sze.milab.dust.net.httpsrv;
 
 import java.io.PrintWriter;
-import java.util.HashSet;
 import java.util.Properties;
-import java.util.Set;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.eclipse.jetty.server.Connector;
 import org.eclipse.jetty.server.HttpConfiguration;
 import org.eclipse.jetty.server.HttpConnectionFactory;
 import org.eclipse.jetty.server.SecureRequestCustomizer;
@@ -21,13 +18,12 @@ import org.eclipse.jetty.util.ssl.SslContextFactory;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.net.DustNetConsts;
 import hu.sze.milab.dust.utils.DustUtils;
 
-public class DustHttpServerJetty extends DustAgent
-		implements DustNetConsts, DustConsts.MindAgent, DustConsts.DustThreadOwner {
+public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, DustConsts.DustThreadOwner 
+{
 	enum Commands {
 		stop, info,
 	}
@@ -36,7 +32,7 @@ public class DustHttpServerJetty extends DustAgent
 	HandlerList handlers;
 	ServletContextHandler ctxHandler;
 
-	Set<String> ownPrefixes = new HashSet<>();
+//	Set<String> ownPrefixes = new HashSet<>();
 
 //
 //	@Override
@@ -118,20 +114,28 @@ public class DustHttpServerJetty extends DustAgent
 			ctxHandler = new ServletContextHandler();
 			ctxHandler.setContextPath("/*");
 			handlers.addHandler(ctxHandler);
+			
+			MindHandle hSelf = Dust.access(MindAccess.Peek, null, MindContext.Self, MIND_ATT_KNOWLEDGE_HANDLE);
+//			Collection<Object> agents = Dust.access(MindAccess.Peek, Collections.EMPTY_LIST, MindContext.Self, MISC_ATT_CONN_MEMBERARR);
 
-			ctxHandler.addServlet(new ServletHolder(new DustHttpServletDispatcher()), "/*");
+			ctxHandler.addServlet(new ServletHolder(new DustHttpServletDispatcher(hSelf)), "/*");
 
 			jetty.setHandler(handlers);
 			jetty.start();
 		}
-		
+
+		return MIND_TAG_RESULT_ACCEPT;
+	}
+	
+	@Override
+	protected MindHandle agentBegin() throws Exception {
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 
 	@Override
 	public final MindHandle agentProcess() throws Exception {
 		Commands cmd = Commands.info;
-		String str = Dust.access(MindAccess.Peek, null, MindContext.Target, NET_ATT_SRVCALL_PATHINFO);
+		String str = Dust.access(MindAccess.Get, null, MindContext.Self, MISC_ATT_CONN_TARGET, NET_ATT_SRVCALL_PATHINFO);
 		if (!DustUtils.isEmpty(str)) {
 			try {
 				String sc = DustUtils.getPostfix(str, "/");
@@ -156,7 +160,7 @@ public class DustHttpServerJetty extends DustAgent
 			}.start();
 			break;
 		case info:
-			HttpServletResponse response = Dust.access(MindAccess.Peek, null, MindContext.Target, NET_ATT_SRVCALL_RESPONSE);
+			HttpServletResponse response = Dust.access(MindAccess.Peek, null, MindContext.Self, MISC_ATT_CONN_TARGET, NET_ATT_SRVCALL_RESPONSE);
 
 			if (null != response) {
 				Properties pp = System.getProperties();
@@ -188,7 +192,7 @@ public class DustHttpServerJetty extends DustAgent
 			}
 			break;
 		}
-		
+
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 
@@ -197,7 +201,7 @@ public class DustHttpServerJetty extends DustAgent
 		release();
 		return MIND_TAG_RESULT_ACCEPT;
 	}
-	
+
 	private void release() throws Exception {
 		if (null != jetty) {
 			Server j = jetty;
@@ -209,38 +213,38 @@ public class DustHttpServerJetty extends DustAgent
 		}
 	}
 
-	@Override
-	public boolean isCurrentThreadOwned() {
-		if (null != jetty) {
-			String[] tns;
-
-			Connector[] conns = jetty.getConnectors();
-			int cl = conns.length;
-			if (cl != ownPrefixes.size()) {
-				ownPrefixes.clear();
-
-				Set<String> postfixes = new HashSet<>(cl);
-				for (Connector c : conns) {
-					postfixes.add(c.toString());
-				}
-
-				for (Thread t : Thread.getAllStackTraces().keySet()) {
-					String tn = t.getName();
-					if (tn.contains("acceptor")) {
-						for (String pf : postfixes) {
-							if (tn.endsWith(pf)) {
-								tns = tn.split("-");
-								ownPrefixes.add(tns[0]);
-								break;
-							}
-						}
-					}
-				}
-			}
-			tns = Thread.currentThread().getName().split("-");
-			return ownPrefixes.contains(tns[0]);
-		}
-		return false;
-	}
+//	@Override
+//	public boolean isCurrentThreadOwned() {
+//		if (null != jetty) {
+//			String[] tns;
+//
+//			Connector[] conns = jetty.getConnectors();
+//			int cl = conns.length;
+//			if (cl != ownPrefixes.size()) {
+//				ownPrefixes.clear();
+//
+//				Set<String> postfixes = new HashSet<>(cl);
+//				for (Connector c : conns) {
+//					postfixes.add(c.toString());
+//				}
+//
+//				for (Thread t : Thread.getAllStackTraces().keySet()) {
+//					String tn = t.getName();
+//					if (tn.contains("acceptor")) {
+//						for (String pf : postfixes) {
+//							if (tn.endsWith(pf)) {
+//								tns = tn.split("-");
+//								ownPrefixes.add(tns[0]);
+//								break;
+//							}
+//						}
+//					}
+//				}
+//			}
+//			tns = Thread.currentThread().getName().split("-");
+//			return ownPrefixes.contains(tns[0]);
+//		}
+//		return false;
+//	}
 
 }
