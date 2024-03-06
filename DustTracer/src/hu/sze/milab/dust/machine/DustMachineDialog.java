@@ -132,6 +132,7 @@ class DustMachineDialog implements DustMachineConsts {
 				if ( null != listeners ) {
 					Object hTarget = DustUtils.safeGet(curr, MIND_ATT_KNOWLEDGE_HANDLE, null);
 					Object oldAgent = Dust.access(MindAccess.Peek, null, null, MIND_ATT_DIALOG_ACTIVEAGENT);
+					Dust.access(MindAccess.Set, null, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 					MindAction action = (val instanceof MindAction) ? (MindAction)val : DustUtilsEnumTranslator.getEnum((MindHandle) val, MindAction.Process);
 
 					for (Object a : listeners) {
@@ -156,6 +157,7 @@ class DustMachineDialog implements DustMachineConsts {
 							DustException.swallow(e);
 						}
 					}
+					
 					Dust.access(MindAccess.Set, oldAgent, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 				}
 			}

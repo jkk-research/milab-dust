@@ -32,44 +32,6 @@ public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, 
 	HandlerList handlers;
 	ServletContextHandler ctxHandler;
 
-//	Set<String> ownPrefixes = new HashSet<>();
-
-//
-//	@Override
-//	public MindHandle agentProcess(MindAction action) throws Exception {
-//		
-//		switch ( action ) {
-//		case Begin:
-//			break;
-//		case End:
-//			break;
-//		case Init:
-//			init();
-//			break;
-//		case Process:
-//			Commands cmd = Commands.info;
-//
-//			String str = Dust.access(MindContext.LocalCtx, MindAccess.Peek, null, NET_ATT_SRVCALL_PATHINFO);
-//			if ( !DustUtils.isEmpty(str) ) {
-//				try {
-//					String sc = DustUtils.getPostfix(str, "/");
-//					cmd = Commands.valueOf(sc);
-//				} catch (Exception e) {
-////					DustException.swallow(e);
-//				}
-//			}
-//
-//			process(cmd);
-//
-//			break;
-//		case Release:
-//			release();
-//			break;
-//		}
-//
-//		return MindStatus.Accept;
-//	}
-
 	@Override
 	protected MindHandle agentInit() throws Exception {
 		if (null == jetty) {
@@ -116,7 +78,6 @@ public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, 
 			handlers.addHandler(ctxHandler);
 			
 			MindHandle hSelf = Dust.access(MindAccess.Peek, null, MindContext.Self, MIND_ATT_KNOWLEDGE_HANDLE);
-//			Collection<Object> agents = Dust.access(MindAccess.Peek, Collections.EMPTY_LIST, MindContext.Self, MISC_ATT_CONN_MEMBERARR);
 
 			ctxHandler.addServlet(new ServletHolder(new DustHttpServletDispatcher(hSelf)), "/*");
 
@@ -212,39 +173,4 @@ public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, 
 			j.stop();
 		}
 	}
-
-//	@Override
-//	public boolean isCurrentThreadOwned() {
-//		if (null != jetty) {
-//			String[] tns;
-//
-//			Connector[] conns = jetty.getConnectors();
-//			int cl = conns.length;
-//			if (cl != ownPrefixes.size()) {
-//				ownPrefixes.clear();
-//
-//				Set<String> postfixes = new HashSet<>(cl);
-//				for (Connector c : conns) {
-//					postfixes.add(c.toString());
-//				}
-//
-//				for (Thread t : Thread.getAllStackTraces().keySet()) {
-//					String tn = t.getName();
-//					if (tn.contains("acceptor")) {
-//						for (String pf : postfixes) {
-//							if (tn.endsWith(pf)) {
-//								tns = tn.split("-");
-//								ownPrefixes.add(tns[0]);
-//								break;
-//							}
-//						}
-//					}
-//				}
-//			}
-//			tns = Thread.currentThread().getName().split("-");
-//			return ownPrefixes.contains(tns[0]);
-//		}
-//		return false;
-//	}
-
 }

@@ -325,8 +325,7 @@ class DustMachine extends Dust.Machine
 		if (null == agent) {
 			Object l = Dust.access(MindAccess.Peek, null, a, MIND_ATT_AGENT_LOGIC);
 			Object n = null;
-			Collection allNatLog = Dust.access(MindAccess.Peek, Collections.EMPTY_SET, APP_MACHINE_MAIN,
-					DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
+			Collection allNatLog = Dust.access(MindAccess.Peek, Collections.EMPTY_SET, APP_MACHINE_MAIN, DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
 			for (Object nl : allNatLog) {
 				if (l == Dust.access(MindAccess.Peek, null, nl, DUST_ATT_NATIVELOGIC_LOGIC)) {
 					n = nl;

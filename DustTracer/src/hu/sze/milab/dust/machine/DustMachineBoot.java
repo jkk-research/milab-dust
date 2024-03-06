@@ -7,6 +7,7 @@ import java.util.Map;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.net.httpsrv.DustHttpJsonapiAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty;
 import hu.sze.milab.dust.stream.DustStreamCsvSaxAgent;
 import hu.sze.milab.dust.stream.DustStreamFilesystemServer;
@@ -104,6 +105,8 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustDevUtils.registerNative(RESOURCE_LOG_CSVSAX, DUSTJAVA_UNIT, DustStreamCsvSaxAgent.class.getCanonicalName());
 
 		DustDevUtils.registerNative(NET_LOG_HTTPSRV, DUSTJAVA_UNIT, DustHttpServerJetty.class.getCanonicalName(), true);
+		DustDevUtils.registerNative(NET_LOG_HTTPSVCJSONAPI, DUSTJAVA_UNIT, DustHttpJsonapiAgent.class.getCanonicalName());
+		
 
 		String bootClass = System.getProperty("DustBootClass");
 		

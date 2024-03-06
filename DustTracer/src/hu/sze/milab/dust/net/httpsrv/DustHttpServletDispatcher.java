@@ -30,14 +30,15 @@ class DustHttpServletDispatcher extends HttpServlet implements DustNetConsts, Du
 		long ts = System.currentTimeMillis();
 		Throwable exception = null;
 		String pathInfo = request.getPathInfo();
+		
+		if ( pathInfo.startsWith("/") ) {
+			pathInfo = pathInfo.substring(1);
+		}
 
 		try {
 			Dust.access(MindAccess.Set, hSelf, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 
 			Collection<Object> agents = Dust.access(MindAccess.Get, Collections.EMPTY_LIST, MindContext.Self, MISC_ATT_CONN_MEMBERARR);
-
-//			Collection<Object> agents = Dust.access(MindAccess.Peek, Collections.EMPTY_LIST, MindContext.Self,
-//					MISC_ATT_CONN_MEMBERARR);
 
 			Object target = null;
 			for (Object agent : agents) {

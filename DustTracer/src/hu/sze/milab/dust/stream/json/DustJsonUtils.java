@@ -10,8 +10,12 @@ import hu.sze.milab.dust.utils.DustUtils;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class DustJsonUtils implements DustJsonConsts {
 	
+	public static String jsonKeyToId(String key) {
+		return key.split(" ")[0].replace(JSONAPI_IDSEP, DUST_SEP_ID);
+	}
+	
 	public static MindHandle handleFromKey(String key) {
-		String id = key.split(" ")[0].replace(JSONAPI_IDSEP, DUST_SEP_ID);
+		String id = jsonKeyToId(key);
 		MindHandle ret = Dust.lookup(id);
 
 		if (null == ret) {
