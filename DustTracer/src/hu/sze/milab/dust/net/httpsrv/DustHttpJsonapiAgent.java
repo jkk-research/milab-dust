@@ -14,6 +14,7 @@ import hu.sze.milab.dust.net.DustNetConsts;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
 import hu.sze.milab.dust.stream.json.DustJsonUtils;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DustHttpJsonapiAgent extends DustAgent implements DustNetConsts, DustJsonConsts {
 
 	@Override
@@ -73,29 +74,4 @@ public class DustHttpJsonapiAgent extends DustAgent implements DustNetConsts, Du
 
 		return MIND_TAG_RESULT_ACCEPT;
 	}
-
-	@Override
-	public MindHandle agentInit() throws Exception {
-		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_INIT);
-		return MIND_TAG_RESULT_ACCEPT;
-	}
-
-	@Override
-	public MindHandle agentBegin() throws Exception {
-		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_BEGIN);
-		return MIND_TAG_RESULT_READACCEPT;
-	}
-
-	@Override
-	public MindHandle agentEnd() throws Exception {
-		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_END);
-		return MIND_TAG_RESULT_ACCEPT;
-	}
-
-	@Override
-	public MindHandle agentRelease() throws Exception {
-		Dust.log(EVENT_TAG_TYPE_TRACE, "Hello, world", MIND_TAG_ACTION_RELEASE);
-		return MIND_TAG_RESULT_ACCEPT;
-	}
-
 }

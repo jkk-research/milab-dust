@@ -1,6 +1,7 @@
 package hu.sze.milab.dust.stream;
 
 import java.io.File;
+import java.io.IOException;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.utils.DustUtils;
@@ -8,6 +9,19 @@ import hu.sze.milab.dust.utils.DustUtilsFile;
 
 public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 
+	public static boolean checkPathBound(String path) throws IOException {
+		File root = new File(".");
+		File f = new File(root, path);
+
+		return f.getCanonicalPath().startsWith(root.getCanonicalPath()) ;
+	}
+	
+	public static File optGetFile(Object... path) throws IOException {
+		String p = DustUtils.toString(DustUtils.sbAppend(null, File.separator, false, path));
+		File f = new File(p);
+		return f.isFile() ? f : null ;
+	}
+	
 	public static File getFile(MindHandle ctx, Object... path) throws Exception {
 
 		String fileName = Dust.access(MindAccess.Peek, null, ctx, path);

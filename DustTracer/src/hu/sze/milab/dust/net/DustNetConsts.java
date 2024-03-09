@@ -8,6 +8,8 @@ public interface DustNetConsts extends DustConsts, DustNetHandles {
 
 	String CHARSET_POSTFIX_UTF8 = "; charset=UTF-8";
 
+	String MEDIATYPE_RAW = "application/octet-stream";
+	
 	String MEDIATYPE_UTF8_TEXT = "text/plain" + CHARSET_POSTFIX_UTF8;
 	String MEDIATYPE_UTF8_HTML = "text/html" + CHARSET_POSTFIX_UTF8;
 	String MEDIATYPE_UTF8_CSV = "text/csv" + CHARSET_POSTFIX_UTF8;

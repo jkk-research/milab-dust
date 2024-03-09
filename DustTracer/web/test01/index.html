@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+<script src="script/DustBase.js"></script>
+<script src="script/DustTokens.js"></script>
+<script src="script/DustSrv.js"></script>
+<script src="script/DustModel.js"></script>
+<script src="script/DustView.js"></script>
+<script src="script/DustControl.js"></script>
+
+<title>DustDock Test01</title>
+
+</head>
+<body>
+	<h1>DustDock Test01</h1>
+	<p>
+		Placeholder for testing DustDock services</b>.
+	</p>
+	<a href="/admin/info">Get server info...</a>
+	
+	<a href="/admin/stop">Stop server!</a>
+	
+	<script>
+		DustBase.Srv.sendData('Hello', { target: 'World', from: 'Myself'});
+	</script>
+</body>
+</html>

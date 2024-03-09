@@ -166,7 +166,7 @@ class DustMachineDialog implements DustMachineConsts {
 		case Delete:
 			break;
 		case Get:
-			ret = curr;
+			ret = (null == curr) ? val : curr;
 			break;
 		case Insert:
 			if ( curr instanceof Set ) {

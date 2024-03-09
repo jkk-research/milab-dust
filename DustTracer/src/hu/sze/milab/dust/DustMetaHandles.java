@@ -192,6 +192,7 @@ public interface DustMetaHandles extends DustConsts {
 	MindHandle RESOURCE_ATT_URL_FRAGMENT = Dust.lookup("giskard:6:?");
 
 	MindHandle RESOURCE_ASP_STREAM = Dust.lookup("giskard:6:?");
+	MindHandle RESOURCE_ATT_STREAM_CTYPEMAP = Dust.lookup("giskard:6:?");
 
 	MindHandle RESOURCE_TAG_STREAMTYPE = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_TAG_STREAMTYPE_RAW = Dust.lookup("giskard:6:?");
