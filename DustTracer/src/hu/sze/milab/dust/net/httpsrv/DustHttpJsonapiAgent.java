@@ -66,6 +66,7 @@ public class DustHttpJsonapiAgent extends DustAgent implements DustNetConsts, Du
 					}
 				}
 				
+				response.setCharacterEncoding(DUST_CHARSET_UTF8);
 				response.setContentType(MEDIATYPE_JSONAPI);
 				PrintWriter out = response.getWriter();
 				JSONValue.writeJSONString(data, out);

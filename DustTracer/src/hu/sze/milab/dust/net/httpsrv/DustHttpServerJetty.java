@@ -105,8 +105,24 @@ public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, 
 //							DustException.swallow(e);
 			}
 		}
+		
+		HttpServletResponse response;
+		
 		switch (cmd) {
 		case stop:
+			response = Dust.access(MindAccess.Peek, null, MindContext.Self, MISC_ATT_CONN_TARGET, NET_ATT_SRVCALL_RESPONSE);
+
+			if (null != response) {
+				response.setContentType(MEDIATYPE_UTF8_HTML);
+				PrintWriter out = response.getWriter();
+
+				out.println("<!doctype html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Server shutdown</title>\n</head>\n<body>\n");
+				out.println("<h2>Server shutdown initiated.</h2>\n");
+				out.println("</body></html>\n");
+				
+				out.flush();
+			}
+			
 			new Thread() {
 				@Override
 				public void run() {
@@ -121,7 +137,7 @@ public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, 
 			}.start();
 			break;
 		case info:
-			HttpServletResponse response = Dust.access(MindAccess.Peek, null, MindContext.Self, MISC_ATT_CONN_TARGET, NET_ATT_SRVCALL_RESPONSE);
+			response = Dust.access(MindAccess.Peek, null, MindContext.Self, MISC_ATT_CONN_TARGET, NET_ATT_SRVCALL_RESPONSE);
 
 			if (null != response) {
 				Properties pp = System.getProperties();
@@ -145,7 +161,8 @@ public class DustHttpServerJetty extends DustAgent implements DustNetConsts //, 
 					sb.append("<li><a href=\"/admin/" + cc + "\">" + cc + "</a></li>");
 				}
 				sb.append("</ul>");
-
+				
+				sb.append("</body></html>");
 				response.setContentType(MEDIATYPE_UTF8_HTML);
 				PrintWriter out = response.getWriter();
 

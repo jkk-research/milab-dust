@@ -10,16 +10,28 @@ if ( !('DustBase' in window) ){
 				jqXHR.DustRequestId = ++requestId;
 				jqXHR.DustMethod = request.method;
 				jqXHR.DustURL = request.url;
+				jqXHR.DustProc = request.respProc;
 				
 				console.log('Request ' + jqXHR.DustRequestId + ' sending...');
 			};
 			
 			$.ajax(request)  
-			.done(function(data, textStatus, jqXHR) {
-				console.log('Request ' + jqXHR.DustRequestId + ' done.');
+			.done(function(data, textStatus, jqXHR) {				
+				if (jqXHR.DustProc) {
+					
+					var ct = jqXHR.getResponseHeader('content-type');
+					
+					jqXHR.DustProc(jqXHR.DustRequestId, true, textStatus, data);
+				} else {
+					console.log('Request ' + jqXHR.DustRequestId + ' done.');
+				}
 			})
 			.fail(function(jqXHR, textStatus, errorThrown ) {
-				console.log('Request ' + jqXHR.DustRequestId + ' failed: ' + errorThrown);
+				if (jqXHR.DustProc) {
+					jqXHR.DustProc(jqXHR.DustRequestId, false, textStatus, errorThrown);
+				} else {
+					console.log('Request ' + jqXHR.DustRequestId + ' failed: ' + errorThrown);
+				}
 			});
 		}
 		
