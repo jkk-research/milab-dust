@@ -10,7 +10,6 @@ import java.util.TreeSet;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustMetaHandles;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
-import hu.sze.milab.dust.machine.DustMachineConsts.MachineAtts;
 import hu.sze.milab.dust.net.DustNetHandles;
 import hu.sze.milab.dust.stream.json.DustJsonApiDomAgent;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
@@ -53,7 +52,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		for (MindHandle h : units.values()) {
 			if (null != Dust.access(MindAccess.Peek, null, h, MIND_ATT_UNIT_HANDLES)) {
 				File f = getUnitFile(h);
-				DustJsonApiDomAgent.writeUnit(h, f, MachineAtts.PersistentAtt);
+				DustJsonApiDomAgent.writeUnit(h, f, null);
 			}
 		}
 	}

@@ -9,10 +9,6 @@ import hu.sze.milab.dust.utils.DustUtilsConsts;
 
 interface DustMachineConsts extends DustHandles, DustUtilsConsts {
 
-	enum MachineAtts {
-		CreatorAccess, PrimaryAspectNames, PersistentAtt, CanContinue,
-	}
-
 	class DustHandle implements MindHandle {
 		private final String id;
 

@@ -45,31 +45,43 @@ public class DustHttpJsonapiAgent extends DustAgent implements DustNetConsts, Du
 
 				out.println(sb.toString());
 			} else {
-				String type = DustJsonUtils.jsonKeyToId(path[1]);
-				
+				String filter = DustJsonUtils.jsonKeyToId(path[1]);
+
+				MindHandle checkAspect = (3 == filter.split(DUST_SEP_ID).length) ? Dust.lookup(filter) : null;
+
 				ArrayList data = new ArrayList();
-				
+
 				Map<Object, MindHandle> units = Dust.access(MindAccess.Get, null, APP_UNIT, MIND_ATT_UNIT_HANDLES);
 
 				for (MindHandle h : units.values()) {
+					if ((null == checkAspect) && !h.getId().startsWith(filter)) {
+						continue;
+					}
+
 					Map<Object, MindHandle> uh = Dust.access(MindAccess.Get, null, h, MIND_ATT_UNIT_HANDLES);
 					if (null != uh) {
-						for ( MindHandle ih : uh.values()) {
-							MindHandle ah = Dust.access(MindAccess.Get, null, ih, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
-							
-							if ( (null != ah) && type.equals(ah.getId() )) {
-								Map im = DustJsonUtils.handleToMap(ih);
-								data.add(im);
+						for (MindHandle ih : uh.values()) {
+							boolean match = (null == checkAspect)
+									|| (boolean) Dust.access(MindAccess.Check, checkAspect, ih, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+
+							if (match) {
+								Map im = DustJsonUtils.knowledgeToMap(h, ih, null);
+								if (null != im) {
+									data.add(im);
+								}
 							}
 						}
 						Dust.log(EVENT_TAG_TYPE_TRACE, uh);
 					}
 				}
 				
+				Map json = DustJsonUtils.toJsonApiMap(data);
+
 				response.setCharacterEncoding(DUST_CHARSET_UTF8);
 				response.setContentType(MEDIATYPE_JSONAPI);
 				PrintWriter out = response.getWriter();
-				JSONValue.writeJSONString(data, out);
+				JSONValue.writeJSONString(json, out);
+				out.flush();
 			}
 		}
 

@@ -14,6 +14,8 @@
 <script src="script/DustView.js"></script>
 <script src="script/DustControl.js"></script>
 
+<script src="https://js.cytoscape.org/js/cytoscape.min.js"></script>
+
 <title>DustJS Test01</title>
 
 <style>
@@ -35,7 +37,7 @@ textarea {
 		<tbody>
 			<tr>
 				<td width="150px"><label for="path">Path</label></td>
-				<td><input style="width: 100%" id="path" value="giskard-1-15" /></td>
+				<td><input style="width: 100%" id="path" value="giskard-2" /></td>
 			</tr>
 			<tr>
 				<td><label for="include">include</label></td>
@@ -72,7 +74,9 @@ textarea {
 					onclick="directRequest('/admin/info');"></td>
 			</tr>
 			<tr>
-				<td colspan="2"><textarea id='srvResponse'></textarea></td>
+				<td><textarea id='srvResponse'></textarea></td>
+				<td><div style="width: 800px; height: 500px; display: block;"
+						id='graph'></div></td>
 			</tr>
 		</tbody>
 	</table>
@@ -108,6 +112,43 @@ textarea {
 		}
 		
 		function loadResponseData(id, success, status, data) {	
+			var respArr = data.data;
+			
+			cy.startBatch();
+			
+			cy.elements.length = 0;
+			
+			var items = {};
+			
+			for ( item of respArr ) {
+				var itemId = item.id.split(' ')[0];
+				items[itemId] = cy.add({ group: 'nodes', data: { id: itemId, label: item.id }});
+			}
+			
+			for ( item of respArr ) {
+				var rel = item.relationships;
+				
+				if ( rel ) {
+					var itemId = item.id.split(' ')[0];
+					for (const r in rel) {
+						var targetId = rel[r].id.split(' ')[0];
+						if ( !items[targetId] ) {
+							items[targetId] = cy.add({ group: 'nodes', data: { id: targetId, label: rel[r].id }});
+						}
+						cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: r } });
+					}
+				}
+			}
+			
+			cy.endBatch();
+			
+			cy.layout({
+					name: 'breadthfirst',
+					fit: true,
+					directed: true,
+					padding: 10
+				});
+			
 			var txt = JSON.stringify(data);
 			displayResponse(id, success, status, txt);
 		}
@@ -117,6 +158,25 @@ textarea {
 			var ta = document.getElementById('srvResponse');
 			ta.value = txt;
 		}
+		
+	  window.cy = cytoscape({
+	    container: document.getElementById('graph'),
+	    style: [
+	        {
+	          selector: 'node',
+	          style: {
+	            'label': 'data(label)'
+	          }
+	        },
+	        {
+	          selector: 'edge',
+	          style: {
+	            'label': 'data(label)'
+	          }
+	        }
+	      ]
+	  });
+		
 	</script>
 </body>
 </html>

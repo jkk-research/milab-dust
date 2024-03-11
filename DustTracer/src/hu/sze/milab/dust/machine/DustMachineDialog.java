@@ -58,14 +58,14 @@ class DustMachineDialog implements DustMachineConsts {
 					curr = context;
 					break;
 				case Self:
-					curr = resolveKnowledge(activeAgent, createIfMissing);
+					curr = resolveKnowledge(activeAgent, true);
 					break;
 				case Target:
-					curr = resolveKnowledge(activeAgent, createIfMissing);
+					curr = resolveKnowledge(activeAgent, true);
 					curr = DustUtils.safeGet(curr, MIND_ATT_AGENT_TARGET, null);
 					break;
 				default:
-					curr = resolveKnowledge((MindHandle) root, createIfMissing);
+					curr = resolveKnowledge((MindHandle) root, true);
 					break;
 				}
 			}
@@ -122,6 +122,7 @@ class DustMachineDialog implements DustMachineConsts {
 
 		switch ( cmd ) {
 		case Check:
+			ret = DustUtils.isEqual(val, curr);
 			break;
 		case Commit:
 			if ( curr instanceof DustHandle ) {

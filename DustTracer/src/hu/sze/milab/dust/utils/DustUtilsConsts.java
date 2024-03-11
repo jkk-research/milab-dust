@@ -36,4 +36,8 @@ public interface DustUtilsConsts extends DustConsts, DustHandles {
 	DustCreator<Map> MAP_CREATOR = new DustCreatorSimple<>(HashMap.class);
 	DustCreator<ArrayList> ARRAY_CREATOR = new DustCreatorSimple<>(ArrayList.class);
 
+	enum MachineAtts {
+		CreatorAccess, PrimaryAspectNames, TransientAtt, CanContinue,
+	}
+
 }

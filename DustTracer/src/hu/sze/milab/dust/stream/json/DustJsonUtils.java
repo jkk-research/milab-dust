@@ -1,11 +1,14 @@
 package hu.sze.milab.dust.stream.json;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class DustJsonUtils implements DustJsonConsts {
@@ -31,6 +34,9 @@ public class DustJsonUtils implements DustJsonConsts {
 	}
 
 	public static String handleToString(MindHandle ih) throws Exception {
+		if ( null == ih ) {
+			return "???";
+		}
 
 		String hId = ih.getId();
 
@@ -47,6 +53,78 @@ public class DustJsonUtils implements DustJsonConsts {
 		item.put(JsonApiMember.type, handleToString(pa));
 
 		return item;
+	}
+
+	public static Map knowledgeToMap(MindHandle unit, MindHandle hItem, Collection<MindHandle> atts) throws Exception {
+		Map item = null;
+		
+		Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, null, unit, MIND_ATT_UNIT_CONTENT, hItem);
+		
+		if (null != itemData) {
+			 item = DustJsonUtils.handleToMap(hItem);
+
+			for (Map.Entry<MindHandle, Object> ce : itemData.entrySet()) {
+				MindHandle hAtt = ce.getKey();
+				
+				if ( DustUtilsAttCache.getAtt(MachineAtts.TransientAtt, hAtt, false) ) {
+					continue;
+				}
+
+				if ((null == atts) || atts.contains(hAtt) ) {
+					String key = DustJsonUtils.handleToString(hAtt);
+					Object val = ce.getValue();
+
+					Object mem = JsonApiMember.attributes;
+
+					if (val instanceof MindHandle) {
+						mem = JsonApiMember.relationships;
+						val = DustJsonUtils.handleToMap((MindHandle) val);
+					} else if (val instanceof Map) {
+						Map mp = new HashMap();
+						for (Map.Entry<Object, Object> ee : ((Map<Object, Object>) val).entrySet()) {
+							Object mk = ee.getKey();
+							if (mk instanceof MindHandle) {
+								mk = DustJsonUtils.handleToString((MindHandle) mk);
+							}
+							Object mv = ee.getValue();
+							if (mv instanceof MindHandle) {
+								mem = JsonApiMember.relationships;
+								mk = DustJsonUtils.handleToMap((MindHandle) mv);
+							}
+							mp.put(mk, mv);
+						}
+						val = mp;
+					}
+					if (val instanceof Collection) {
+						ArrayList al = new ArrayList();
+						for (Object oo : ((Collection) val)) {
+							if (oo instanceof MindHandle) {
+								mem = JsonApiMember.relationships;
+								oo = DustJsonUtils.handleToMap((MindHandle) oo);
+							}
+							al.add(oo);
+						}
+						val = al;
+					}
+
+					DustUtils.safeGet(item, mem, MAP_CREATOR).put(key, val);
+				}
+			}
+		}
+		return item;
+	}
+	
+	public static Map toJsonApiMap(ArrayList data) throws Exception {
+		Map out = new HashMap<>();
+
+		Map jsonapi = DustUtils.safeGet(out, JsonApiMember.jsonapi, MAP_CREATOR);
+		jsonapi.put(JsonApiMember.version, JSONAPI_VERSION);
+
+		out.put(JsonApiMember.data, data);
+
+		DustUtils.safeGet(out, JsonApiMember.meta, MAP_CREATOR).put(JsonApiMember.count, data.size());
+
+		return out;
 	}
 
 }
