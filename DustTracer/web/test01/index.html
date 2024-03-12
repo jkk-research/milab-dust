@@ -5,7 +5,7 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
 <script src="script/DustBase.js"></script>
 <script src="script/DustTokens.js"></script>
@@ -14,7 +14,7 @@
 <script src="script/DustView.js"></script>
 <script src="script/DustControl.js"></script>
 
-<script src="https://js.cytoscape.org/js/cytoscape.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
 
 <title>DustJS Test01</title>
 
@@ -37,7 +37,7 @@ textarea {
 		<tbody>
 			<tr>
 				<td width="150px"><label for="path">Path</label></td>
-				<td><input style="width: 100%" id="path" value="giskard-2" /></td>
+				<td><input style="width: 100%" id="path" value="giskard" /></td>
 			</tr>
 			<tr>
 				<td><label for="include">include</label></td>
@@ -75,7 +75,7 @@ textarea {
 			</tr>
 			<tr>
 				<td><textarea id='srvResponse'></textarea></td>
-				<td><div style="width: 800px; height: 500px; display: block;"
+				<td width="80%"><div style="width: 100%; height: 500px; display: block;"
 						id='graph'></div></td>
 			</tr>
 		</tbody>
@@ -112,17 +112,23 @@ textarea {
 		}
 		
 		function loadResponseData(id, success, status, data) {	
+			var txt = JSON.stringify(data);
+			displayResponse(id, success, status, txt);
+
 			var respArr = data.data;
 			
 			cy.startBatch();
 			
-			cy.elements.length = 0;
+			var all = cy.elements('node[id]');
+			cy.remove(all);
 			
 			var items = {};
 			
 			for ( item of respArr ) {
 				var itemId = item.id.split(' ')[0];
-				items[itemId] = cy.add({ group: 'nodes', data: { id: itemId, label: item.id }});
+				if ( !items[itemId] ) {
+					items[itemId] = cy.add({ group: 'nodes', data: { id: itemId, label: item.id }});
+				}
 			}
 			
 			for ( item of respArr ) {
@@ -131,26 +137,66 @@ textarea {
 				if ( rel ) {
 					var itemId = item.id.split(' ')[0];
 					for (const r in rel) {
-						var targetId = rel[r].id.split(' ')[0];
-						if ( !items[targetId] ) {
-							items[targetId] = cy.add({ group: 'nodes', data: { id: targetId, label: rel[r].id }});
+						var t = rel[r];
+						t = ( Array.isArray(t) ) ? t : [t];
+						
+						for ( target of t ) {
+							var targetId = target.id.split(' ')[0];
+							if ( !items[targetId] ) {
+								items[targetId] = cy.add({ group: 'nodes', data: { id: targetId, label: target.id }});
+							}
+							cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: r } });
 						}
-						cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: r } });
 					}
 				}
 			}
 			
 			cy.endBatch();
 			
-			cy.layout({
-					name: 'breadthfirst',
-					fit: true,
-					directed: true,
-					padding: 10
-				});
+// 			var l = cy.layout({
+// 					name: 'breadthfirst',
+// 					fit: true,
+// 					directed: true,
+// 					padding: 10
+// 				});
+//			l.run();
+	
+			let options = {
+			  name: 'cose',
 			
-			var txt = JSON.stringify(data);
-			displayResponse(id, success, status, txt);
+			  ready: function(){},
+			  stop: function(){},
+			
+			  animate: true,
+			
+			  animationEasing: undefined,
+			  animationDuration: undefined,
+			
+			  animateFilter: function ( node, i ){ return true; },
+			  animationThreshold: 250,
+			  refresh: 2,
+			  fit: true,
+			  padding: 30,
+			
+			  boundingBox: undefined,
+			  nodeDimensionsIncludeLabels: false,
+			
+			  randomize: false,
+			  componentSpacing: 40,
+			  nodeRepulsion: function( node ){ return 2048; },
+			  nodeOverlap: 4,
+			  idealEdgeLength: function( edge ){ return 32; },
+			  edgeElasticity: function( edge ){ return 32; },
+			  nestingFactor: 1.2,
+			  gravity: 1,
+			  numIter: 1000,
+			  initialTemp: 1000,
+			  coolingFactor: 0.99,
+			  minTemp: 1.0
+			};
+			
+			var layout = cy.layout( options );
+			layout.run();			
 		}
 		
 		function displayResponse(id, success, status, txt) {	
