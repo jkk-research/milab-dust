@@ -6,4 +6,5 @@ import hu.sze.milab.dust.utils.DustUtilsConsts;
 
 public interface DustTestConsts extends DustHandles, DustUtilsConsts {
 	MindHandle TEST0_UNIT = Dust.lookup("test:0");
+	MindHandle TEST1_UNIT = Dust.lookup("test:1");
 }

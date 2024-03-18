@@ -1,9 +1,9 @@
 package hu.sze.milab.dust;
 
-public interface DustMetaHandles extends DustConsts {
+public interface DustMetaHandles extends DustConsts, DustUnitHandles {
 	// Original
 
-	MindHandle APP_UNIT = Dust.lookup("giskard:0");
+//	MindHandle APP_UNIT = Dust.lookup("giskard:0");
 
 	MindHandle APP_MACHINE_MAIN = Dust.lookup("giskard:0:?");
 
@@ -11,7 +11,7 @@ public interface DustMetaHandles extends DustConsts {
 
 	MindHandle APP_ASSEMBLY_MAIN = Dust.lookup("giskard:0:?");
 
-	MindHandle MIND_UNIT = Dust.lookup("giskard:1");
+//	MindHandle MIND_UNIT = Dust.lookup("giskard:1");
 
 	MindHandle MIND_ASP_UNIT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_UNIT_HANDLES = Dust.lookup("giskard:1:?");
@@ -97,7 +97,7 @@ public interface DustMetaHandles extends DustConsts {
 
 	MindHandle MIND_ASP_AUTHOR = Dust.lookup("giskard:1:?");
 
-	MindHandle DUST_UNIT = Dust.lookup("giskard:2");
+//	MindHandle DUST_UNIT = Dust.lookup("giskard:2");
 
 	MindHandle DUST_ASP_MACHINE = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MACHINE_AUTHORS = Dust.lookup("giskard:2:?");
@@ -126,7 +126,7 @@ public interface DustMetaHandles extends DustConsts {
 
 	MindHandle DUST_TAG_NATIVELOGIC_SERVER = Dust.lookup("giskard:2:?");
 
-	MindHandle MISC_UNIT = Dust.lookup("giskard:3");
+//	MindHandle MISC_UNIT = Dust.lookup("giskard:3");
 
 	MindHandle MISC_ASP_CONN = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_OWNER = Dust.lookup("giskard:3:?");
@@ -153,7 +153,7 @@ public interface DustMetaHandles extends DustConsts {
 	MindHandle MISC_ASP_VARIANT = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_VARIANT_VALUE = Dust.lookup("giskard:3:?");
 
-	MindHandle TEXT_UNIT = Dust.lookup("giskard:4");
+//	MindHandle TEXT_UNIT = Dust.lookup("giskard:4");
 
 	MindHandle TEXT_TAG_LANGUAGE = Dust.lookup("giskard:4:?");
 	MindHandle TEXT_TAG_LANGUAGE_EN_US = Dust.lookup("giskard:4:?");
@@ -163,12 +163,12 @@ public interface DustMetaHandles extends DustConsts {
 
 	MindHandle TEXT_TAG_TYPE = Dust.lookup("giskard:4:?");
 	MindHandle TEXT_TAG_TYPE_TOKEN = Dust.lookup("giskard:4:?");
-	MindHandle TEXT_TAG_TYPE_NAME = Dust.lookup("giskard:4:?");
+	MindHandle TEXT_TAG_TYPE_LABEL = Dust.lookup("giskard:4:?");
 
 	MindHandle TEXT_ASP_PLAIN = Dust.lookup("giskard:4:?");
 	MindHandle TEXT_ATT_PLAIN_TEXT = Dust.lookup("giskard:4:?");
 
-	MindHandle EVENT_UNIT = Dust.lookup("giskard:5");
+//	MindHandle EVENT_UNIT = Dust.lookup("giskard:5");
 
 	MindHandle EVENT_ASP_EVENT = Dust.lookup("giskard:5:?");
 
@@ -181,7 +181,7 @@ public interface DustMetaHandles extends DustConsts {
 	MindHandle EVENT_TAG_TYPE_TRACE = Dust.lookup("giskard:5:?");
 	MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.lookup("giskard:5:?");
 
-	MindHandle RESOURCE_UNIT = Dust.lookup("giskard:6");
+//	MindHandle RESOURCE_UNIT = Dust.lookup("giskard:6");
 
 	MindHandle RESOURCE_ASP_URL = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_ATT_URL_SCHEME = Dust.lookup("giskard:6:?");
@@ -209,10 +209,12 @@ public interface DustMetaHandles extends DustConsts {
 	MindHandle RESOURCE_LOG_CSVSAX = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard:6:?");
 
-	MindHandle DEV_UNIT = Dust.lookup("giskard:7");
+//	MindHandle DEV_UNIT = Dust.lookup("giskard:7");
 
 	MindHandle DEV_ATT_HINT = Dust.lookup("giskard:7:?");
 
-	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
+//	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
+
+//	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 
 }

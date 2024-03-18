@@ -21,6 +21,22 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Set, hAgtHelloWorld, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}
 	
+	public static void defineClient() throws Exception {
+		MindHandle hModDustJS = DustDevUtils.newHandle(TEST0_UNIT, DUST_ASP_MODULE);
+		Dust.access(MindAccess.Insert, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
+		Dust.access(MindAccess.Set, "script/Dust.js", hModDustJS, RESOURCE_ATT_URL_PATH);
+		
+		MindHandle hModChart = DustDevUtils.newHandle(TEST0_UNIT, DUST_ASP_MODULE);
+		Dust.access(MindAccess.Insert, "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js", hModChart, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
+		Dust.access(MindAccess.Set, "script/DustGraphCytoscape.js", hModChart, RESOURCE_ATT_URL_PATH);
+		
+		MindHandle hModClient = DustDevUtils.newHandle(TEST0_UNIT, DUST_ASP_MACHINE);
+		DustDevUtils.setText(hModClient, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "DustJS Test01");
+		Dust.access(MindAccess.Insert, hModDustJS, hModClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
+		Dust.access(MindAccess.Insert, hModChart, hModClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
+
+	}
+	
 	public static void startPortal() throws Exception {
 		MindHandle hRequest = DustDevUtils.newHandle(TEST0_UNIT, NET_ASP_SRVCALL);
 

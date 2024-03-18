@@ -9,8 +9,10 @@ import java.util.TreeSet;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustMetaHandles;
+import hu.sze.milab.dust.DustUnitHandles;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.net.DustNetHandles;
+import hu.sze.milab.dust.stream.DustStreamHandles;
 import hu.sze.milab.dust.stream.json.DustJsonApiDomAgent;
 import hu.sze.milab.dust.stream.json.DustJsonConsts;
 import hu.sze.milab.dust.utils.DustUtils;
@@ -23,14 +25,14 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-		initFromInterfaces(DustMetaHandles.class, DustNetHandles.class);
+		initFromInterfaces(DustUnitHandles.class, DustMetaHandles.class, DustNetHandles.class, DustStreamHandles.class);
 
 //		dumpUnits();
 		
 //		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
 //		readUnits();
 		
-//		writeJavaMeta("giskard", "hu.sze.milab.dust.DustHandles");
+		writeJavaMeta("giskard", "hu.sze.milab.dust.DustHandles");
 	}
 
 	public static void readUnits() throws Exception {
@@ -152,6 +154,9 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						pName = pName.replace("_ATT_", "_ASP_");
 						MindHandle hParent = parents.get(pName);
 
+						if ( (hParent == ch) && (MIND_ASP_TAG == hPA ) ) {
+							continue;
+						}
 						Dust.access(MindAccess.Set, hParent, ch, MISC_ATT_CONN_PARENT);
 					}
 				}

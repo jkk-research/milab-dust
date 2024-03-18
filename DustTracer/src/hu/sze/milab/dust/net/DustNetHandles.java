@@ -2,10 +2,11 @@ package hu.sze.milab.dust.net;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustConsts;
+import hu.sze.milab.dust.DustUnitHandles;
 
-public interface DustNetHandles extends DustConsts {
+public interface DustNetHandles extends DustConsts, DustUnitHandles {
 	
-	MindHandle NET_UNIT = Dust.lookup("giskard:10");
+//	MindHandle NET_UNIT = Dust.lookup("giskard:10");
 
 	MindHandle NET_ASP_HOST = Dust.lookup("giskard:10:?");
 	MindHandle NET_ATT_HOST_PORT = Dust.lookup("giskard:10:?");

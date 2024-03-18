@@ -85,6 +85,24 @@ public class DustDevUtils implements DustHandles {
 		}
 	}
 
+	public static void setTag(MindHandle hItem, MindHandle hTag, MindHandle hParent) {
+		Dust.access(MindAccess.Set, hTag, hItem, MIND_ATT_KNOWLEDGE_TAGS, hParent);
+	}
+
+	public static void setTag(MindHandle hItem, MindHandle hTag) {
+		setTag(hItem, hTag, hTag);
+	}
+
+	public static MindHandle setText(MindHandle hItem, MindHandle hTxtType, MindHandle hLang, String txt) {
+		MindHandle hTxt = newHandle(L10N_UNIT, TEXT_ASP_PLAIN);
+		
+		Dust.access(MindAccess.Set, txt, hItem, TEXT_ATT_PLAIN_TEXT);
+		setTag(hItem, hTxtType, TEXT_TAG_TYPE);
+		setTag(hItem, hLang, TEXT_TAG_LANGUAGE);
+		
+		return hTxt;
+	}
+
 	public static void breakpoint(Object... objects) {
 		Dust.log(EVENT_TAG_TYPE_BREAKPOINT, objects);
 	}

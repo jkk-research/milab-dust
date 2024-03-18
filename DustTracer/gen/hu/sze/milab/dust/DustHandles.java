@@ -1,7 +1,7 @@
 package hu.sze.milab.dust;
 
 public interface DustHandles extends DustConsts {
-	// Generated: 2024-03-05T16_25_13
+	// Generated: 2024-03-18T04_34_45
 
 	MindHandle APP_UNIT = Dust.lookup("giskard:0");
 
@@ -163,7 +163,7 @@ public interface DustHandles extends DustConsts {
 
 	MindHandle TEXT_TAG_TYPE = Dust.lookup("giskard:4:4");
 	MindHandle TEXT_TAG_TYPE_TOKEN = Dust.lookup("giskard:4:5");
-	MindHandle TEXT_TAG_TYPE_NAME = Dust.lookup("giskard:4:6");
+	MindHandle TEXT_TAG_TYPE_LABEL = Dust.lookup("giskard:4:6");
 
 	MindHandle TEXT_ASP_PLAIN = Dust.lookup("giskard:4:7");
 	MindHandle TEXT_ATT_PLAIN_TEXT = Dust.lookup("giskard:4:8");
@@ -192,22 +192,23 @@ public interface DustHandles extends DustConsts {
 	MindHandle RESOURCE_ATT_URL_FRAGMENT = Dust.lookup("giskard:6:6");
 
 	MindHandle RESOURCE_ASP_STREAM = Dust.lookup("giskard:6:7");
+	MindHandle RESOURCE_ATT_STREAM_CTYPEMAP = Dust.lookup("giskard:6:8");
 
-	MindHandle RESOURCE_TAG_STREAMTYPE = Dust.lookup("giskard:6:8");
-	MindHandle RESOURCE_TAG_STREAMTYPE_RAW = Dust.lookup("giskard:6:9");
-	MindHandle RESOURCE_TAG_STREAMTYPE_TEXT = Dust.lookup("giskard:6:10");
-	MindHandle RESOURCE_TAG_STREAMTYPE_ZIPENTRY = Dust.lookup("giskard:6:11");
+	MindHandle RESOURCE_TAG_STREAMTYPE = Dust.lookup("giskard:6:9");
+	MindHandle RESOURCE_TAG_STREAMTYPE_RAW = Dust.lookup("giskard:6:10");
+	MindHandle RESOURCE_TAG_STREAMTYPE_TEXT = Dust.lookup("giskard:6:11");
+	MindHandle RESOURCE_TAG_STREAMTYPE_ZIPENTRY = Dust.lookup("giskard:6:12");
 
-	MindHandle RESOURCE_ASP_PROCESSOR = Dust.lookup("giskard:6:12");
-	MindHandle RESOURCE_ATT_PROCESSOR_STREAM = Dust.lookup("giskard:6:13");
-	MindHandle RESOURCE_ATT_PROCESSOR_DATA = Dust.lookup("giskard:6:14");
+	MindHandle RESOURCE_ASP_PROCESSOR = Dust.lookup("giskard:6:13");
+	MindHandle RESOURCE_ATT_PROCESSOR_STREAM = Dust.lookup("giskard:6:14");
+	MindHandle RESOURCE_ATT_PROCESSOR_DATA = Dust.lookup("giskard:6:15");
 
-	MindHandle RESOURCE_LOG_FILESYSTEM = Dust.lookup("giskard:6:15");
-	MindHandle RESOURCE_LOG_ZIPREADER = Dust.lookup("giskard:6:16");
-	MindHandle RESOURCE_LOG_JSONDOM = Dust.lookup("giskard:6:17");
-	MindHandle RESOURCE_LOG_CSVSAX = Dust.lookup("giskard:6:18");
+	MindHandle RESOURCE_LOG_FILESYSTEM = Dust.lookup("giskard:6:16");
+	MindHandle RESOURCE_LOG_ZIPREADER = Dust.lookup("giskard:6:17");
+	MindHandle RESOURCE_LOG_JSONDOM = Dust.lookup("giskard:6:18");
+	MindHandle RESOURCE_LOG_CSVSAX = Dust.lookup("giskard:6:19");
 
-	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard:6:19");
+	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard:6:20");
 
 	MindHandle DEV_UNIT = Dust.lookup("giskard:7");
 
@@ -240,5 +241,21 @@ public interface DustHandles extends DustConsts {
 	MindHandle NET_LOG_HTTPSRV = Dust.lookup("giskard:10:17");
 	MindHandle NET_LOG_HTTPSVCFILES = Dust.lookup("giskard:10:18");
 	MindHandle NET_LOG_HTTPSVCJSONAPI = Dust.lookup("giskard:10:19");
+
+	MindHandle JSONAPI_UNIT = Dust.lookup("giskard:11");
+
+	MindHandle JSONAPI_ASP_FETCHPARAMS = Dust.lookup("giskard:11:0");
+	MindHandle JSONAPI_ATT_FETCHPARAMS_INCLUDE = Dust.lookup("giskard:11:1");
+	MindHandle JSONAPI_ATT_FETCHPARAMS_FIELDS = Dust.lookup("giskard:11:2");
+	MindHandle JSONAPI_ATT_FETCHPARAMS_FILTER = Dust.lookup("giskard:11:3");
+	MindHandle JSONAPI_ATT_FETCHPARAMS_SORT = Dust.lookup("giskard:11:4");
+	MindHandle JSONAPI_ATT_FETCHPARAMS_PAGELIMIT = Dust.lookup("giskard:11:5");
+	MindHandle JSONAPI_ATT_FETCHPARAMS_PAGEOFFSET = Dust.lookup("giskard:11:6");
+
+	MindHandle GEOMETRY_UNIT = Dust.lookup("giskard:12");
+
+	MindHandle MONTRU_UNIT = Dust.lookup("giskard:13");
+
+	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 
 }
