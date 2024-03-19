@@ -1,7 +1,7 @@
 package hu.sze.milab.dust;
 
 public interface DustHandles extends DustConsts {
-	// Generated: 2024-03-18T04_34_45
+	// Generated: 2024-03-19T17_10_44
 
 	MindHandle APP_UNIT = Dust.lookup("giskard:0");
 
@@ -110,21 +110,22 @@ public interface DustHandles extends DustConsts {
 	MindHandle DUST_ATT_MACHINE_THREADS = Dust.lookup("giskard:2:8");
 	MindHandle DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS = Dust.lookup("giskard:2:9");
 	MindHandle DUST_ATT_MACHINE_ACTIVE_SERVERS = Dust.lookup("giskard:2:10");
+	MindHandle DUST_ATT_MACHINE_UNIT_RESOLVER = Dust.lookup("giskard:2:11");
 
-	MindHandle DUST_ASP_MODULE = Dust.lookup("giskard:2:11");
-	MindHandle DUST_ATT_MODULE_UNITS = Dust.lookup("giskard:2:12");
-	MindHandle DUST_ATT_MODULE_NATIVELOGICS = Dust.lookup("giskard:2:13");
-	MindHandle DUST_ATT_MODULE_LIBRARIES = Dust.lookup("giskard:2:14");
+	MindHandle DUST_ASP_MODULE = Dust.lookup("giskard:2:12");
+	MindHandle DUST_ATT_MODULE_UNITS = Dust.lookup("giskard:2:13");
+	MindHandle DUST_ATT_MODULE_NATIVELOGICS = Dust.lookup("giskard:2:14");
+	MindHandle DUST_ATT_MODULE_LIBRARIES = Dust.lookup("giskard:2:15");
 
-	MindHandle DUST_ASP_THREAD = Dust.lookup("giskard:2:15");
-	MindHandle DUST_ATT_THREAD_DIALOG = Dust.lookup("giskard:2:16");
+	MindHandle DUST_ASP_THREAD = Dust.lookup("giskard:2:16");
+	MindHandle DUST_ATT_THREAD_DIALOG = Dust.lookup("giskard:2:17");
 
-	MindHandle DUST_ASP_NATIVELOGIC = Dust.lookup("giskard:2:17");
-	MindHandle DUST_ATT_NATIVELOGIC_LOGIC = Dust.lookup("giskard:2:18");
-	MindHandle DUST_ATT_NATIVELOGIC_IMPLEMENTATION = Dust.lookup("giskard:2:19");
-	MindHandle DUST_ATT_NATIVELOGIC_INSTANCE = Dust.lookup("giskard:2:20");
+	MindHandle DUST_ASP_NATIVELOGIC = Dust.lookup("giskard:2:18");
+	MindHandle DUST_ATT_NATIVELOGIC_LOGIC = Dust.lookup("giskard:2:19");
+	MindHandle DUST_ATT_NATIVELOGIC_IMPLEMENTATION = Dust.lookup("giskard:2:20");
+	MindHandle DUST_ATT_NATIVELOGIC_INSTANCE = Dust.lookup("giskard:2:21");
 
-	MindHandle DUST_TAG_NATIVELOGIC_SERVER = Dust.lookup("giskard:2:21");
+	MindHandle DUST_TAG_NATIVELOGIC_SERVER = Dust.lookup("giskard:2:22");
 
 	MindHandle MISC_UNIT = Dust.lookup("giskard:3");
 
@@ -146,12 +147,27 @@ public interface DustHandles extends DustConsts {
 
 	MindHandle MISC_TAG_ACTIVE = Dust.lookup("giskard:3:13");
 
-	MindHandle MISC_TAG_DIRECTION = Dust.lookup("giskard:3:14");
-	MindHandle MISC_TAG_DIRECTION_IN = Dust.lookup("giskard:3:15");
-	MindHandle MISC_TAG_DIRECTION_OUT = Dust.lookup("giskard:3:16");
+	MindHandle MISC_TAG_NEGATE = Dust.lookup("giskard:3:14");
 
-	MindHandle MISC_ASP_VARIANT = Dust.lookup("giskard:3:17");
-	MindHandle MISC_ATT_VARIANT_VALUE = Dust.lookup("giskard:3:18");
+	MindHandle MISC_TAG_READONLY = Dust.lookup("giskard:3:15");
+
+	MindHandle MISC_TAG_DIRECTION = Dust.lookup("giskard:3:16");
+	MindHandle MISC_TAG_DIRECTION_IN = Dust.lookup("giskard:3:17");
+	MindHandle MISC_TAG_DIRECTION_OUT = Dust.lookup("giskard:3:18");
+
+	MindHandle MISC_ASP_VARIANT = Dust.lookup("giskard:3:19");
+	MindHandle MISC_ATT_VARIANT_VALUE = Dust.lookup("giskard:3:20");
+
+	MindHandle MISC_ASP_SPACE = Dust.lookup("giskard:3:21");
+	MindHandle MISC_ATT_SPACE_DIMENSIONS = Dust.lookup("giskard:3:22");
+
+	MindHandle MISC_ASP_VECTOR = Dust.lookup("giskard:3:23");
+
+	MindHandle MISC_TAG_VECTOR_LOCATION = Dust.lookup("giskard:3:24");
+
+	MindHandle MISC_TAG_VECTOR_SCALE = Dust.lookup("giskard:3:25");
+
+	MindHandle MISC_TAG_VECTOR_ROTATE = Dust.lookup("giskard:3:26");
 
 	MindHandle TEXT_UNIT = Dust.lookup("giskard:4");
 
@@ -241,6 +257,8 @@ public interface DustHandles extends DustConsts {
 	MindHandle NET_LOG_HTTPSRV = Dust.lookup("giskard:10:17");
 	MindHandle NET_LOG_HTTPSVCFILES = Dust.lookup("giskard:10:18");
 	MindHandle NET_LOG_HTTPSVCJSONAPI = Dust.lookup("giskard:10:19");
+	MindHandle NET_LOG_HTTPCLIDIRECT = Dust.lookup("giskard:10:20");
+	MindHandle NET_LOG_HTTPCLIJSONAPI = Dust.lookup("giskard:10:21");
 
 	MindHandle JSONAPI_UNIT = Dust.lookup("giskard:11");
 
@@ -255,6 +273,45 @@ public interface DustHandles extends DustConsts {
 	MindHandle GEOMETRY_UNIT = Dust.lookup("giskard:12");
 
 	MindHandle MONTRU_UNIT = Dust.lookup("giskard:13");
+
+	MindHandle GEOMETRY_TAG_VALTYPE = Dust.lookup("giskard:13:0");
+	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_X = Dust.lookup("giskard:13:1");
+	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Y = Dust.lookup("giskard:13:2");
+
+	MindHandle MONTRU_ASP_AREA = Dust.lookup("giskard:13:3");
+	MindHandle MONTRU_ASP_WIDGET = Dust.lookup("giskard:13:4");
+
+	MindHandle MONTRU_TAG_WIDGET = Dust.lookup("giskard:13:5");
+	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:6");
+	MindHandle MONTRU_TAG_WIDGET_BUTTON = Dust.lookup("giskard:13:7");
+	MindHandle MONTRU_TAG_WIDGET_INPUT = Dust.lookup("giskard:13:8");
+	MindHandle MONTRU_TAG_WIDGET_TEXTAREA = Dust.lookup("giskard:13:9");
+	MindHandle MONTRU_TAG_WIDGET_TOGGLE = Dust.lookup("giskard:13:10");
+	MindHandle MONTRU_TAG_WIDGET_SELECT = Dust.lookup("giskard:13:11");
+
+	MindHandle MONTRU_ASP_CONTAINER = Dust.lookup("giskard:13:12");
+
+	MindHandle MONTRU_TAG_LAYOUT = Dust.lookup("giskard:13:13");
+	MindHandle MONTRU_TAG_LAYOUT_LAYERED = Dust.lookup("giskard:13:14");
+	MindHandle MONTRU_TAG_LAYOUT_PAGE = Dust.lookup("giskard:13:15");
+	MindHandle MONTRU_TAG_LAYOUT_FLOW = Dust.lookup("giskard:13:16");
+
+	MindHandle MONTRU_TAG_PAGE = Dust.lookup("giskard:13:17");
+	MindHandle MONTRU_TAG_PAGE_HEADER = Dust.lookup("giskard:13:18");
+	MindHandle MONTRU_TAG_PAGE_FOOTER = Dust.lookup("giskard:13:19");
+	MindHandle MONTRU_TAG_PAGE_LEAD = Dust.lookup("giskard:13:20");
+	MindHandle MONTRU_TAG_PAGE_TAIL = Dust.lookup("giskard:13:21");
+	MindHandle MONTRU_TAG_PAGE_CENTER = Dust.lookup("giskard:13:22");
+
+	MindHandle MONTRU_TAG_FLOW = Dust.lookup("giskard:13:23");
+	MindHandle MONTRU_TAG_FLOW_LINE = Dust.lookup("giskard:13:24");
+	MindHandle MONTRU_TAG_FLOW_PAGE = Dust.lookup("giskard:13:25");
+
+	MindHandle MONTRU_ASP_GRID = Dust.lookup("giskard:13:26");
+	MindHandle MONTRU_ATT_GRID_AXES = Dust.lookup("giskard:13:27");
+
+	MindHandle MONTRU_LOG_WINDOW = Dust.lookup("giskard:13:28");
+	MindHandle MONTRU_LOG_GRAPH = Dust.lookup("giskard:13:29");
 
 	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 

@@ -32,4 +32,7 @@ public interface DustNetHandles extends DustConsts, DustUnitHandles {
 	MindHandle NET_LOG_HTTPSVCFILES = Dust.lookup("giskard:10:?");
 	MindHandle NET_LOG_HTTPSVCJSONAPI = Dust.lookup("giskard:10:?");
 	
+	MindHandle NET_LOG_HTTPCLIDIRECT = Dust.lookup("giskard:10:?");
+	MindHandle NET_LOG_HTTPCLIJSONAPI = Dust.lookup("giskard:10:?");
+	
 }

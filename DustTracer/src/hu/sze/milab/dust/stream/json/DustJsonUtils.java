@@ -80,22 +80,33 @@ public class DustJsonUtils implements DustJsonConsts {
 						mem = JsonApiMember.relationships;
 						val = DustJsonUtils.handleToMap((MindHandle) val);
 					} else if (val instanceof Map) {
-						Map mp = new HashMap();
+						Map mp = null;
+						ArrayList al = null;
 						for (Map.Entry<Object, Object> ee : ((Map<Object, Object>) val).entrySet()) {
 							Object mk = ee.getKey();
 							if (mk instanceof MindHandle) {
 								mk = DustJsonUtils.handleToString((MindHandle) mk);
 							}
+							
 							Object mv = ee.getValue();
 							if (mv instanceof MindHandle) {
 								mem = JsonApiMember.relationships;
-								mk = DustJsonUtils.handleToMap((MindHandle) mv);
+								mp = DustJsonUtils.handleToMap((MindHandle) mv);
+								DustUtils.safeGet(mp, JsonApiMember.meta, MAP_CREATOR).put("key", mk);
+								
+								if ( null == al ) {
+									val = al = new ArrayList();
+								}
+								al.add(mp);
+								
+							} else {
+								if ( null == mp ) {
+									val = mp = new HashMap();
+								}
+								mp.put(mk, mv);
 							}
-							mp.put(mk, mv);
 						}
-						val = mp;
-					}
-					if (val instanceof Collection) {
+					} else if (val instanceof Collection) {
 						ArrayList al = new ArrayList();
 						for (Object oo : ((Collection) val)) {
 							if (oo instanceof MindHandle) {

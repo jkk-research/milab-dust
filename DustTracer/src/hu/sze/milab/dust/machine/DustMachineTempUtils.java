@@ -8,7 +8,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 import hu.sze.milab.dust.Dust;
-import hu.sze.milab.dust.DustMetaHandles;
+import hu.sze.milab.dust.DustCoreHandles;
 import hu.sze.milab.dust.DustUnitHandles;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.net.DustNetHandles;
@@ -25,7 +25,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-		initFromInterfaces(DustUnitHandles.class, DustMetaHandles.class, DustNetHandles.class, DustStreamHandles.class);
+		initFromInterfaces(DustUnitHandles.class, DustCoreHandles.class, DustNetHandles.class, DustStreamHandles.class);
 
 //		dumpUnits();
 		
