@@ -98,7 +98,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		
 		// TODO not good... fix: ensure getUnit call on units when resolving from file...
 		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
-		Dust.log(EVENT_ASP_EVENT, JSONAPI_ASP_FETCHPARAMS);
+		Dust.log(EVENT_ASP_EVENT, STANDARD_ASP_JSONAPIFETCH);
 
 		machine.bootInit(bh);
 		

@@ -23,7 +23,7 @@ public interface DustUnitHandles extends DustConsts {
 	
 	MindHandle NET_UNIT = Dust.lookup("giskard:10");
 
-	MindHandle JSONAPI_UNIT = Dust.lookup("giskard:11");
+	MindHandle STANDARD_UNIT = Dust.lookup("giskard:11");
 
 	MindHandle GEOMETRY_UNIT = Dust.lookup("giskard:12");
 

@@ -1,7 +1,7 @@
 package hu.sze.milab.dust;
 
 public interface DustHandles extends DustConsts {
-	// Generated: 2024-03-19T17_10_44
+	// Generated: 2024-03-21T15_21_15
 
 	MindHandle APP_UNIT = Dust.lookup("giskard:0");
 
@@ -260,15 +260,18 @@ public interface DustHandles extends DustConsts {
 	MindHandle NET_LOG_HTTPCLIDIRECT = Dust.lookup("giskard:10:20");
 	MindHandle NET_LOG_HTTPCLIJSONAPI = Dust.lookup("giskard:10:21");
 
-	MindHandle JSONAPI_UNIT = Dust.lookup("giskard:11");
+	MindHandle STANDARD_UNIT = Dust.lookup("giskard:11");
 
-	MindHandle JSONAPI_ASP_FETCHPARAMS = Dust.lookup("giskard:11:0");
-	MindHandle JSONAPI_ATT_FETCHPARAMS_INCLUDE = Dust.lookup("giskard:11:1");
-	MindHandle JSONAPI_ATT_FETCHPARAMS_FIELDS = Dust.lookup("giskard:11:2");
-	MindHandle JSONAPI_ATT_FETCHPARAMS_FILTER = Dust.lookup("giskard:11:3");
-	MindHandle JSONAPI_ATT_FETCHPARAMS_SORT = Dust.lookup("giskard:11:4");
-	MindHandle JSONAPI_ATT_FETCHPARAMS_PAGELIMIT = Dust.lookup("giskard:11:5");
-	MindHandle JSONAPI_ATT_FETCHPARAMS_PAGEOFFSET = Dust.lookup("giskard:11:6");
+	MindHandle STANDARD_ASP_JSONAPIFETCH = Dust.lookup("giskard:11:0");
+	MindHandle STANDARD_ATT_JSONAPIFETCH_INCLUDE = Dust.lookup("giskard:11:1");
+	MindHandle STANDARD_ATT_JSONAPIFETCH_FIELDS = Dust.lookup("giskard:11:2");
+	MindHandle STANDARD_ATT_JSONAPIFETCH_FILTER = Dust.lookup("giskard:11:3");
+	MindHandle STANDARD_ATT_JSONAPIFETCH_SORT = Dust.lookup("giskard:11:4");
+	MindHandle STANDARD_ATT_JSONAPIFETCH_PAGELIMIT = Dust.lookup("giskard:11:5");
+	MindHandle STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET = Dust.lookup("giskard:11:6");
+
+	MindHandle STANDARD_ASP_XMLELEMENT = Dust.lookup("giskard:11:7");
+	MindHandle STANDARD_ATT_XMLELEMENT_ATTRIBUTES = Dust.lookup("giskard:11:8");
 
 	MindHandle GEOMETRY_UNIT = Dust.lookup("giskard:12");
 

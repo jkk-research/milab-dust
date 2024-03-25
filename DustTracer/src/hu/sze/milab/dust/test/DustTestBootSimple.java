@@ -90,12 +90,12 @@ public class DustTestBootSimple implements DustTestConsts {
 
 		
 		MindHandle hWebCmdInfo = DustDevUtils.newHandle(TEST1_UNIT, RESOURCE_ASP_URL);
-		Dust.access(MindAccess.Set, tSrv + "/info", hWebCmdInfo, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Set, "info", hWebCmdInfo, RESOURCE_ATT_URL_PATH);
 
 		MindHandle hWebCmdStop = DustDevUtils.newHandle(TEST1_UNIT, RESOURCE_ASP_URL);
-		Dust.access(MindAccess.Set, tSrv + "/stop", hWebCmdStop, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Set, "stop", hWebCmdStop, RESOURCE_ATT_URL_PATH);
 		
-		MindHandle hWebDataRequest = DustDevUtils.newHandle(TEST1_UNIT, JSONAPI_ASP_FETCHPARAMS);
+		MindHandle hWebDataRequest = DustDevUtils.newHandle(TEST1_UNIT, STANDARD_ASP_JSONAPIFETCH);
 		Dust.access(MindAccess.Set, "giskard", hWebDataRequest, RESOURCE_ATT_URL_PATH);
 		
 		MindHandle hWebSrvResponseTxt = DustDevUtils.newHandle(TEST1_UNIT, TEXT_ASP_PLAIN);
@@ -108,6 +108,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Insert, hWebDataRequest, hWebDataAccess, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		
 		MindHandle hWebDirectRequest = DustDevUtils.newHandle(TEST1_UNIT, NET_LOG_HTTPCLIDIRECT);
+		Dust.access(MindAccess.Set, tSrv, hWebDirectRequest, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, hWebSrvResponseTxt, hWebDirectRequest, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Insert, hWebCmdInfo, hWebDirectRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hWebCmdStop, hWebDirectRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
@@ -141,12 +142,12 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hRequestPropertiesGrid = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_ASP_GRID);
 		MindHandle hRequestPropertiesRows = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN);
 		Dust.access(MindAccess.Insert, RESOURCE_ATT_URL_PATH, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, JSONAPI_ATT_FETCHPARAMS_INCLUDE, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, JSONAPI_ATT_FETCHPARAMS_FIELDS, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, JSONAPI_ATT_FETCHPARAMS_FILTER, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, JSONAPI_ATT_FETCHPARAMS_SORT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, JSONAPI_ATT_FETCHPARAMS_PAGELIMIT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, JSONAPI_ATT_FETCHPARAMS_PAGEOFFSET, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_INCLUDE, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FIELDS, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FILTER, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_SORT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGELIMIT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		MindHandle hRequestPropertiesCols = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN);
 		Dust.access(MindAccess.Insert, hLabels, hRequestPropertiesCols, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
