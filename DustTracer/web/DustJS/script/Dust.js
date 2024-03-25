@@ -1,57 +1,11 @@
 
 if ( !('Dust' in window) ){
-	function DustInit () {
-		
-		var Tokens = {};
-		var TokenInfo = {};
-		var Paths = {};
-		
-		function getPath(root, rel) {
-			var path = null;
-			
-			if ( root ) {
-				path = new URL(root + rel).href;
-				if (path.slice(-1) === '/') {
-					path = path.slice(0, -1);
-				}
-			}
-			
-			return path;
-		}
+	var KnowledgeMap = {};
 
-		var r = document.currentScript.src;
-		
-		if ( r ) {
-			Paths.script = getPath(r, '/..');
-			Paths.res = getPath(Paths.script, '/../res');
-		} else {
-			console.error('DustBase path init error.');
+	function DustInit () {
+		this.lookup = function(id) {
+			return KnowledgeMap[id];
 		}
-		
-		this.getTokens = function(module) {
-			return Tokens[module];
-		}
-		
-		this.addModule = function(module, ... tokens) {
-			var mod = Tokens[module];
-			
-			if ( !mod ) {
-				mod = {};
-				Tokens[module] = mod;
-				
-				for (t of tokens) {
-					var id = t.type + '_' + module + '_' + t.id;
-					var entity = t.entity ? t.entity : id;
-					mod[id] = entity;
-					
-					if ( t.info ) {
-						TokenInfo[id] = t.info;
-					}
-				}
-			} else {
-				console.error('Multiple declaration of module ' + module);
-			}	
-		}		
 	}
 	
 	function DustSrv () {
@@ -73,7 +27,23 @@ if ( !('Dust' in window) ){
 					
 					var ct = jqXHR.getResponseHeader('content-type');
 					
-					jqXHR.DustProc(jqXHR.DustRequestId, true, textStatus, data);
+					var ids = [];
+					
+					if ( ct.includes('application/vnd.api+json') ) {
+						var respArr = data.data;
+						
+						for ( item of respArr ) {
+							var itemId = item.id.split(' ')[0];
+							ids.push(itemId);
+							KnowledgeMap[itemId] = item;
+						}
+					}
+					
+					var listeners = Array.isArray(jqXHR.DustProc) ? jqXHR.DustProc : [jqXHR.DustProc];
+					
+					for ( l of listeners ) {
+						l(jqXHR.DustRequestId, true, textStatus, data, ids);
+					}
 				} else {
 					console.log('Request ' + jqXHR.DustRequestId + ' done.');
 				}

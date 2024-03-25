@@ -22,28 +22,28 @@ if ( 'Dust' in window ){
 	      ]
 	  });
 
-	this.loadResponseData = function(id, success, status, data) {	
-			var respArr = data.data;
-			
+	this.loadResponseData = function(id, success, status, txt, ids)  {	
 			cy.startBatch();
 			
 			var all = cy.elements('node[id]');
 			cy.remove(all);
 			
+			var item;
+			
 			var items = {};
 			
-			for ( item of respArr ) {
-				var itemId = item.id.split(' ')[0];
+			for ( itemId of ids ) {
+				item = Dust.lookup(itemId);
 				if ( !items[itemId] ) {
 					items[itemId] = cy.add({ group: 'nodes', data: { id: itemId, label: item.id.split(' ')[1] }});
 				}
 			}
 			
-			for ( item of respArr ) {
+			for ( itemId of ids ) {
+				item = Dust.lookup(itemId);
 				var rel = item.relationships;
 				
 				if ( rel ) {
-					var itemId = item.id.split(' ')[0];
 					for (const r in rel) {
 						var t = rel[r];
 						var key = null;
