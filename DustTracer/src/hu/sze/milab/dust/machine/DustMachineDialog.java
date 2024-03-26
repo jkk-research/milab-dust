@@ -155,6 +155,7 @@ class DustMachineDialog implements DustMachineConsts {
 								}
 							}
 						} catch (Throwable e) {
+							Dust.access(MindAccess.Set, null, a, MIND_ATT_AGENT_TARGET);
 							DustException.swallow(e);
 						}
 					}

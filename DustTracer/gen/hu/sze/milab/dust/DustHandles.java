@@ -1,7 +1,7 @@
 package hu.sze.milab.dust;
 
 public interface DustHandles extends DustConsts {
-	// Generated: 2024-03-25T14_45_17
+	// Generated: 2024-03-26T10_36_06
 
 	MindHandle APP_UNIT = Dust.lookup("giskard:0");
 

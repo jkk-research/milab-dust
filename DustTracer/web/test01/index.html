@@ -17,7 +17,7 @@
 		<tbody>
 			<tr>
 				<td class="dataTable" width="150px"><label for="path">Path</label></td>
-				<td ><input style="width: 100%" id="path" value="test:1" /></td>
+				<td ><input style="width: 100%" id="path" value="test:0" /></td>
 			</tr>
 			<tr>
 				<td class="dataTable"><label for="include">include</label></td>
@@ -54,7 +54,7 @@
 					onclick="directRequest('/admin/info');"></td>
 			</tr>
 			<tr>
-				<td class="dataTable maxHeight"><textarea class="maxWidth" height='800px' id='srvResponse' ></textarea></td>
+				<td class="dataTable maxHeight"><div class="maxWidth montruScrollY" style="height: 800px" id='srvResponse'> </div></td>
 				<td class="dataTable" width="80%"><div style="width: 100%; height: 800px; display: block;"
 						id='graph'></div></td>
 			</tr>
@@ -108,8 +108,9 @@
 		
 		function displayResponse(id, success, status, txt) {	
 			console.log('Request success ' + txt);
-			var ta = document.getElementById('srvResponse');
-			ta.value = txt;
+			$('#srvResponse').text(txt);
+// 			var respArea = document.getElementById('srvResponse');
+// 			respArea.text(txt);
 		}
 		
 		Dust.Srv.loadResource({ url: '/jsonapi/test:1', respProc: [processResponse, Dust.Graph.loadResponseData]});	

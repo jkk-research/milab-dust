@@ -10,3 +10,7 @@
 .maxHeight {
 	height: 100%;
 }
+
+.montruScrollY {
+	overflow-y: scroll;
+}
