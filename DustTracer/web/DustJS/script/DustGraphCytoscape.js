@@ -28,7 +28,7 @@ if ('Dust' in window) {
 			var fs = '';		
 			for (s of sel) {
 				var item = Dust.lookup(s.id());
-				log = log.concat( fs, '(', item.id, ' ', item.label,')' );
+				log = log.concat( fs, '(', item.id, ' ', item.label, ' : ', item[DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT],')' );
 				fs = ', ';
 			}
 			console.log(log + ']');

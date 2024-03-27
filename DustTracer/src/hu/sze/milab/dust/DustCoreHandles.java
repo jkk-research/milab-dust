@@ -229,9 +229,9 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 //	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
 	
-	MindHandle GEOMETRY_TAG_VALTYPE = Dust.lookup("giskard:13:?");
-	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_X = Dust.lookup("giskard:13:?");
-	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Y = Dust.lookup("giskard:13:?");
+	MindHandle GEOMETRY_TAG_VALTYPE = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_X = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Y = Dust.lookup("giskard:12:?");
 	
 	MindHandle MONTRU_ASP_AREA = Dust.lookup("giskard:13:?");
 	

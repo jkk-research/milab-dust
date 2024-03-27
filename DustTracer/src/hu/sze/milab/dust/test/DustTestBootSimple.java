@@ -70,6 +70,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		
 		MindHandle hModDustJS = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE);
 		Dust.access(MindAccess.Insert, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
+		Dust.access(MindAccess.Insert, "script/DustHandles.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
 		Dust.access(MindAccess.Set, "script/Dust.js", hModDustJS, RESOURCE_ATT_URL_PATH);
 		
 		MindHandle hModChart = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE);

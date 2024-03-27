@@ -14,6 +14,8 @@ public interface DustConsts {
 	String DUST_EXT_CSV = ".csv";
 	String DUST_EXT_XML = ".xml";
 
+	String DUST_EXT_JS = ".js";
+
 	String DUST_EXT_JAR = ".jar";
 	String DUST_EXT_JAVA = ".java";
 	String DUST_EXT_CLASS = ".class";

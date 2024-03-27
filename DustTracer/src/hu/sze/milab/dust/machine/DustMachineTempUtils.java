@@ -22,25 +22,30 @@ import hu.sze.milab.dust.utils.DustUtilsFile;
 @SuppressWarnings({ "rawtypes" })
 public class DustMachineTempUtils implements DustJsonConsts {
 
+	private static final MindHandle[] META_HANDLES = { MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_LOGIC, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY,
+			DUST_ASP_MACHINE };
+
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
 		initFromInterfaces(DustUnitHandles.class, DustCoreHandles.class, DustNetHandles.class, DustStreamHandles.class);
 
 //		dumpUnits();
-		
+
 //		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
 //		readUnits();
+
+		writeJavaMeta("gen", "hu.sze.milab.dust.DustHandles");
 		
-		writeJavaMeta("giskard", "hu.sze.milab.dust.DustHandles");
+		writeJavaScriptMeta("web/DustJS/script", "DustHandles");
 	}
 
 	public static void readUnits() throws Exception {
 		File dir = new File(MODULE_DIR, "giskard");
 
-		if (dir.isDirectory()) {
+		if ( dir.isDirectory() ) {
 			for (File f : dir.listFiles()) {
-				if (f.getName().toLowerCase().endsWith(DUST_EXT_JSON)) {
+				if ( f.getName().toLowerCase().endsWith(DUST_EXT_JSON) ) {
 					DustJsonApiDomAgent.readUnit(f);
 				}
 			}
@@ -52,7 +57,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		Map<Object, MindHandle> units = Dust.access(MindAccess.Peek, null, APP_UNIT, MIND_ATT_UNIT_HANDLES);
 
 		for (MindHandle h : units.values()) {
-			if (null != Dust.access(MindAccess.Peek, null, h, MIND_ATT_UNIT_HANDLES)) {
+			if ( null != Dust.access(MindAccess.Peek, null, h, MIND_ATT_UNIT_HANDLES) ) {
 				File f = getUnitFile(h);
 				DustJsonApiDomAgent.writeUnit(h, f, null);
 			}
@@ -70,32 +75,28 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		return f;
 	}
 
-	public static void writeJavaMeta(String authorID, String targetInterfaceName) throws Exception {
-		DustMachineTempJavaMeta metaWriter = null;
+	public static void writeJavaMeta(String srcRoot, String targetInterfaceName) throws Exception {
+		genSources(new DustMachineTempMetaGenJava(srcRoot, targetInterfaceName, META_HANDLES));
+	}
+
+	public static void writeJavaScriptMeta(String srcRoot, String objName) throws Exception {
+		genSources(new DustMachineTempMetaGenJavaScript(srcRoot, objName, META_HANDLES));
+	}
+
+	public static void genSources(DustMachineTempSrcGen metaWriter) throws Exception {
+		metaWriter.agentBegin();
 
 		Map<Object, Object> units = Dust.access(MindAccess.Peek, null, APP_UNIT, MIND_ATT_UNIT_CONTENT);
-
-//		Map units = Dust.access(MindAccess.Peek, null, APP_MACHINE_MAIN, DUST_ATT_MACHINE_AUTHORS, authorID, MIND_ATT_AUTHOR_UNITS);
-//		Map units = Dust.access(MindAccess.Peek, null, null, DUST_ATT_MACHINE_UNITS);
 		for (Map.Entry<Object, Object> ue : units.entrySet()) {
-			if (null == metaWriter) {
-				metaWriter = new DustMachineTempJavaMeta("gen", targetInterfaceName, MIND_ASP_UNIT, MIND_ASP_ASPECT,
-						MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_LOGIC, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY,
-						DUST_ASP_MACHINE);
-				metaWriter.agentBegin();
-			}
-
 			Map<String, MindHandle> hU = DustUtils.simpleGet(ue.getValue(), MIND_ATT_UNIT_HANDLES);
-			if (null != hU) {
+			if ( null != hU ) {
 				Dust.log(null, "Unit found", ue.getKey(), hU.size());
 				metaWriter.unitToAdd = hU;
 				metaWriter.agentProcess(MindAction.Process);
 			}
 		}
 
-		if (null != metaWriter) {
-			metaWriter.agentEnd();
-		}
+		metaWriter.agentEnd();
 	}
 
 	public static void initFromInterfaces(Class... ifClasses) throws IllegalAccessException {
@@ -104,11 +105,11 @@ public class DustMachineTempUtils implements DustJsonConsts {
 //		Dust.access(MindAccess.Set, TEXT_TAG_LANGUAGE_EN_US, null, TEXT_ATT_LANGUAGE_DEFAULT);
 
 		Set<String> authors = new TreeSet<>();
-		
+
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
-				if (ch instanceof DustHandle) {
+				if ( ch instanceof DustHandle ) {
 					String name = f.getName();
 					DustHandle hItem = (DustHandle) ch;
 					hItem.setHint(name);
@@ -116,7 +117,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 
 					String[] nn = name.split(DUST_SEP);
 					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
-					
+
 					String aId = hItem.getId().split(DUST_SEP_ID)[0];
 					if ( authors.add(aId) ) {
 						MindHandle hA = Dust.lookup(aId);
@@ -124,7 +125,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						Dust.access(MindAccess.Set, MIND_ASP_AUTHOR, hA, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 					}
 
-					if ("ASP".equals(nn[1]) || "TAG".equals(nn[1])) {
+					if ( "ASP".equals(nn[1]) || "TAG".equals(nn[1]) ) {
 						parents.put(name, (MindHandle) ch);
 					}
 
@@ -142,19 +143,19 @@ public class DustMachineTempUtils implements DustJsonConsts {
 		for (Class constClass : ifClasses) {
 			for (Field f : constClass.getDeclaredFields()) {
 				Object ch = f.get(null);
-				if (ch instanceof MindHandle) {
+				if ( ch instanceof MindHandle ) {
 					String name = f.getName();
 					String[] nn = name.split(DUST_SEP);
 					MindHandle hPA = DustUtilsAttCache.getAtt(MachineAtts.PrimaryAspectNames, nn[1], null);
 
 					Dust.access(MindAccess.Set, hPA, ch, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
-					if ("ATT".equals(nn[1]) || "TAG".equals(nn[1])) {
+					if ( "ATT".equals(nn[1]) || "TAG".equals(nn[1]) ) {
 						String pName = name.substring(0, nn[0].length() + nn[1].length() + nn[2].length() + 2);
 						pName = pName.replace("_ATT_", "_ASP_");
 						MindHandle hParent = parents.get(pName);
 
-						if ( (hParent == ch) && (MIND_ASP_TAG == hPA ) ) {
+						if ( (hParent == ch) && (MIND_ASP_TAG == hPA) ) {
 							continue;
 						}
 						Dust.access(MindAccess.Set, hParent, ch, MISC_ATT_CONN_PARENT);

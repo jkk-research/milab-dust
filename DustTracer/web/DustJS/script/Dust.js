@@ -3,15 +3,76 @@ if (!('Dust' in window)) {
 	var KnowledgeMap = {};
 	var Relations = new Set();
 
+	var Notifier = null;
+
+	function optNotifyCollect(changed) {
+		var ret = false;
+
+		var listeners = KnowledgeMap[changed][DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS];
+
+		if (listeners) {
+			if (null == Notifier) {
+				Notifier = { seen: new Set(), queue: [] };
+				for (l of listeners) {
+					Notifier.queue.push({ agent: l, chg: [changed] });
+				}
+				ret = true;
+			} else {
+				var nq = Notifier.queue;
+				var ql = nq.length();
+
+				for (l of listeners) {
+					if (!Notifier.seen.has(l)) {
+						for (let i = 0; i < ql; i++) {
+							var qi = nq[i];
+							if ( qi.agent == l ) {
+								if ( !qi.chg.includes(changed) ) {
+									qi.chg.push(changed);
+									nq.splice(i, 1);
+									nq.push(qi);
+									--i;
+									--ql;
+									break;
+								}
+							}
+						}
+					}
+					Notifier.queue.push({ agent: l, chg: [changed] });
+				}
+			}
+		}
+
+		return ret;
+	}
+
+	function optNotifySend() {
+		var ret = false;
+		
+		if ( Notifier && Notifier.queue.length() ) {
+			var qi = Notifier.shift();
+			var l = qi.agent;
+			Notifier.seen.add(l);
+						
+			var impl = KnowledgeMap[l][DUST_ATT_NATIVELOGIC_INSTANCE];
+			if ( impl ) {
+				impl.agentProcess(qi.chg);
+			}
+			
+			ret = ( 0 < Notifier.queue.length() );
+		}
+		
+		return ret;
+	}
+
 	function DustInit() {
 		this.lookup = function(key, createIfMissing) {
 			var id = key.split(' ')[0];
 			var ret = KnowledgeMap[id];
 
 			if (!ret && createIfMissing) {
-				ret = { 'id' : id, 'label' : key.split(' ')[1]};
-				
-				if ( !ret.label ) {
+				ret = { 'id': id, 'label': key.split(' ')[1] };
+
+				if (!ret.label) {
 					console.log('Missing label ' + key);
 				}
 				KnowledgeMap[id] = ret;
@@ -19,7 +80,7 @@ if (!('Dust' in window)) {
 
 			return ret;
 		}
-		
+
 		this.isRelation = function(key) {
 			return Relations.has(key);
 		}
@@ -66,12 +127,12 @@ if (!('Dust' in window)) {
 									for (const key in item.relationships) {
 										var rel = item.relationships[key];
 										var val = null;
-										
-										if (Array.isArray(rel) ) {
+
+										if (Array.isArray(rel)) {
 											var ob;
-											for ( target of rel ) {
-												if ( !val ) {
-													if ( target.meta ) {
+											for (target of rel) {
+												if (!val) {
+													if (target.meta) {
 														val = {};
 														ob = true;
 													} else {
@@ -79,10 +140,10 @@ if (!('Dust' in window)) {
 														ob = false;
 													}
 												}
-												
-												var v = target.id; 
+
+												var v = target.id;
 												Dust.lookup(v, true);
-												if ( ob ) {
+												if (ob) {
 													var rk = target.meta.key;
 													Dust.lookup(rk, true);
 													val[rk] = v;
@@ -94,10 +155,10 @@ if (!('Dust' in window)) {
 											val = rel.id;
 											Dust.lookup(val, true);
 										}
-										
+
 										var kRel = Dust.lookup(key, true).id;
 										Relations.add(kRel);
-										
+
 										kItem[kRel] = val;
 									}
 								}
