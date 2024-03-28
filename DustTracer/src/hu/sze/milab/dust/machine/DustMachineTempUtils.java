@@ -23,7 +23,7 @@ import hu.sze.milab.dust.utils.DustUtilsFile;
 public class DustMachineTempUtils implements DustJsonConsts {
 
 	private static final MindHandle[] META_HANDLES = { MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_LOGIC, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY,
-			DUST_ASP_MACHINE };
+			DUST_LOG_MACHINE };
 
 	private static final File MODULE_DIR = new File("work/json/");
 

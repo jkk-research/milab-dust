@@ -21,6 +21,8 @@ public interface DustUnitHandles extends DustConsts {
 
 	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
 	
+	MindHandle DUSTJAVASCRIPT_UNIT = Dust.lookup("giskard:9");
+	
 	MindHandle NET_UNIT = Dust.lookup("giskard:10");
 
 	MindHandle STANDARD_UNIT = Dust.lookup("giskard:11");

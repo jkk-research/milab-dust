@@ -99,7 +99,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 //	MindHandle DUST_UNIT = Dust.lookup("giskard:2");
 
-	MindHandle DUST_ASP_MACHINE = Dust.lookup("giskard:2:?");
+	MindHandle DUST_LOG_MACHINE = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MACHINE_AUTHORS = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MACHINE_UNITS = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MACHINE_ASSEMBLIES = Dust.lookup("giskard:2:?");
@@ -235,7 +235,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	
 	MindHandle MONTRU_ASP_AREA = Dust.lookup("giskard:13:?");
 	
-	MindHandle MONTRU_ASP_WIDGET = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_LOG_WIDGET = Dust.lookup("giskard:13:?");
 	
 	MindHandle MONTRU_TAG_WIDGET = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:?");
@@ -263,11 +263,13 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_TAG_FLOW_LINE = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_FLOW_PAGE = Dust.lookup("giskard:13:?");
 	
-	MindHandle MONTRU_ASP_GRID = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_LOG_GRID = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_ATT_GRID_AXES = Dust.lookup("giskard:13:?");
 	
 	MindHandle MONTRU_LOG_WINDOW = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_LOG_GRAPH = Dust.lookup("giskard:13:?");
+
+	MindHandle MONTRU_LOG_GUI = Dust.lookup("giskard:13:?");
 
 //	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 

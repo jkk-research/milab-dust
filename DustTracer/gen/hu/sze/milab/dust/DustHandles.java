@@ -1,7 +1,7 @@
 package hu.sze.milab.dust;
 
 public interface DustHandles extends DustConsts {
-	// Generated: 2024-03-27T14_17_22
+	// Generated: 2024-03-28T16_23_56
 
 	MindHandle APP_UNIT = Dust.lookup("giskard:0");
 
@@ -99,7 +99,8 @@ public interface DustHandles extends DustConsts {
 
 	MindHandle DUST_UNIT = Dust.lookup("giskard:2");
 
-	MindHandle DUST_ASP_MACHINE = Dust.lookup("giskard:2:0");
+	MindHandle DUST_LOG_MACHINE = Dust.lookup("giskard:2:0");
+
 	MindHandle DUST_ATT_MACHINE_AUTHORS = Dust.lookup("giskard:2:1");
 	MindHandle DUST_ATT_MACHINE_UNITS = Dust.lookup("giskard:2:2");
 	MindHandle DUST_ATT_MACHINE_ASSEMBLIES = Dust.lookup("giskard:2:3");
@@ -232,6 +233,8 @@ public interface DustHandles extends DustConsts {
 
 	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
 
+	MindHandle DUSTJAVASCRIPT_UNIT = Dust.lookup("giskard:9");
+
 	MindHandle NET_UNIT = Dust.lookup("giskard:10");
 
 	MindHandle NET_ASP_HOST = Dust.lookup("giskard:10:0");
@@ -282,7 +285,8 @@ public interface DustHandles extends DustConsts {
 	MindHandle MONTRU_UNIT = Dust.lookup("giskard:13");
 
 	MindHandle MONTRU_ASP_AREA = Dust.lookup("giskard:13:0");
-	MindHandle MONTRU_ASP_WIDGET = Dust.lookup("giskard:13:1");
+
+	MindHandle MONTRU_LOG_WIDGET = Dust.lookup("giskard:13:1");
 
 	MindHandle MONTRU_TAG_WIDGET = Dust.lookup("giskard:13:2");
 	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:3");
@@ -310,11 +314,13 @@ public interface DustHandles extends DustConsts {
 	MindHandle MONTRU_TAG_FLOW_LINE = Dust.lookup("giskard:13:21");
 	MindHandle MONTRU_TAG_FLOW_PAGE = Dust.lookup("giskard:13:22");
 
-	MindHandle MONTRU_ASP_GRID = Dust.lookup("giskard:13:23");
+	MindHandle MONTRU_LOG_GRID = Dust.lookup("giskard:13:23");
+
 	MindHandle MONTRU_ATT_GRID_AXES = Dust.lookup("giskard:13:24");
 
 	MindHandle MONTRU_LOG_WINDOW = Dust.lookup("giskard:13:25");
 	MindHandle MONTRU_LOG_GRAPH = Dust.lookup("giskard:13:26");
+	MindHandle MONTRU_LOG_GUI = Dust.lookup("giskard:13:27");
 
 	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 

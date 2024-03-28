@@ -69,17 +69,17 @@ public class DustDevUtils implements DustHandles {
 		return hLogic;
 	}
 
-	public static void registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName) {
-		registerNative(hLogic, hUnit, nativeClassName, false);
+	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName) {
+		registerNative(hLogic, hUnit, hModule, nativeClassName, false);
 	}
 
-	public static void registerNative(MindHandle hLogic, MindHandle hUnit, String nativeClassName, boolean srv) {
+	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {
 		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVELOGIC);
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
 
-		Dust.access(MindAccess.Set, hNative, APP_MODULE_MAIN, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
+		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
 		if (srv) {
 			Dust.access(MindAccess.Set, true, hNative, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
 		}

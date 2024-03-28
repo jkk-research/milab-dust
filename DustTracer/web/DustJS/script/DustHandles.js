@@ -1,5 +1,5 @@
 
-// Generated: 2024-03-27T14_17_22
+// Generated: 2024-03-28T16_23_57
 if (!("DustHandles" in window)) {
 	DustHandles = {
 
@@ -99,7 +99,8 @@ if (!("DustHandles" in window)) {
 
 		DUST_UNIT : "giskard-2",
 
-		DUST_ASP_MACHINE : "giskard-2-0",
+		DUST_LOG_MACHINE : "giskard-2-0",
+
 		DUST_ATT_MACHINE_AUTHORS : "giskard-2-1",
 		DUST_ATT_MACHINE_UNITS : "giskard-2-2",
 		DUST_ATT_MACHINE_ASSEMBLIES : "giskard-2-3",
@@ -232,6 +233,8 @@ if (!("DustHandles" in window)) {
 
 		DUSTJAVA_UNIT : "giskard-8",
 
+		DUSTJAVASCRIPT_UNIT : "giskard-9",
+
 		NET_UNIT : "giskard-10",
 
 		NET_ASP_HOST : "giskard-10-0",
@@ -282,7 +285,8 @@ if (!("DustHandles" in window)) {
 		MONTRU_UNIT : "giskard-13",
 
 		MONTRU_ASP_AREA : "giskard-13-0",
-		MONTRU_ASP_WIDGET : "giskard-13-1",
+
+		MONTRU_LOG_WIDGET : "giskard-13-1",
 
 		MONTRU_TAG_WIDGET : "giskard-13-2",
 		MONTRU_TAG_WIDGET_LABEL : "giskard-13-3",
@@ -310,11 +314,13 @@ if (!("DustHandles" in window)) {
 		MONTRU_TAG_FLOW_LINE : "giskard-13-21",
 		MONTRU_TAG_FLOW_PAGE : "giskard-13-22",
 
-		MONTRU_ASP_GRID : "giskard-13-23",
+		MONTRU_LOG_GRID : "giskard-13-23",
+
 		MONTRU_ATT_GRID_AXES : "giskard-13-24",
 
 		MONTRU_LOG_WINDOW : "giskard-13-25",
 		MONTRU_LOG_GRAPH : "giskard-13-26",
+		MONTRU_LOG_GUI : "giskard-13-27",
 
 		L10N_UNIT : "giskard-100",
 	};
