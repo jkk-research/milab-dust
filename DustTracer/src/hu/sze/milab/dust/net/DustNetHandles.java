@@ -28,11 +28,16 @@ public interface DustNetHandles extends DustConsts, DustUnitHandles {
 	MindHandle NET_ATT_SRVCALL_ATTRIBUTES = Dust.lookup("giskard:10:?");
 	MindHandle NET_ATT_SRVCALL_STATUS = Dust.lookup("giskard:10:?");
 
+	MindHandle NET_ASP_SRVRESP = Dust.lookup("giskard:10:?");
+	MindHandle NET_ATT_SRVRESP_STATUS = Dust.lookup("giskard:10:?");
+	MindHandle NET_ATT_SRVRESP_TYPE = Dust.lookup("giskard:10:?");
+	MindHandle NET_ATT_SRVRESP_HEADER = Dust.lookup("giskard:10:?");
+	MindHandle NET_ATT_SRVRESP_PAYLOAD = Dust.lookup("giskard:10:?");
+
 	MindHandle NET_LOG_HTTPSRV = Dust.lookup("giskard:10:?");
 	MindHandle NET_LOG_HTTPSVCFILES = Dust.lookup("giskard:10:?");
 	MindHandle NET_LOG_HTTPSVCJSONAPI = Dust.lookup("giskard:10:?");
 	
-	MindHandle NET_LOG_HTTPCLIDIRECT = Dust.lookup("giskard:10:?");
-	MindHandle NET_LOG_HTTPCLIJSONAPI = Dust.lookup("giskard:10:?");
+	MindHandle NET_LOG_HTTPCLICOMM = Dust.lookup("giskard:10:?");
 	
 }

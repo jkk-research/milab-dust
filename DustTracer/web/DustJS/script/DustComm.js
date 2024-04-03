@@ -23,61 +23,7 @@ if ('Dust' in window) {
 						var ids = [];
 
 						if (ct.includes('application/vnd.api+json')) {
-							var respArr = data.data;
-
-							for (item of respArr) {
-								var kItem = Dust.lookup(item.id, true);
-								ids.push(kItem.id);
-
-								if (item.attributes) {
-									for (const key in item.attributes) {
-										var val = item.attributes[key];
-
-										var kAtt = Dust.lookup(key, true);
-										kItem[kAtt.id] = val;
-									}
-								}
-
-								if (item.relationships) {
-									for (const key in item.relationships) {
-										var rel = item.relationships[key];
-										var val = null;
-
-										if (Array.isArray(rel)) {
-											var ob;
-											for (target of rel) {
-												if (!val) {
-													if (target.meta) {
-														val = {};
-														ob = true;
-													} else {
-														val = [];
-														ob = false;
-													}
-												}
-
-												var v = target.id;
-												Dust.lookup(v, true);
-												if (ob) {
-													var rk = target.meta.key;
-													Dust.lookup(rk, true);
-													val[rk] = v;
-												} else {
-													val.push(v);
-												}
-											}
-										} else {
-											val = rel.id;
-											Dust.lookup(val, true);
-										}
-
-										var kRel = Dust.lookup(key, true).id;
-										Relations.add(kRel);
-
-										kItem[kRel] = val;
-									}
-								}
-							}
+							Dust.processResponseData(data, ids);
 						}
 
 						var listeners = Array.isArray(jqXHR.DustProc) ? jqXHR.DustProc : [jqXHR.DustProc];

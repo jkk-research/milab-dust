@@ -58,7 +58,13 @@ if ('Dust' in window) {
 					if (Dust.isRelation(key)) {
 						var rel = item[key];
 						var isArr = Array.isArray(rel);
-						var rl = Dust.lookup(key).label;
+						var ri = Dust.lookup(key);
+						
+						if ( ri.id == DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT ) {
+							continue;
+						}
+						
+						var rl = ri.label;
 						var rk = null;
 
 						if (isArr) {

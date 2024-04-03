@@ -6,13 +6,14 @@ import java.util.Date;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustHandles;
+import hu.sze.milab.dust.utils.DustUtils;
 
 public class DustDevUtils implements DustHandles {
 
 	public static final Comparator<String> ID_COMP = new Comparator<String>() {
 		@Override
 		public int compare(String o1, String o2) {
-			if (o1.equals(o2)) {
+			if ( o1.equals(o2) ) {
 				return 0;
 			}
 
@@ -24,9 +25,9 @@ public class DustDevUtils implements DustHandles {
 			int m2 = s2.length - 1;
 
 			for (int i = 1; (0 == ret) && (i < 3); ++i) {
-				if (i > m1) {
+				if ( i > m1 ) {
 					ret = -1;
-				} else if (i > m2) {
+				} else if ( i > m2 ) {
 					ret = 1;
 				} else {
 					ret = Integer.valueOf(s1[i]) - Integer.valueOf(s2[i]);
@@ -37,29 +38,37 @@ public class DustDevUtils implements DustHandles {
 		}
 	};
 
-	public static MindHandle newHandle(MindHandle hUnit, MindHandle hPrimaryAspect) {
-		return newHandle(hUnit.getId(), hPrimaryAspect);
+	public static MindHandle newHandle(MindHandle hUnit, MindHandle hPrimaryAspect, String hint) {
+		return newHandle(hUnit.getId(), hPrimaryAspect, hint);
 	};
 
-	public static MindHandle newHandle(String unit, MindHandle hPrimaryAspect) {
+	public static MindHandle newHandle(String unit, MindHandle hPrimaryAspect, String hint) {
 		MindHandle h = Dust.lookup(unit + DUST_SEP_ID + ITEMID_NEW);
 
 		Dust.access(MindAccess.Set, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
+		if ( !DustUtils.isEmpty(hint) ) {
+			Dust.access(MindAccess.Set, hint, h, DEV_ATT_HINT);
+		}
+		
 		return h;
 	};
 
 	public static MindHandle registerAgent(MindHandle hUnit, MindHandle hLogic) {
-		MindHandle hAgent = newHandle(hUnit, MIND_ASP_AGENT);
+		return registerAgent(hUnit, hLogic, hLogic.getId());
+	};
+
+	public static MindHandle registerAgent(MindHandle hUnit, MindHandle hLogic, String hint) {
+		MindHandle hAgent = newHandle(hUnit, MIND_ASP_AGENT, hint);
 
 		Dust.access(MindAccess.Set, hLogic, hAgent, MIND_ATT_AGENT_LOGIC);
 
 		return hAgent;
 	};
 
-	public static MindHandle registerLogic(MindHandle hUnit, String nativeClassName) {
-		MindHandle hLogic = newHandle(hUnit, MIND_ASP_LOGIC);
-		MindHandle hNative = newHandle(hUnit, DUST_ASP_NATIVELOGIC);
+	public static MindHandle registerLogic(MindHandle hUnit, String nativeClassName, String hint) {
+		MindHandle hLogic = newHandle(hUnit, MIND_ASP_LOGIC, hint + "_logic");
+		MindHandle hNative = newHandle(hUnit, DUST_ASP_NATIVELOGIC, hint + "_impl");
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
@@ -74,13 +83,13 @@ public class DustDevUtils implements DustHandles {
 	}
 
 	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {
-		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVELOGIC);
+		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVELOGIC, DustUtils.getPostfix(nativeClassName, "."));
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
 
 		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
-		if (srv) {
+		if ( srv ) {
 			Dust.access(MindAccess.Set, true, hNative, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
 		}
 	}
@@ -94,12 +103,13 @@ public class DustDevUtils implements DustHandles {
 	}
 
 	public static MindHandle setText(MindHandle hItem, MindHandle hTxtType, MindHandle hLang, String txt) {
-		MindHandle hTxt = newHandle(L10N_UNIT, TEXT_ASP_PLAIN);
-		
-		Dust.access(MindAccess.Set, txt, hItem, TEXT_ATT_PLAIN_TEXT);
-		setTag(hItem, hTxtType, TEXT_TAG_TYPE);
-		setTag(hItem, hLang, TEXT_TAG_LANGUAGE);
-		
+		MindHandle hTxt = newHandle(L10N_UNIT, TEXT_ASP_PLAIN, null);
+
+		Dust.access(MindAccess.Set, txt, hTxt, TEXT_ATT_PLAIN_TEXT);
+		Dust.access(MindAccess.Set, hItem, hTxt, MISC_ATT_CONN_OWNER);
+		setTag(hTxt, hTxtType, TEXT_TAG_TYPE);
+		setTag(hTxt, hLang, TEXT_TAG_LANGUAGE);
+
 		return hTxt;
 	}
 

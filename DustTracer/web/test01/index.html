@@ -49,7 +49,7 @@
 					<button id="btnStop" style="float: right; background-color: red;" onclick="directRequest('/admin/stop');">Stop!
 					</button>
 					<button id="btnInfo" style="float: right;" onclick="directRequest('/admin/info');">Server info</button>
-					<button style="float: right;">Test</button></td>
+					<button id="btnTest" style="float: right;">Test</button></td>
 			</tr>
 			<tr>
 				<td class="dataTable maxHeight"><div class="maxWidth montruScrollY" style="height: 800px" id='srvResponse'>
@@ -105,19 +105,14 @@
 		function processResponse(id, success, status, resp, ids) {	
 			var str = JSON.stringify(resp);
 			displayResponse(id, success, status, str);
-			
-//			Dust.Graph.loadResponseData(id, success, status, data);
 		}
 		
 		function displayResponse(id, success, status, txt) {	
 			console.log('Request success ' + txt);
 			$('#srvResponse').text(txt);
-// 			var respArea = document.getElementById('srvResponse');
-// 			respArea.text(txt);
 		}
 		
-		Dust.Comm.loadResource({ url: '/jsonapi/test:1', respProc: [processResponse, Dust.Graph.loadResponseData]});	
-
+		Dust.loadApp('/jsonapi/test:1', [processResponse, Dust.Graph.loadResponseData]);	
 		
 	</script>
 </body>

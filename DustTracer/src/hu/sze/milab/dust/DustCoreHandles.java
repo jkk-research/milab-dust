@@ -158,14 +158,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ASP_VARIANT = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_VARIANT_VALUE = Dust.lookup("giskard:3:?");
 
-	MindHandle MISC_ASP_SPACE = Dust.lookup("giskard:3:?");
-	MindHandle MISC_ATT_SPACE_DIMENSIONS = Dust.lookup("giskard:3:?");
-
-	MindHandle MISC_ASP_VECTOR = Dust.lookup("giskard:3:?");
-
-	MindHandle MISC_TAG_VECTOR_LOCATION = Dust.lookup("giskard:3:?");
-	MindHandle MISC_TAG_VECTOR_SCALE = Dust.lookup("giskard:3:?");
-	MindHandle MISC_TAG_VECTOR_ROTATE = Dust.lookup("giskard:3:?");
+	MindHandle MISC_LOG_ATTCOLLECTOR = Dust.lookup("giskard:3:?");
 
 //	MindHandle TEXT_UNIT = Dust.lookup("giskard:4");
 
@@ -229,11 +222,23 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 //	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
 	
+	MindHandle GEOMETRY_ASP_SPACE = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_ATT_SPACE_DIMENSIONS = Dust.lookup("giskard:12:?");
+
+	MindHandle GEOMETRY_ASP_VECTOR = Dust.lookup("giskard:12:?");
+
+	MindHandle GEOMETRY_TAG_VECTOR_LOCATION = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VECTOR_SCALE = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VECTOR_ROTATE = Dust.lookup("giskard:12:?");
+	
 	MindHandle GEOMETRY_TAG_VALTYPE = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_X = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Y = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Z = Dust.lookup("giskard:12:?");
 	
-	MindHandle MONTRU_ASP_AREA = Dust.lookup("giskard:13:?");
+	
+	
+	MindHandle MONTRU_LOG_AREA = Dust.lookup("giskard:13:?");
 	
 	MindHandle MONTRU_LOG_WIDGET = Dust.lookup("giskard:13:?");
 	
