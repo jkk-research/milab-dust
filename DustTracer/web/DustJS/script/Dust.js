@@ -1,81 +1,117 @@
 
 if (!('Dust' in window)) {
+	MindAccess = {
+		Check: DustHandles.MIND_TAG_ACCESS_CHECK,
+		Peek: DustHandles.MIND_TAG_ACCESS_PEEK,
+		Get: DustHandles.MIND_TAG_ACCESS_GET,
+		Set: DustHandles.MIND_TAG_ACCESS_SET,
+		Insert: DustHandles.MIND_TAG_ACCESS_INSERT,
+		Delete: DustHandles.MIND_TAG_ACCESS_DELETE,
+		Reset: DustHandles.MIND_TAG_ACCESS_RESET,
+		Commit: DustHandles.MIND_TAG_ACCESS_COMMIT,
+		Broadcast: DustHandles.MIND_TAG_ACCESS_BROADCAST,
+		Lookup: DustHandles.MIND_TAG_ACCESS_LOOKUP
+	};
+
+	MindAction = {
+		Init: DustHandles.MIND_TAG_ACTION_INIT,
+		Begin: DustHandles.MIND_TAG_ACTION_BEGIN,
+		Process: DustHandles.MIND_TAG_ACTION_PROCESS,
+		End: DustHandles.MIND_TAG_ACTION_END,
+		Release: DustHandles.MIND_TAG_ACTION_RELEASE,
+	};
+
+	MindContext = {
+		Dialog: DustHandles.MIND_TAG_CONTEXT_DIALOG,
+		Self: DustHandles.MIND_TAG_CONTEXT_SELF,
+		Target: DustHandles.MIND_TAG_CONTEXT_TARGET,
+		Direct: DustHandles.MIND_TAG_CONTEXT_DIRECT,
+	};
+
 	var KnowledgeMap = {};
-
-	var Context = null;
-	var Notifier = null;
-
+	var Context = {};
 	var Relations = new Set();
 
-	function optNotifyCollect(changed, command) {
-		var ret = false;
+	var Notifier = {
+		first: true,
+		seen: new Set(),
+		queue: [],
 
-		var listeners = Dust.lookup(changed)[DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS];
+		optCollect: function(changed, command) {
+			var ret = false;
 
-		if (listeners) {
-			if (null == Notifier) {
-				Notifier = { seen: new Set(), queue: [] };
-				for (l of listeners) {
-					Notifier.queue.push({ agent: l, cmd: command, chg: [changed] });
-				}
-				ret = true;
-			} else {
-				var nq = Notifier.queue;
-				var ql = nq.length();
+			var listeners = Dust.lookup(changed)[DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS];
 
-				for (l of listeners) {
-					if (!Notifier.seen.has(l)) {
-						for (let i = 0; i < ql; i++) {
-							var qi = nq[i];
-							if (qi.agent == l) {
-								if (!qi.chg.includes(changed)) {
-									qi.chg.push(changed);
-									nq.splice(i, 1);
-									nq.push(qi);
-									--i;
-									--ql;
-									break;
+			if (listeners) {
+				if (this.first) {
+					this.first = false;
+					for (l of listeners) {
+						this.queue.push({ agent: l, cmd: command, chg: [changed] });
+					}
+					ret = true;
+				} else {
+					var nq = this.queue;
+					var ql = nq.length;
+
+					for (l of listeners) {
+						if (!this.seen.has(l)) {
+							var found = false;
+
+							for (let i = 0; i < ql; i++) {
+								var qi = nq[i];
+								if (qi.agent == l) {
+									if (!qi.chg.includes(changed)) {
+										qi.chg.push(changed);
+										nq.splice(i, 1);
+										nq.push(qi);
+										found = true;
+										break;
+									}
 								}
+							}
+
+							if (!found) {
+								this.queue.push({ agent: l, chg: [changed] });
 							}
 						}
 					}
-					Notifier.queue.push({ agent: l, chg: [changed] });
 				}
 			}
-		}
 
-		return ret;
-	}
+			return ret;
+		},
 
-	function optNotifySend() {
-		var ret = false;
+		optSend: function() {
+			var ret = false;
 
-		if (Notifier && Notifier.queue.length) {
-			var qi = Notifier.queue.shift();
-			var l = qi.agent;
-			Notifier.seen.add(l);
+			if (this.queue.length) {
+				var qi = this.queue.shift();
+				var l = qi.agent;
+				this.seen.add(l);
 
-			try {
-				var agent = Dust.lookup(l);
-				var impl = agent[DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE];
-				if (!impl) {
-					var logic = agent[DustHandles.MIND_ATT_AGENT_LOGIC];
+				try {
+					var agent = Dust.lookup(l);
+					var impl = agent[DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE];
+					if (!impl) {
+						var logic = agent[DustHandles.MIND_ATT_AGENT_LOGIC];
 
-					// create implementation from module
-				}
-				Context = qi;
-				impl.agentProcess(qi.chg);
-			} finally {
-				if (0 < Notifier.queue.length) {
-					ret = true;
-				} else {
-					Notifier = null;
+						// create implementation from module
+					}
+					Context = qi;
+					impl.agentProcess(qi.cmd);
+				} finally {
+					if (0 < this.queue.length) {
+						ret = true;
+					} else {
+						this.seen.clear();
+						this.first = true;
+					}
 				}
 			}
-		}
 
-		return ret;
-	}
+			return ret;
+		}
+	};
 
 	function loadJsonApiData(jsonApiObj, ids) {
 		var respArr = jsonApiObj.data;
@@ -131,6 +167,7 @@ if (!('Dust' in window)) {
 					}
 
 					var kRel = Dust.lookup(key, true).id;
+					Relations.add(key);
 					Relations.add(kRel);
 
 					kItem[kRel] = val;
@@ -138,7 +175,7 @@ if (!('Dust' in window)) {
 			}
 		}
 	}
-	
+
 	function DustInit() {
 		this.lookup = function(key, createIfMissing) {
 			var id = key.split(' ')[0];
@@ -157,19 +194,68 @@ if (!('Dust' in window)) {
 		}
 
 		this.access = function(cmd, val, root, ...path) {
-			var item = root;
+			var value;
 
-			// resolve path
+			switch (root) {
+				case MindContext.Self:
+					value = Context.agent;
+					break;
+				case MindContext.Target:
+					value = Context.chg;
+					break;
+				default:
+					value = root;
+					break;
+			}
+
+			var lastColl = null;
+			var lastKey = null;
+
+			if (value) {
+				var createMissing = false;
+				switch (cmd) {
+					case MindAccess.Get:
+					case MindAccess.Set:
+					case MindAccess.Insert:
+						createMissing = true;
+						break;
+				}
+
+				var resolve = true;
+				for (p of path) {
+					var curr = null;
+
+					if (value) {
+						if (resolve) {
+							curr = this.lookup(value, createMissing);
+						}
+					} else if (createMissing) {
+
+					}
+					lastKey = p;
+					resolve = Relations.has(lastKey);
+					lastColl = curr;
+					value = curr = curr[lastKey];
+				}
+			}
 
 			switch (cmd) {
-				case DustHandles.MIND_TAG_ACCESS_PEEK:
+				case MindAccess.Peek:
+					value = value ? value : val;
 					break;
-				case DustHandles.MIND_TAG_ACCESS_COMMIT:
-					if (optNotifyCollect(item, val)) {
-						while (optNotifySend());
+				case MindAccess.Set:
+					if (value != val) {
+						lastColl[lastKey] = val;
+					}
+					break;
+				case MindAccess.Commit:
+					if (Notifier.optCollect(value, val)) {
+						while (Notifier.optSend());
 					}
 					break;
 			}
+			
+			return value;
 		}
 
 		this.find = function(defVal, expr, ...path) {
@@ -189,22 +275,36 @@ if (!('Dust' in window)) {
 
 			return ret;
 		}
-		
-		this.processResponseData = function(respData, ids) {	
+
+		this.processResponseData = function(respData, ids) {
 			loadJsonApiData(respData, ids);
 		}
 
-		this.loadApp = function(root, respProcArr) {
-			Dust.Comm.loadResource({ url: root, respProc: respProcArr });
+		this.loadApp = function(reqPath, mainModule, respProcArr) {
+			Dust.access(MindAccess.Set, reqPath, DustBoot.dataReq, DustHandles.RESOURCE_ATT_URL_PATH);
+			Dust.access(MindAccess.Set, mainModule, DustBoot.dataReq, DustHandles.TEXT_ATT_TOKEN);
+			Dust.access(MindAccess.Set, respProcArr, DustBoot.dataReq, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+
+			Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataReq);
+
+//			var root = reqPath + mainModule;
+//			Dust.Comm.loadResource({ url: root, respProc: respProcArr });
 		}
 
 		this.isRelation = function(key) {
 			return Relations.has(key);
 		}
+	}
+
+	function MachineInit() {
 
 		this.agentProcess = function(action) {
 			switch (action) {
 				case DustHandles.MIND_TAG_ACTION_PROCESS:
+					var respData = Dust.access(MindAccess.Peek, [], DustBoot.bulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
+					var ids = [];
+					loadJsonApiData(respData, ids);
+					Dust.access(MindAccess.Set, ids, DustBoot.bulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
 					break;
 			}
 
@@ -213,6 +313,11 @@ if (!('Dust' in window)) {
 	}
 
 	Dust = new DustInit();
+
+	var m = new MachineInit();
+
+	Dust.access(MindAccess.Set, m, DustBoot.machine, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+	Dust.access(MindAccess.Set, [DustBoot.machine], DustBoot.bulkLoad, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
 
 	console.log('Dust initialized.');
 }

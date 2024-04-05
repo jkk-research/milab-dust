@@ -23,7 +23,10 @@ if ('Dust' in window) {
 						var ids = [];
 
 						if (ct.includes('application/vnd.api+json')) {
-							Dust.processResponseData(data, ids);
+							Dust.access(MindAccess.Set, data, DustBoot.bulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
+							Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.bulkLoad);
+							ids = Dust.access(MindAccess.Peek, [], DustBoot.bulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
+//							Dust.processResponseData(data, ids);
 						}
 
 						var listeners = Array.isArray(jqXHR.DustProc) ? jqXHR.DustProc : [jqXHR.DustProc];
@@ -66,9 +69,36 @@ if ('Dust' in window) {
 			request.method = 'GET';
 			doSend(request);
 		}
+
+		this.agentProcess = function(action) {
+			switch (action) {
+				case DustHandles.MIND_TAG_ACTION_PROCESS:
+					var u = Dust.access(MindAccess.Peek, "", DustBoot.dataReq, DustHandles.RESOURCE_ATT_URL_PATH) +
+						Dust.access(MindAccess.Peek, "", DustBoot.dataReq, DustHandles.TEXT_ATT_TOKEN);
+
+					var l = Dust.access(MindAccess.Peek, [], DustBoot.dataReq, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+
+					var request = {
+						method: 'GET',
+						url: u,
+						respProc: l
+					};
+
+					doSend(request);
+
+					break;
+			}
+
+			return DustHandles.MIND_TAG_RESULT_ACCEPT;
+		}
 	}
 
-	Dust.Comm = new DustComm();
+	var c = new DustComm();
+
+	Dust.access(MindAccess.Set, c, DustBoot.comm, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+	Dust.access(MindAccess.Set, [DustBoot.comm], DustBoot.dataReq, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
+
+	Dust.Comm = c;
 
 	console.log('Dust.Comm initialized.');
 }

@@ -1,52 +1,61 @@
 package hu.sze.milab.dust.test;
 
+import java.io.File;
+import java.io.PrintWriter;
+import java.util.Map;
+import java.util.TreeMap;
+
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.machine.DustMachineTempMetaGenJavaScript;
 import hu.sze.milab.dust.machine.DustMachineTempUtils;
 
 public class DustTestBootSimple implements DustTestConsts {
-	
+
 	public static void boot(String[] launchParams) throws Exception {
 		DustMachineTempUtils.test();
-		
+
 		startPortal();
 //		helloWorld();
 	}
-	
+
 	public static void helloWorld() throws Exception {
 		MindHandle hLogHelloWorld = DustDevUtils.registerLogic(TEST0_UNIT, DustTestAgentHelloWorld.class.getCanonicalName(), "Hello, world LOGIC");
-		
-		MindHandle hAgtHelloWorld = DustDevUtils.registerAgent(TEST0_UNIT, hLogHelloWorld); 	
+
+		MindHandle hAgtHelloWorld = DustDevUtils.registerAgent(TEST0_UNIT, hLogHelloWorld);
 
 		Dust.access(MindAccess.Set, hAgtHelloWorld, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}
-	
+
 	public static void startPortal() throws Exception {
+		String genBoot = "/script/DustBoot.js";
+		String appWebRoot = "web/test01";
+
 		MindHandle hRequest = DustDevUtils.newHandle(TEST0_UNIT, NET_ASP_SRVCALL, "Server call");
 
-		MindHandle hAgtSrv = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSRV); 	
+		MindHandle hAgtSrv = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSRV);
 
 		Dust.access(MindAccess.Set, 8090L, hAgtSrv, NET_ATT_HOST_PORT);
 		Dust.access(MindAccess.Set, "admin", hAgtSrv, TEXT_ATT_TOKEN);
 		Dust.access(MindAccess.Set, hRequest, hAgtSrv, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Insert, hAgtSrv, hAgtSrv, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hAgtSrv, hAgtSrv, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		
-		MindHandle hAgtJsonapi = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSVCJSONAPI); 	
+
+		MindHandle hAgtJsonapi = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSVCJSONAPI);
 
 		Dust.access(MindAccess.Set, "jsonapi", hAgtJsonapi, TEXT_ATT_TOKEN);
 		Dust.access(MindAccess.Set, hRequest, hAgtJsonapi, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Insert, hAgtJsonapi, hAgtJsonapi, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hAgtJsonapi, hAgtSrv, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		
-		MindHandle hAgtFile = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSVCFILES); 	
+
+		MindHandle hAgtFile = DustDevUtils.registerAgent(TEST0_UNIT, NET_LOG_HTTPSVCFILES);
 
 		Dust.access(MindAccess.Set, "", hAgtFile, TEXT_ATT_TOKEN);
 		Dust.access(MindAccess.Set, "index.html", hAgtFile, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, hRequest, hAgtFile, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Insert, hAgtFile, hAgtFile, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hAgtFile, hAgtSrv, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		
+
 		Dust.access(MindAccess.Set, "text/html; charset=utf-8", hAgtFile, RESOURCE_ATT_STREAM_CTYPEMAP, "html");
 		Dust.access(MindAccess.Set, "text/html; charset=utf-8", hAgtFile, RESOURCE_ATT_STREAM_CTYPEMAP, "xhtml");
 		Dust.access(MindAccess.Set, "application/javascript; charset=utf-8", hAgtFile, RESOURCE_ATT_STREAM_CTYPEMAP, "js");
@@ -57,35 +66,34 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Set, "web/DustJS", hDirDustJS, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Insert, hDirDustJS, hAgtFile, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		MindHandle hDirTest01 = DustDevUtils.registerAgent(TEST0_UNIT, RESOURCE_LOG_FILESYSTEM);
-		Dust.access(MindAccess.Set, "web/test01", hDirTest01, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Set, appWebRoot, hDirTest01, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Insert, hDirTest01, hAgtFile, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Set, "res/img/favicon.png", hDirTest01, MISC_ATT_CONN_MEMBERMAP, "favicon.ico");
-		
+
 		Dust.access(MindAccess.Set, hAgtFile, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 		Dust.access(MindAccess.Set, hAgtJsonapi, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 		Dust.access(MindAccess.Set, hAgtSrv, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
-		
-		
+
 		// ------------- Client ----------- //
-		
+
 		MindHandle hModDustJS = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Dust JS module");
 		Dust.access(MindAccess.Insert, "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
-		Dust.access(MindAccess.Insert, "script/DustHandles.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
-		Dust.access(MindAccess.Set, "script/Dust.js", hModDustJS, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Insert, "/script/DustHandles.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
+		Dust.access(MindAccess.Insert, genBoot, hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
+		Dust.access(MindAccess.Set, "/script/Dust.js", hModDustJS, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "Dust", hModDustJS, TEXT_ATT_TOKEN);
 
-		
 		MindHandle hModComm = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Comm JS module");
-		Dust.access(MindAccess.Set, "script/DustComm.js", hModComm, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Set, "/script/DustComm.js", hModComm, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "Dust.Comm", hModComm, TEXT_ATT_TOKEN);
 
 		MindHandle hModMontru = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Montru JS module");
-		Dust.access(MindAccess.Set, "script/DustMontru.js", hModMontru, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Set, "/script/DustMontru.js", hModMontru, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "Dust.Montru", hModMontru, TEXT_ATT_TOKEN);
 
 		MindHandle hModGraph = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Graph JS module");
 		Dust.access(MindAccess.Insert, "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js", hModGraph, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
-		Dust.access(MindAccess.Set, "script/DustGraphCytoscape.js", hModGraph, RESOURCE_ATT_URL_PATH);
+		Dust.access(MindAccess.Set, "/script/DustGraphCytoscape.js", hModGraph, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "Dust.Graph", hModGraph, TEXT_ATT_TOKEN);
 
 		MindHandle hWebClient = DustDevUtils.newHandle(TEST1_UNIT, DUST_LOG_MACHINE, "Web Client logic");
@@ -95,14 +103,12 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Insert, hModComm, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
 		Dust.access(MindAccess.Insert, hModMontru, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
 		Dust.access(MindAccess.Insert, hModGraph, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
-		
+
 //		MindHandle hLabels = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN);
 
-		
 		Object tSrv = Dust.access(MindAccess.Get, "???", hAgtSrv, TEXT_ATT_TOKEN);
 		Object tDA = Dust.access(MindAccess.Get, "???", hAgtJsonapi, TEXT_ATT_TOKEN);
 
-		
 		MindHandle hWebCmdInfo = DustDevUtils.newHandle(TEST1_UNIT, RESOURCE_ASP_URL, "SrvCall info");
 		Dust.access(MindAccess.Set, tSrv, hWebCmdInfo, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "info", hWebCmdInfo, TEXT_ATT_TOKEN);
@@ -110,24 +116,24 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hWebCmdStop = DustDevUtils.newHandle(TEST1_UNIT, RESOURCE_ASP_URL, "SrvCall stop");
 		Dust.access(MindAccess.Set, tSrv, hWebCmdStop, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "stop", hWebCmdStop, TEXT_ATT_TOKEN);
-		
+
 		MindHandle hWebDataRequest = DustDevUtils.newHandle(TEST1_UNIT, STANDARD_ASP_JSONAPIFETCH, "SrvCall Jsonapi");
 		Dust.access(MindAccess.Set, tDA, hWebDataRequest, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "giskard", hWebDataRequest, TEXT_ATT_TOKEN);
-		
-		MindHandle hWebSrvResponse = DustDevUtils.newHandle(TEST1_UNIT, NET_ASP_SRVRESP, "Srv Response");
-		MindHandle hJsonapiDom = DustDevUtils.newHandle(TEST1_UNIT, STANDARD_ASP_JSONAPIDOM, "Jsonapi Dom");
 
+		MindHandle hWebSrvResponse = DustDevUtils.newHandle(TEST1_UNIT, NET_ASP_SRVRESP, "Srv Response");
+
+		MindHandle hJsonapiDom = DustDevUtils.newHandle(TEST1_UNIT, STANDARD_ASP_JSONAPIDOM, "Jsonapi Dom");
+		Dust.access(MindAccess.Set, "Jsonapi Dom", hJsonapiDom, DEV_ATT_HINT);
 		Dust.access(MindAccess.Set, hJsonapiDom, hWebSrvResponse, NET_ATT_SRVRESP_PAYLOAD);
-		Dust.access(MindAccess.Insert, hJsonapiDom, hWebClient, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+//		Dust.access(MindAccess.Insert, hJsonapiDom, hWebClient, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
 		MindHandle hWebComm = DustDevUtils.newHandle(TEST1_UNIT, NET_LOG_HTTPCLICOMM, "Comm logic");
 		Dust.access(MindAccess.Set, hWebSrvResponse, hWebComm, MISC_ATT_CONN_TARGET);
-		
-		Dust.access(MindAccess.Insert, hWebDataRequest, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+
+//		Dust.access(MindAccess.Insert, hWebDataRequest, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hWebCmdInfo, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hWebCmdStop, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
-		
 
 		MindHandle hGetDataBtn = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_LOG_WIDGET, "Btn logic - Jsonapi");
 		Dust.access(MindAccess.Set, hWebDataRequest, hGetDataBtn, MISC_ATT_CONN_TARGET);
@@ -142,7 +148,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		DustDevUtils.setText(hSrvInfoBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server info");
 //		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 //		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
-		
+
 		MindHandle hSrvStopBtn = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_LOG_WIDGET, "Btn logic - stop");
 		Dust.access(MindAccess.Set, hWebCmdStop, hSrvStopBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnStop", hSrvStopBtn, TEXT_ATT_TOKEN);
@@ -195,11 +201,27 @@ public class DustTestBootSimple implements DustTestConsts {
 //		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 //		Dust.access(MindAccess.Insert, hContButtons, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 //		Dust.access(MindAccess.Insert, hContMain, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		
+
 		MindHandle hGui = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_LOG_GUI, "Web GUI");
 //		Dust.access(MindAccess.Insert, hPage, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Insert, hWebSrvResponse, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
+		Map<String, MindHandle> bootNodes = new TreeMap<>();
+
+		bootNodes.put("machine", hWebClient);
+		bootNodes.put("bulkLoad", hJsonapiDom);
+		bootNodes.put("comm", hWebComm);
+		bootNodes.put("dataReq", hWebDataRequest);
+
+		String bootJS = DustMachineTempMetaGenJavaScript.genJSObject(genBoot, bootNodes);
+		
+		File appScript = new File(appWebRoot, "script");
+		appScript.mkdirs();
+
+		try (PrintWriter out = new PrintWriter(appWebRoot + genBoot)) {
+			out.println(bootJS);
+			out.flush();
+		}
 	}
-	
+
 }
