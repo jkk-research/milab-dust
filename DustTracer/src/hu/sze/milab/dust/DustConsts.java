@@ -29,7 +29,7 @@ public interface DustConsts {
 	};
 
 	enum MindContext {
-		Dialog, Self, Target, Direct, 
+		Action, Self, Target, Dialog, Direct, 
 	};
 
 	int KEY_ADD = -1;

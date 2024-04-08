@@ -4,7 +4,7 @@ if ('Dust' in window) {
 	function DustComm() {
 		var requestId = 0;
 
-		function doSend(request) {
+		this.doSend = function(request) {
 			request.beforeSend = function(jqXHR, settings) {
 				jqXHR.DustRequestId = ++requestId;
 				jqXHR.DustMethod = request.method;
@@ -26,7 +26,7 @@ if ('Dust' in window) {
 							Dust.access(MindAccess.Set, data, DustBoot.bulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
 							Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.bulkLoad);
 							ids = Dust.access(MindAccess.Peek, [], DustBoot.bulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
-//							Dust.processResponseData(data, ids);
+							//							Dust.processResponseData(data, ids);
 						}
 
 						var listeners = Array.isArray(jqXHR.DustProc) ? jqXHR.DustProc : [jqXHR.DustProc];
@@ -62,43 +62,39 @@ if ('Dust' in window) {
 
 			request.data = JSON.stringify(data);
 
-			doSend(request);
+			this.doSend(request);
 		};
 
 		this.loadResource = function(request) {
 			request.method = 'GET';
-			doSend(request);
-		}
-
-		this.agentProcess = function(action) {
-			switch (action) {
-				case DustHandles.MIND_TAG_ACTION_PROCESS:
-					var u = Dust.access(MindAccess.Peek, "", DustBoot.dataReq, DustHandles.RESOURCE_ATT_URL_PATH) +
-						Dust.access(MindAccess.Peek, "", DustBoot.dataReq, DustHandles.TEXT_ATT_TOKEN);
-
-					var l = Dust.access(MindAccess.Peek, [], DustBoot.dataReq, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
-
-					var request = {
-						method: 'GET',
-						url: u,
-						respProc: l
-					};
-
-					doSend(request);
-
-					break;
-			}
-
-			return DustHandles.MIND_TAG_RESULT_ACCEPT;
+			this.doSend(request);
 		}
 	}
+	
+	var Comm = new DustComm();
+	
+	function CommNarrative() {
+		var u = '/' + Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.RESOURCE_ATT_URL_PATH) + '/' +
+			Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.TEXT_ATT_TOKEN);
 
-	var c = new DustComm();
+		var l = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
 
-	Dust.access(MindAccess.Set, c, DustBoot.comm, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+		var request = {
+			method: 'GET',
+			url: u,
+			respProc: l
+		};
+
+		Comm.doSend(request);
+
+		return DustHandles.MIND_TAG_RESULT_ACCEPT;
+	}
+
+
+	Dust.access(MindAccess.Set, CommNarrative, DustBoot.comm, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
 	Dust.access(MindAccess.Set, [DustBoot.comm], DustBoot.dataReq, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
 
-	Dust.Comm = c;
+	Dust.Comm = Comm;
 
 	console.log('Dust.Comm initialized.');
 }

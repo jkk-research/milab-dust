@@ -90,7 +90,7 @@ public class DustDevUtils implements DustHandles {
 
 		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
 		if ( srv ) {
-			Dust.access(MindAccess.Set, true, hNative, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
+			setTag(hNative, DUST_TAG_NATIVELOGIC_SERVER);
 		}
 	}
 

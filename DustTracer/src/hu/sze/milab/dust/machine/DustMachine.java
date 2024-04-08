@@ -340,7 +340,7 @@ class DustMachine extends Dust.Machine
 				if (null == agent) {
 					String ac = Dust.access(MindAccess.Peek, null, n, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
 					agent = (MindAgent) Class.forName(ac).getDeclaredConstructor().newInstance();
-					boolean srv = Dust.access(MindAccess.Peek, false, n, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
+					boolean srv = Dust.access(MindAccess.Check, DUST_TAG_NATIVELOGIC_SERVER, n, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVELOGIC_SERVER);
 					if (srv) {
 						agent.agentProcess(MindAction.Init);
 						Dust.access(MindAccess.Insert, agent, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_ACTIVE_SERVERS, 0);

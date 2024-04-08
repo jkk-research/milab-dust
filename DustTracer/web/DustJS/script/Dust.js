@@ -22,6 +22,7 @@ if (!('Dust' in window)) {
 	};
 
 	MindContext = {
+		Action: DustHandles.MIND_TAG_CONTEXT_DIALOG,
 		Dialog: DustHandles.MIND_TAG_CONTEXT_DIALOG,
 		Self: DustHandles.MIND_TAG_CONTEXT_SELF,
 		Target: DustHandles.MIND_TAG_CONTEXT_TARGET,
@@ -37,41 +38,34 @@ if (!('Dust' in window)) {
 		seen: new Set(),
 		queue: [],
 
-		optCollect: function(changed, command) {
+		optCollect: function(target, action) {
 			var ret = false;
 
-			var listeners = Dust.lookup(changed)[DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS];
+			var listeners = Dust.lookup(target)[DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS];
 
 			if (listeners) {
 				if (this.first) {
 					this.first = false;
 					for (l of listeners) {
-						this.queue.push({ agent: l, cmd: command, chg: [changed] });
+						this.queue.push({ agent: l, action: action, target: target });
 					}
 					ret = true;
 				} else {
 					var nq = this.queue;
-					var ql = nq.length;
 
 					for (l of listeners) {
 						if (!this.seen.has(l)) {
 							var found = false;
 
-							for (let i = 0; i < ql; i++) {
-								var qi = nq[i];
-								if (qi.agent == l) {
-									if (!qi.chg.includes(changed)) {
-										qi.chg.push(changed);
-										nq.splice(i, 1);
-										nq.push(qi);
-										found = true;
-										break;
-									}
+							for (qi of nq) {
+								if ((qi.agent == l) && (qi.target == target)) {
+									found = true;
+									break;
 								}
 							}
 
 							if (!found) {
-								this.queue.push({ agent: l, chg: [changed] });
+								this.queue.push({ agent: l, action: action, target: target });
 							}
 						}
 					}
@@ -91,14 +85,14 @@ if (!('Dust' in window)) {
 
 				try {
 					var agent = Dust.lookup(l);
-					var impl = agent[DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE];
-					if (!impl) {
+					var narrative = agent[DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE];
+					if (!narrative) {
 						var logic = agent[DustHandles.MIND_ATT_AGENT_LOGIC];
 
 						// create implementation from module
 					}
 					Context = qi;
-					impl.agentProcess(qi.cmd);
+					narrative();
 				} finally {
 					if (0 < this.queue.length) {
 						ret = true;
@@ -197,11 +191,14 @@ if (!('Dust' in window)) {
 			var value;
 
 			switch (root) {
+				case MindContext.Action:
+					value = Context.action;
+					break;
 				case MindContext.Self:
 					value = Context.agent;
 					break;
 				case MindContext.Target:
-					value = Context.chg;
+					value = Context.target;
 					break;
 				default:
 					value = root;
@@ -254,7 +251,7 @@ if (!('Dust' in window)) {
 					}
 					break;
 			}
-			
+
 			return value;
 		}
 
@@ -287,8 +284,8 @@ if (!('Dust' in window)) {
 
 			Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataReq);
 
-//			var root = reqPath + mainModule;
-//			Dust.Comm.loadResource({ url: root, respProc: respProcArr });
+			//			var root = reqPath + mainModule;
+			//			Dust.Comm.loadResource({ url: root, respProc: respProcArr });
 		}
 
 		this.isRelation = function(key) {
@@ -296,27 +293,18 @@ if (!('Dust' in window)) {
 		}
 	}
 
-	function MachineInit() {
+	function MachineNarrative() {
+		var respData = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.MISC_ATT_VARIANT_VALUE);
+		var ids = [];
+		loadJsonApiData(respData, ids);
+		Dust.access(MindAccess.Set, ids, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 
-		this.agentProcess = function(action) {
-			switch (action) {
-				case DustHandles.MIND_TAG_ACTION_PROCESS:
-					var respData = Dust.access(MindAccess.Peek, [], DustBoot.bulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
-					var ids = [];
-					loadJsonApiData(respData, ids);
-					Dust.access(MindAccess.Set, ids, DustBoot.bulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
-					break;
-			}
-
-			return DustHandles.MIND_TAG_RESULT_ACCEPT;
-		}
+		return DustHandles.MIND_TAG_RESULT_ACCEPT;
 	}
 
 	Dust = new DustInit();
 
-	var m = new MachineInit();
-
-	Dust.access(MindAccess.Set, m, DustBoot.machine, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+	Dust.access(MindAccess.Set, MachineNarrative, DustBoot.machine, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
 	Dust.access(MindAccess.Set, [DustBoot.machine], DustBoot.bulkLoad, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
 
 	console.log('Dust initialized.');

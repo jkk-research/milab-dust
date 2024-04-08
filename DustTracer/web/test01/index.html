@@ -100,7 +100,7 @@
 		}
 		
 		function directRequest(target) {	
-			Dust.Comm.loadResource({ url: target, respProc: displayResponse});
+//			Dust.Comm.loadResource({ url: target, respProc: displayResponse});
 		}
 		
 		function processResponse(id, success, status, resp, ids) {	
@@ -113,7 +113,7 @@
 			$('#srvResponse').text(txt);
 		}
 		
-		Dust.loadApp('/jsonapi/', 'test:1', [processResponse, Dust.Graph.loadResponseData]);	
+		Dust.loadApp('jsonapi', 'test:1', [processResponse, Dust.Graph.loadResponseData]);	
 		
 	</script>
 </body>

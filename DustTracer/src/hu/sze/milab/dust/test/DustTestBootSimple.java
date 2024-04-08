@@ -131,9 +131,8 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hWebComm = DustDevUtils.newHandle(TEST1_UNIT, NET_LOG_HTTPCLICOMM, "Comm logic");
 		Dust.access(MindAccess.Set, hWebSrvResponse, hWebComm, MISC_ATT_CONN_TARGET);
 
-//		Dust.access(MindAccess.Insert, hWebDataRequest, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
-		Dust.access(MindAccess.Insert, hWebCmdInfo, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
-		Dust.access(MindAccess.Insert, hWebCmdStop, hWebComm, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+		Dust.access(MindAccess.Insert, hWebComm, hWebCmdInfo, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+		Dust.access(MindAccess.Insert, hWebComm, hWebCmdStop, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
 		MindHandle hGetDataBtn = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_LOG_WIDGET, "Btn logic - Jsonapi");
 		Dust.access(MindAccess.Set, hWebDataRequest, hGetDataBtn, MISC_ATT_CONN_TARGET);

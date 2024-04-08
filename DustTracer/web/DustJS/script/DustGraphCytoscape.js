@@ -21,14 +21,15 @@ if ('Dust' in window) {
 				}
 			]
 		});
-		
-		cy.on('select unselect tapselect tapunselect', 'node', function(evt){
+
+		cy.on('select unselect tapselect tapunselect', 'node', function(evt) {
 			var sel = cy.$(':selected');
-			var log = 'Selected: [';	
-			var fs = '';		
+			var log = 'Selected: [';
+			var fs = '';
 			for (s of sel) {
 				var item = Dust.lookup(s.id());
-				log = log.concat( fs, '(', item.id, ' ', item.label, ' : ', item[DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT],')' );
+				var str = JSON.stringify(item);
+				log = log.concat(fs, '(', item.id, ' ', item.label, ') : ', str);
 				fs = ', ';
 			}
 			console.log(log + ']');
@@ -43,6 +44,7 @@ if ('Dust' in window) {
 			var item;
 
 			var items = {};
+			var edgeIds = new Set();
 
 			for (itemId of ids) {
 				item = Dust.lookup(itemId);
@@ -59,11 +61,11 @@ if ('Dust' in window) {
 						var rel = item[key];
 						var isArr = Array.isArray(rel);
 						var ri = Dust.lookup(key);
-						
-						if ( ri.id == DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT ) {
+
+						if (ri.id == DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT) {
 							continue;
 						}
-						
+
 						var rl = ri.label;
 						var rk = null;
 
@@ -98,8 +100,13 @@ if ('Dust' in window) {
 									l = l + ' {' + rk + '}';
 								}
 							}
-							
-							cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: l } });
+
+							var eid = itemId + ' - ' + targetId + ' : ' + l;
+
+							if (!edgeIds.has(eid)) {
+								cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: l } });
+								edgeIds.add(eid);
+							}
 						}
 					}
 				}

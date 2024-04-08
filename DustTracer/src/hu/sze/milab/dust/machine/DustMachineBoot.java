@@ -86,7 +86,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustUtilsEnumTranslator.register(MindAction.class, MIND_TAG_ACTION_INIT, MIND_TAG_ACTION_BEGIN, MIND_TAG_ACTION_PROCESS, 
 				MIND_TAG_ACTION_END, MIND_TAG_ACTION_RELEASE);
 		
-		DustUtilsEnumTranslator.register(MindContext.class, MIND_TAG_CONTEXT_DIALOG, MIND_TAG_CONTEXT_SELF, MIND_TAG_CONTEXT_TARGET, MIND_TAG_CONTEXT_DIRECT);
+		DustUtilsEnumTranslator.register(MindContext.class, MIND_TAG_CONTEXT_ACTION, MIND_TAG_CONTEXT_SELF, MIND_TAG_CONTEXT_TARGET, MIND_TAG_CONTEXT_DIALOG, MIND_TAG_CONTEXT_DIRECT);
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MindAccess.Get, MindAccess.Set, MindAccess.Insert);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
