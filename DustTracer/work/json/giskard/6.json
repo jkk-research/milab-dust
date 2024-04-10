@@ -78,7 +78,7 @@
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_CSVSAX"
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_NAR_CSVSAX"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -86,7 +86,7 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-6-18 RESOURCE_LOG_CSVSAX"
+    "id" : "giskard-6-18 RESOURCE_NAR_CSVSAX"
   }, {
     "type" : "giskard-1-12 MIND_ASP_ASPECT",
     "attributes" : {
@@ -130,7 +130,7 @@
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_ZIPREADER"
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_NAR_ZIPREADER"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -138,7 +138,7 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-6-16 RESOURCE_LOG_ZIPREADER"
+    "id" : "giskard-6-16 RESOURCE_NAR_ZIPREADER"
   }, {
     "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
     "attributes" : {
@@ -158,7 +158,7 @@
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_JSONDOM"
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_NAR_JSONDOM"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -166,7 +166,7 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-6-17 RESOURCE_LOG_JSONDOM"
+    "id" : "giskard-6-17 RESOURCE_NAR_JSONDOM"
   }, {
     "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
     "attributes" : {
@@ -218,7 +218,7 @@
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_LOG_FILESYSTEM"
+      "giskard-7-0 DEV_ATT_HINT" : "RESOURCE_NAR_FILESYSTEM"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -226,7 +226,7 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-6-15 RESOURCE_LOG_FILESYSTEM"
+    "id" : "giskard-6-15 RESOURCE_NAR_FILESYSTEM"
   }, {
     "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
     "attributes" : {

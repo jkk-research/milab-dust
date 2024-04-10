@@ -22,8 +22,8 @@ import hu.sze.milab.dust.utils.DustUtilsFile;
 @SuppressWarnings({ "rawtypes" })
 public class DustMachineTempUtils implements DustJsonConsts {
 
-	private static final MindHandle[] META_HANDLES = { MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_LOGIC, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY,
-			DUST_LOG_MACHINE };
+	private static final MindHandle[] META_HANDLES = { MIND_ASP_UNIT, MIND_ASP_ASPECT, MIND_ASP_ATTRIBUTE, MIND_ASP_TAG, MIND_ASP_AGENT, MIND_ASP_NARRATIVE, DUST_ASP_MODULE, MIND_ASP_ASSEMBLY,
+			DUST_NAR_MACHINE };
 
 	private static final File MODULE_DIR = new File("work/json/");
 
@@ -32,7 +32,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 
 //		dumpUnits();
 
-//		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
+//		Dust.log(EVENT_ASP_EVENT, NET_NAR_HTTPSRV);
 //		readUnits();
 
 		writeJavaMeta("gen", "hu.sze.milab.dust.DustHandles");

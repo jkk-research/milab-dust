@@ -61,17 +61,17 @@ public class DustDevUtils implements DustHandles {
 	public static MindHandle registerAgent(MindHandle hUnit, MindHandle hLogic, String hint) {
 		MindHandle hAgent = newHandle(hUnit, MIND_ASP_AGENT, hint);
 
-		Dust.access(MindAccess.Set, hLogic, hAgent, MIND_ATT_AGENT_LOGIC);
+		Dust.access(MindAccess.Set, hLogic, hAgent, MIND_ATT_AGENT_NARRATIVE);
 
 		return hAgent;
 	};
 
 	public static MindHandle registerLogic(MindHandle hUnit, String nativeClassName, String hint) {
-		MindHandle hLogic = newHandle(hUnit, MIND_ASP_LOGIC, hint + "_logic");
-		MindHandle hNative = newHandle(hUnit, DUST_ASP_NATIVELOGIC, hint + "_impl");
+		MindHandle hLogic = newHandle(hUnit, MIND_ASP_NARRATIVE, hint + "_logic");
+		MindHandle hNative = newHandle(hUnit, DUST_ASP_NATIVE, hint + "_impl");
 
-		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
-		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVE_NARRATIVE);
+		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
 		Dust.access(MindAccess.Set, hNative, APP_MODULE_MAIN, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
 
@@ -83,14 +83,14 @@ public class DustDevUtils implements DustHandles {
 	}
 
 	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {
-		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVELOGIC, DustUtils.getPostfix(nativeClassName, "."));
+		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVE, DustUtils.getPostfix(nativeClassName, "."));
 
-		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVELOGIC_LOGIC);
-		Dust.access(MindAccess.Set, nativeClassName, hNative, DUST_ATT_NATIVELOGIC_IMPLEMENTATION);
+		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVE_NARRATIVE);
+		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
 		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
 		if ( srv ) {
-			setTag(hNative, DUST_TAG_NATIVELOGIC_SERVER);
+			setTag(hNative, DUST_TAG_NATIVE_SERVER);
 		}
 	}
 

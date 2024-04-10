@@ -25,15 +25,15 @@
 				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
 					{
 						"id": "test-1-13 test:1:13",
-						"type": "giskard-13-1 MONTRU_LOG_WIDGET"
+						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
 					},
 					{
 						"id": "test-1-14 test:1:14",
-						"type": "giskard-13-1 MONTRU_LOG_WIDGET"
+						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
 					},
 					{
 						"id": "test-1-15 test:1:15",
-						"type": "giskard-13-1 MONTRU_LOG_WIDGET"
+						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
 					}
 				],
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -72,10 +72,10 @@
 		},
 		{
 			"id": "test-1-21 test:1:21",
-			"type": "giskard-13-26 MONTRU_LOG_GRAPH",
+			"type": "giskard-13-26 MONTRU_NAR_GRAPH",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-26 MONTRU_LOG_GRAPH",
+					"id": "giskard-13-26 MONTRU_NAR_GRAPH",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -91,13 +91,13 @@
 		},
 		{
 			"id": "test-1-11 test:1:11",
-			"type": "giskard-10-21 NET_LOG_HTTPCLIJSONAPI",
+			"type": "giskard-10-21 NET_NAR_HTTPCLIJSONAPI",
 			"attributes": {
 				"giskard-6-4 RESOURCE_ATT_URL_PATH": "jsonapi"
 			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-10-21 NET_LOG_HTTPCLIJSONAPI",
+					"id": "giskard-10-21 NET_NAR_HTTPCLIJSONAPI",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
@@ -123,11 +123,11 @@
 				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
 					{
 						"id": "test-1-16 test:1:16",
-						"type": "giskard-13-1 MONTRU_LOG_WIDGET"
+						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
 					},
 					{
 						"id": "test-1-21 test:1:21",
-						"type": "giskard-13-26 MONTRU_LOG_GRAPH"
+						"type": "giskard-13-26 MONTRU_NAR_GRAPH"
 					}
 				],
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -143,13 +143,13 @@
 		},
 		{
 			"id": "test-1-12 test:1:12",
-			"type": "giskard-10-20 NET_LOG_HTTPCLIDIRECT",
+			"type": "giskard-10-20 NET_NAR_HTTPCLIDIRECT",
 			"attributes": {
 				"giskard-6-4 RESOURCE_ATT_URL_PATH": "admin"
 			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-10-20 NET_LOG_HTTPCLIDIRECT",
+					"id": "giskard-10-20 NET_NAR_HTTPCLIDIRECT",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
@@ -170,16 +170,16 @@
 		},
 		{
 			"id": "test-1-23 test:1:23",
-			"type": "giskard-13-25 MONTRU_LOG_WINDOW",
+			"type": "giskard-13-25 MONTRU_NAR_WINDOW",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-25 MONTRU_LOG_WINDOW",
+					"id": "giskard-13-25 MONTRU_NAR_WINDOW",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
 					{
 						"id": "test-1-17 test:1:17",
-						"type": "giskard-13-23 MONTRU_LOG_GRID"
+						"type": "giskard-13-23 MONTRU_NAR_GRID"
 					},
 					{
 						"id": "test-1-20 test:1:20",
@@ -210,14 +210,14 @@
 		},
 		{
 			"id": "test-1-13 test:1:13",
-			"type": "giskard-13-1 MONTRU_LOG_WIDGET",
+			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"attributes": {
 				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "Get Data!",
 				"giskard-4-3 TEXT_ATT_TOKEN": "btnGetData"
 			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_LOG_WIDGET",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -258,14 +258,14 @@
 		},
 		{
 			"id": "test-1-14 test:1:14",
-			"type": "giskard-13-1 MONTRU_LOG_WIDGET",
+			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"attributes": {
 				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "Server info",
 				"giskard-4-3 TEXT_ATT_TOKEN": "btnInfo"
 			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_LOG_WIDGET",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -306,14 +306,14 @@
 		},
 		{
 			"id": "test-1-15 test:1:15",
-			"type": "giskard-13-1 MONTRU_LOG_WIDGET",
+			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"attributes": {
 				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "Server STOP!",
 				"giskard-4-3 TEXT_ATT_TOKEN": "btnStop"
 			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_LOG_WIDGET",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -354,10 +354,10 @@
 		},
 		{
 			"id": "test-1-16 test:1:16",
-			"type": "giskard-13-1 MONTRU_LOG_WIDGET",
+			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_LOG_WIDGET",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
@@ -391,10 +391,10 @@
 		},
 		{
 			"id": "test-1-17 test:1:17",
-			"type": "giskard-13-23 MONTRU_LOG_GRID",
+			"type": "giskard-13-23 MONTRU_NAR_GRID",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-23 MONTRU_LOG_GRID",
+					"id": "giskard-13-23 MONTRU_NAR_GRID",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-13-24 MONTRU_ATT_GRID_AXES": [
@@ -540,14 +540,14 @@
 		},
 		{
 			"id": "test-1-5 test:1:5",
-			"type": "giskard-2-0 DUST_LOG_MACHINE",
+			"type": "giskard-2-0 DUST_NAR_MACHINE",
 			"attributes": {
 				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "DustJS Test01",
 				"giskard-4-3 TEXT_ATT_TOKEN": "index.html"
 			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-2-0 DUST_LOG_MACHINE",
+					"id": "giskard-2-0 DUST_NAR_MACHINE",
 					"type": "giskard-1-15 MIND_ASP_LOGIC"
 				},
 				"giskard-2-5 DUST_ATT_MACHINE_MODULES": [
@@ -582,7 +582,7 @@
 				],
 				"giskard-2-11 DUST_ATT_MACHINE_UNIT_RESOLVER": {
 					"id": "test-1-11 test:1:11",
-					"type": "giskard-10-21 NET_LOG_HTTPCLIJSONAPI"
+					"type": "giskard-10-21 NET_NAR_HTTPCLIJSONAPI"
 				}
 			}
 		},

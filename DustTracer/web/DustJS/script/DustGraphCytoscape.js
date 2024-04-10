@@ -154,6 +154,29 @@ if ('Dust' in window) {
 	}
 
 	Dust.Graph = new DustGraphInit();
+	
+	function GraphNarrative() {
+	}
+
+	function modGraphNarrative() {
+		var ret = DustHandles.MIND_TAG_RESULT_ACCEPT;
+
+		var absNar = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MIND_ATT_AGENT_NARRATIVE);
+
+		switch (absNar) {
+			case DustHandles.MONTRU_NAR_GRAPH:
+				Dust.access(MindAccess.Set, GraphNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				break;
+
+			default:
+				ret = DustHandles.MIND_TAG_RESULT_PASS;
+				break;
+		}
+
+		return ret;
+	}
+	Dust.access(MindAccess.Set, modGraphNarrative, DustBoot.modGraph, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+
 
 	console.log('Dust Cytoscape graph initialized.');
 }

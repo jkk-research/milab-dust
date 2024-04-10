@@ -84,13 +84,26 @@ if (!('Dust' in window)) {
 				this.seen.add(l);
 
 				try {
-					var agent = Dust.lookup(l);
-					var narrative = agent[DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE];
+					var agent = Dust.lookup(l, true);
+					var narrative = agent[DustHandles.DUST_ATT_NATIVE_INSTANCE];
 					if (!narrative) {
-						var logic = agent[DustHandles.MIND_ATT_AGENT_LOGIC];
+						var machine = Dust.lookup(DustBoot.narMachine);
+						var modules = machine[DustHandles.DUST_ATT_MACHINE_MODULES];
 
-						// create implementation from module
+						for (mod of modules) {
+							var mn = Dust.access(MindAccess.Peek, null, mod, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+
+							if (mn) {
+								Context = { agent: null, action: null, target: l };
+
+								if (DustHandles.MIND_TAG_RESULT_ACCEPT == mn()) {
+									narrative = agent[DustHandles.DUST_ATT_NATIVE_INSTANCE];
+									break;
+								}
+							}
+						}
 					}
+
 					Context = qi;
 					narrative();
 				} finally {
@@ -278,11 +291,11 @@ if (!('Dust' in window)) {
 		}
 
 		this.loadApp = function(reqPath, mainModule, respProcArr) {
-			Dust.access(MindAccess.Set, reqPath, DustBoot.dataReq, DustHandles.RESOURCE_ATT_URL_PATH);
-			Dust.access(MindAccess.Set, mainModule, DustBoot.dataReq, DustHandles.TEXT_ATT_TOKEN);
-			Dust.access(MindAccess.Set, respProcArr, DustBoot.dataReq, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+			Dust.access(MindAccess.Set, reqPath, DustBoot.dataSrvReq, DustHandles.RESOURCE_ATT_URL_PATH);
+			Dust.access(MindAccess.Set, mainModule, DustBoot.dataSrvReq, DustHandles.TEXT_ATT_TOKEN);
+			Dust.access(MindAccess.Set, respProcArr, DustBoot.dataSrvReq, DustHandles.DUST_ATT_NATIVE_INSTANCE);
 
-			Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataReq);
+			Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataSrvReq);
 
 			//			var root = reqPath + mainModule;
 			//			Dust.Comm.loadResource({ url: root, respProc: respProcArr });
@@ -302,10 +315,34 @@ if (!('Dust' in window)) {
 		return DustHandles.MIND_TAG_RESULT_ACCEPT;
 	}
 
+	function modDustNarrative() {
+		var ret = DustHandles.MIND_TAG_RESULT_ACCEPT;
+
+		var absNar = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MIND_ATT_AGENT_NARRATIVE);
+
+		switch (absNar) {
+			case DustHandles.DUST_NAR_MACHINE:
+				Dust.access(MindAccess.Set, MachineNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				break;
+
+			default:
+				ret = DustHandles.MIND_TAG_RESULT_PASS;
+				break;
+		}
+
+		return ret;
+	}
+
 	Dust = new DustInit();
 
-	Dust.access(MindAccess.Set, MachineNarrative, DustBoot.machine, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
-	Dust.access(MindAccess.Set, [DustBoot.machine], DustBoot.bulkLoad, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
+	Dust.access(MindAccess.Set, modDustNarrative, DustBoot.modDust, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+
+
+	//	Dust.access(MindAccess.Set, MachineNarrative, DustBoot.narMachine, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	
+	Dust.access(MindAccess.Set, DustHandles.DUST_NAR_MACHINE, DustBoot.narMachine, DustHandles.MIND_ATT_AGENT_NARRATIVE);
+	Dust.access(MindAccess.Set, [DustBoot.narMachine], DustBoot.dataBulkLoad, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
+	Dust.access(MindAccess.Set, [DustBoot.modDust, DustBoot.modComm], DustBoot.narMachine, DustHandles.DUST_ATT_MACHINE_MODULES);
 
 	console.log('Dust initialized.');
 }

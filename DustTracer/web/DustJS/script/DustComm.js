@@ -23,9 +23,9 @@ if ('Dust' in window) {
 						var ids = [];
 
 						if (ct.includes('application/vnd.api+json')) {
-							Dust.access(MindAccess.Set, data, DustBoot.bulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
-							Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.bulkLoad);
-							ids = Dust.access(MindAccess.Peek, [], DustBoot.bulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
+							Dust.access(MindAccess.Set, data, DustBoot.dataBulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
+							Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataBulkLoad);
+							ids = Dust.access(MindAccess.Peek, [], DustBoot.dataBulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
 							//							Dust.processResponseData(data, ids);
 						}
 
@@ -70,14 +70,14 @@ if ('Dust' in window) {
 			this.doSend(request);
 		}
 	}
-	
+
 	var Comm = new DustComm();
-	
+
 	function CommNarrative() {
 		var u = '/' + Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.RESOURCE_ATT_URL_PATH) + '/' +
 			Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.TEXT_ATT_TOKEN);
 
-		var l = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
+		var l = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
 
 		var request = {
 			method: 'GET',
@@ -90,9 +90,31 @@ if ('Dust' in window) {
 		return DustHandles.MIND_TAG_RESULT_ACCEPT;
 	}
 
+	function modCommNarrative() {
+		var ret = DustHandles.MIND_TAG_RESULT_ACCEPT;
 
-	Dust.access(MindAccess.Set, CommNarrative, DustBoot.comm, DustHandles.DUST_ATT_NATIVELOGIC_INSTANCE);
-	Dust.access(MindAccess.Set, [DustBoot.comm], DustBoot.dataReq, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
+		var absNar = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MIND_ATT_AGENT_NARRATIVE);
+
+		switch (absNar) {
+			case DustHandles.NET_NAR_HTTPCLICOMM:
+				Dust.access(MindAccess.Set, CommNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				break;
+
+			default:
+				ret = DustHandles.MIND_TAG_RESULT_PASS;
+				break;
+		}
+
+		return ret;
+	}
+
+	Dust.access(MindAccess.Set, modCommNarrative, DustBoot.modComm, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+
+
+	//	Dust.access(MindAccess.Set, CommNarrative, DustBoot.narComm, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	Dust.access(MindAccess.Set, DustHandles.NET_NAR_HTTPCLICOMM, DustBoot.narComm, DustHandles.MIND_ATT_AGENT_NARRATIVE);
+
+	Dust.access(MindAccess.Set, [DustBoot.narComm], DustBoot.dataSrvReq, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
 
 	Dust.Comm = Comm;
 

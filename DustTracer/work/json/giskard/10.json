@@ -18,7 +18,7 @@
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "NET_LOG_HTTPSRV"
+      "giskard-7-0 DEV_ATT_HINT" : "NET_NAR_HTTPSRV"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -26,11 +26,11 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-10-17 NET_LOG_HTTPSRV"
+    "id" : "giskard-10-17 NET_NAR_HTTPSRV"
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "NET_LOG_HTTPSVCFILES"
+      "giskard-7-0 DEV_ATT_HINT" : "NET_NAR_HTTPSVCFILES"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -38,11 +38,11 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-10-18 NET_LOG_HTTPSVCFILES"
+    "id" : "giskard-10-18 NET_NAR_HTTPSVCFILES"
   }, {
     "type" : "giskard-1-15 MIND_ASP_LOGIC",
     "attributes" : {
-      "giskard-7-0 DEV_ATT_HINT" : "NET_LOG_HTTPSVCJSONAPI"
+      "giskard-7-0 DEV_ATT_HINT" : "NET_NAR_HTTPSVCJSONAPI"
     },
     "relationships" : {
       "giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT" : {
@@ -50,7 +50,7 @@
         "id" : "giskard-1-15 MIND_ASP_LOGIC"
       }
     },
-    "id" : "giskard-10-19 NET_LOG_HTTPSVCJSONAPI"
+    "id" : "giskard-10-19 NET_NAR_HTTPSVCJSONAPI"
   }, {
     "type" : "giskard-1-13 MIND_ASP_ATTRIBUTE",
     "attributes" : {

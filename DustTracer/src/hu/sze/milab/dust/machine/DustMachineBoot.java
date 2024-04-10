@@ -90,26 +90,26 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MindAccess.Get, MindAccess.Set, MindAccess.Insert);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
-		DustUtilsAttCache.set(MachineAtts.TransientAtt, true, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_CONTENT, DUST_ATT_NATIVELOGIC_INSTANCE, DUST_ATT_MACHINE_ACTIVE_SERVERS,
+		DustUtilsAttCache.set(MachineAtts.TransientAtt, true, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_CONTENT, DUST_ATT_NATIVE_INSTANCE, DUST_ATT_MACHINE_ACTIVE_SERVERS,
 				NET_ATT_SRVCALL_REQUEST, NET_ATT_SRVCALL_RESPONSE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
-				, "AGT", MIND_ASP_AGENT, "LOG", MIND_ASP_LOGIC
-				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_LOG_MACHINE);
+				, "AGT", MIND_ASP_AGENT, "NAR", MIND_ASP_NARRATIVE
+				, "AUTHOR", MIND_ASP_AUTHOR, "MODULE", DUST_ASP_MODULE, "ASSEMBLY", MIND_ASP_ASSEMBLY, "MACHINE", DUST_NAR_MACHINE);
 		
 		// TODO not good... fix: ensure getUnit call on units when resolving from file...
-		Dust.log(EVENT_ASP_EVENT, NET_LOG_HTTPSRV);
+		Dust.log(EVENT_ASP_EVENT, NET_NAR_HTTPSRV);
 		Dust.log(EVENT_ASP_EVENT, STANDARD_ASP_JSONAPIFETCH);
 
 		machine.bootInit(bh);
 		
-		DustDevUtils.registerNative(RESOURCE_LOG_FILESYSTEM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamFilesystemServer.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(RESOURCE_LOG_ZIPREADER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustZipAgentReader.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_LOG_JSONDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustJsonDomAgent.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_LOG_CSVSAX, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCsvSaxAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_NAR_FILESYSTEM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamFilesystemServer.class.getCanonicalName(), true);
+		DustDevUtils.registerNative(RESOURCE_NAR_ZIPREADER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustZipAgentReader.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_NAR_JSONDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustJsonDomAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_NAR_CSVSAX, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCsvSaxAgent.class.getCanonicalName());
 
-		DustDevUtils.registerNative(NET_LOG_HTTPSRV, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpServerJetty.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(NET_LOG_HTTPSVCFILES, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpFileAgent.class.getCanonicalName());
-		DustDevUtils.registerNative(NET_LOG_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(NET_NAR_HTTPSRV, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpServerJetty.class.getCanonicalName(), true);
+		DustDevUtils.registerNative(NET_NAR_HTTPSVCFILES, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpFileAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(NET_NAR_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getCanonicalName());
 		
 
 		String bootClass = System.getProperty("DustBootClass");

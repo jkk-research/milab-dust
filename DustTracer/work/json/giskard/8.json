@@ -27,7 +27,7 @@
       },
       "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
         "type" : "giskard-1-15 MIND_ASP_LOGIC",
-        "id" : "giskard-6-17 RESOURCE_LOG_JSONDOM"
+        "id" : "giskard-6-17 RESOURCE_NAR_JSONDOM"
       }
     },
     "id" : "giskard-8-3 giskard:8:3"
@@ -43,7 +43,7 @@
       },
       "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
         "type" : "giskard-1-15 MIND_ASP_LOGIC",
-        "id" : "giskard-6-18 RESOURCE_LOG_CSVSAX"
+        "id" : "giskard-6-18 RESOURCE_NAR_CSVSAX"
       }
     },
     "id" : "giskard-8-4 giskard:8:4"
@@ -62,7 +62,7 @@
       },
       "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
         "type" : "giskard-1-15 MIND_ASP_LOGIC",
-        "id" : "giskard-10-17 NET_LOG_HTTPSRV"
+        "id" : "giskard-10-17 NET_NAR_HTTPSRV"
       }
     },
     "id" : "giskard-8-5 giskard:8:5"
@@ -81,7 +81,7 @@
       },
       "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
         "type" : "giskard-1-15 MIND_ASP_LOGIC",
-        "id" : "giskard-6-15 RESOURCE_LOG_FILESYSTEM"
+        "id" : "giskard-6-15 RESOURCE_NAR_FILESYSTEM"
       }
     },
     "id" : "giskard-8-1 giskard:8:1"
@@ -97,7 +97,7 @@
       },
       "giskard-2-18 DUST_ATT_NATIVELOGIC_LOGIC" : {
         "type" : "giskard-1-15 MIND_ASP_LOGIC",
-        "id" : "giskard-6-16 RESOURCE_LOG_ZIPREADER"
+        "id" : "giskard-6-16 RESOURCE_NAR_ZIPREADER"
       }
     },
     "id" : "giskard-8-2 giskard:8:2"
