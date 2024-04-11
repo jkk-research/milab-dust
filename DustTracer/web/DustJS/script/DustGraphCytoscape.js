@@ -165,7 +165,7 @@ if ('Dust' in window) {
 
 		switch (absNar) {
 			case DustHandles.MONTRU_NAR_GRAPH:
-				Dust.access(MindAccess.Set, GraphNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				Dust.access(MindAccess.Set, GraphNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;
 
 			default:
@@ -175,7 +175,7 @@ if ('Dust' in window) {
 
 		return ret;
 	}
-	Dust.access(MindAccess.Set, modGraphNarrative, DustBoot.modGraph, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	Dust.access(MindAccess.Set, modGraphNarrative, DustBoot.modGraph, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 
 	console.log('Dust Cytoscape graph initialized.');

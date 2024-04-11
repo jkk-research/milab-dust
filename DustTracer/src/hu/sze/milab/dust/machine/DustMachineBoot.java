@@ -90,7 +90,7 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		DustUtilsAttCache.set(MachineAtts.CreatorAccess, true, MindAccess.Get, MindAccess.Set, MindAccess.Insert);
 		DustUtilsAttCache.set(MachineAtts.CanContinue, true, MIND_TAG_RESULT_READ, MIND_TAG_RESULT_READACCEPT);
-		DustUtilsAttCache.set(MachineAtts.TransientAtt, true, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_CONTENT, DUST_ATT_NATIVE_INSTANCE, DUST_ATT_MACHINE_ACTIVE_SERVERS,
+		DustUtilsAttCache.set(MachineAtts.TransientAtt, true, MIND_ATT_KNOWLEDGE_HANDLE, MIND_ATT_UNIT_HANDLES, MIND_ATT_UNIT_CONTENT, DUST_ATT_IMPL_INSTANCE, DUST_ATT_MACHINE_ACTIVE_SERVERS,
 				NET_ATT_SRVCALL_REQUEST, NET_ATT_SRVCALL_RESPONSE);
 		DustUtilsAttCache.setWithPairs(MachineAtts.PrimaryAspectNames, "ASP", MIND_ASP_ASPECT, "ATT", MIND_ASP_ATTRIBUTE, "UNIT", MIND_ASP_UNIT, "TAG", MIND_ASP_TAG
 				, "AGT", MIND_ASP_AGENT, "NAR", MIND_ASP_NARRATIVE

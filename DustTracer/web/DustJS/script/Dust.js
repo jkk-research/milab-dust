@@ -85,19 +85,19 @@ if (!('Dust' in window)) {
 
 				try {
 					var agent = Dust.lookup(l, true);
-					var narrative = agent[DustHandles.DUST_ATT_NATIVE_INSTANCE];
+					var narrative = agent[DustHandles.DUST_ATT_IMPL_NARRATIVE];
 					if (!narrative) {
 						var machine = Dust.lookup(DustBoot.narMachine);
 						var modules = machine[DustHandles.DUST_ATT_MACHINE_MODULES];
 
 						for (mod of modules) {
-							var mn = Dust.access(MindAccess.Peek, null, mod, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+							var mn = Dust.access(MindAccess.Peek, null, mod, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 							if (mn) {
 								Context = { agent: null, action: null, target: l };
 
 								if (DustHandles.MIND_TAG_RESULT_ACCEPT == mn()) {
-									narrative = agent[DustHandles.DUST_ATT_NATIVE_INSTANCE];
+									narrative = agent[DustHandles.DUST_ATT_IMPL_NARRATIVE];
 									break;
 								}
 							}
@@ -159,7 +159,8 @@ if (!('Dust' in window)) {
 							}
 
 							var v = target.id;
-							Dust.lookup(v, true);
+							v = Dust.lookup(v, true).id;
+							
 							if (ob) {
 								var rk = target.meta.key;
 								Dust.lookup(rk, true);
@@ -169,7 +170,7 @@ if (!('Dust' in window)) {
 							}
 						}
 					} else {
-						val = rel.id;
+						val = rel.id.split(' ')[0];
 						Dust.lookup(val, true);
 					}
 
@@ -250,6 +251,11 @@ if (!('Dust' in window)) {
 			}
 
 			switch (cmd) {
+				case MindAccess.Reset:
+					if (Array.isArray(lastColl) && (0 < lastColl.length)) {
+						lastColl = [];
+					}
+					break;
 				case MindAccess.Peek:
 					value = value ? value : val;
 					break;
@@ -293,7 +299,7 @@ if (!('Dust' in window)) {
 		this.loadApp = function(reqPath, mainModule, respProcArr) {
 			Dust.access(MindAccess.Set, reqPath, DustBoot.dataSrvReq, DustHandles.RESOURCE_ATT_URL_PATH);
 			Dust.access(MindAccess.Set, mainModule, DustBoot.dataSrvReq, DustHandles.TEXT_ATT_TOKEN);
-			Dust.access(MindAccess.Set, respProcArr, DustBoot.dataSrvReq, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+			Dust.access(MindAccess.Set, respProcArr, DustBoot.dataSrvReq, DustHandles.DUST_ATT_IMPL_INSTANCE);
 
 			Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataSrvReq);
 
@@ -308,8 +314,15 @@ if (!('Dust' in window)) {
 
 	function MachineNarrative() {
 		var respData = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.MISC_ATT_VARIANT_VALUE);
+		
+		var target = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.MISC_ATT_CONN_TARGET);
+		
+//		Dust.access(MindAccess.Reset, null, target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 		var ids = [];
+		Dust.access(MindAccess.Set, ids, target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 		loadJsonApiData(respData, ids);
+		
+//		Dust.access(MindAccess.Commit, MindAction.Process, target);
 		Dust.access(MindAccess.Set, ids, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 
 		return DustHandles.MIND_TAG_RESULT_ACCEPT;
@@ -322,7 +335,7 @@ if (!('Dust' in window)) {
 
 		switch (absNar) {
 			case DustHandles.DUST_NAR_MACHINE:
-				Dust.access(MindAccess.Set, MachineNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				Dust.access(MindAccess.Set, MachineNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;
 
 			default:
@@ -335,10 +348,11 @@ if (!('Dust' in window)) {
 
 	Dust = new DustInit();
 
-	Dust.access(MindAccess.Set, modDustNarrative, DustBoot.modDust, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	Dust.access(MindAccess.Set, modDustNarrative, DustBoot.modDust, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 
 	//	Dust.access(MindAccess.Set, MachineNarrative, DustBoot.narMachine, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	Dust.access(MindAccess.Set, DustBoot.narGui, DustBoot.narMachine, DustHandles.MISC_ATT_CONN_TARGET);
 	
 	Dust.access(MindAccess.Set, DustHandles.DUST_NAR_MACHINE, DustBoot.narMachine, DustHandles.MIND_ATT_AGENT_NARRATIVE);
 	Dust.access(MindAccess.Set, [DustBoot.narMachine], DustBoot.dataBulkLoad, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);

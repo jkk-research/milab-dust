@@ -96,7 +96,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Set, "/script/DustGraphCytoscape.js", hModGraph, RESOURCE_ATT_URL_PATH);
 		Dust.access(MindAccess.Set, "Dust.Graph", hModGraph, TEXT_ATT_TOKEN);
 
-		MindHandle hWebClient = DustDevUtils.newHandle(TEST1_UNIT, DUST_NAR_MACHINE, "Web Client logic");
+		MindHandle hWebClient = DustDevUtils.registerAgent(TEST1_UNIT, DUST_NAR_MACHINE, "Web Client logic");
 		Dust.access(MindAccess.Set, "index.html", hWebClient, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hWebClient, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "DustJS Test01");
 		Dust.access(MindAccess.Insert, hModDustJS, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
@@ -128,34 +128,34 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Set, hJsonapiDom, hWebSrvResponse, NET_ATT_SRVRESP_PAYLOAD);
 //		Dust.access(MindAccess.Insert, hJsonapiDom, hWebClient, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
-		MindHandle hWebComm = DustDevUtils.newHandle(TEST1_UNIT, NET_NAR_HTTPCLICOMM, "Comm logic");
+		MindHandle hWebComm = DustDevUtils.registerAgent(TEST1_UNIT, NET_NAR_HTTPCLICOMM, "Comm logic");
 		Dust.access(MindAccess.Set, hWebSrvResponse, hWebComm, MISC_ATT_CONN_TARGET);
 
 		Dust.access(MindAccess.Insert, hWebComm, hWebCmdInfo, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Insert, hWebComm, hWebCmdStop, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
-		MindHandle hGetDataBtn = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - Jsonapi");
+		MindHandle hGetDataBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - Jsonapi");
 		Dust.access(MindAccess.Set, hWebDataRequest, hGetDataBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnGetData", hGetDataBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hGetDataBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Get Data!");
 //		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 //		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
 
-		MindHandle hSrvInfoBtn = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - info");
+		MindHandle hSrvInfoBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - info");
 		Dust.access(MindAccess.Set, hWebCmdInfo, hSrvInfoBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnInfo", hSrvInfoBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hSrvInfoBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server info");
 //		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 //		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
 
-		MindHandle hSrvStopBtn = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - stop");
+		MindHandle hSrvStopBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - stop");
 		Dust.access(MindAccess.Set, hWebCmdStop, hSrvStopBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnStop", hSrvStopBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hSrvStopBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server STOP!");
 //		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 //		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
 
-		MindHandle hResponseArea = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_AREA, "Srv response text area");
+		MindHandle hResponseArea = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_AREA, "Srv response text area");
 		Dust.access(MindAccess.Insert, hWebSrvResponse, hResponseArea, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 //		DustDevUtils.setTag(hResponseArea, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
 
@@ -182,7 +182,9 @@ public class DustTestBootSimple implements DustTestConsts {
 //		Dust.access(MindAccess.Insert, hSrvInfoBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 //		Dust.access(MindAccess.Insert, hSrvStopBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
-//		MindHandle hGraph = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_GRAPH);
+		MindHandle hGraph = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GRAPH, "Graph");
+		Dust.access(MindAccess.Set, "graph", hGraph, TEXT_ATT_TOKEN);
+		
 //		DustDevUtils.setTag(hGraph, MONTRU_TAG_PAGE_CENTER, MONTRU_TAG_PAGE);
 //
 //		MindHandle hContMain = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_ASP_CONTAINER);
@@ -201,9 +203,14 @@ public class DustTestBootSimple implements DustTestConsts {
 //		Dust.access(MindAccess.Insert, hContButtons, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 //		Dust.access(MindAccess.Insert, hContMain, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
-		MindHandle hGui = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_GUI, "Web GUI");
+		MindHandle hGui = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GUI, "Web GUI");
 //		Dust.access(MindAccess.Insert, hPage, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, hWebSrvResponse, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+//		Dust.access(MindAccess.Insert, hWebSrvResponse, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+		
+		Dust.access(MindAccess.Insert, hGraph, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
+		Dust.access(MindAccess.Set, hGui, hWebClient, MISC_ATT_CONN_TARGET);
+		
+		
 
 		Map<String, MindHandle> bootNodes = new TreeMap<>();
 
@@ -211,6 +218,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		bootNodes.put("dataBulkLoad", hJsonapiDom);
 		bootNodes.put("narComm", hWebComm);
 		bootNodes.put("dataSrvReq", hWebDataRequest);
+		bootNodes.put("narGui", hGui);
 
 		bootNodes.put("modDust", hModDustJS);
 		bootNodes.put("modComm", hModComm);

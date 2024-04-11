@@ -77,7 +77,7 @@ if ('Dust' in window) {
 		var u = '/' + Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.RESOURCE_ATT_URL_PATH) + '/' +
 			Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.TEXT_ATT_TOKEN);
 
-		var l = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+		var l = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.DUST_ATT_IMPL_INSTANCE);
 
 		var request = {
 			method: 'GET',
@@ -97,7 +97,7 @@ if ('Dust' in window) {
 
 		switch (absNar) {
 			case DustHandles.NET_NAR_HTTPCLICOMM:
-				Dust.access(MindAccess.Set, CommNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				Dust.access(MindAccess.Set, CommNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;
 
 			default:
@@ -108,7 +108,7 @@ if ('Dust' in window) {
 		return ret;
 	}
 
-	Dust.access(MindAccess.Set, modCommNarrative, DustBoot.modComm, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	Dust.access(MindAccess.Set, modCommNarrative, DustBoot.modComm, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 
 	//	Dust.access(MindAccess.Set, CommNarrative, DustBoot.narComm, DustHandles.DUST_ATT_NATIVE_INSTANCE);

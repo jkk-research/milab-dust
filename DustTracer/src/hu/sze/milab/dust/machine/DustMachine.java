@@ -320,21 +320,21 @@ class DustMachine extends Dust.Machine
 	}
 
 	public MindAgent selectAgent(Object a) throws Exception {
-		MindAgent agent = Dust.access(MindAccess.Peek, null, a, DUST_ATT_NATIVE_INSTANCE);
+		MindAgent agent = Dust.access(MindAccess.Peek, null, a, DUST_ATT_IMPL_INSTANCE);
 
 		if (null == agent) {
 			Object l = Dust.access(MindAccess.Peek, null, a, MIND_ATT_AGENT_NARRATIVE);
 			Object n = null;
 			Collection allNatLog = Dust.access(MindAccess.Peek, Collections.EMPTY_SET, APP_MACHINE_MAIN, DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
 			for (Object nl : allNatLog) {
-				if (l == Dust.access(MindAccess.Peek, null, nl, DUST_ATT_NATIVE_NARRATIVE)) {
+				if (l == Dust.access(MindAccess.Peek, null, nl, DUST_ATT_IMPL_NARRATIVE)) {
 					n = nl;
 					break;
 				}
 			}
 
 			if (null != n) {
-				agent = Dust.access(MindAccess.Peek, null, n, DUST_ATT_NATIVE_INSTANCE);
+				agent = Dust.access(MindAccess.Peek, null, n, DUST_ATT_IMPL_INSTANCE);
 				Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 
 				if (null == agent) {
@@ -345,11 +345,11 @@ class DustMachine extends Dust.Machine
 						agent.agentProcess(MindAction.Init);
 						Dust.access(MindAccess.Insert, agent, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_ACTIVE_SERVERS, 0);
 					}
-					Dust.access(MindAccess.Set, agent, n, DUST_ATT_NATIVE_INSTANCE);
+					Dust.access(MindAccess.Set, agent, n, DUST_ATT_IMPL_INSTANCE);
 				}
 			}
 
-			Dust.access(MindAccess.Set, agent, a, DUST_ATT_NATIVE_INSTANCE);
+			Dust.access(MindAccess.Set, agent, a, DUST_ATT_IMPL_INSTANCE);
 		} else {
 			Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 		}

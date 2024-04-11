@@ -48,7 +48,7 @@ if ('Dust' in window) {
 
 		switch (absNar) {
 			case DustHandles.MONTRU_NAR_GUI:
-				Dust.access(MindAccess.Set, GuiNarrative, MindContext.Target, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+				Dust.access(MindAccess.Set, GuiNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;
 
 			default:
@@ -58,7 +58,7 @@ if ('Dust' in window) {
 
 		return ret;
 	}
-	Dust.access(MindAccess.Set, modMontruNarrative, DustBoot.modMontru, DustHandles.DUST_ATT_NATIVE_INSTANCE);
+	Dust.access(MindAccess.Set, modMontruNarrative, DustBoot.modMontru, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 	var btns = $("button");
 	btns.on("click", handleAction);

@@ -68,9 +68,9 @@ public class DustDevUtils implements DustHandles {
 
 	public static MindHandle registerLogic(MindHandle hUnit, String nativeClassName, String hint) {
 		MindHandle hLogic = newHandle(hUnit, MIND_ASP_NARRATIVE, hint + "_logic");
-		MindHandle hNative = newHandle(hUnit, DUST_ASP_NATIVE, hint + "_impl");
+		MindHandle hNative = newHandle(hUnit, DUST_ASP_IMPL, hint + "_impl");
 
-		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVE_NARRATIVE);
+		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_IMPL_NARRATIVE);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
 		Dust.access(MindAccess.Set, hNative, APP_MODULE_MAIN, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
@@ -83,9 +83,9 @@ public class DustDevUtils implements DustHandles {
 	}
 
 	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {
-		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_NATIVE, DustUtils.getPostfix(nativeClassName, "."));
+		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_IMPL, DustUtils.getPostfix(nativeClassName, "."));
 
-		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_NATIVE_NARRATIVE);
+		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_IMPL_NARRATIVE);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
 		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
