@@ -1,7 +1,6 @@
 
 if ('Dust' in window) {
 	function DustGraphInit() {
-
 		var cy = cytoscape({
 			container: document.getElementById('graph'),
 			style: [
@@ -35,127 +34,136 @@ if ('Dust' in window) {
 			console.log(log + ']');
 		});
 
-		this.loadResponseData = function(id, success, status, txt, ids) {
-			cy.startBatch();
+		return cy;
+	}
 
-			var all = cy.elements('node[id]');
-			cy.remove(all);
+	function loadResponseData(cy, ids) {
+		cy.startBatch();
 
-			var item;
+		var all = cy.elements('node[id]');
+		cy.remove(all);
 
-			var items = {};
-			var edgeIds = new Set();
+		var item;
 
-			for (itemId of ids) {
-				item = Dust.lookup(itemId);
-				if (!items[itemId]) {
-					items[itemId] = cy.add({ group: 'nodes', data: { id: itemId, label: item.label } });
-				}
+		var items = {};
+		var edgeIds = new Set();
+
+		for (itemId of ids) {
+			item = Dust.lookup(itemId);
+			if (!items[itemId]) {
+				items[itemId] = cy.add({ group: 'nodes', data: { id: itemId, label: item.label } });
 			}
+		}
 
-			for (itemId of ids) {
-				item = Dust.lookup(itemId);
+		for (itemId of ids) {
+			item = Dust.lookup(itemId);
 
-				for (const key in item) {
-					if (Dust.isRelation(key)) {
-						var rel = item[key];
-						var isArr = Array.isArray(rel);
-						var ri = Dust.lookup(key);
+			for (const key in item) {
+				if (Dust.isRelation(key)) {
+					var rel = item[key];
+					var isArr = Array.isArray(rel);
+					var ri = Dust.lookup(key);
 
-						if (ri.id == DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT) {
-							continue;
-						}
+					if (ri.id == DustHandles.MIND_ATT_KNOWLEDGE_PRIMARYASPECT) {
+						continue;
+					}
 
-						var rl = ri.label;
-						var rk = null;
+					var rl = ri.label;
+					var rk = null;
 
-						if (isArr) {
-							rk = 0;
+					if (isArr) {
+						rk = 0;
+					} else {
+						if (typeof rel === "string") {
+							rel = [rel];
 						} else {
-							if (typeof rel === "string") {
-								rel = [rel];
+							rk = "";
+						}
+					}
+
+
+					for (tr in rel) {
+						var targetId = rel[tr];
+						var target = Dust.lookup(targetId, true);
+						targetId = target.id;
+
+						if (!items[targetId]) {
+							items[targetId] = cy.add({ group: 'nodes', data: { id: targetId, label: target.label } });
+						}
+
+						var l = rl;
+
+						if (rk != null) {
+							if (isArr) {
+								l = l + ' [' + rk + ']';
+								rk = rk + 1;
 							} else {
-								rk = "";
+								rk = tr;
+								l = l + ' {' + rk + '}';
 							}
 						}
 
+						var eid = itemId + ' - ' + targetId + ' : ' + l;
 
-						for (tr in rel) {
-							var targetId = rel[tr];
-							var target = Dust.lookup(targetId, true);
-							targetId = target.id;
-
-							if (!items[targetId]) {
-								items[targetId] = cy.add({ group: 'nodes', data: { id: targetId, label: target.label } });
-							}
-
-							var l = rl;
-
-							if (rk != null) {
-								if (isArr) {
-									l = l + ' [' + rk + ']';
-									rk = rk + 1;
-								} else {
-									rk = tr;
-									l = l + ' {' + rk + '}';
-								}
-							}
-
-							var eid = itemId + ' - ' + targetId + ' : ' + l;
-
-							if (!edgeIds.has(eid)) {
-								cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: l } });
-								edgeIds.add(eid);
-							}
+						if (!edgeIds.has(eid)) {
+							cy.add({ group: 'edges', data: { source: itemId, target: targetId, label: l } });
+							edgeIds.add(eid);
 						}
 					}
 				}
 			}
-
-			cy.endBatch();
-
-			let options = {
-				name: 'cose',
-
-				ready: function() { },
-				stop: function() { },
-
-				animate: true,
-
-				animationEasing: undefined,
-				animationDuration: undefined,
-
-				animateFilter: function(node, i) { return true; },
-				animationThreshold: 250,
-				refresh: 2,
-				fit: true,
-				padding: 30,
-
-				boundingBox: undefined,
-				nodeDimensionsIncludeLabels: false,
-
-				randomize: false,
-				componentSpacing: 40,
-				nodeRepulsion: function(node) { return 2048; },
-				nodeOverlap: 4,
-				idealEdgeLength: function(edge) { return 32; },
-				edgeElasticity: function(edge) { return 32; },
-				nestingFactor: 1.2,
-				gravity: 1,
-				numIter: 1000,
-				initialTemp: 1000,
-				coolingFactor: 0.99,
-				minTemp: 1.0
-			};
-
-			var layout = cy.layout(options);
-			layout.run();
 		}
+
+		cy.endBatch();
+
+		let options = {
+			name: 'cose',
+
+			ready: function() { },
+			stop: function() { },
+
+			animate: true,
+
+			animationEasing: undefined,
+			animationDuration: undefined,
+
+			animateFilter: function(node, i) { return true; },
+			animationThreshold: 250,
+			refresh: 2,
+			fit: true,
+			padding: 30,
+
+			boundingBox: undefined,
+			nodeDimensionsIncludeLabels: false,
+
+			randomize: false,
+			componentSpacing: 40,
+			nodeRepulsion: function(node) { return 2048; },
+			nodeOverlap: 4,
+			idealEdgeLength: function(edge) { return 32; },
+			edgeElasticity: function(edge) { return 32; },
+			nestingFactor: 1.2,
+			gravity: 1,
+			numIter: 1000,
+			initialTemp: 1000,
+			coolingFactor: 0.99,
+			minTemp: 1.0
+		};
+
+		var layout = cy.layout(options);
+		layout.run();
 	}
 
-	Dust.Graph = new DustGraphInit();
-	
 	function GraphNarrative() {
+		var gr = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.DUST_ATT_IMPL_INSTANCE);
+
+		if (!gr) {
+			gr = new DustGraphInit();
+			Dust.access(MindAccess.Set, gr, MindContext.Self, DustHandles.DUST_ATT_IMPL_INSTANCE);
+		}
+		var ids = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
+
+		loadResponseData(gr, ids);
 	}
 
 	function modGraphNarrative() {
@@ -176,7 +184,6 @@ if ('Dust' in window) {
 		return ret;
 	}
 	Dust.access(MindAccess.Set, modGraphNarrative, DustBoot.modGraph, DustHandles.DUST_ATT_IMPL_NARRATIVE);
-
 
 	console.log('Dust Cytoscape graph initialized.');
 }

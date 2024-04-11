@@ -46,9 +46,9 @@
 			<tr>
 				<td class="dataTable" colspan="2" width="800px"><button id="btnGetData"
 						onclick="getJsonData('path', 'include', 'fields', 'filter', 'sort', 'page[offset]', 'page[limit]');">Get data!</button>
-					<button id="btnStop" style="float: right; background-color: red;" onclick="directRequest('/admin/stop');">Stop!
+					<button id="btnStop" style="float: right; background-color: red;">Stop!
 					</button>
-					<button id="btnInfo" style="float: right;" onclick="directRequest('/admin/info');">Server info</button>
+					<button id="btnInfo" style="float: right;">Server info</button>
 					<button id="btnTest" style="float: right;">Test</button></td>
 			</tr>
 			<tr>
@@ -73,35 +73,6 @@
 
 
 	<script>
-	
-		function getJsonData(url, ... params) {			
-			var request = {};
-			var data = null;
-			
-			var val = document.getElementById(url);
-			val = val.value;
-
-			request.url = "/jsonapi/" + val;
-			request.respProc = [processResponse, Dust.Graph.loadResponseData];
-			
-			for ( p of params ) {
-				val = document.getElementById(p);
-				val = val.value;
-				if ( val ) {
-					if ( !data ) {
-						data = {};
-						request.data = data;
-					}
-					data[p] = val;
-				}
-			}
-			
-			Dust.Comm.loadResource(request);
-		}
-		
-		function directRequest(target) {	
-//			Dust.Comm.loadResource({ url: target, respProc: displayResponse});
-		}
 		
 		function processResponse(id, success, status, resp, ids) {	
 			var str = JSON.stringify(resp);
@@ -113,7 +84,7 @@
 			$('#srvResponse').text(txt);
 		}
 		
-		Dust.loadApp('jsonapi', 'test:1', [processResponse, Dust.Graph.loadResponseData]);	
+		Dust.loadApp('jsonapi', 'test:1', [processResponse]);	
 		
 	</script>
 </body>

@@ -322,8 +322,8 @@ if (!('Dust' in window)) {
 		Dust.access(MindAccess.Set, ids, target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 		loadJsonApiData(respData, ids);
 		
-//		Dust.access(MindAccess.Commit, MindAction.Process, target);
-		Dust.access(MindAccess.Set, ids, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
+		Dust.access(MindAccess.Commit, MindAction.Process, target);
+//		Dust.access(MindAccess.Set, ids, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 
 		return DustHandles.MIND_TAG_RESULT_ACCEPT;
 	}
