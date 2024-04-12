@@ -151,6 +151,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_TAG_NEGATE = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_TAG_READONLY = Dust.lookup("giskard:3:?");
+	MindHandle MISC_TAG_HIDDEN = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_TAG_DIRECTION = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_DIRECTION_IN = Dust.lookup("giskard:3:?");

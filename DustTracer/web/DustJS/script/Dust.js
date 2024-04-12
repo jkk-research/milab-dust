@@ -160,10 +160,10 @@ if (!('Dust' in window)) {
 
 							var v = target.id;
 							v = Dust.lookup(v, true).id;
-							
+
 							if (ob) {
 								var rk = target.meta.key;
-								Dust.lookup(rk, true);
+								rk = Dust.lookup(rk, true).id;
 								val[rk] = v;
 							} else {
 								val.push(v);
@@ -232,19 +232,20 @@ if (!('Dust' in window)) {
 						break;
 				}
 
-				var resolve = true;
+				var curr = null;
 				for (p of path) {
-					var curr = null;
-
 					if (value) {
-						if (resolve) {
+						if (typeof value === 'string') {
 							curr = this.lookup(value, createMissing);
 						}
-					} else if (createMissing) {
+					} else {
+						if (createMissing) {
 
+						} else {
+							break;
+						}
 					}
 					lastKey = p;
-					resolve = Relations.has(lastKey);
 					lastColl = curr;
 					value = curr = curr[lastKey];
 				}
@@ -296,15 +297,11 @@ if (!('Dust' in window)) {
 			loadJsonApiData(respData, ids);
 		}
 
-		this.loadApp = function(reqPath, mainModule, respProcArr) {
+		this.loadApp = function(reqPath, mainModule) {
 			Dust.access(MindAccess.Set, reqPath, DustBoot.dataSrvReq, DustHandles.RESOURCE_ATT_URL_PATH);
 			Dust.access(MindAccess.Set, mainModule, DustBoot.dataSrvReq, DustHandles.TEXT_ATT_TOKEN);
-			Dust.access(MindAccess.Set, respProcArr, DustBoot.dataSrvReq, DustHandles.DUST_ATT_IMPL_INSTANCE);
 
 			Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataSrvReq);
-
-			//			var root = reqPath + mainModule;
-			//			Dust.Comm.loadResource({ url: root, respProc: respProcArr });
 		}
 
 		this.isRelation = function(key) {
@@ -314,16 +311,14 @@ if (!('Dust' in window)) {
 
 	function MachineNarrative() {
 		var respData = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.MISC_ATT_VARIANT_VALUE);
-		
+
 		var target = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.MISC_ATT_CONN_TARGET);
-		
-//		Dust.access(MindAccess.Reset, null, target, DustHandles.MISC_ATT_CONN_MEMBERARR);
+
 		var ids = [];
-		Dust.access(MindAccess.Set, ids, target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 		loadJsonApiData(respData, ids);
-		
+
+		Dust.access(MindAccess.Set, ids, target, DustHandles.MONTRU_ATT_GUI_SELECTED, DustHandles.MISC_ATT_CONN_MEMBERARR);
 		Dust.access(MindAccess.Commit, MindAction.Process, target);
-//		Dust.access(MindAccess.Set, ids, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
 
 		return DustHandles.MIND_TAG_RESULT_ACCEPT;
 	}
@@ -351,9 +346,8 @@ if (!('Dust' in window)) {
 	Dust.access(MindAccess.Set, modDustNarrative, DustBoot.modDust, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 
-	//	Dust.access(MindAccess.Set, MachineNarrative, DustBoot.narMachine, DustHandles.DUST_ATT_NATIVE_INSTANCE);
 	Dust.access(MindAccess.Set, DustBoot.narGui, DustBoot.narMachine, DustHandles.MISC_ATT_CONN_TARGET);
-	
+
 	Dust.access(MindAccess.Set, DustHandles.DUST_NAR_MACHINE, DustBoot.narMachine, DustHandles.MIND_ATT_AGENT_NARRATIVE);
 	Dust.access(MindAccess.Set, [DustBoot.narMachine], DustBoot.dataBulkLoad, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);
 	Dust.access(MindAccess.Set, [DustBoot.modDust, DustBoot.modComm], DustBoot.narMachine, DustHandles.DUST_ATT_MACHINE_MODULES);

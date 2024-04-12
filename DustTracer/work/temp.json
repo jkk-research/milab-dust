@@ -1,625 +1,480 @@
 {
 	"data": [
 		{
-			"id": "test-1 test:1",
 			"type": "giskard-1-0 MIND_ASP_UNIT",
+			"id": "test-1 test:1",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-1-0 MIND_ASP_UNIT",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-0 MIND_ASP_UNIT"
 				},
 				"giskard-1-3 MIND_ATT_UNIT_AUTHOR": {
-					"id": "test test",
-					"type": "???"
+					"type": "???",
+					"id": "test test"
 				}
 			}
 		},
 		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Web GUI"
+			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
 			"id": "test-1-20 test:1:20",
-			"type": "giskard-13-9 MONTRU_ASP_CONTAINER",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-9 MONTRU_ASP_CONTAINER",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
+				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
 					{
-						"id": "test-1-13 test:1:13",
-						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
-					},
-					{
-						"id": "test-1-14 test:1:14",
-						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
-					},
-					{
-						"id": "test-1-15 test:1:15",
-						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-19 test:1:19"
 					}
 				],
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-13-12 MONTRU_TAG_LAYOUT_PAGE",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-10 MONTRU_TAG_LAYOUT"
-						}
-					}
-				]
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-27 MONTRU_NAR_GUI"
+				}
 			}
 		},
 		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Srv Response"
+			},
+			"type": "giskard-10-17 NET_ASP_SRVRESP",
 			"id": "test-1-9 test:1:9",
-			"type": "giskard-11-0 STANDARD_ASP_JSONAPIFETCH",
-			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "giskard"
-			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-11-0 STANDARD_ASP_JSONAPIFETCH",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-10-17 NET_ASP_SRVRESP"
+				},
+				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
+					{
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-15 test:1:15"
+					}
+				],
+				"giskard-10-21 NET_ATT_SRVRESP_PAYLOAD": {
+					"type": "giskard-11-0 STANDARD_ASP_JSONAPIDOM",
+					"id": "test-1-10 test:1:10"
 				}
 			}
 		},
 		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Jsonapi Dom"
+			},
+			"type": "giskard-11-0 STANDARD_ASP_JSONAPIDOM",
 			"id": "test-1-10 test:1:10",
-			"type": "giskard-4-7 TEXT_ASP_PLAIN",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-4-7 TEXT_ASP_PLAIN",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
-				}
-			}
-		},
-		{
-			"id": "test-1-21 test:1:21",
-			"type": "giskard-13-26 MONTRU_NAR_GRAPH",
-			"relationships": {
-				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-26 MONTRU_NAR_GRAPH",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-11-0 STANDARD_ASP_JSONAPIDOM"
 				},
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
+				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
 					{
-						"id": "giskard-13-19 MONTRU_TAG_PAGE_CENTER",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-14 MONTRU_TAG_PAGE"
-						}
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-5 test:1:5"
 					}
 				]
 			}
 		},
 		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Comm logic"
+			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
 			"id": "test-1-11 test:1:11",
-			"type": "giskard-10-21 NET_NAR_HTTPCLIJSONAPI",
-			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "jsonapi"
-			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-10-21 NET_NAR_HTTPCLIJSONAPI",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
-					{
-						"id": "test-1-9 test:1:9",
-						"type": "giskard-11-0 STANDARD_ASP_JSONAPIFETCH"
-					}
-				],
 				"giskard-3-4 MISC_ATT_CONN_TARGET": {
-					"id": "test-1-10 test:1:10",
-					"type": "giskard-4-7 TEXT_ASP_PLAIN"
+					"type": "giskard-10-17 NET_ASP_SRVRESP",
+					"id": "test-1-9 test:1:9"
+				},
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-10-25 NET_NAR_HTTPCLICOMM"
 				}
 			}
 		},
 		{
-			"id": "test-1-22 test:1:22",
-			"type": "giskard-13-9 MONTRU_ASP_CONTAINER",
-			"relationships": {
-				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-9 MONTRU_ASP_CONTAINER",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
-				},
-				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
-					{
-						"id": "test-1-16 test:1:16",
-						"type": "giskard-13-1 MONTRU_NAR_WIDGET"
-					},
-					{
-						"id": "test-1-21 test:1:21",
-						"type": "giskard-13-26 MONTRU_NAR_GRAPH"
-					}
-				],
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-13-12 MONTRU_TAG_LAYOUT_PAGE",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-10 MONTRU_TAG_LAYOUT"
-						}
-					}
-				]
-			}
-		},
-		{
-			"id": "test-1-12 test:1:12",
-			"type": "giskard-10-20 NET_NAR_HTTPCLIDIRECT",
 			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "admin"
-			},
-			"relationships": {
-				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-10-20 NET_NAR_HTTPCLIDIRECT",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
-				},
-				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
-					{
-						"id": "test-1-7 test:1:7",
-						"type": "giskard-6-0 RESOURCE_ASP_URL"
-					},
-					{
-						"id": "test-1-8 test:1:8",
-						"type": "giskard-6-0 RESOURCE_ASP_URL"
-					}
-				],
-				"giskard-3-4 MISC_ATT_CONN_TARGET": {
-					"id": "test-1-10 test:1:10",
-					"type": "giskard-4-7 TEXT_ASP_PLAIN"
-				}
-			}
-		},
-		{
-			"id": "test-1-23 test:1:23",
-			"type": "giskard-13-25 MONTRU_NAR_WINDOW",
-			"relationships": {
-				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-25 MONTRU_NAR_WINDOW",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
-				},
-				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
-					{
-						"id": "test-1-17 test:1:17",
-						"type": "giskard-13-23 MONTRU_NAR_GRID"
-					},
-					{
-						"id": "test-1-20 test:1:20",
-						"type": "giskard-13-9 MONTRU_ASP_CONTAINER"
-					},
-					{
-						"id": "test-1-22 test:1:22",
-						"type": "giskard-13-9 MONTRU_ASP_CONTAINER"
-					}
-				],
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-13-22 MONTRU_TAG_FLOW_PAGE",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-20 MONTRU_TAG_FLOW"
-						}
-					},
-					{
-						"id": "giskard-13-13 MONTRU_TAG_LAYOUT_FLOW",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-10 MONTRU_TAG_LAYOUT"
-						}
-					}
-				]
-			}
-		},
-		{
-			"id": "test-1-13 test:1:13",
-			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
-			"attributes": {
-				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "Get Data!",
+				"giskard-7-0 DEV_ATT_HINT": "Btn logic - Jsonapi",
 				"giskard-4-3 TEXT_ATT_TOKEN": "btnGetData"
 			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
+			"id": "test-1-12 test:1:12",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-4-1 TEXT_TAG_LANGUAGE_EN_US",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-0 TEXT_TAG_LANGUAGE"
-						}
-					},
-					{
-						"id": "giskard-13-4 MONTRU_TAG_WIDGET_BUTTON",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-2 MONTRU_TAG_WIDGET"
-						}
-					},
-					{
-						"id": "giskard-13-17 MONTRU_TAG_PAGE_LEAD",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-14 MONTRU_TAG_PAGE"
-						}
-					},
-					{
-						"id": "giskard-4-6 TEXT_TAG_TYPE_LABEL",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-4 TEXT_TAG_TYPE"
-						}
-					}
-				],
 				"giskard-3-4 MISC_ATT_CONN_TARGET": {
-					"id": "test-1-9 test:1:9",
-					"type": "giskard-11-0 STANDARD_ASP_JSONAPIFETCH"
+					"type": "giskard-11-1 STANDARD_ASP_JSONAPIFETCH",
+					"id": "test-1-8 test:1:8"
+				},
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET"
 				}
 			}
 		},
 		{
-			"id": "test-1-14 test:1:14",
-			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"attributes": {
-				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "Server info",
+				"giskard-7-0 DEV_ATT_HINT": "Btn logic - info",
 				"giskard-4-3 TEXT_ATT_TOKEN": "btnInfo"
 			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
+			"id": "test-1-13 test:1:13",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-4-1 TEXT_TAG_LANGUAGE_EN_US",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-0 TEXT_TAG_LANGUAGE"
-						}
-					},
-					{
-						"id": "giskard-13-4 MONTRU_TAG_WIDGET_BUTTON",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-2 MONTRU_TAG_WIDGET"
-						}
-					},
-					{
-						"id": "giskard-13-18 MONTRU_TAG_PAGE_TAIL",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-14 MONTRU_TAG_PAGE"
-						}
-					},
-					{
-						"id": "giskard-4-6 TEXT_TAG_TYPE_LABEL",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-4 TEXT_TAG_TYPE"
-						}
-					}
-				],
 				"giskard-3-4 MISC_ATT_CONN_TARGET": {
-					"id": "test-1-7 test:1:7",
-					"type": "giskard-6-0 RESOURCE_ASP_URL"
+					"type": "giskard-6-0 RESOURCE_ASP_URL",
+					"id": "test-1-6 test:1:6"
+				},
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET"
 				}
 			}
 		},
 		{
-			"id": "test-1-15 test:1:15",
-			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"attributes": {
-				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "Server STOP!",
+				"giskard-7-0 DEV_ATT_HINT": "Btn logic - stop",
 				"giskard-4-3 TEXT_ATT_TOKEN": "btnStop"
 			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
+			"id": "test-1-14 test:1:14",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-4-1 TEXT_TAG_LANGUAGE_EN_US",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-0 TEXT_TAG_LANGUAGE"
-						}
-					},
-					{
-						"id": "giskard-13-4 MONTRU_TAG_WIDGET_BUTTON",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-2 MONTRU_TAG_WIDGET"
-						}
-					},
-					{
-						"id": "giskard-13-18 MONTRU_TAG_PAGE_TAIL",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-14 MONTRU_TAG_PAGE"
-						}
-					},
-					{
-						"id": "giskard-4-6 TEXT_TAG_TYPE_LABEL",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-4 TEXT_TAG_TYPE"
-						}
-					}
-				],
 				"giskard-3-4 MISC_ATT_CONN_TARGET": {
-					"id": "test-1-8 test:1:8",
-					"type": "giskard-6-0 RESOURCE_ASP_URL"
+					"type": "giskard-6-0 RESOURCE_ASP_URL",
+					"id": "test-1-7 test:1:7"
+				},
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-1 MONTRU_NAR_WIDGET"
 				}
 			}
 		},
 		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Srv response text area",
+				"giskard-4-3 TEXT_ATT_TOKEN": "srvResponse"
+			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
+			"id": "test-1-15 test:1:15",
+			"relationships": {
+				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
+				},
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-0 MONTRU_NAR_AREA"
+				}
+			}
+		},
+		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "giskard:13:23",
+				"giskard-4-3 TEXT_ATT_TOKEN": "fetchParams"
+			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
 			"id": "test-1-16 test:1:16",
-			"type": "giskard-13-1 MONTRU_NAR_WIDGET",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-1 MONTRU_NAR_WIDGET",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-13-6 MONTRU_TAG_WIDGET_TEXTAREA",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-2 MONTRU_TAG_WIDGET"
-						}
-					},
-					{
-						"id": "giskard-13-17 MONTRU_TAG_PAGE_LEAD",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-13-14 MONTRU_TAG_PAGE"
-						}
-					},
-					{
-						"id": "giskard-3-15 MISC_TAG_READONLY",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-3-15 MISC_TAG_READONLY"
-						}
-					}
-				],
-				"giskard-3-4 MISC_ATT_CONN_TARGET": {
-					"id": "test-1-10 test:1:10",
-					"type": "giskard-4-7 TEXT_ASP_PLAIN"
-				}
-			}
-		},
-		{
-			"id": "test-1-17 test:1:17",
-			"type": "giskard-13-23 MONTRU_NAR_GRID",
-			"relationships": {
-				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-13-23 MONTRU_NAR_GRID",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-23 MONTRU_NAR_GRID"
 				},
 				"giskard-13-24 MONTRU_ATT_GRID_AXES": [
 					{
-						"id": "test-1-18 test:1:18",
-						"type": "giskard-3-0 MISC_ASP_CONN",
 						"meta": {
-							"key": "giskard-12-2 GEOMETRY_TAG_VALTYPE_CARTESIAN_Y"
-						}
+							"key": "giskard-12-8 GEOMETRY_TAG_VALTYPE_CARTESIAN_Y"
+						},
+						"type": "giskard-3-0 MISC_ASP_CONN",
+						"id": "test-1-17 test:1:17"
 					},
 					{
-						"id": "test-1-19 test:1:19",
-						"type": "giskard-3-0 MISC_ASP_CONN",
 						"meta": {
-							"key": "giskard-12-1 GEOMETRY_TAG_VALTYPE_CARTESIAN_X"
-						}
+							"key": "giskard-12-7 GEOMETRY_TAG_VALTYPE_CARTESIAN_X"
+						},
+						"type": "giskard-3-0 MISC_ASP_CONN",
+						"id": "test-1-18 test:1:18"
 					}
 				]
 			}
 		},
 		{
-			"id": "test-1-1 test:1:1",
-			"type": "giskard-2-12 DUST_ASP_MODULE",
 			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "script/Dust.js",
+				"giskard-7-0 DEV_ATT_HINT": "Grid rows"
+			},
+			"type": "giskard-3-0 MISC_ASP_CONN",
+			"id": "test-1-17 test:1:17",
+			"relationships": {
+				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-3-0 MISC_ASP_CONN"
+				},
+				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-6-4 RESOURCE_ATT_URL_PATH"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-4-3 TEXT_ATT_TOKEN"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-11-2 STANDARD_ATT_JSONAPIFETCH_INCLUDE"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-11-3 STANDARD_ATT_JSONAPIFETCH_FIELDS"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-11-4 STANDARD_ATT_JSONAPIFETCH_FILTER"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-11-5 STANDARD_ATT_JSONAPIFETCH_SORT"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-11-6 STANDARD_ATT_JSONAPIFETCH_PAGELIMIT"
+					},
+					{
+						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE",
+						"id": "giskard-11-7 STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET"
+					}
+				]
+			}
+		},
+		{
+			"attributes": {
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "/script/Dust.js",
+				"giskard-7-0 DEV_ATT_HINT": "Dust JS module",
 				"giskard-2-15 DUST_ATT_MODULE_LIBRARIES": [
 					"https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js",
-					"script/DustHandles.js"
+					"/script/DustHandles.js",
+					"/script/DustBoot.js"
 				],
 				"giskard-4-3 TEXT_ATT_TOKEN": "Dust"
 			},
+			"type": "giskard-2-12 DUST_ASP_MODULE",
+			"id": "test-1-1 test:1:1",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-2-12 DUST_ASP_MODULE",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-2-12 DUST_ASP_MODULE"
 				}
 			}
 		},
 		{
-			"id": "test-1-18 test:1:18",
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Grid cols"
+			},
 			"type": "giskard-3-0 MISC_ASP_CONN",
+			"id": "test-1-18 test:1:18",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-3-0 MISC_ASP_CONN",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-3-0 MISC_ASP_CONN"
 				},
 				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
 					{
-						"id": "giskard-6-4 RESOURCE_ATT_URL_PATH",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
-					},
-					{
-						"id": "giskard-11-1 STANDARD_ATT_JSONAPIFETCH_INCLUDE",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
-					},
-					{
-						"id": "giskard-11-2 STANDARD_ATT_JSONAPIFETCH_FIELDS",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
-					},
-					{
-						"id": "giskard-11-3 STANDARD_ATT_JSONAPIFETCH_FILTER",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
-					},
-					{
-						"id": "giskard-11-4 STANDARD_ATT_JSONAPIFETCH_SORT",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
-					},
-					{
-						"id": "giskard-11-5 STANDARD_ATT_JSONAPIFETCH_PAGELIMIT",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
-					},
-					{
-						"id": "giskard-11-6 STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET",
-						"type": "giskard-1-13 MIND_ASP_ATTRIBUTE"
+						"type": "giskard-11-1 STANDARD_ASP_JSONAPIFETCH",
+						"id": "test-1-8 test:1:8"
 					}
 				]
 			}
 		},
 		{
-			"id": "test-1-2 test:1:2",
-			"type": "giskard-2-12 DUST_ASP_MODULE",
 			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "script/DustComm.js",
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "/script/DustComm.js",
+				"giskard-7-0 DEV_ATT_HINT": "Comm JS module",
 				"giskard-4-3 TEXT_ATT_TOKEN": "Dust.Comm"
 			},
+			"type": "giskard-2-12 DUST_ASP_MODULE",
+			"id": "test-1-2 test:1:2",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-2-12 DUST_ASP_MODULE",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-2-12 DUST_ASP_MODULE"
 				}
 			}
 		},
 		{
+			"attributes": {
+				"giskard-7-0 DEV_ATT_HINT": "Graph",
+				"giskard-4-3 TEXT_ATT_TOKEN": "graph"
+			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
 			"id": "test-1-19 test:1:19",
-			"type": "giskard-3-0 MISC_ASP_CONN",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-3-0 MISC_ASP_CONN",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
-				"giskard-3-7 MISC_ATT_CONN_MEMBERARR": [
-					{
-						"id": "test-1-6 test:1:6",
-						"type": "giskard-3-0 MISC_ASP_CONN"
-					},
-					{
-						"id": "test-1-9 test:1:9",
-						"type": "giskard-11-0 STANDARD_ASP_JSONAPIFETCH"
-					}
-				]
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-13-26 MONTRU_NAR_GRAPH"
+				}
 			}
 		},
 		{
-			"id": "test-1-3 test:1:3",
-			"type": "giskard-2-12 DUST_ASP_MODULE",
 			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "script/DustMontru.js",
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "/script/DustMontru.js",
+				"giskard-7-0 DEV_ATT_HINT": "Montru JS module",
 				"giskard-4-3 TEXT_ATT_TOKEN": "Dust.Montru"
 			},
+			"type": "giskard-2-12 DUST_ASP_MODULE",
+			"id": "test-1-3 test:1:3",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-2-12 DUST_ASP_MODULE",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-2-12 DUST_ASP_MODULE"
 				}
 			}
 		},
 		{
-			"id": "test-1-4 test:1:4",
-			"type": "giskard-2-12 DUST_ASP_MODULE",
 			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "script/DustGraphCytoscape.js",
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "/script/DustGraphCytoscape.js",
+				"giskard-7-0 DEV_ATT_HINT": "Graph JS module",
 				"giskard-2-15 DUST_ATT_MODULE_LIBRARIES": [
 					"https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"
 				],
 				"giskard-4-3 TEXT_ATT_TOKEN": "Dust.Graph"
 			},
+			"type": "giskard-2-12 DUST_ASP_MODULE",
+			"id": "test-1-4 test:1:4",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-2-12 DUST_ASP_MODULE",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-2-12 DUST_ASP_MODULE"
 				}
 			}
 		},
 		{
-			"id": "test-1-5 test:1:5",
-			"type": "giskard-2-0 DUST_NAR_MACHINE",
 			"attributes": {
-				"giskard-4-8 TEXT_ATT_PLAIN_TEXT": "DustJS Test01",
+				"giskard-7-0 DEV_ATT_HINT": "Web Client logic",
 				"giskard-4-3 TEXT_ATT_TOKEN": "index.html"
 			},
+			"type": "giskard-1-23 MIND_ASP_AGENT",
+			"id": "test-1-5 test:1:5",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-2-0 DUST_NAR_MACHINE",
-					"type": "giskard-1-15 MIND_ASP_LOGIC"
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-1-23 MIND_ASP_AGENT"
 				},
 				"giskard-2-5 DUST_ATT_MACHINE_MODULES": [
 					{
-						"id": "test-1-1 test:1:1",
-						"type": "giskard-2-12 DUST_ASP_MODULE"
+						"type": "giskard-2-12 DUST_ASP_MODULE",
+						"id": "test-1-1 test:1:1"
 					},
 					{
-						"id": "test-1-3 test:1:3",
-						"type": "giskard-2-12 DUST_ASP_MODULE"
+						"type": "giskard-2-12 DUST_ASP_MODULE",
+						"id": "test-1-2 test:1:2"
 					},
 					{
-						"id": "test-1-4 test:1:4",
-						"type": "giskard-2-12 DUST_ASP_MODULE"
+						"type": "giskard-2-12 DUST_ASP_MODULE",
+						"id": "test-1-3 test:1:3"
+					},
+					{
+						"type": "giskard-2-12 DUST_ASP_MODULE",
+						"id": "test-1-4 test:1:4"
 					}
 				],
-				"giskard-1-9 MIND_ATT_KNOWLEDGE_TAGS": [
-					{
-						"id": "giskard-4-1 TEXT_TAG_LANGUAGE_EN_US",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-0 TEXT_TAG_LANGUAGE"
-						}
-					},
-					{
-						"id": "giskard-4-6 TEXT_TAG_TYPE_LABEL",
-						"type": "giskard-1-14 MIND_ASP_TAG",
-						"meta": {
-							"key": "giskard-4-4 TEXT_TAG_TYPE"
-						}
-					}
-				],
-				"giskard-2-11 DUST_ATT_MACHINE_UNIT_RESOLVER": {
-					"id": "test-1-11 test:1:11",
-					"type": "giskard-10-21 NET_NAR_HTTPCLIJSONAPI"
+				"giskard-3-4 MISC_ATT_CONN_TARGET": {
+					"type": "giskard-1-23 MIND_ASP_AGENT",
+					"id": "test-1-20 test:1:20"
+				},
+				"giskard-1-24 MIND_ATT_AGENT_NARRATIVE": {
+					"type": "giskard-1-15 MIND_ASP_NARRATIVE",
+					"id": "giskard-2-0 DUST_NAR_MACHINE"
 				}
 			}
 		},
 		{
+			"attributes": {
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "admin",
+				"giskard-7-0 DEV_ATT_HINT": "SrvCall info",
+				"giskard-4-3 TEXT_ATT_TOKEN": "info"
+			},
+			"type": "giskard-6-0 RESOURCE_ASP_URL",
 			"id": "test-1-6 test:1:6",
-			"type": "giskard-3-0 MISC_ASP_CONN",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-3-0 MISC_ASP_CONN",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
-				}
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-6-0 RESOURCE_ASP_URL"
+				},
+				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
+					{
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-11 test:1:11"
+					}
+				]
 			}
 		},
 		{
+			"attributes": {
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "admin",
+				"giskard-7-0 DEV_ATT_HINT": "SrvCall stop",
+				"giskard-4-3 TEXT_ATT_TOKEN": "stop"
+			},
+			"type": "giskard-6-0 RESOURCE_ASP_URL",
 			"id": "test-1-7 test:1:7",
-			"type": "giskard-6-0 RESOURCE_ASP_URL",
-			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "info"
-			},
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-6-0 RESOURCE_ASP_URL",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
-				}
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-6-0 RESOURCE_ASP_URL"
+				},
+				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
+					{
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-11 test:1:11"
+					}
+				]
 			}
 		},
 		{
-			"id": "test-1-8 test:1:8",
-			"type": "giskard-6-0 RESOURCE_ASP_URL",
 			"attributes": {
-				"giskard-6-4 RESOURCE_ATT_URL_PATH": "stop"
+				"giskard-6-4 RESOURCE_ATT_URL_PATH": "jsonapi",
+				"giskard-7-0 DEV_ATT_HINT": "SrvCall Jsonapi",
+				"giskard-4-3 TEXT_ATT_TOKEN": "test:0"
 			},
+			"type": "giskard-11-1 STANDARD_ASP_JSONAPIFETCH",
+			"id": "test-1-8 test:1:8",
 			"relationships": {
 				"giskard-1-11 MIND_ATT_KNOWLEDGE_PRIMARYASPECT": {
-					"id": "giskard-6-0 RESOURCE_ASP_URL",
-					"type": "giskard-1-12 MIND_ASP_ASPECT"
-				}
+					"type": "giskard-1-12 MIND_ASP_ASPECT",
+					"id": "giskard-11-1 STANDARD_ASP_JSONAPIFETCH"
+				},
+				"giskard-1-10 MIND_ATT_KNOWLEDGE_LISTENERS": [
+					{
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-11 test:1:11"
+					},
+					{
+						"type": "giskard-1-23 MIND_ASP_AGENT",
+						"id": "test-1-16 test:1:16"
+					}
+				]
 			}
 		}
 	],
@@ -627,6 +482,6 @@
 		"version": "1.1"
 	},
 	"meta": {
-		"count": 24
+		"count": 21
 	}
 }

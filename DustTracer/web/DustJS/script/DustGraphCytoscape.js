@@ -56,6 +56,13 @@ if ('Dust' in window) {
 		}
 
 		for (itemId of ids) {
+			
+			var hidden = Dust.access(MindAccess.Peek, null, itemId, DustHandles.MIND_ATT_KNOWLEDGE_TAGS, DustHandles.MISC_TAG_HIDDEN);
+			
+			if ( hidden ) {
+				continue;
+			}
+			
 			item = Dust.lookup(itemId);
 
 			for (const key in item) {
@@ -161,7 +168,7 @@ if ('Dust' in window) {
 			gr = new DustGraphInit();
 			Dust.access(MindAccess.Set, gr, MindContext.Self, DustHandles.DUST_ATT_IMPL_INSTANCE);
 		}
-		var ids = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MISC_ATT_CONN_MEMBERARR);
+		var ids = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MONTRU_ATT_GUI_SELECTED, DustHandles.MISC_ATT_CONN_MEMBERARR);
 
 		loadResponseData(gr, ids);
 	}

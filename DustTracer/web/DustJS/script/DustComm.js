@@ -9,41 +9,29 @@ if ('Dust' in window) {
 				jqXHR.DustRequestId = ++requestId;
 				jqXHR.DustMethod = request.method;
 				jqXHR.DustURL = request.url;
-				jqXHR.DustProc = request.respProc;
 
 				console.log('Request ' + jqXHR.DustRequestId + ' sending...');
 			};
 
 			$.ajax(request)
 				.done(function(data, textStatus, jqXHR) {
-					if (jqXHR.DustProc) {
-
 						var ct = jqXHR.getResponseHeader('content-type');
-
-						var ids = [];
+						
+						var txt = data;
 
 						if (ct.includes('application/vnd.api+json')) {
 							Dust.access(MindAccess.Set, data, DustBoot.dataBulkLoad, DustHandles.MISC_ATT_VARIANT_VALUE);
 							Dust.access(MindAccess.Commit, MindAction.Process, DustBoot.dataBulkLoad);
-							ids = Dust.access(MindAccess.Peek, [], DustBoot.dataBulkLoad, DustHandles.MISC_ATT_CONN_MEMBERARR);
-							//							Dust.processResponseData(data, ids);
+							txt = JSON.stringify(data);
 						}
+						
+						var target = Dust.access(MindAccess.Peek, null, DustBoot.narComm, DustHandles.MISC_ATT_CONN_TARGET);
+						Dust.access(MindAccess.Set, txt, target, DustHandles.TEXT_ATT_PLAIN_TEXT);
+						Dust.access(MindAccess.Commit, MindAction.Process, target);
 
-						var listeners = Array.isArray(jqXHR.DustProc) ? jqXHR.DustProc : [jqXHR.DustProc];
-
-						for (l of listeners) {
-							l(jqXHR.DustRequestId, true, textStatus, data, ids);
-						}
-					} else {
-						console.log('Request ' + jqXHR.DustRequestId + ' done.');
-					}
 				})
 				.fail(function(jqXHR, textStatus, errorThrown) {
-					if (jqXHR.DustProc) {
-						jqXHR.DustProc(jqXHR.DustRequestId, false, textStatus, errorThrown);
-					} else {
-						console.log('Request ' + jqXHR.DustRequestId + ' failed: ' + errorThrown);
-					}
+						console.log('Request ' + jqXHR.DustRequestId + ' status: ' + textStatus + ' failed: ' + errorThrown);
 				});
 		}
 
@@ -77,12 +65,9 @@ if ('Dust' in window) {
 		var u = '/' + Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.RESOURCE_ATT_URL_PATH) + '/' +
 			Dust.access(MindAccess.Peek, "", MindContext.Target, DustHandles.TEXT_ATT_TOKEN);
 
-		var l = Dust.access(MindAccess.Peek, [], MindContext.Target, DustHandles.DUST_ATT_IMPL_INSTANCE);
-
 		var request = {
 			method: 'GET',
-			url: u,
-			respProc: l
+			url: u
 		};
 
 		Comm.doSend(request);
@@ -110,8 +95,6 @@ if ('Dust' in window) {
 
 	Dust.access(MindAccess.Set, modCommNarrative, DustBoot.modComm, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
-
-	//	Dust.access(MindAccess.Set, CommNarrative, DustBoot.narComm, DustHandles.DUST_ATT_NATIVE_INSTANCE);
 	Dust.access(MindAccess.Set, DustHandles.NET_NAR_HTTPCLICOMM, DustBoot.narComm, DustHandles.MIND_ATT_AGENT_NARRATIVE);
 
 	Dust.access(MindAccess.Set, [DustBoot.narComm], DustBoot.dataSrvReq, DustHandles.MIND_ATT_KNOWLEDGE_LISTENERS);

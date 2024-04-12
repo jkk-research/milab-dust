@@ -119,7 +119,7 @@ public class DustTestBootSimple implements DustTestConsts {
 
 		MindHandle hWebDataRequest = DustDevUtils.newHandle(TEST1_UNIT, STANDARD_ASP_JSONAPIFETCH, "SrvCall Jsonapi");
 		Dust.access(MindAccess.Set, tDA, hWebDataRequest, RESOURCE_ATT_URL_PATH);
-		Dust.access(MindAccess.Set, "giskard", hWebDataRequest, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Set, "test:0", hWebDataRequest, TEXT_ATT_TOKEN);
 
 		MindHandle hWebSrvResponse = DustDevUtils.newHandle(TEST1_UNIT, NET_ASP_SRVRESP, "Srv Response");
 
@@ -156,25 +156,34 @@ public class DustTestBootSimple implements DustTestConsts {
 //		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
 
 		MindHandle hResponseArea = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_AREA, "Srv response text area");
-		Dust.access(MindAccess.Insert, hWebSrvResponse, hResponseArea, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+		Dust.access(MindAccess.Set, "srvResponse", hResponseArea, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Insert, hResponseArea, hWebSrvResponse, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 //		DustDevUtils.setTag(hResponseArea, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
 
-//		MindHandle hRequestPropertiesGrid = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_GRID);
-//		MindHandle hRequestPropertiesRows = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN);
-//		Dust.access(MindAccess.Insert, RESOURCE_ATT_URL_PATH, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_INCLUDE, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FIELDS, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FILTER, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_SORT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGELIMIT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//
-//		MindHandle hRequestPropertiesCols = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN);
+		MindHandle hRequestPropertiesGrid = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GRID);
+		Dust.access(MindAccess.Set, "fetchParams", hRequestPropertiesGrid, TEXT_ATT_TOKEN);
+		MindHandle hRequestPropertiesRows = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN, "Grid rows");
+		Dust.access(MindAccess.Insert, RESOURCE_ATT_URL_PATH, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, TEXT_ATT_TOKEN, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_INCLUDE, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FIELDS, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FILTER, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_SORT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGELIMIT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+
+		MindHandle hRequestPropertiesCols = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN, "Grid cols");
 //		Dust.access(MindAccess.Insert, hLabels, hRequestPropertiesCols, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hWebDataRequest, hRequestPropertiesCols, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//
-//		Dust.access(MindAccess.Set, hRequestPropertiesRows, hRequestPropertiesGrid, MONTRU_ATT_GRID_AXES, GEOMETRY_TAG_VALTYPE_CARTESIAN_Y);
-//		Dust.access(MindAccess.Set, hRequestPropertiesCols, hRequestPropertiesGrid, MONTRU_ATT_GRID_AXES, GEOMETRY_TAG_VALTYPE_CARTESIAN_X);
+		Dust.access(MindAccess.Insert, hWebDataRequest, hRequestPropertiesCols, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+
+		Dust.access(MindAccess.Set, hRequestPropertiesRows, hRequestPropertiesGrid, MONTRU_ATT_GRID_AXES, GEOMETRY_TAG_VALTYPE_CARTESIAN_Y);
+		Dust.access(MindAccess.Set, hRequestPropertiesCols, hRequestPropertiesGrid, MONTRU_ATT_GRID_AXES, GEOMETRY_TAG_VALTYPE_CARTESIAN_X);
+		
+		Dust.access(MindAccess.Insert, hWebComm, hWebDataRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
+		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hWebDataRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
+		
+		Dust.access(MindAccess.Insert, hWebClient, hJsonapiDom, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
+		
 //
 //		MindHandle hContButtons = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_ASP_CONTAINER);
 //		DustDevUtils.setTag(hContButtons, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
@@ -204,6 +213,10 @@ public class DustTestBootSimple implements DustTestConsts {
 //		Dust.access(MindAccess.Insert, hContMain, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		MindHandle hGui = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GUI, "Web GUI");
+		MindHandle hGuiSel = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN, "Selected items");
+		DustDevUtils.setTag(hGuiSel, MISC_TAG_HIDDEN);
+		Dust.access(MindAccess.Set, hGuiSel, hGui, MONTRU_ATT_GUI_SELECTED);
+
 //		Dust.access(MindAccess.Insert, hPage, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 //		Dust.access(MindAccess.Insert, hWebSrvResponse, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		

@@ -13,6 +13,9 @@
 <body>
 	<h1>DustJS JSON:API test</h1>
 
+	<div class="dataTable maxWidth" id='fetchParams'></div>
+
+
 	<table class="dataTable maxWidth">
 		<tbody>
 			<tr>
@@ -44,10 +47,8 @@
 				<td><input style="width: 100%" id="page[limit]" value="444" /></td>
 			</tr>
 			<tr>
-				<td class="dataTable" colspan="2" width="800px"><button id="btnGetData"
-						onclick="getJsonData('path', 'include', 'fields', 'filter', 'sort', 'page[offset]', 'page[limit]');">Get data!</button>
-					<button id="btnStop" style="float: right; background-color: red;">Stop!
-					</button>
+				<td class="dataTable" colspan="2" width="800px"><button id="btnGetData">Get data!</button>
+					<button id="btnStop" style="float: right; background-color: red;">Stop!</button>
 					<button id="btnInfo" style="float: right;">Server info</button>
 					<button id="btnTest" style="float: right;">Test</button></td>
 			</tr>
@@ -58,6 +59,7 @@
 			</tr>
 		</tbody>
 	</table>
+
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 	<script src="/script/DustHandles.js"></script>
@@ -71,21 +73,8 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js"></script>
 	<script src="/script/DustGraphCytoscape.js"></script>
 
-
 	<script>
-		
-		function processResponse(id, success, status, resp, ids) {	
-			var str = JSON.stringify(resp);
-			displayResponse(id, success, status, str);
-		}
-		
-		function displayResponse(id, success, status, txt) {	
-			console.log('Request success ' + txt);
-			$('#srvResponse').text(txt);
-		}
-		
-		Dust.loadApp('jsonapi', 'test:1', [processResponse]);	
-		
+		Dust.loadApp('jsonapi', 'test:1');
 	</script>
 </body>
 </html>
