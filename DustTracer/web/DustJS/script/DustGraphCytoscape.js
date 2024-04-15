@@ -129,14 +129,14 @@ if ('Dust' in window) {
 			ready: function() { },
 			stop: function() { },
 
-			animate: true,
+//			animate: true,
 
-			animationEasing: undefined,
-			animationDuration: undefined,
-
-			animateFilter: function(node, i) { return true; },
-			animationThreshold: 250,
-			refresh: 2,
+//			animationEasing: undefined,
+//			animationDuration: undefined,
+//
+//			animateFilter: function(node, i) { return true; },
+//			animationThreshold: 250,
+//			refresh: 2,
 			fit: true,
 			padding: 30,
 
@@ -144,10 +144,10 @@ if ('Dust' in window) {
 			nodeDimensionsIncludeLabels: false,
 
 			randomize: false,
-			componentSpacing: 40,
+			componentSpacing: 80,
 			nodeRepulsion: function(node) { return 2048; },
 			nodeOverlap: 4,
-			idealEdgeLength: function(edge) { return 32; },
+			idealEdgeLength: function(edge) { return 100; },
 			edgeElasticity: function(edge) { return 32; },
 			nestingFactor: 1.2,
 			gravity: 1,
@@ -173,7 +173,7 @@ if ('Dust' in window) {
 		loadResponseData(gr, ids);
 	}
 
-	function modGraphNarrative() {
+	function modCytoscapeNarrative() {
 		var ret = DustHandles.MIND_TAG_RESULT_ACCEPT;
 
 		var absNar = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.MIND_ATT_AGENT_NARRATIVE);
@@ -190,7 +190,7 @@ if ('Dust' in window) {
 
 		return ret;
 	}
-	Dust.access(MindAccess.Set, modGraphNarrative, DustBoot.modGraph, DustHandles.DUST_ATT_IMPL_NARRATIVE);
+	Dust.access(MindAccess.Set, modCytoscapeNarrative, DustBoot.modGraph, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 
 	console.log('Dust Cytoscape graph initialized.');
 }

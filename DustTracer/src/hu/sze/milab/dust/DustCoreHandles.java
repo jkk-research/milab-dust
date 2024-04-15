@@ -116,7 +116,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle DUST_ASP_MODULE = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MODULE_UNITS = Dust.lookup("giskard:2:?");
-	MindHandle DUST_ATT_MODULE_NATIVELOGICS = Dust.lookup("giskard:2:?");
+	MindHandle DUST_ATT_MODULE_NARRATIVEIMPLS = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MODULE_LIBRARIES = Dust.lookup("giskard:2:?");
 
 	MindHandle DUST_ASP_THREAD = Dust.lookup("giskard:2:?");
@@ -252,7 +252,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_TAG_WIDGET_TOGGLE = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_SELECT = Dust.lookup("giskard:13:?");
 
-	MindHandle MONTRU_ASP_CONTAINER = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_NAR_CONTAINER = Dust.lookup("giskard:13:?");
 
 	MindHandle MONTRU_TAG_LAYOUT = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_LAYOUT_LAYERED = Dust.lookup("giskard:13:?");

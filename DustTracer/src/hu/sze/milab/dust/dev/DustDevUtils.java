@@ -73,7 +73,7 @@ public class DustDevUtils implements DustHandles {
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_IMPL_NARRATIVE);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
-		Dust.access(MindAccess.Set, hNative, APP_MODULE_MAIN, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
+		Dust.access(MindAccess.Set, hNative, APP_MODULE_MAIN, DUST_ATT_MODULE_NARRATIVEIMPLS, KEY_ADD);
 
 		return hLogic;
 	}
@@ -88,7 +88,7 @@ public class DustDevUtils implements DustHandles {
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_IMPL_NARRATIVE);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
-		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NATIVELOGICS, KEY_ADD);
+		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NARRATIVEIMPLS, KEY_ADD);
 		if ( srv ) {
 			setTag(hNative, DUST_TAG_NATIVE_SERVER);
 		}

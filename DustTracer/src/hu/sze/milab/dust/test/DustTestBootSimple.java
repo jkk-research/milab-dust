@@ -81,20 +81,27 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Insert, "/script/DustHandles.js", hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
 		Dust.access(MindAccess.Insert, genBoot, hModDustJS, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
 		Dust.access(MindAccess.Set, "/script/Dust.js", hModDustJS, RESOURCE_ATT_URL_PATH);
-		Dust.access(MindAccess.Set, "Dust", hModDustJS, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Set, "modDustNarrative", hModDustJS, TEXT_ATT_TOKEN);
+		DustDevUtils.registerNative(DUST_NAR_MACHINE, TEST1_UNIT, hModDustJS, "MachineNarrative");
 
 		MindHandle hModComm = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Comm JS module");
 		Dust.access(MindAccess.Set, "/script/DustComm.js", hModComm, RESOURCE_ATT_URL_PATH);
-		Dust.access(MindAccess.Set, "Dust.Comm", hModComm, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Set, "modCommNarrative", hModComm, TEXT_ATT_TOKEN);
+		DustDevUtils.registerNative(NET_NAR_HTTPCLICOMM, TEST1_UNIT, hModComm, "CommNarrative");
 
 		MindHandle hModMontru = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Montru JS module");
 		Dust.access(MindAccess.Set, "/script/DustMontru.js", hModMontru, RESOURCE_ATT_URL_PATH);
-		Dust.access(MindAccess.Set, "Dust.Montru", hModMontru, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Set, "modMontruNarrative", hModMontru, TEXT_ATT_TOKEN);
+		DustDevUtils.registerNative(MONTRU_NAR_GUI, TEST1_UNIT, hModMontru, "GuiNarrative", true);
+		DustDevUtils.registerNative(MONTRU_NAR_CONTAINER, TEST1_UNIT, hModMontru, "ContainerNarrative");
+		DustDevUtils.registerNative(MONTRU_NAR_AREA, TEST1_UNIT, hModMontru, "AreaNarrative");
+		DustDevUtils.registerNative(MONTRU_NAR_GRID, TEST1_UNIT, hModMontru, "GridNarrative");
 
 		MindHandle hModGraph = DustDevUtils.newHandle(TEST1_UNIT, DUST_ASP_MODULE, "Graph JS module");
 		Dust.access(MindAccess.Insert, "https://cdnjs.cloudflare.com/ajax/libs/cytoscape/3.28.1/cytoscape.min.js", hModGraph, DUST_ATT_MODULE_LIBRARIES, KEY_ADD);
 		Dust.access(MindAccess.Set, "/script/DustGraphCytoscape.js", hModGraph, RESOURCE_ATT_URL_PATH);
-		Dust.access(MindAccess.Set, "Dust.Graph", hModGraph, TEXT_ATT_TOKEN);
+		Dust.access(MindAccess.Set, "modCytoscapeNarrative", hModGraph, TEXT_ATT_TOKEN);
+		DustDevUtils.registerNative(MONTRU_NAR_GRAPH, TEST1_UNIT, hModGraph, "GraphNarrative");
 
 		MindHandle hWebClient = DustDevUtils.registerAgent(TEST1_UNIT, DUST_NAR_MACHINE, "Web Client logic");
 		Dust.access(MindAccess.Set, "index.html", hWebClient, TEXT_ATT_TOKEN);
@@ -103,8 +110,6 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Insert, hModComm, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
 		Dust.access(MindAccess.Insert, hModMontru, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
 		Dust.access(MindAccess.Insert, hModGraph, hWebClient, DUST_ATT_MACHINE_MODULES, KEY_ADD);
-
-//		MindHandle hLabels = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN);
 
 		Object tSrv = Dust.access(MindAccess.Get, "???", hAgtSrv, TEXT_ATT_TOKEN);
 		Object tDA = Dust.access(MindAccess.Get, "???", hAgtJsonapi, TEXT_ATT_TOKEN);
@@ -126,7 +131,6 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hJsonapiDom = DustDevUtils.newHandle(TEST1_UNIT, STANDARD_ASP_JSONAPIDOM, "Jsonapi Dom");
 		Dust.access(MindAccess.Set, "Jsonapi Dom", hJsonapiDom, DEV_ATT_HINT);
 		Dust.access(MindAccess.Set, hJsonapiDom, hWebSrvResponse, NET_ATT_SRVRESP_PAYLOAD);
-//		Dust.access(MindAccess.Insert, hJsonapiDom, hWebClient, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
 		MindHandle hWebComm = DustDevUtils.registerAgent(TEST1_UNIT, NET_NAR_HTTPCLICOMM, "Comm logic");
 		Dust.access(MindAccess.Set, hWebSrvResponse, hWebComm, MISC_ATT_CONN_TARGET);
@@ -138,27 +142,23 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Set, hWebDataRequest, hGetDataBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnGetData", hGetDataBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hGetDataBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Get Data!");
-//		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
-//		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 
 		MindHandle hSrvInfoBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - info");
 		Dust.access(MindAccess.Set, hWebCmdInfo, hSrvInfoBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnInfo", hSrvInfoBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hSrvInfoBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server info");
-//		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
-//		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 
 		MindHandle hSrvStopBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - stop");
 		Dust.access(MindAccess.Set, hWebCmdStop, hSrvStopBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnStop", hSrvStopBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hSrvStopBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server STOP!");
-//		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
-//		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
 
 		MindHandle hResponseArea = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_AREA, "Srv response text area");
 		Dust.access(MindAccess.Set, "srvResponse", hResponseArea, TEXT_ATT_TOKEN);
 		Dust.access(MindAccess.Insert, hResponseArea, hWebSrvResponse, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
-//		DustDevUtils.setTag(hResponseArea, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
 
 		MindHandle hRequestPropertiesGrid = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GRID);
 		Dust.access(MindAccess.Set, "fetchParams", hRequestPropertiesGrid, TEXT_ATT_TOKEN);
@@ -168,62 +168,58 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_INCLUDE, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FIELDS, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_FILTER, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_SORT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGELIMIT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_SORT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGELIMIT, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+//		Dust.access(MindAccess.Insert, STANDARD_ATT_JSONAPIFETCH_PAGEOFFSET, hRequestPropertiesRows, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		MindHandle hRequestPropertiesCols = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN, "Grid cols");
-//		Dust.access(MindAccess.Insert, hLabels, hRequestPropertiesCols, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Insert, hWebDataRequest, hRequestPropertiesCols, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		Dust.access(MindAccess.Set, hRequestPropertiesRows, hRequestPropertiesGrid, MONTRU_ATT_GRID_AXES, GEOMETRY_TAG_VALTYPE_CARTESIAN_Y);
 		Dust.access(MindAccess.Set, hRequestPropertiesCols, hRequestPropertiesGrid, MONTRU_ATT_GRID_AXES, GEOMETRY_TAG_VALTYPE_CARTESIAN_X);
-		
-		Dust.access(MindAccess.Insert, hWebComm, hWebDataRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
-		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hWebDataRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
-		
-		Dust.access(MindAccess.Insert, hWebClient, hJsonapiDom, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
-		
-//
-//		MindHandle hContButtons = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_ASP_CONTAINER);
-//		DustDevUtils.setTag(hContButtons, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
-//		Dust.access(MindAccess.Insert, hGetDataBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hSrvInfoBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hSrvStopBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+
+		Dust.access(MindAccess.Insert, hWebComm, hWebDataRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hWebDataRequest, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+
+		Dust.access(MindAccess.Insert, hWebClient, hJsonapiDom, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+
+		MindHandle hContButtons = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_CONTAINER, "button panel");
+		DustDevUtils.setTag(hContButtons, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
+
+		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
+
+		Dust.access(MindAccess.Insert, hGetDataBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, hSrvInfoBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, hSrvStopBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		MindHandle hGraph = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GRAPH, "Graph");
 		Dust.access(MindAccess.Set, "graph", hGraph, TEXT_ATT_TOKEN);
+
+		MindHandle hContMain = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_CONTAINER, "resp/graph panel");
+		DustDevUtils.setTag(hContMain, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
 		
-//		DustDevUtils.setTag(hGraph, MONTRU_TAG_PAGE_CENTER, MONTRU_TAG_PAGE);
-//
-//		MindHandle hContMain = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_ASP_CONTAINER);
-//		DustDevUtils.setTag(hContMain, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
-//		Dust.access(MindAccess.Insert, hResponseArea, hContMain, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hGraph, hContMain, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//
-//
-//		MindHandle hPage = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_WINDOW);
-//		DustDevUtils.setTag(hPage, MONTRU_TAG_LAYOUT_FLOW, MONTRU_TAG_LAYOUT);
-//		DustDevUtils.setTag(hPage, MONTRU_TAG_FLOW_PAGE, MONTRU_TAG_FLOW);
-//		
-//		
-//		
-//		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hContButtons, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hContMain, hPage, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		DustDevUtils.setTag(hResponseArea, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hGraph, MONTRU_TAG_PAGE_CENTER, MONTRU_TAG_PAGE);
+		
+		Dust.access(MindAccess.Insert, hResponseArea, hContMain, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, hGraph, hContMain, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		MindHandle hGui = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GUI, "Web GUI");
+		DustDevUtils.setTag(hGui, MONTRU_TAG_LAYOUT_FLOW, MONTRU_TAG_LAYOUT);
+		DustDevUtils.setTag(hGui, MONTRU_TAG_FLOW_PAGE, MONTRU_TAG_FLOW);
+		
+		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, hContButtons, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, hContMain, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+
 		MindHandle hGuiSel = DustDevUtils.newHandle(TEST1_UNIT, MISC_ASP_CONN, "Selected items");
 		DustDevUtils.setTag(hGuiSel, MISC_TAG_HIDDEN);
 		Dust.access(MindAccess.Set, hGuiSel, hGui, MONTRU_ATT_GUI_SELECTED);
 
-//		Dust.access(MindAccess.Insert, hPage, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-//		Dust.access(MindAccess.Insert, hWebSrvResponse, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
-		
-		Dust.access(MindAccess.Insert, hGraph, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);		
+		Dust.access(MindAccess.Insert, hGraph, hGui, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 		Dust.access(MindAccess.Set, hGui, hWebClient, MISC_ATT_CONN_TARGET);
-		
-		
 
 		Map<String, MindHandle> bootNodes = new TreeMap<>();
 
@@ -239,7 +235,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		bootNodes.put("modGraph", hModGraph);
 
 		String bootJS = DustMachineTempMetaGenJavaScript.genJSObject(genBoot, bootNodes);
-		
+
 		File appScript = new File(appWebRoot, "script");
 		appScript.mkdirs();
 

@@ -39,6 +39,9 @@ if ('Dust' in window) {
 	function GuiNarrative() {
 	}
 
+	function ContainerNarrative() {
+	}
+
 	function AreaNarrative() {
 		var txt = Dust.access(MindAccess.Peek, null, MindContext.Target, DustHandles.TEXT_ATT_PLAIN_TEXT);
 
@@ -85,6 +88,10 @@ if ('Dust' in window) {
 		switch (absNar) {
 			case DustHandles.MONTRU_NAR_GUI:
 				Dust.access(MindAccess.Set, GuiNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
+				break;
+		
+			case DustHandles.MONTRU_NAR_CONTAINER:
+				Dust.access(MindAccess.Set, ContainerNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;
 
 			case DustHandles.MONTRU_NAR_AREA:
