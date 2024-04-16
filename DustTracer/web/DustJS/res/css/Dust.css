@@ -1,16 +1,21 @@
-
-.dataTable {
-	border: 1px solid black;
+* {
+	margin: 0;
+	padding: 0;
 }
 
-.maxWidth {
+.montruMaxWidth {
 	width: 100%;
 }
 
-.maxHeight {
+.montruMaxHeight {
 	height: 100%;
 }
 
 .montruScrollY {
 	overflow-y: scroll;
+}
+
+.montruInline {
+	display: inline-block;
+	vertical-align: top;
 }

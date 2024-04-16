@@ -69,8 +69,8 @@ if ('Dust' in window) {
 			for (r of rows) {
 				var content = '';
 				for (c of cols) {
-					var vv = Dust.access(MindAccess.Peek, ' - ', c, r);
-					content = content.concat('<td> ' + vv + ' </td>');
+					var vv = Dust.access(MindAccess.Peek, '', c, r);
+					content = content.concat('<td> <input style="width: 100%" name="' + c + '"" value="' + vv + '" </td>');
 				};
 				$table.append('<tr><td>' + r + '</td>' + content + '</tr>');
 			}
