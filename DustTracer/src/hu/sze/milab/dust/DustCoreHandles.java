@@ -46,6 +46,9 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_ATT_AGENT_NARRATIVE = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_AGENT_TARGET = Dust.lookup("giskard:1:?");
 
+	MindHandle MIND_NAR_POPULATE = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_POPULATE_ROOTATT = Dust.lookup("giskard:1:?");
+
 	MindHandle MIND_TAG_CONTEXT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_ACTION = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_SELF = Dust.lookup("giskard:1:?");
@@ -135,6 +138,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ATT_CONN_PARENT = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_SOURCE = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_TARGET = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_CONN_FACTORY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_REQUIRES = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_MEMBERMAP = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_MEMBERARR = Dust.lookup("giskard:3:?");
@@ -150,12 +154,16 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle MISC_TAG_NEGATE = Dust.lookup("giskard:3:?");
 
+	MindHandle MISC_TAG_DBLHASH = Dust.lookup("giskard:3:?");
+
 	MindHandle MISC_TAG_READONLY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_HIDDEN = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_TAG_DIRECTION = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_DIRECTION_IN = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_DIRECTION_OUT = Dust.lookup("giskard:3:?");
+
+	MindHandle MISC_ASP_REFERENCE = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_ASP_VARIANT = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_VARIANT_VALUE = Dust.lookup("giskard:3:?");
@@ -212,8 +220,12 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle RESOURCE_ATT_PROCESSOR_STREAM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_ATT_PROCESSOR_DATA = Dust.lookup("giskard:6:?");
 
+	MindHandle RESOURCE_NAR_CACHE = Dust.lookup("giskard:6:?");
+	MindHandle RESOURCE_ATT_CACHE_REQUEST = Dust.lookup("giskard:6:?");
+
 	MindHandle RESOURCE_NAR_FILESYSTEM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_NAR_ZIPREADER = Dust.lookup("giskard:6:?");
+	MindHandle RESOURCE_NAR_XMLDOM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_NAR_JSONDOM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_NAR_CSVSAX = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard:6:?");

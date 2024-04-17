@@ -7,12 +7,15 @@ import java.util.Map;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.net.DustNetDownloadAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpFileAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpJsonapiAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpServerJetty;
+import hu.sze.milab.dust.stream.DustStreamCache;
 import hu.sze.milab.dust.stream.DustStreamCsvSaxAgent;
 import hu.sze.milab.dust.stream.DustStreamFilesystemServer;
 import hu.sze.milab.dust.stream.json.DustJsonDomAgent;
+import hu.sze.milab.dust.stream.xml.DustXmlDomAgent;
 import hu.sze.milab.dust.stream.zip.DustZipAgentReader;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
@@ -102,11 +105,18 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.bootInit(bh);
 		
+		
+		
+		DustDevUtils.registerNative(MIND_NAR_POPULATE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMachineNarrative.PopulateAgent.class.getCanonicalName());
+		
+		DustDevUtils.registerNative(RESOURCE_NAR_CACHE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCache.class.getCanonicalName(), true);
 		DustDevUtils.registerNative(RESOURCE_NAR_FILESYSTEM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamFilesystemServer.class.getCanonicalName(), true);
 		DustDevUtils.registerNative(RESOURCE_NAR_ZIPREADER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustZipAgentReader.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_NAR_XMLDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustXmlDomAgent.class.getCanonicalName());
 		DustDevUtils.registerNative(RESOURCE_NAR_JSONDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustJsonDomAgent.class.getCanonicalName());
 		DustDevUtils.registerNative(RESOURCE_NAR_CSVSAX, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCsvSaxAgent.class.getCanonicalName());
 
+		DustDevUtils.registerNative(NET_NAR_DOWNLOAD, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustNetDownloadAgent.class.getCanonicalName(), true);
 		DustDevUtils.registerNative(NET_NAR_HTTPSRV, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpServerJetty.class.getCanonicalName(), true);
 		DustDevUtils.registerNative(NET_NAR_HTTPSVCFILES, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpFileAgent.class.getCanonicalName());
 		DustDevUtils.registerNative(NET_NAR_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getCanonicalName());
