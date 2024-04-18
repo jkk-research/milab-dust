@@ -11,4 +11,12 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 		}
 	}
 
+	public static String addHash2(String str) {
+		return new StringBuilder(getHash2(str)).append(File.separator).append(str).toString();
+	}
+
+	public static String getHash2(String str) {
+		return DustUtils.getHash2(cutPostfix(str, "."), File.separator);
+	}
+
 }

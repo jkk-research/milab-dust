@@ -43,9 +43,16 @@ public class DustStreamFilesystemServer extends DustAgent implements DustStreamC
 
 	public void setStreamValue() throws IOException {
 		File fDir = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, DUST_ATT_IMPL_DATA);
-		String fName = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, RESOURCE_ATT_URL_PATH);
+		String fName = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, TEXT_ATT_TOKEN);
 		
 		File f = new File(fDir, fName);
+		
+		if ( !f.exists() ) {
+			File p = f.getParentFile();
+			if ( !p.isDirectory() ) {
+				p.mkdirs();
+			}
+		}
 		Object val = f;
 		
 		Object type = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, MIND_ATT_KNOWLEDGE_TAGS, RESOURCE_TAG_STREAMTYPE);
@@ -59,6 +66,7 @@ public class DustStreamFilesystemServer extends DustAgent implements DustStreamC
 		}
 		
 		Dust.access(MindAccess.Set, val, MIND_TAG_CONTEXT_TARGET, DUST_ATT_IMPL_DATA);
+		Dust.access(MindAccess.Set, f.getAbsolutePath(), MIND_TAG_CONTEXT_TARGET, RESOURCE_ATT_URL_PATH);
 	}
 
 	@Override
