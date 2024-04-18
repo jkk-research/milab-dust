@@ -29,7 +29,7 @@ public class DustJsonDomAgent extends DustAgent implements DustJsonConsts {
 		Object current = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
 
 		if ( null != current ) {
-			Object s = Dust.access(MindAccess.Peek, null, hStream, MISC_ATT_VARIANT_VALUE);
+			Object s = Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA);
 			Object d = Dust.access(MindAccess.Peek, null, hData, MISC_ATT_VARIANT_VALUE);
 
 			if ( s instanceof File ) {

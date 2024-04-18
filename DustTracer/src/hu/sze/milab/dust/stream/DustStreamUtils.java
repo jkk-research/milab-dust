@@ -62,8 +62,14 @@ public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 			return valStr;
 		}
 		
-		String ret = ( removeQuotes && valStr.startsWith("\"") ) ? valStr.substring(1, valStr.length()-1) : valStr;
-		ret = valStr.replace("\"\"", "\"");
+		String ret = valStr;
+		if ( removeQuotes ) {
+			if ( valStr.startsWith("\"") ) {
+				ret = valStr.substring(1, valStr.length()-1);
+			}
+		}
+		
+		ret = ret.replace("\"\"", "\"");
 
 		return ret;
 	}

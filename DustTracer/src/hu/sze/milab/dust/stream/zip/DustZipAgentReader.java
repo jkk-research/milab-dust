@@ -24,14 +24,14 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 		MindHandle ret = MIND_TAG_RESULT_REJECT;
 		
 		Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE);
-		File f = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE, MISC_ATT_VARIANT_VALUE);
+		File f = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_SOURCE, DUST_ATT_IMPL_DATA);
 
 		if ( f.isFile() ) {
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Opening file", path = f.getCanonicalPath());
 
 			long t = System.currentTimeMillis();
 			zipFile = new ZipFile(f);
-			Dust.access(MindAccess.Set, zipFile, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET, MISC_ATT_VARIANT_VALUE);
+			Dust.access(MindAccess.Set, zipFile, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET, DUST_ATT_IMPL_DATA);
 
 			zipEnum = zipFile.getEntries();
 			openTime = System.currentTimeMillis() - t;

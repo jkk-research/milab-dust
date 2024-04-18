@@ -106,20 +106,20 @@ public class DustMachineBoot implements DustMachineConsts {
 		machine.bootInit(bh);
 		
 		
+		DustDevUtils.registerNative(MIND_NAR_POPULATE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMachineNarrative.PopulateAgent.class.getName());
 		
-		DustDevUtils.registerNative(MIND_NAR_POPULATE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMachineNarrative.PopulateAgent.class.getCanonicalName());
-		
-		DustDevUtils.registerNative(RESOURCE_NAR_CACHE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCache.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(RESOURCE_NAR_FILESYSTEM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamFilesystemServer.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(RESOURCE_NAR_ZIPREADER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustZipAgentReader.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_NAR_XMLDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustXmlDomAgent.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_NAR_JSONDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustJsonDomAgent.class.getCanonicalName());
-		DustDevUtils.registerNative(RESOURCE_NAR_CSVSAX, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCsvSaxAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_NAR_FILESYSTEM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamFilesystemServer.class.getName(), true);
+		DustDevUtils.registerNative(RESOURCE_NAR_CACHE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCache.class.getName(), true);
 
-		DustDevUtils.registerNative(NET_NAR_DOWNLOAD, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustNetDownloadAgent.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(NET_NAR_HTTPSRV, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpServerJetty.class.getCanonicalName(), true);
-		DustDevUtils.registerNative(NET_NAR_HTTPSVCFILES, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpFileAgent.class.getCanonicalName());
-		DustDevUtils.registerNative(NET_NAR_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getCanonicalName());
+		DustDevUtils.registerNative(RESOURCE_NAR_ZIPREADER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustZipAgentReader.class.getName());
+		DustDevUtils.registerNative(RESOURCE_NAR_XMLDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustXmlDomAgent.class.getName());
+		DustDevUtils.registerNative(RESOURCE_NAR_JSONDOM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustJsonDomAgent.class.getName());
+		DustDevUtils.registerNative(RESOURCE_NAR_CSVSAX, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCsvSaxAgent.class.getName());
+
+		DustDevUtils.registerNative(NET_NAR_DOWNLOAD, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustNetDownloadAgent.class.getName(), true);
+		DustDevUtils.registerNative(NET_NAR_HTTPSRV, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpServerJetty.class.getName(), true);
+		DustDevUtils.registerNative(NET_NAR_HTTPSVCFILES, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpFileAgent.class.getName());
+		DustDevUtils.registerNative(NET_NAR_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getName());
 		
 
 		String bootClass = System.getProperty("DustBootClass");

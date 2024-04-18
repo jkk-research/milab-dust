@@ -316,6 +316,21 @@ class DustMachine extends Dust.Machine
 					: MIND_TAG_RESULT_READACCEPT;
 		}
 
+		ArrayList sc = Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTCOMMITS);
+		if (null != sc) {
+			for (Object c : sc) {
+				boolean transaction = Dust.access(MindAccess.Check, MISC_TAG_TRANSACTION, c, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_TRANSACTION);
+				if ( transaction ) {
+					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, c);
+				}
+				try {
+					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, c);
+				} finally {
+					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, c);					
+				}
+			}
+		}
+
 		return ret;
 	}
 

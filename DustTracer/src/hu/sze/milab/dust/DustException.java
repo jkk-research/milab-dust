@@ -17,6 +17,9 @@ public final class DustException extends RuntimeException implements DustHandles
 
 	public static void swallow(Throwable src, Object... params) {
 		log(true, src, DustUtils.sbAppend(null, ",", false, params).toString());
+		if ( null != src ) {
+			src.printStackTrace();
+		}
 	}
 
 	public static <FakeRet> FakeRet wrap(Throwable src, Object... params) {

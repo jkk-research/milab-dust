@@ -36,6 +36,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_ASP_ASSEMBLY = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_ASSEMBLY_UNITS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_ASSEMBLY_STARTAGENTS = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_ASSEMBLY_STARTCOMMITS = Dust.lookup("giskard:1:?");
 
 	MindHandle MIND_ASP_DIALOG = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_DIALOG_ASSEMBLY = Dust.lookup("giskard:1:?");
@@ -128,6 +129,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle DUST_ASP_IMPL = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_IMPL_NARRATIVE = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_IMPL_INSTANCE = Dust.lookup("giskard:2:?");
+	MindHandle DUST_ATT_IMPL_DATA = Dust.lookup("giskard:2:?");
 
 	MindHandle DUST_TAG_NATIVE_SERVER = Dust.lookup("giskard:2:?");
 
@@ -147,17 +149,16 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ASP_ALIAS = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ASP_GEN = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_GEN_COUNT = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_GEN_SEP_ITEM = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_GEN_SEP_LINE = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_TAG_EMPTY = Dust.lookup("giskard:3:?");
-
 	MindHandle MISC_TAG_ACTIVE = Dust.lookup("giskard:3:?");
-
 	MindHandle MISC_TAG_NEGATE = Dust.lookup("giskard:3:?");
-
 	MindHandle MISC_TAG_DBLHASH = Dust.lookup("giskard:3:?");
-
 	MindHandle MISC_TAG_READONLY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_HIDDEN = Dust.lookup("giskard:3:?");
+	MindHandle MISC_TAG_TRANSACTION = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_TAG_DIRECTION = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_DIRECTION_IN = Dust.lookup("giskard:3:?");
@@ -228,7 +229,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle RESOURCE_NAR_XMLDOM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_NAR_JSONDOM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_NAR_CSVSAX = Dust.lookup("giskard:6:?");
-	MindHandle RESOURCE_ATT_CSVSAX_SEP = Dust.lookup("giskard:6:?");
 
 //	MindHandle DEV_UNIT = Dust.lookup("giskard:7");
 
