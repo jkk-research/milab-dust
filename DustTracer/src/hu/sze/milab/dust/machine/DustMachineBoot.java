@@ -7,6 +7,7 @@ import java.util.Map;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.event.DustEventNarrative;
 import hu.sze.milab.dust.net.DustNetDownloadAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpFileAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpJsonapiAgent;
@@ -107,6 +108,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		
 		
 		DustDevUtils.registerNative(MIND_NAR_POPULATE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMachineNarrative.PopulateAgent.class.getName());
+		DustDevUtils.registerNative(EVENT_NAR_THROTTLE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustEventNarrative.Throttle.class.getName());
 		
 		DustDevUtils.registerNative(RESOURCE_NAR_FILESYSTEM, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamFilesystemServer.class.getName(), true);
 		DustDevUtils.registerNative(RESOURCE_NAR_CACHE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustStreamCache.class.getName(), true);

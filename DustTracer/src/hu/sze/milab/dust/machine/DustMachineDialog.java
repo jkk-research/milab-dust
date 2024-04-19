@@ -136,6 +136,7 @@ class DustMachineDialog implements DustMachineConsts {
 					Dust.access(MindAccess.Set, null, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 					MindAction action = (val instanceof MindAction) ? (MindAction)val : DustUtilsEnumTranslator.getEnum((MindHandle) val, MindAction.Process);
 
+					boolean stop = false;
 					for (Object a : listeners) {
 						try {
 							MindAgent agent = machine.selectAgent(a);
@@ -146,7 +147,8 @@ class DustMachineDialog implements DustMachineConsts {
 								case Begin:
 								case Process:
 								case End:
-									agent.agentProcess(action);
+									MindHandle result = agent.agentProcess(action);
+									stop = ((MIND_TAG_RESULT_REJECT == result) || (MIND_TAG_RESULT_READ == result));
 									break;
 								case Init:
 								case Release:
@@ -157,6 +159,10 @@ class DustMachineDialog implements DustMachineConsts {
 						} catch (Throwable e) {
 							Dust.access(MindAccess.Set, null, a, MIND_ATT_AGENT_TARGET);
 							DustException.swallow(e);
+						}
+						
+						if ( stop ) {
+							break;
 						}
 					}
 					

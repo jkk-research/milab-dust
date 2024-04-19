@@ -57,6 +57,8 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_TAG_CONTEXT_DIALOG = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_DIRECT = Dust.lookup("giskard:1:?");
 
+	MindHandle MIND_TAG_UNIT = Dust.lookup("giskard:1:?");
+
 	MindHandle MIND_TAG_VALTYPE = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_VALTYPE_INT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_VALTYPE_REAL = Dust.lookup("giskard:1:?");
@@ -188,7 +190,32 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 //	MindHandle EVENT_UNIT = Dust.lookup("giskard:5");
 
+	MindHandle EVENT_ASP_TIME = Dust.lookup("giskard:5:?");
+	
+	MindHandle EVENT_ATT_TIME_YEAR = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_TIME_DAYOFYEAR = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_TIME_HOUR24 = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_TIME_MIN = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_TIME_SEC = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_TIME_MILLI = Dust.lookup("giskard:5:?");
+
 	MindHandle EVENT_ASP_EVENT = Dust.lookup("giskard:5:?");
+	
+	MindHandle EVENT_ATT_EVENT_START = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_EVENT_END = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_EVENT_DURATION = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_EVENT_REPETITION = Dust.lookup("giskard:5:?");
+
+	MindHandle EVENT_NAR_THROTTLE = Dust.lookup("giskard:5:?");
+	MindHandle EVENT_ATT_LAST_ACTION = Dust.lookup("giskard:5:?");
+	
+	MindHandle EVENT_TAG_CAL = Dust.lookup("giskard:1:?");
+	MindHandle EVENT_TAG_CAL_GREGORIAN = Dust.lookup("giskard:1:?");
+	
+	MindHandle EVENT_TAG_TIMEZONE = Dust.lookup("giskard:1:?");
+	MindHandle EVENT_TAG_TIMEZONE_GMT = Dust.lookup("giskard:1:?");
+
+	MindHandle EVENT_TAG_DST = Dust.lookup("giskard:5:?");
 
 	MindHandle EVENT_TAG_TYPE = Dust.lookup("giskard:5:?");
 	MindHandle EVENT_TAG_TYPE_EXCEPTIONTHROWN = Dust.lookup("giskard:5:?");
