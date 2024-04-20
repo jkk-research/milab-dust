@@ -15,11 +15,11 @@ public interface DustEventNarrative extends DustEventConsts {
 			long w = (last + dist) - ts;
 			
 			if ( 0 < w ) {
-				MindHandle hSelf = Dust.access(MindAccess.Peek, 0L, MIND_TAG_CONTEXT_SELF);
+				Object self = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF);
 				Dust.log(EVENT_TAG_TYPE_TRACE, "Throttle wait", w, "msec");
 				
-				synchronized (hSelf) {
-					hSelf.wait(w);
+				synchronized (self) {
+					self.wait(w);
 				}
 			}
 			

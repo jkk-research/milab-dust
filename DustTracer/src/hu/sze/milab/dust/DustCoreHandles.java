@@ -260,6 +260,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 //	MindHandle DEV_UNIT = Dust.lookup("giskard:7");
 
 	MindHandle DEV_ATT_HINT = Dust.lookup("giskard:7:?");
+	MindHandle DEV_TAG_TEST = Dust.lookup("giskard:7:?");
 
 //	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
 	

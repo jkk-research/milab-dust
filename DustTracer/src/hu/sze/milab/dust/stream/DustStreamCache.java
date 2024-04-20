@@ -8,31 +8,35 @@ public class DustStreamCache extends DustAgent implements DustStreamConsts {
 
 	@Override
 	protected MindHandle agentProcess() throws Exception {
-		
+
 		MindHandle hCacheItem = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
 
 		String fileName = Dust.access(MindAccess.Peek, null, hCacheItem, TEXT_ATT_TOKEN);
 		MindHandle hStream = Dust.access(MindAccess.Peek, null, hCacheItem, MISC_ATT_CONN_TARGET);
-		
-		if ( (boolean) Dust.access(MindAccess.Check, MISC_TAG_DBLHASH, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_DBLHASH)) {
+
+		if ( (boolean) Dust.access(MindAccess.Check, MISC_TAG_DBLHASH, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_DBLHASH) ) {
 			fileName = DustUtilsFile.addHash2(fileName);
 		}
-		
+
 		Dust.access(MindAccess.Set, fileName, hStream, TEXT_ATT_TOKEN);
-		
-		Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hStream);
-		
-		if ( null == Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA) ) {
-			String url = Dust.access(MindAccess.Peek, null, hCacheItem, RESOURCE_ATT_URL_PATH);
-			MindHandle hRequest = Dust.access(MindAccess.Peek, url, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_CACHE_REQUEST);
-			Dust.access(MindAccess.Set, url, hRequest, RESOURCE_ATT_URL_PATH);
-			
-			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hRequest);
-			
+
+		try {
 			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hStream);
+
+			if ( null == Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA) ) {
+				String url = Dust.access(MindAccess.Peek, null, hCacheItem, RESOURCE_ATT_URL_PATH);
+				MindHandle hRequest = Dust.access(MindAccess.Peek, url, MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_CACHE_REQUEST);
+				Dust.access(MindAccess.Set, url, hRequest, RESOURCE_ATT_URL_PATH);
+
+				Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hRequest);
+
+				Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hStream);
+			}
+		} finally {
+			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, hStream);
 		}
 
-		return ( null == Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA) ) ? MIND_TAG_RESULT_REJECT : MIND_TAG_RESULT_ACCEPT;
+		return (null == Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA)) ? MIND_TAG_RESULT_REJECT : MIND_TAG_RESULT_ACCEPT;
 	}
 
 }

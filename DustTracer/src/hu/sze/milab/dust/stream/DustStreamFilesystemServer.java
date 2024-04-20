@@ -44,18 +44,17 @@ public class DustStreamFilesystemServer extends DustAgent implements DustStreamC
 
 			if ( DustUtils.isEmpty(fName) ) {
 				fName = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, RESOURCE_ATT_URL_PATH);
-
 				f = new File(fName);
-
-				String cp = fDir.getCanonicalPath();
-				if ( !f.getCanonicalPath().startsWith(cp) ) {
-					DustException.wrap(new AccessDeniedException(fName), "Requested file path not under root", cp);
-				}
 			} else {
 				f = new File(fDir, fName);
-
 				Dust.access(MindAccess.Set, f.getAbsolutePath(), MIND_TAG_CONTEXT_TARGET, RESOURCE_ATT_URL_PATH);
 			}
+			
+			String cp = fDir.getCanonicalPath();
+			if ( !f.getCanonicalPath().startsWith(cp) ) {
+				DustException.wrap(new AccessDeniedException(fName), "Requested file path not under root", cp);
+			}
+
 
 			Object dir = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_DIRECTION);
 			

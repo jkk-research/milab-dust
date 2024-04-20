@@ -50,7 +50,7 @@ public class DustNetUtils implements DustNetConsts {
 		return ct;
 	}
 
-	public static void download(String url, OutputStream target, Collection<String> headers) throws Exception {
+	public static void download(String url, OutputStream target, Collection<String> headers, int timeout) throws Exception {
 		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
 
 		for (String h : headers) {
@@ -58,6 +58,11 @@ public class DustNetUtils implements DustNetConsts {
 			String key = h.substring(0, s).trim();
 			String val = h.substring(s + 1).trim();
 			conn.setRequestProperty(key, val);
+		}
+		
+		if ( -1 != timeout ) {
+			conn.setConnectTimeout(timeout);
+			conn.setReadTimeout(timeout);
 		}
 
 		InputStream is = conn.getInputStream();

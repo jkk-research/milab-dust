@@ -102,6 +102,14 @@ public class DustDevUtils implements DustHandles {
 		setTag(hItem, hTag, hTag);
 	}
 
+	public static boolean chkTag(MindHandle hItem, MindHandle hTag, MindHandle hParent) {
+		return (boolean) Dust.access(MindAccess.Check, hTag, hItem, MIND_ATT_KNOWLEDGE_TAGS, hParent);
+	}
+
+	public static boolean chkTag(MindHandle hItem, MindHandle hTag) {
+		return chkTag(hItem, hTag, hTag);
+	}
+
 	public static MindHandle setText(MindHandle hItem, MindHandle hTxtType, MindHandle hLang, String txt) {
 		MindHandle hTxt = newHandle(L10N_UNIT, TEXT_ASP_PLAIN, null);
 

@@ -21,6 +21,7 @@ interface DustMachineNarrative extends DustMachineConsts {
 			Map<Object, Object> transfer = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_MEMBERMAP);
 
 			for (Map.Entry<Object, Object> et : transfer.entrySet()) {
+				Object key = et.getKey();
 				Object val = et.getValue();
 
 				if ( val instanceof String ) {
@@ -34,8 +35,9 @@ interface DustMachineNarrative extends DustMachineConsts {
 				} else if ( val instanceof MindHandle ) {
 					val = Dust.access(MindAccess.Peek, null, hFrom, val);
 				}
-
-				Dust.access(MindAccess.Set, val, hTo, et.getKey());
+				
+//				Dust.log(EVENT_TAG_TYPE_TRACE, "PopulateAgent set", key, val);
+				Dust.access(MindAccess.Set, val, hTo, key);
 			}
 			
 			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hTo);
