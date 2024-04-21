@@ -104,7 +104,7 @@ public class DustUtils implements DustUtilsConsts {
 	public static <RetType> RetType safeGet(Object map, Object key, DustCreator<RetType> creator, Object... hints) {
 		synchronized (map) {
 			RetType ret = ((Map<Object, RetType>) map).get(key);
-			if ( (null == ret) && ( null != creator) ) {
+			if ( (null == ret) && (null != creator) ) {
 				ret = creator.create(key, hints);
 				((Map<Object, RetType>) map).put(key, ret);
 			}

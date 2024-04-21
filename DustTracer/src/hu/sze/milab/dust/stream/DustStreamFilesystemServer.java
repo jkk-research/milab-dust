@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.Flushable;
+import java.io.PrintWriter;
 import java.nio.file.AccessDeniedException;
 
 import hu.sze.milab.dust.Dust;
@@ -76,7 +76,7 @@ public class DustStreamFilesystemServer extends DustAgent implements DustStreamC
 			}
 
 			Object type = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, MIND_ATT_KNOWLEDGE_TAGS, RESOURCE_TAG_STREAMTYPE);
-			val = (RESOURCE_TAG_STREAMTYPE_TEXT == type) ? (MISC_TAG_DIRECTION_IN == dir) ? new FileReader(f) : new FileWriter(f)
+			val = (RESOURCE_TAG_STREAMTYPE_TEXT == type) ? (MISC_TAG_DIRECTION_IN == dir) ? new FileReader(f) : new PrintWriter(f)
 					: (MISC_TAG_DIRECTION_IN == dir) ? new FileInputStream(f) : new FileOutputStream(f);
 
 			Dust.access(MindAccess.Set, val, MIND_TAG_CONTEXT_TARGET, DUST_ATT_IMPL_DATA);
