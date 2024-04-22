@@ -26,6 +26,7 @@ import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
 public class DustMachineBoot implements DustMachineConsts {
 	
 	public static void main(String[] args) {
+		long ts = System.currentTimeMillis();
 		DustMachine machine = new DustMachine();
 
 		try {
@@ -39,6 +40,8 @@ public class DustMachineBoot implements DustMachineConsts {
 		} catch (Exception e) {
 			DustException.swallow(e, "Uncaught exception in the thinking process, exiting.");
 		}
+		
+		Dust.log(EVENT_TAG_TYPE_TRACE, "Total runtime: " + (System.currentTimeMillis() - ts) + " msec.");
 	}
 
 	static class BootHandles extends HashMap<String, DustHandle> implements IdResolver {

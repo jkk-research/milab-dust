@@ -33,6 +33,10 @@ public class DustXmlUtils implements DustXmlConsts {
 	}
 
 	public static boolean optLoadInfo(Map<String, String> cd, Element e, String tagName) {
+		return optLoadInfo(cd, e, tagName, tagName);
+	}
+
+	public static boolean optLoadInfo(Map<String, String> cd, Element e, String tagName, String mapName) {
 		String val = getInfo(e, tagName);
 		if ( !DustUtils.isEmpty(val) ) {
 			cd.put(tagName, val);

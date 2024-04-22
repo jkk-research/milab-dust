@@ -39,6 +39,10 @@ public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 	}
 	
 	public static String csvOptEscape(String valStr, String sepChar) {
+		if ( null == valStr ) {
+			return "";
+		}
+		
 		String ret = valStr;
 		
 		if ( valStr.contains(sepChar) || valStr.contains("\"") || valStr.contains("\n") ) {

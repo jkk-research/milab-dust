@@ -1,6 +1,7 @@
 package hu.sze.milab.dust.machine;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -196,6 +197,11 @@ class DustMachineDialog implements DustMachineConsts {
 			ret = (null == curr) ? val : curr;
 			break;
 		case Reset:
+			if ( curr instanceof Map ) {
+				((Map)curr).clear();
+			} else if ( curr instanceof Collection ) {
+				((Collection)curr).clear();
+			}
 			break;
 		case Set:
 			if ( null != lastKey ) {

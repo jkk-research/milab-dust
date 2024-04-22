@@ -119,7 +119,7 @@ public class DustUtils implements DustUtilsConsts {
 
 	public static String cutPostfix(String strSrc, String pfSep) {
 		int sep = strSrc.lastIndexOf(pfSep);
-		return strSrc.substring(0, sep);
+		return (-1 == sep) ? strSrc : strSrc.substring(0, sep);
 	}
 
 	public static String replacePostfix(String strSrc, String pfSep, String postfix) {
