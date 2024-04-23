@@ -1,6 +1,8 @@
 package hu.sze.milab.dust;
 
 import java.nio.charset.StandardCharsets;
+import java.util.HashSet;
+import java.util.Set;
 
 public interface DustConsts {
 	String DUST_SEP = "_";
@@ -47,8 +49,23 @@ public interface DustConsts {
 		MindHandle agentProcess(MindAction action) throws Exception;
 	}
 
-//	interface DustThreadOwner {
-//		boolean isCurrentThreadOwned();
-//	}
+	class MindCommitFilter {
+		private MindHandle agent;
+		
+		private Set<MindHandle> actions;
+		
+		public MindCommitFilter(MindHandle agent, MindHandle... actions) {
+			this.agent = agent;
+			this.actions = new HashSet<MindHandle>();
+			
+			for ( MindHandle ah : actions ) {
+				this.actions.add(ah);
+			}
+		}
+		
+		public MindHandle getAgent(Object action) {
+			return ((null == action) || actions.contains(action)) ? agent : null;
+		}
+	}
 
 }

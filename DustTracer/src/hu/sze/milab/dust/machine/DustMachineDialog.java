@@ -143,7 +143,7 @@ class DustMachineDialog implements DustMachineConsts {
 					boolean stop = false;
 					for (Object a : listeners) {
 						try {
-							MindAgent agent = machine.selectAgent(a);
+							MindAgent agent = machine.selectAgent(a, val);
 							if ( null != agent ) {
 								Dust.access(MindAccess.Set, hTarget, a, MIND_ATT_AGENT_TARGET);
 								Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
