@@ -55,6 +55,9 @@ class DustMachineDialog implements DustMachineConsts {
 				MindContext ctx = (root instanceof MindContext) ? (MindContext) root : DustUtilsEnumTranslator.getEnum((MindHandle) root, MindContext.Direct);
 
 				switch ( ctx ) {
+				case Action:
+					curr = context.get(MIND_TAG_CONTEXT_ACTION);
+					break;
 				case Dialog:
 					curr = context;
 					break;
@@ -144,6 +147,7 @@ class DustMachineDialog implements DustMachineConsts {
 							if ( null != agent ) {
 								Dust.access(MindAccess.Set, hTarget, a, MIND_ATT_AGENT_TARGET);
 								Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
+								Dust.access(MindAccess.Set, val, null, MIND_TAG_CONTEXT_ACTION);
 								switch ( action ) {
 								case Begin:
 								case Process:

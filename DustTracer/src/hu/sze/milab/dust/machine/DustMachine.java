@@ -18,8 +18,7 @@ import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-class DustMachine extends Dust.Machine
-		implements DustMachineConsts, DustConsts.MindAgent, DustMachineConsts.IdResolver {
+class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.MindAgent, DustMachineConsts.IdResolver {
 
 //long lastId = 100000L;
 //private synchronized String getTempId() {
@@ -103,19 +102,19 @@ class DustMachine extends Dust.Machine
 			String[] ids = id.split(DUST_SEP_ID);
 			int idl = ids.length;
 
-			if (idl < 3) {
+			if ( idl < 3 ) {
 				DustHandle h = be.getValue();
 				rootHandles.put(id, h);
 
-				if (APP_UNIT == h) {
+				if ( APP_UNIT == h ) {
 					unitHandles.put(id, rootHandles);
 					continue;
 				}
 
-				if (idl == 2) {
+				if ( idl == 2 ) {
 					Map m = DustUtils.safeGet(rootContent, h, crtKnowledge);
 					DustHandle hAuthor = bh.get(ids[0]);
-					if (null == hAuthor) {
+					if ( null == hAuthor ) {
 						hAuthor = lookup(rootUnit, ids[0]);
 						Map mA = DustUtils.safeGet(rootContent, hAuthor, crtKnowledge);
 						mA.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, MIND_ASP_AUTHOR);
@@ -131,7 +130,7 @@ class DustMachine extends Dust.Machine
 		for (Map.Entry<String, DustHandle> be : bh.entrySet()) {
 			String id = be.getKey();
 
-			if (3 == id.split(DUST_SEP_ID).length) {
+			if ( 3 == id.split(DUST_SEP_ID).length ) {
 				DustHandle h = be.getValue();
 				String unitId = DustUtils.cutPostfix(id, DUST_SEP_ID);
 				unitHandles.get(unitId).put(id, h);
@@ -159,7 +158,7 @@ class DustMachine extends Dust.Machine
 
 		m.put(MIND_ATT_KNOWLEDGE_HANDLE, h);
 		m.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, MIND_ASP_UNIT);
-		if (0 < hints.length) {
+		if ( 0 < hints.length ) {
 			m.put(MIND_ATT_UNIT_AUTHOR, hints[0]);
 		}
 
@@ -167,8 +166,9 @@ class DustMachine extends Dust.Machine
 	}
 
 	boolean canLoadUnit = true;
+
 	private void optLoadUnit(MindHandle h) {
-		if (loadUnits && canLoadUnit && (this == idRes)) {
+		if ( loadUnits && canLoadUnit && (this == idRes) ) {
 			try {
 				canLoadUnit = false;
 				DustJsonApiDomAgent.readUnit(DustMachineUtils.getUnitFile(h));
@@ -184,7 +184,7 @@ class DustMachine extends Dust.Machine
 		synchronized (unit) {
 			DustHandle ret = DustUtils.simpleGet(unit, MIND_ATT_UNIT_HANDLES, id);
 
-			if (null == ret) {
+			if ( null == ret ) {
 				Map m = (Map) unit.get(MIND_ATT_UNIT_HANDLES);
 				ret = DustUtils.safeGet(m, id, crtHandle);
 			}
@@ -208,14 +208,14 @@ class DustMachine extends Dust.Machine
 		DustHandle hAuthor = lookup(rootUnit, ii[0]);
 		DustHandle ret = hAuthor;
 
-		if (ii.length > 1) {
+		if ( ii.length > 1 ) {
 			String unitID = (ii.length == 2) ? id : DustUtils.cutPostfix(id, DUST_SEP_ID);
 			ret = lookup(rootUnit, unitID);
 
-			if (ii.length > 2) {
+			if ( ii.length > 2 ) {
 				Map unit = getUnit(unitID, hAuthor);
 
-				if (ITEMID_NEW.equals(ii[2])) {
+				if ( ITEMID_NEW.equals(ii[2]) ) {
 					Map mh = DustUtils.simpleGet(unit, MIND_ATT_UNIT_HANDLES);
 					id = DustUtils.sbAppend(null, DUST_SEP_ID, true, ii[0], ii[1], mh.size()).toString();
 				}
@@ -233,7 +233,7 @@ class DustMachine extends Dust.Machine
 		Map unit = null;
 		DustHandle hAuthor = null;
 
-		if (ii.length < 3) {
+		if ( ii.length < 3 ) {
 			unit = rootUnit;
 		} else {
 			hAuthor = lookup(rootUnit, ii[0]);
@@ -241,14 +241,14 @@ class DustMachine extends Dust.Machine
 		}
 
 		Map m = DustUtils.simpleGet(unit, MIND_ATT_UNIT_CONTENT);
-		return DustUtils.safeGet(m, h, createIfMissing ? (ii.length == 2) ? crtUnit : crtKnowledge  : null, hAuthor);
+		return DustUtils.safeGet(m, h, createIfMissing ? (ii.length == 2) ? crtUnit : crtKnowledge : null, hAuthor);
 	}
 
 	@Override
 	protected <RetType> RetType access(MindAccess cmd, Object val, Object root, Object... path) {
 		Object ret = null;
 
-		switch (cmd) {
+		switch ( cmd ) {
 		case Broadcast:
 			log((MindHandle) val, path);
 			break;
@@ -267,7 +267,7 @@ class DustMachine extends Dust.Machine
 	protected void log(MindHandle event, Object... params) {
 		StringBuilder sb = DustUtils.sbAppend(null, ", ", false, params);
 
-		if (null != sb) {
+		if ( null != sb ) {
 			System.out.println(DustUtils.sbAppend(null, "", true, DustDevUtils.getTimeStr(), " [", event, "] ", sb));
 		}
 	}
@@ -290,20 +290,19 @@ class DustMachine extends Dust.Machine
 		}
 
 		ArrayList sa = Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS);
-		if (null == sa) {
+		if ( null == sa ) {
 			ret = MIND_TAG_RESULT_PASS;
 		} else {
 			for (Object a : sa) {
 				MindAgent agent = selectAgent(a);
 
-				if (null != agent) {
+				if ( null != agent ) {
 					Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 
 					try {
-						if (DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(MindAction.Begin), false)) {
+						if ( DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(MindAction.Begin), false) ) {
 							do {
-							} while (DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(MindAction.Process),
-									false));
+							} while (DustUtilsAttCache.getAtt(MachineAtts.CanContinue, agent.agentProcess(MindAction.Process), false));
 						}
 					} finally {
 						agent.agentProcess(MindAction.End);
@@ -311,13 +310,11 @@ class DustMachine extends Dust.Machine
 				}
 			}
 
-			ret = (null == Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_ACTIVE_SERVERS))
-					? MIND_TAG_RESULT_ACCEPT
-					: MIND_TAG_RESULT_READACCEPT;
+			ret = (null == Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_ACTIVE_SERVERS)) ? MIND_TAG_RESULT_ACCEPT : MIND_TAG_RESULT_READACCEPT;
 		}
 
 		ArrayList sc = Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTCOMMITS);
-		if (null != sc) {
+		if ( null != sc ) {
 			for (Object c : sc) {
 				boolean transaction = Dust.access(MindAccess.Check, MISC_TAG_TRANSACTION, c, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_TRANSACTION);
 				if ( transaction ) {
@@ -326,7 +323,7 @@ class DustMachine extends Dust.Machine
 				try {
 					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, c);
 				} finally {
-					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, c);					
+					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, c);
 				}
 			}
 		}
@@ -337,26 +334,26 @@ class DustMachine extends Dust.Machine
 	public MindAgent selectAgent(Object a) throws Exception {
 		MindAgent agent = Dust.access(MindAccess.Peek, null, a, DUST_ATT_IMPL_INSTANCE);
 
-		if (null == agent) {
+		if ( null == agent ) {
 			Object l = Dust.access(MindAccess.Peek, null, a, MIND_ATT_AGENT_NARRATIVE);
 			Object n = null;
 			Collection allNatLog = Dust.access(MindAccess.Peek, Collections.EMPTY_SET, APP_MACHINE_MAIN, DUST_ATT_MACHINE_ALL_IMPLEMENTATIONS);
 			for (Object nl : allNatLog) {
-				if (l == Dust.access(MindAccess.Peek, null, nl, DUST_ATT_IMPL_NARRATIVE)) {
+				if ( l == Dust.access(MindAccess.Peek, null, nl, DUST_ATT_IMPL_NARRATIVE) ) {
 					n = nl;
 					break;
 				}
 			}
 
-			if (null != n) {
+			if ( null != n ) {
 				agent = Dust.access(MindAccess.Peek, null, n, DUST_ATT_IMPL_INSTANCE);
 				Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 
-				if (null == agent) {
+				if ( null == agent ) {
 					String ac = Dust.access(MindAccess.Peek, null, n, TEXT_ATT_TOKEN);
 					agent = (MindAgent) Class.forName(ac).getDeclaredConstructor().newInstance();
 					boolean srv = Dust.access(MindAccess.Check, DUST_TAG_NATIVE_SERVER, n, MIND_ATT_KNOWLEDGE_TAGS, DUST_TAG_NATIVE_SERVER);
-					if (srv) {
+					if ( srv ) {
 						agent.agentProcess(MindAction.Init);
 						Dust.access(MindAccess.Insert, agent, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_ACTIVE_SERVERS, 0);
 					}
@@ -374,7 +371,7 @@ class DustMachine extends Dust.Machine
 
 	@Override
 	public MindHandle agentProcess(MindAction action) throws Exception {
-		switch (action) {
+		switch ( action ) {
 		case Begin:
 			return agentBegin();
 		case End:
@@ -403,9 +400,8 @@ class DustMachine extends Dust.Machine
 	protected MindHandle agentRelease() throws Exception {
 		MindHandle ret = MIND_TAG_RESULT_PASS;
 
-		Collection<MindAgent> servers = Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN,
-				DUST_ATT_MACHINE_ACTIVE_SERVERS);
-		if (null == servers) {
+		Collection<MindAgent> servers = Dust.access(MindAccess.Peek, null, APP_ASSEMBLY_MAIN, DUST_ATT_MACHINE_ACTIVE_SERVERS);
+		if ( null == servers ) {
 			ret = MIND_TAG_RESULT_PASS;
 		} else {
 			ret = MIND_TAG_RESULT_ACCEPT;

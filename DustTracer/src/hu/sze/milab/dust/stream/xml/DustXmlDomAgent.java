@@ -19,7 +19,7 @@ public class DustXmlDomAgent extends DustAgent implements DustXmlConsts {
 	@Override
 	protected MindHandle agentProcess() throws Exception {
 		Object filePath = Dust.access(MindAccess.Peek, "?", MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_PROCESSOR_STREAM, RESOURCE_ATT_URL_PATH);
-		Dust.log(EVENT_TAG_TYPE_TRACE, "Loading XML DOM", filePath);
+//		Dust.log(EVENT_TAG_TYPE_TRACE, "Loading XML DOM", filePath);
 
 		InputStream is = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, DUST_ATT_IMPL_DATA);
 

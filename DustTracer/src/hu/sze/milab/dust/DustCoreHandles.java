@@ -47,9 +47,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_ATT_AGENT_NARRATIVE = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_AGENT_TARGET = Dust.lookup("giskard:1:?");
 
-	MindHandle MIND_NAR_POPULATE = Dust.lookup("giskard:1:?");
-	MindHandle MIND_ATT_POPULATE_ROOTATT = Dust.lookup("giskard:1:?");
-
 	MindHandle MIND_TAG_CONTEXT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_ACTION = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_SELF = Dust.lookup("giskard:1:?");
@@ -318,6 +315,15 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle MONTRU_NAR_GUI = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_ATT_GUI_SELECTED = Dust.lookup("giskard:13:?");
+
+	MindHandle EXPR_ASP_EXPRESSION = Dust.lookup("giskard:14:?");
+	MindHandle EXPR_ATT_EXPRESSION_STATIC = Dust.lookup("giskard:14:?");
+	MindHandle EXPR_ATT_EXPRESSION_STR = Dust.lookup("giskard:14:?");
+
+	MindHandle EXPR_NAR_POPULATE = Dust.lookup("giskard:14:?");
+	MindHandle EXPR_ATT_POPULATE_ROOTATT = Dust.lookup("giskard:14:?");
+
+	MindHandle EXPR_NAR_FILTER = Dust.lookup("giskard:14:?");
 
 //	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 

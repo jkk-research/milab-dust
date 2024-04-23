@@ -15,7 +15,8 @@ public class DustStreamCache extends DustAgent implements DustStreamConsts {
 		MindHandle hStream = Dust.access(MindAccess.Peek, null, hCacheItem, MISC_ATT_CONN_TARGET);
 
 		if ( (boolean) Dust.access(MindAccess.Check, MISC_TAG_DBLHASH, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_DBLHASH) ) {
-			fileName = DustUtilsFile.addHash2(fileName);
+			String sep = Dust.access(MindAccess.Peek, ".", MIND_TAG_CONTEXT_SELF, MISC_ATT_GEN_SEP_ITEM);
+			fileName = DustUtilsFile.addHash2(fileName, sep);
 		}
 
 		Dust.access(MindAccess.Set, fileName, hStream, TEXT_ATT_TOKEN);
