@@ -3,12 +3,13 @@ package hu.sze.milab.dust.stream;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.io.StringWriter;
 import java.io.Writer;
 import java.util.Collection;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.dev.DustDevProcMon;
+import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.utils.DustUtils;
 
 @SuppressWarnings("rawtypes")
@@ -66,16 +67,17 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 						}
 						Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, hData);
 
-						DustDevProcMon pmRead = new DustDevProcMon("CSV line", 100);
+//						DustDevProcMon pmRead = new DustDevProcMon("CSV line", 100);
 
 						for (line = br.readLine(); null != line; line = br.readLine()) {
+							Dust.access(MindAccess.Reset, null, hData, MISC_ATT_CONN_MEMBERMAP);
 							String[] values = line.split(sep);
 							for (int i = values.length; i-- > 0;) {
 								String val = DustStreamUtils.csvOptUnEscape(values[i], true);
 								Dust.access(MindAccess.Set, val, hData, MISC_ATT_CONN_MEMBERMAP, cols[i]);
 							}
 							Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hData);
-							pmRead.step();
+//							pmRead.step();
 						}
 
 						Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, hData);
@@ -94,6 +96,12 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 		if ( null == cols ) {
 			cols = Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERARR);
 		}
+		
+		boolean test = DustDevUtils.chkTag(MIND_TAG_CONTEXT_SELF, DEV_TAG_TEST);
+		if ( test ) {
+			fw = new StringWriter();
+		}
+
 		int l = cols.size();
 		int i = 0;
 		for (Object ch : cols) {
@@ -103,6 +111,10 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 			fw.write(((++i) < l) ? sep : "\n");
 		}
 		fw.flush();
+		
+		if ( test ) {
+			System.out.println(((StringWriter)fw).toString());
+		}
 	}
 
 	@Override

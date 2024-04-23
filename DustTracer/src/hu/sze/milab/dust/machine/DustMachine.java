@@ -294,7 +294,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			ret = MIND_TAG_RESULT_PASS;
 		} else {
 			for (Object a : sa) {
-				MindAgent agent = selectAgent(a, null);
+				MindAgent agent = selectAgent(a);
 
 				if ( null != agent ) {
 					Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
@@ -331,13 +331,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		return ret;
 	}
 
-	public MindAgent selectAgent(Object a, Object action) throws Exception {
-		if ( a instanceof MindCommitFilter ) {
-			a = ((MindCommitFilter)a).getAgent(action);
-			if ( null == a ) {
-				return null;
-			}
-		}
+	public MindAgent selectAgent(Object a) throws Exception {
 		MindAgent agent = Dust.access(MindAccess.Peek, null, a, DUST_ATT_IMPL_INSTANCE);
 
 		if ( null == agent ) {

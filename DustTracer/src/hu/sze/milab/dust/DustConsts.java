@@ -64,7 +64,10 @@ public interface DustConsts {
 		}
 		
 		public MindHandle getAgent(Object action) {
-			return ((null == action) || actions.contains(action)) ? agent : null;
+			if ((null == action) || actions.contains(action)) {
+				return agent;
+			}
+			return null;
 		}
 	}
 
