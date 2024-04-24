@@ -11,10 +11,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 import hu.sze.milab.dust.DustException;
-import hu.sze.milab.dust.DustConsts.MindAgent;
 import hu.sze.milab.dust.utils.DustUtilsData;
-import hu.sze.milab.dust.utils.DustUtilsFactory;
 import hu.sze.milab.dust.utils.DustUtilsData.TableReader;
+import hu.sze.milab.dust.utils.DustUtilsFactory;
 
 public class DustStreamUtils implements DustStreamConsts {
 	

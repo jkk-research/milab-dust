@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Collection;
 
 import hu.sze.milab.dust.Dust;
@@ -25,7 +26,7 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 
 		if ( null != current ) {
 			Object s = Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA);
-			
+
 			if ( null == s ) {
 				Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hStream);
 				s = Dust.access(MindAccess.Peek, null, hStream, DUST_ATT_IMPL_DATA);
@@ -56,28 +57,34 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 
 			if ( DustUtils.isEqual(hStream, current) ) {
 				if ( s instanceof Reader ) {
+					ArrayList<String> items = new ArrayList<>();
+					DustStreamUtils.CsvLineReader lineReader = new DustStreamUtils.CsvLineReader(sep, items);
+
+					ArrayList<String> cols = null;
 					try (BufferedReader br = new BufferedReader((Reader) s)) {
-						String line = br.readLine();
-						String[] cols = line.split(sep);
-						int len = cols.length;
-
-						for (int i = len; i-- > 0;) {
-							cols[i] = DustStreamUtils.csvOptUnEscape(cols[i], true);
-							Dust.access(MindAccess.Set, cols[i], hData, MISC_ATT_CONN_MEMBERARR, i);
-						}
-						Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, hData);
-
-//						DustDevProcMon pmRead = new DustDevProcMon("CSV line", 100);
-
-						for (line = br.readLine(); null != line; line = br.readLine()) {
-							Dust.access(MindAccess.Reset, null, hData, MISC_ATT_CONN_MEMBERMAP);
-							String[] values = line.split(sep);
-							for (int i = values.length; i-- > 0;) {
-								String val = DustStreamUtils.csvOptUnEscape(values[i], true);
-								Dust.access(MindAccess.Set, val, hData, MISC_ATT_CONN_MEMBERMAP, cols[i]);
+						for (String line = br.readLine(); null != line; line = br.readLine()) {
+							if ( !lineReader.csvReadLine(line) ) {
+								continue;
 							}
-							Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hData);
-//							pmRead.step();
+
+							if ( null == cols ) {
+								cols = new ArrayList<>(items.size());
+								Dust.access(MindAccess.Reset, null, hData, MISC_ATT_CONN_MEMBERARR);
+								for (String i : items) {
+									String col = i.trim();
+									cols.add(col);
+									Dust.access(MindAccess.Insert, col, hData, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+								}
+								Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, hData);
+							} else {
+								Dust.access(MindAccess.Reset, null, hData, MISC_ATT_CONN_MEMBERMAP);
+								for (int i = items.size(); i-- > 0;) {
+									Dust.access(MindAccess.Set, items.get(i).trim(), hData, MISC_ATT_CONN_MEMBERMAP, cols.get(i));
+								}
+								Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hData);
+							}
+							
+							items.clear();
 						}
 
 						Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, hData);
@@ -96,7 +103,7 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 		if ( null == cols ) {
 			cols = Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERARR);
 		}
-		
+
 		boolean test = DustDevUtils.chkTag(MIND_TAG_CONTEXT_SELF, DEV_TAG_TEST);
 		if ( test ) {
 			fw = new StringWriter();
@@ -111,9 +118,9 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 			fw.write(((++i) < l) ? sep : "\n");
 		}
 		fw.flush();
-		
+
 		if ( test ) {
-			System.out.println(((StringWriter)fw).toString());
+			System.out.println(((StringWriter) fw).toString());
 		}
 	}
 

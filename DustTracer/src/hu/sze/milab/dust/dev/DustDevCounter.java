@@ -41,7 +41,7 @@ public class DustDevCounter implements Iterable<Map.Entry<Object, Long>> {
 	public String toString() {
 		StringBuilder sb = DustUtils.sbAppend(null, "", true, head, " {");
 		for (Map.Entry<Object, Long> e : counts.entrySet()) {
-			DustUtils.sbAppend(null, "", true, "\n    ", e.getKey(), e.getValue());
+			DustUtils.sbAppend(sb, "\t", true, "\n", e.getKey(), e.getValue());
 		}
 		
 		sb.append("\n }");
