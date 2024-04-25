@@ -20,11 +20,6 @@ import hu.sze.milab.dust.utils.DustUtilsAttCache;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.MindAgent, DustMachineConsts.IdResolver {
 
-//long lastId = 100000L;
-//private synchronized String getTempId() {
-//	return String.valueOf( ++lastId );
-//}
-
 	static class KnowledgeMap extends HashMap {
 		private static final long serialVersionUID = 1L;
 
@@ -65,8 +60,10 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			return m;
 		}
 	};
+	
+//	static DustMachineDialog SINGLE_DIALOG;
 
-	final ThreadLocal<DustMachineDialog> dialogs = new ThreadLocal<DustMachineDialog>() {
+	final ThreadLocal<DustMachineDialog> DIALOGS = new ThreadLocal<DustMachineDialog>() {
 		@Override
 		protected DustMachineDialog initialValue() {
 			return new DustMachineDialog(DustMachine.this);
@@ -137,6 +134,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			}
 		}
 
+//		SINGLE_DIALOG = new DustMachineDialog(this);
 		idRes = this;
 
 		for (MindHandle hu : units) {
@@ -256,7 +254,8 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			ret = idRes.recall((String) val);
 			break;
 		default:
-			ret = dialogs.get().access(cmd, val, root, path);
+//			ret = SINGLE_DIALOG.access(cmd, val, root, path);
+			ret = DIALOGS.get().access(cmd, val, root, path);
 			break;
 		}
 
