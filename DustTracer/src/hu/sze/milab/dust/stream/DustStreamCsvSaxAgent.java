@@ -112,7 +112,7 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 		int l = cols.size();
 		int i = 0;
 		for (Object ch : cols) {
-			String val = head ? DustUtils.toString(ch) : Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERMAP, ch);
+			String val = DustUtils.toString(head ? ch : Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERMAP, ch));
 			val = DustStreamUtils.csvOptEscape(val, sep);
 			fw.write(val);
 			fw.write(((++i) < l) ? sep : "\n");

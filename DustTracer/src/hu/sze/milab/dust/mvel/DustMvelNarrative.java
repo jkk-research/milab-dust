@@ -67,7 +67,7 @@ public interface DustMvelNarrative extends DustMvelConsts {
 				Object hTo = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET);
 
 				Object hFrom = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
-				Object rootAtt = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, EXPR_ATT_POPULATE_ROOTATT);
+				Object rootAtt = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_GEN_TARGET_ATT);
 				Object root = (null == rootAtt) ? hFrom : Dust.access(MindAccess.Peek, null, hFrom, rootAtt);
 
 				Map<Object, Object> transfer = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_MEMBERMAP);
@@ -98,7 +98,7 @@ public interface DustMvelNarrative extends DustMvelConsts {
 			boolean ret = true;
 			if ( MIND_TAG_ACTION_PROCESS == Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_ACTION) ) {
 				Object hFrom = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET);
-				Object rootAtt = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, EXPR_ATT_POPULATE_ROOTATT);
+				Object rootAtt = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_GEN_TARGET_ATT);
 				Object root = (null == rootAtt) ? hFrom : Dust.access(MindAccess.Peek, null, hFrom, rootAtt);
 
 				String expr = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, EXPR_ATT_EXPRESSION_STR);

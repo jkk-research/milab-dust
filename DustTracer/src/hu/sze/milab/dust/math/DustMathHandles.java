@@ -17,6 +17,4 @@ public interface DustMathHandles extends DustConsts, DustUnitHandles {
 	MindHandle MATH_TAG_AGGRTYPE_MAX = Dust.lookup("giskard:15:?");
 	MindHandle MATH_TAG_AGGRTYPE_AVG = Dust.lookup("giskard:15:?");
 
-	MindHandle MATH_NAR_HTTPCLICOMM = Dust.lookup("giskard:15:?");
-	
 }
