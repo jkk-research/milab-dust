@@ -2,6 +2,7 @@ package hu.sze.milab.dust.net;
 
 import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
@@ -49,9 +50,9 @@ public class DustNetUtils implements DustNetConsts {
 
 		return ct;
 	}
-
-	public static void download(String url, OutputStream target, Collection<String> headers, int timeout) throws Exception {
-		HttpURLConnection conn = (HttpURLConnection) new URL(url).openConnection();
+	
+	public static HttpURLConnection getConn(URL url, int timeout, Collection<String> headers) throws IOException {
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
 		for (String h : headers) {
 			int s = h.indexOf(":");
@@ -59,10 +60,33 @@ public class DustNetUtils implements DustNetConsts {
 			String val = h.substring(s + 1).trim();
 			conn.setRequestProperty(key, val);
 		}
-		
+
 		if ( -1 != timeout ) {
 			conn.setConnectTimeout(timeout);
 			conn.setReadTimeout(timeout);
+		}
+		return conn;
+	}
+
+	public static void download(String urlStr, OutputStream target, Collection<String> headers, int timeout) throws Exception {
+		URL url = new URL(urlStr);
+		HttpURLConnection conn = getConn(url, timeout, headers);
+
+		if ( "http".equals(url.getProtocol()) ) {
+			conn.setInstanceFollowRedirects(false);
+			conn.connect();
+
+			int resCode = conn.getResponseCode();
+			if ( resCode == HttpURLConnection.HTTP_SEE_OTHER || resCode == HttpURLConnection.HTTP_MOVED_PERM || resCode == HttpURLConnection.HTTP_MOVED_TEMP ) {
+				String redirect = conn.getHeaderField("Location");
+				if ( redirect.startsWith("/") ) {
+					redirect = url.getProtocol() + "://" + url.getHost() + redirect;
+				}
+				conn.disconnect();
+				
+				url = new URL(redirect);
+				conn = getConn(url, timeout, headers);
+			}
 		}
 
 		InputStream is = conn.getInputStream();
@@ -81,5 +105,4 @@ public class DustNetUtils implements DustNetConsts {
 			}
 		}
 	}
-
 }
