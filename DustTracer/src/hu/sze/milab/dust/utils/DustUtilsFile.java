@@ -27,4 +27,10 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 		return DustUtils.getHash2(cutPostfix(str, sep), File.separator);
 	}
 
+	public static boolean exists(Object... pathSegments) {
+		String path = DustUtils.sbAppend(null, File.separator, false, pathSegments).toString();
+		
+		return new File(path).exists();
+	}
+
 }

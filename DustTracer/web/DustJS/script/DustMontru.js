@@ -58,10 +58,11 @@ if ('Dust' in window) {
 
 	function GridNarrative() {
 		var grid = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.DUST_ATT_IMPL_INSTANCE);
+		
 		if (!grid) {
 			var id = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.TEXT_ATT_TOKEN);
 			$grid = $('#' + id);
-			
+
 			var rows = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.MONTRU_ATT_GRID_AXES, DustHandles.GEOMETRY_TAG_VALTYPE_CARTESIAN_Y, DustHandles.MISC_ATT_CONN_MEMBERARR);
 			var cols = Dust.access(MindAccess.Peek, null, MindContext.Self, DustHandles.MONTRU_ATT_GRID_AXES, DustHandles.GEOMETRY_TAG_VALTYPE_CARTESIAN_X, DustHandles.MISC_ATT_CONN_MEMBERARR);
 
@@ -70,11 +71,20 @@ if ('Dust' in window) {
 				var content = '';
 				for (c of cols) {
 					var vv = Dust.access(MindAccess.Peek, '', c, r);
-					content = content.concat('<td> <input style="width: 100%" name="' + c + '"" value="' + vv + '" </td>');
+					content = content.concat('<td> <input style="width: 100%" name="' + c + '"" placeholder="' + r + '"" value="' + vv + '" </td>');
 				};
 				$table.append('<tr><td>' + r + '</td>' + content + '</tr>');
 			}
 			$grid.append($table);
+
+			$("input").on("change", function() {
+				
+				var item = $(this).attr('placeholder');
+				var att = $(this).attr('name');
+				var val = $(this).val();
+				Dust.access(MindAccess.Set, val, item, att);
+//				alert("Set " + item + ":" + att + " to " + val);
+			});
 
 			Dust.access(MindAccess.Set, grid, MindContext.Self, DustHandles.DUST_ATT_IMPL_INSTANCE);
 		}
@@ -89,7 +99,7 @@ if ('Dust' in window) {
 			case DustHandles.MONTRU_NAR_GUI:
 				Dust.access(MindAccess.Set, GuiNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;
-		
+
 			case DustHandles.MONTRU_NAR_CONTAINER:
 				Dust.access(MindAccess.Set, ContainerNarrative, MindContext.Target, DustHandles.DUST_ATT_IMPL_NARRATIVE);
 				break;

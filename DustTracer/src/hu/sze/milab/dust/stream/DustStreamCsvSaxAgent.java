@@ -60,7 +60,7 @@ public class DustStreamCsvSaxAgent extends DustAgent implements DustStreamConsts
 					ArrayList<String> items = new ArrayList<>();
 					DustStreamUtils.CsvLineReader lineReader = new DustStreamUtils.CsvLineReader(sep, items);
 
-					ArrayList<String> cols = null;
+					ArrayList<String> cols = Dust.access(MindAccess.Peek, null, hData, MISC_ATT_CONN_MEMBERARR);
 					try (BufferedReader br = new BufferedReader((Reader) s)) {
 						for (String line = br.readLine(); null != line; line = br.readLine()) {
 							if ( !lineReader.csvReadLine(line) ) {

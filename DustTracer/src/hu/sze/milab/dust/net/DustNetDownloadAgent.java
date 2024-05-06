@@ -47,7 +47,7 @@ public class DustNetDownloadAgent extends DustAgent implements DustNetConsts {
 
 			DustNetUtils.download(url, os, headers, (int) timeout);
 		} catch ( Throwable t) {
-			DustException.swallow(t, "Downolad failed", url, filePath);
+			DustException.swallow(t, "Download failed", url, filePath);
 			ret = MIND_TAG_RESULT_REJECT;
 		} finally {
 			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_END, hStream);
