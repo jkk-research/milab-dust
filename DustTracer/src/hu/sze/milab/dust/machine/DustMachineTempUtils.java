@@ -126,15 +126,9 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						Dust.access(MindAccess.Set, MIND_ASP_AUTHOR, hA, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 					}
 
-					if ( "ASP".equals(nn[1]) || "TAG".equals(nn[1]) ) {
+					if ( "NAR".equals(nn[1]) || "ASP".equals(nn[1]) || "TAG".equals(nn[1]) ) {
 						parents.put(name, (MindHandle) ch);
 					}
-
-//					Map token = DustMachineBoot.createKnowledge((DustHandle) L10N_UNIT, null, null);
-//					token.put(TEXT_ATT_PLAIN_TEXT, tokenVal);
-//					token.put(MIND_ATT_KNOWLEDGE_PRIMARYASPECT, TEXT_ASP_PLAIN);
-//					token.put(TEXT_TAG_LANGUAGE, TEXT_TAG_LANGUAGE_EN_US);
-//					token.put(MISC_ATT_CONN_OWNER, ch);
 
 					Dust.log(null, name, " -> ", tokenVal);
 				}

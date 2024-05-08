@@ -1,6 +1,7 @@
 package hu.sze.milab.dust.utils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -136,5 +137,33 @@ public class DustUtils implements DustUtilsConsts {
 
 		return String.format("%02x%s%02x", h1, sep, h2);
 	}
+	
+	public static class EnumMap {
+		private HashMap map;
+		
+		public EnumMap(Object srcOb, Class ... enumClasses) {
+			map = new HashMap<>();
+			Map src = (Map) srcOb;
+			
+			for ( Class c : enumClasses ) {
+				for ( Object e : c.getEnumConstants() ) {
+					Object val = src.get(((Enum)e).name());
+					if ( null != val ) {
+						map.put(e, val);
+					}
+				}
+			}
+		}
+		
+		public int size() {
+			return map.size();
+		}
+		
+		public <RetType> RetType get(Object key) {
+			return (RetType) map.get(key);
+		}
+	}
+
+
 
 }

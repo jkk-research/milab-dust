@@ -83,6 +83,11 @@ class DustMachineDialog implements DustMachineConsts {
 		Set prevSet = null;
 
 		for (Object p : path) {
+			if ( curr instanceof Enum ) {
+				MindHandle h = DustUtilsEnumTranslator.getHandle(curr);
+				curr = (null == h) ? ((Enum)curr).name() : h;
+			}
+			
 			if ( curr instanceof DustHandle ) {
 				curr = resolveKnowledge((DustHandle) curr, createIfMissing);
 			} else if ( null == curr ) {
