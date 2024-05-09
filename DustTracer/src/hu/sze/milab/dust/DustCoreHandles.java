@@ -155,6 +155,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ATT_GEN_SEP_ITEM = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_GEN_SEP_LINE = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_GEN_TARGET_ATT = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_GEN_EXTMAP = Dust.lookup("giskard:3:?");
 
 
 	MindHandle MISC_TAG_EMPTY = Dust.lookup("giskard:3:?");

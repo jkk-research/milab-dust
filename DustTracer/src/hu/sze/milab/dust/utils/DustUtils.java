@@ -141,15 +141,19 @@ public class DustUtils implements DustUtilsConsts {
 	public static class EnumMap {
 		private HashMap map;
 		
-		public EnumMap(Object srcOb, Class ... enumClasses) {
+		public EnumMap(Object srcOb, boolean keepOrig, Class ... enumClasses) {
 			map = new HashMap<>();
 			Map src = (Map) srcOb;
 			
 			for ( Class c : enumClasses ) {
 				for ( Object e : c.getEnumConstants() ) {
-					Object val = src.get(((Enum)e).name());
+					String n = ((Enum)e).name();
+					Object val = src.get(n);
 					if ( null != val ) {
 						map.put(e, val);
+						if ( keepOrig ) {
+							map.put(n, val);
+						}
 					}
 				}
 			}
