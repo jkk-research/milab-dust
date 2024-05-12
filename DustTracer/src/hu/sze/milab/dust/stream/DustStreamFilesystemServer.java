@@ -32,15 +32,6 @@ public class DustStreamFilesystemServer extends DustAgent implements DustStreamC
 		Object val = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, DUST_ATT_IMPL_DATA);
 
 		if ( null == val ) {
-//			File fDataRoot = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, DUST_ATT_IMPL_DATA);
-//
-//			if ( null == fDataRoot ) {
-//				fDataRoot = DustStreamUtils.getFile(MIND_TAG_CONTEXT_SELF, RESOURCE_ATT_URL_PATH);
-//				Dust.access(MindAccess.Set, fDataRoot, MIND_TAG_CONTEXT_SELF, DUST_ATT_IMPL_DATA);
-//			}
-//
-//			File fDir = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, DUST_ATT_IMPL_DATA);
-
 			File f = getFile(MIND_TAG_CONTEXT_TARGET, MIND_TAG_CONTEXT_SELF, true);
 
 			Object dir = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, MIND_ATT_KNOWLEDGE_TAGS, MISC_TAG_DIRECTION);
@@ -52,11 +43,11 @@ public class DustStreamFilesystemServer extends DustAgent implements DustStreamC
 			}
 
 			Object type = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, MIND_ATT_KNOWLEDGE_TAGS, RESOURCE_TAG_STREAMTYPE);
-			
-			if (MISC_TAG_DIRECTION_IN == dir) {
+
+			if ( MISC_TAG_DIRECTION_IN == dir ) {
 				val = (RESOURCE_TAG_STREAMTYPE_TEXT == type) ? new FileReader(f) : new FileInputStream(f);
 			} else {
-				val = (RESOURCE_TAG_STREAMTYPE_TEXT == type) ? new PrintWriter(f) : new FileOutputStream(f);				
+				val = (RESOURCE_TAG_STREAMTYPE_TEXT == type) ? new PrintWriter(f) : new FileOutputStream(f);
 			}
 
 			Dust.access(MindAccess.Set, val, MIND_TAG_CONTEXT_TARGET, DUST_ATT_IMPL_DATA);
