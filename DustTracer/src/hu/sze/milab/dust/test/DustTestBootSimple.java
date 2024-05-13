@@ -187,9 +187,9 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hContButtons = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_CONTAINER, "button panel");
 		DustDevUtils.setTag(hContButtons, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
 
-		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
-		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
-		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_PAGE_TAIL, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_LINE_LEAD, MONTRU_TAG_LINE);
+		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_LINE_TAIL, MONTRU_TAG_LINE);
+		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_LINE_TAIL, MONTRU_TAG_LINE);
 
 		Dust.access(MindAccess.Insert, hGetDataBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Insert, hSrvInfoBtn, hContButtons, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
@@ -201,7 +201,7 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hContMain = DustDevUtils.newHandle(TEST1_UNIT, MONTRU_NAR_CONTAINER, "resp/graph panel");
 		DustDevUtils.setTag(hContMain, MONTRU_TAG_LAYOUT_PAGE, MONTRU_TAG_LAYOUT);
 		
-		DustDevUtils.setTag(hResponseArea, MONTRU_TAG_PAGE_LEAD, MONTRU_TAG_PAGE);
+		DustDevUtils.setTag(hResponseArea, MONTRU_TAG_LINE_LEAD, MONTRU_TAG_LINE);
 		DustDevUtils.setTag(hGraph, MONTRU_TAG_PAGE_CENTER, MONTRU_TAG_PAGE);
 		
 		Dust.access(MindAccess.Insert, hResponseArea, hContMain, MISC_ATT_CONN_MEMBERARR, KEY_ADD);

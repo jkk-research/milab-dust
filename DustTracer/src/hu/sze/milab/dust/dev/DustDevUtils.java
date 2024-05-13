@@ -7,8 +7,9 @@ import java.util.Date;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustHandles;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsConsts;
 
-public class DustDevUtils implements DustHandles {
+public class DustDevUtils implements DustHandles, DustUtilsConsts {
 
 	public static final Comparator<String> ID_COMP = new Comparator<String>() {
 		@Override
@@ -80,6 +81,21 @@ public class DustDevUtils implements DustHandles {
 
 	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName) {
 		registerNative(hLogic, hUnit, hModule, nativeClassName, false);
+	}
+
+	public static <RetType> RetType getImplOb(DustCreator<RetType> c, Object key, Object... hints) throws Exception {
+		return getImplOb(MIND_TAG_CONTEXT_SELF, c, key, hints);
+	}
+
+	public static <RetType> RetType getImplOb(MindHandle h, DustCreator<RetType> c, Object key, Object... hints) throws Exception {
+		RetType val = Dust.access(MindAccess.Peek, null, h, DUST_ATT_IMPL_DATA);
+
+		if ( null == val ) {
+			val =  c.create(key, hints);
+			Dust.access(MindAccess.Set, val, h, DUST_ATT_IMPL_DATA);
+		}
+
+		return val;
 	}
 
 	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {

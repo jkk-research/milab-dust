@@ -12,6 +12,7 @@ import hu.sze.milab.dust.DustCoreHandles;
 import hu.sze.milab.dust.DustUnitHandles;
 import hu.sze.milab.dust.machine.DustMachineConsts.DustHandle;
 import hu.sze.milab.dust.math.DustMathHandles;
+import hu.sze.milab.dust.montru.DustMontruHandles;
 import hu.sze.milab.dust.net.DustNetHandles;
 import hu.sze.milab.dust.stream.DustStreamHandles;
 import hu.sze.milab.dust.stream.json.DustJsonApiDomAgent;
@@ -29,7 +30,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 	private static final File MODULE_DIR = new File("work/json/");
 
 	public static void test(Object... params) throws Exception {
-		initFromInterfaces(DustUnitHandles.class, DustCoreHandles.class, DustNetHandles.class, DustMathHandles.class, DustStreamHandles.class);
+		initFromInterfaces(DustUnitHandles.class, DustCoreHandles.class, DustNetHandles.class, DustMathHandles.class, DustStreamHandles.class, DustMontruHandles.class);
 
 //		dumpUnits();
 

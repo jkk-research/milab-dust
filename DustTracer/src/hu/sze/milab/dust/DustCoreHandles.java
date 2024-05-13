@@ -3,15 +3,11 @@ package hu.sze.milab.dust;
 public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	// Original
 
-//	MindHandle APP_UNIT = Dust.lookup("giskard:0");
-
 	MindHandle APP_MACHINE_MAIN = Dust.lookup("giskard:0:?");
 
 	MindHandle APP_MODULE_MAIN = Dust.lookup("giskard:0:?");
 
 	MindHandle APP_ASSEMBLY_MAIN = Dust.lookup("giskard:0:?");
-
-//	MindHandle MIND_UNIT = Dust.lookup("giskard:1");
 
 	MindHandle MIND_ASP_UNIT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_UNIT_HANDLES = Dust.lookup("giskard:1:?");
@@ -105,8 +101,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_NAR_SELECT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_NAR_JOIN = Dust.lookup("giskard:1:?");
 
-//	MindHandle DUST_UNIT = Dust.lookup("giskard:2");
-
 	MindHandle DUST_NAR_MACHINE = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MACHINE_AUTHORS = Dust.lookup("giskard:2:?");
 	MindHandle DUST_ATT_MACHINE_UNITS = Dust.lookup("giskard:2:?");
@@ -134,8 +128,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle DUST_ATT_IMPL_DATA = Dust.lookup("giskard:2:?");
 
 	MindHandle DUST_TAG_NATIVE_SERVER = Dust.lookup("giskard:2:?");
-
-//	MindHandle MISC_UNIT = Dust.lookup("giskard:3");
 
 	MindHandle MISC_ASP_CONN = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_OWNER = Dust.lookup("giskard:3:?");
@@ -190,8 +182,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_NAR_FACTORY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_FACTORY_TYPE = Dust.lookup("giskard:3:?");
 
-//	MindHandle TEXT_UNIT = Dust.lookup("giskard:4");
-
 	MindHandle TEXT_TAG_LANGUAGE = Dust.lookup("giskard:4:?");
 	MindHandle TEXT_TAG_LANGUAGE_EN_US = Dust.lookup("giskard:4:?");
 
@@ -204,8 +194,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle TEXT_ASP_PLAIN = Dust.lookup("giskard:4:?");
 	MindHandle TEXT_ATT_PLAIN_TEXT = Dust.lookup("giskard:4:?");
-
-//	MindHandle EVENT_UNIT = Dust.lookup("giskard:5");
 
 	MindHandle EVENT_ASP_TIME = Dust.lookup("giskard:5:?");
 	
@@ -246,8 +234,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle EVENT_TAG_TYPE_TRACE = Dust.lookup("giskard:5:?");
 	MindHandle EVENT_TAG_TYPE_BREAKPOINT = Dust.lookup("giskard:5:?");
 
-//	MindHandle RESOURCE_UNIT = Dust.lookup("giskard:6");
-
 	MindHandle RESOURCE_ASP_URL = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_ATT_URL_SCHEME = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_ATT_URL_USERINFO = Dust.lookup("giskard:6:?");
@@ -277,14 +263,12 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle RESOURCE_NAR_JSONDOM = Dust.lookup("giskard:6:?");
 	MindHandle RESOURCE_NAR_CSVSAX = Dust.lookup("giskard:6:?");
 
-//	MindHandle DEV_UNIT = Dust.lookup("giskard:7");
-
 	MindHandle DEV_ATT_HINT = Dust.lookup("giskard:7:?");
 	MindHandle DEV_TAG_TEST = Dust.lookup("giskard:7:?");
 
-//	MindHandle DUSTJAVA_UNIT = Dust.lookup("giskard:8");
-	
 	MindHandle GEOMETRY_TAG_VECTOR_LOCATION = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VECTOR_SIZE = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_TAG_VECTOR_WEIGHT = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_TAG_VECTOR_SCALE = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_TAG_VECTOR_ROTATE = Dust.lookup("giskard:12:?");
 	
@@ -292,47 +276,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_X = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Y = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_TAG_VALTYPE_CARTESIAN_Z = Dust.lookup("giskard:12:?");
-	
-	
-	
-	MindHandle MONTRU_NAR_AREA = Dust.lookup("giskard:13:?");
-	
-	MindHandle MONTRU_NAR_WIDGET = Dust.lookup("giskard:13:?");
-	
-	MindHandle MONTRU_TAG_WIDGET = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_BUTTON = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_INPUT = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_TEXTAREA = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_TOGGLE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_SELECT = Dust.lookup("giskard:13:?");
-
-	MindHandle MONTRU_NAR_CONTAINER = Dust.lookup("giskard:13:?");
-
-	MindHandle MONTRU_TAG_LAYOUT = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_LAYOUT_LAYERED = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_LAYOUT_PAGE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_LAYOUT_FLOW = Dust.lookup("giskard:13:?");
-	
-	MindHandle MONTRU_TAG_PAGE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_PAGE_HEADER = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_PAGE_FOOTER = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_PAGE_LEAD = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_PAGE_TAIL = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_PAGE_CENTER = Dust.lookup("giskard:13:?");
-
-	MindHandle MONTRU_TAG_FLOW = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_FLOW_LINE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_FLOW_PAGE = Dust.lookup("giskard:13:?");
-	
-	MindHandle MONTRU_NAR_GRID = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_ATT_GRID_AXES = Dust.lookup("giskard:13:?");
-	
-	MindHandle MONTRU_NAR_WINDOW = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_NAR_GRAPH = Dust.lookup("giskard:13:?");
-
-	MindHandle MONTRU_NAR_GUI = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_ATT_GUI_SELECTED = Dust.lookup("giskard:13:?");
 
 	MindHandle EXPR_ASP_EXPRESSION = Dust.lookup("giskard:14:?");
 	MindHandle EXPR_ATT_EXPRESSION_STATIC = Dust.lookup("giskard:14:?");
@@ -341,7 +284,5 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle EXPR_NAR_POPULATE = Dust.lookup("giskard:14:?");
 
 	MindHandle EXPR_NAR_FILTER = Dust.lookup("giskard:14:?");
-
-//	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 
 }
