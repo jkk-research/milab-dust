@@ -164,7 +164,8 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_TAG_DIRECTION_IN = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_DIRECTION_OUT = Dust.lookup("giskard:3:?");
 
-	MindHandle MISC_ASP_REFERENCE = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ASP_REF = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_REF_PATH = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_ASP_SPACE = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_SPACE_DIMENSIONS = Dust.lookup("giskard:3:?");

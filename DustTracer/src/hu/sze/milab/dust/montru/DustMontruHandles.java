@@ -21,7 +21,8 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_TAG_WIDGET_INPUT = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_TEXTAREA = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_TOGGLE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_SELECT = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGET_LIST = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGET_COMBO = Dust.lookup("giskard:13:?");
 
 	MindHandle MONTRU_NAR_CONTAINER = Dust.lookup("giskard:13:?");
 

@@ -9,7 +9,10 @@ import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.event.DustEventNarrative;
 import hu.sze.milab.dust.misc.DustMiscNarrative;
-import hu.sze.milab.dust.montru.DustMontruContainerNarrative;
+import hu.sze.milab.dust.montru.DustMontruNarrativeContainer;
+import hu.sze.milab.dust.montru.DustMontruNarrativeFrame;
+import hu.sze.milab.dust.montru.DustMontruNarrativeGrid;
+import hu.sze.milab.dust.montru.DustMontruNarrativeWidget;
 import hu.sze.milab.dust.mvel.DustMvelNarrative;
 import hu.sze.milab.dust.net.DustNetDownloadAgent;
 import hu.sze.milab.dust.net.httpsrv.DustHttpFileAgent;
@@ -113,7 +116,10 @@ public class DustMachineBoot implements DustMachineConsts {
 		machine.bootInit(bh);
 		
 		
-		DustDevUtils.registerNative(MONTRU_NAR_WINDOW, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruContainerNarrative.Frame.class.getName());
+		DustDevUtils.registerNative(MONTRU_NAR_WINDOW, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeFrame.class.getName(), true);
+		DustDevUtils.registerNative(MONTRU_NAR_CONTAINER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeContainer.class.getName());
+		DustDevUtils.registerNative(MONTRU_NAR_WIDGET, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeWidget.class.getName());
+		DustDevUtils.registerNative(MONTRU_NAR_GRID, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeGrid.class.getName());
 		
 		DustDevUtils.registerNative(MISC_NAR_TABLE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMiscNarrative.TableAgent.class.getName());
 		
