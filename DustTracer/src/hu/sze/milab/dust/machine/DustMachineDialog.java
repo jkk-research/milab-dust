@@ -62,7 +62,8 @@ class DustMachineDialog implements DustMachineConsts {
 					curr = context;
 					break;
 				case Self:
-					curr = resolveKnowledge(activeAgent, true);
+					curr = activeAgent;
+//					curr = resolveKnowledge(activeAgent, true);
 					break;
 				case Target:
 					curr = resolveKnowledge(activeAgent, true);
@@ -160,18 +161,20 @@ class DustMachineDialog implements DustMachineConsts {
 								Dust.access(MindAccess.Set, hTarget, a, MIND_ATT_AGENT_TARGET);
 								Dust.access(MindAccess.Set, a, null, MIND_ATT_DIALOG_ACTIVEAGENT);
 								Dust.access(MindAccess.Set, val, null, MIND_TAG_CONTEXT_ACTION);
-								switch ( action ) {
-								case Begin:
-								case Process:
-								case End:
-									MindHandle result = agent.agentProcess(action);
-									stop = ((MIND_TAG_RESULT_REJECT == result) || (MIND_TAG_RESULT_READ == result));
-									break;
-								case Init:
-								case Release:
-									DustException.wrap(null, "Invalid commit action", val);
-									break;
-								}
+								MindHandle result = agent.agentProcess(action);
+								stop = ((MIND_TAG_RESULT_REJECT == result) || (MIND_TAG_RESULT_READ == result));
+//								switch ( action ) {
+//								case Begin:
+//								case Process:
+//								case End:
+//									MindHandle result = agent.agentProcess(action);
+//									stop = ((MIND_TAG_RESULT_REJECT == result) || (MIND_TAG_RESULT_READ == result));
+//									break;
+//								case Init:
+//								case Release:
+//									DustException.wrap(null, "Invalid commit action", val);
+//									break;
+//								}
 							}
 						} catch (Throwable e) {
 							Dust.access(MindAccess.Set, null, a, MIND_ATT_AGENT_TARGET);

@@ -63,6 +63,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 		MindHandle hAgent = newHandle(hUnit, MIND_ASP_AGENT, hint);
 
 		Dust.access(MindAccess.Set, hLogic, hAgent, MIND_ATT_AGENT_NARRATIVE);
+		Dust.access(MindAccess.Set, hAgent, hAgent, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
 
 		return hAgent;
 	};

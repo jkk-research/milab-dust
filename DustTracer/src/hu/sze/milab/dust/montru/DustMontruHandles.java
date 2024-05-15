@@ -19,7 +19,7 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_BUTTON = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_INPUT = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_TEXTAREA = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGET_TEXT = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_TOGGLE = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_LIST = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_COMBO = Dust.lookup("giskard:13:?");
@@ -30,8 +30,9 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_TAG_LAYOUT_LAYERED = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_LAYOUT_PAGE = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_LAYOUT_FLOW = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_LAYOUT_BOX = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_LAYOUT_SPLIT = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_LAYOUT_CARD = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_LAYOUT_TAB = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_LAYOUT_GRID = Dust.lookup("giskard:13:?");
 
 	MindHandle MONTRU_TAG_PAGE = Dust.lookup("giskard:13:?");
@@ -44,9 +45,9 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_TAG_LINE_CENTER = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_LINE_TAIL = Dust.lookup("giskard:13:?");
 
-	MindHandle MONTRU_TAG_FLOW = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_FLOW_LINE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_FLOW_PAGE = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_BOX = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_BOX_LINE = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_BOX_PAGE = Dust.lookup("giskard:13:?");
 	
 	MindHandle MONTRU_NAR_GRID = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_ATT_GRID_AXES = Dust.lookup("giskard:13:?");

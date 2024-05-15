@@ -208,8 +208,8 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Insert, hGraph, hContMain, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 
 		MindHandle hGui = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_GUI, "Web GUI");
-		DustDevUtils.setTag(hGui, MONTRU_TAG_LAYOUT_FLOW, MONTRU_TAG_LAYOUT);
-		DustDevUtils.setTag(hGui, MONTRU_TAG_FLOW_PAGE, MONTRU_TAG_FLOW);
+		DustDevUtils.setTag(hGui, MONTRU_TAG_LAYOUT_BOX, MONTRU_TAG_LAYOUT);
+		DustDevUtils.setTag(hGui, MONTRU_TAG_BOX_PAGE, MONTRU_TAG_BOX);
 		
 		Dust.access(MindAccess.Insert, hRequestPropertiesGrid, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		Dust.access(MindAccess.Insert, hContButtons, hGui, MISC_ATT_CONN_MEMBERARR, KEY_ADD);

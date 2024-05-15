@@ -1,34 +1,35 @@
 package hu.sze.milab.dust.montru;
 
-import javax.swing.JFrame;
+import java.awt.Component;
 
-import hu.sze.milab.dust.Dust;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+
 import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.dev.DustDevUtils;
-import hu.sze.milab.dust.utils.DustUtils;
 
-public abstract class DustMontruNarrativeGrid extends DustAgent implements DustMontruConsts {
+public class DustMontruNarrativeGrid extends DustAgent implements DustMontruConsts {
 
-	static DustCreator<JFrame> CREATOR = new DustCreator<JFrame>() {
+	static class GridWrapper extends CompWrapper<JScrollPane> {
+		
+		JTable tbl;
+		
+		protected GridWrapper() {
+			super(new JScrollPane());
+			tbl = new JTable();
+			
+			comp.setViewportView(tbl);
+		}
+	}
+
+	static DustCreator<CompWrapper<? extends Component>> CREATOR = new DustCreator<CompWrapper<? extends Component>>() {
 
 		@Override
-		public JFrame create(Object key, Object... hints) {
-			JFrame frame = new JFrame();
-			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		public CompWrapper<? extends Component> create(Object key, Object... hints) {
+			CompWrapper<? extends Component> ret = new GridWrapper();
 
-			String title = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MONTRU_ATT_GEN_LABEL);
-			if ( !DustUtils.isEmpty(title) ) {
-				frame.setTitle(title);
-			}
-
-			frame.pack();
-			frame.setVisible(true);
-
-			DustMontruUtils.setBounds(frame);
-
-			return frame;
+			return ret;
 		}
-
 	};
 
 	@Override
@@ -45,7 +46,6 @@ public abstract class DustMontruNarrativeGrid extends DustAgent implements DustM
 
 	@Override
 	protected MindHandle agentProcess() throws Exception {
-		JFrame frm = DustDevUtils.getImplOb(CREATOR, "");
 
 		return super.agentProcess();
 	}
