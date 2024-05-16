@@ -51,7 +51,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 		if ( !DustUtils.isEmpty(hint) ) {
 			Dust.access(MindAccess.Set, hint, h, DEV_ATT_HINT);
 		}
-		
+
 		return h;
 	};
 
@@ -92,7 +92,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 		RetType val = Dust.access(MindAccess.Peek, null, h, DUST_ATT_IMPL_DATA);
 
 		if ( null == val ) {
-			val =  c.create(key, hints);
+			val = c.create(key, hints);
 			Dust.access(MindAccess.Set, val, h, DUST_ATT_IMPL_DATA);
 		}
 
@@ -125,6 +125,16 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 
 	public static boolean chkTag(MindHandle hItem, MindHandle hTag) {
 		return chkTag(hItem, hTag, hTag);
+	}
+
+	public static <RetType> RetType getValueRec(MindHandle hStart, MindHandle hKeyValue, MindHandle hKeyNext) {
+		RetType ret = null;
+		
+		while ((null != hStart) && (null == (ret = Dust.access(MindAccess.Peek, null, hStart, hKeyValue)))) {
+			hStart = Dust.access(MindAccess.Peek, null, hStart, hKeyNext);
+		}
+
+		return ret;
 	}
 
 	public static MindHandle setText(MindHandle hItem, MindHandle hTxtType, MindHandle hLang, String txt) {

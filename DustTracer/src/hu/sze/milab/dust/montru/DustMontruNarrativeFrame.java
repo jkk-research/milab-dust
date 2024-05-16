@@ -1,6 +1,5 @@
 package hu.sze.milab.dust.montru;
 
-import java.awt.BorderLayout;
 import java.awt.Component;
 
 import javax.swing.JFrame;
@@ -27,9 +26,10 @@ public class DustMontruNarrativeFrame extends DustAgent implements DustMontruCon
 			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_INIT, MIND_TAG_CONTEXT_SELF, MONTRU_ATT_WINDOW_MAIN);
 			
 			CompWrapper<Component> mw = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MONTRU_ATT_WINDOW_MAIN, DUST_ATT_IMPL_DATA);
-			
 			if ( null != mw ) {
-				frame.getContentPane().add(mw.comp, BorderLayout.CENTER);
+				MindHandle hSelf = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF);
+				Dust.access(MindAccess.Set, hSelf, mw.hComp, MISC_ATT_CONN_OWNER);
+				frame.getContentPane().add(mw.comp);
 			}
 
 			frame.pack();
@@ -49,14 +49,10 @@ public class DustMontruNarrativeFrame extends DustAgent implements DustMontruCon
 	}
 
 	@Override
-	protected MindHandle agentBegin() throws Exception {
-		DustDevUtils.getImplOb(CREATOR, "");
-		return MIND_TAG_RESULT_ACCEPT;
-	}
-
-	@Override
 	protected MindHandle agentProcess() throws Exception {
-		return super.agentProcess();
+		Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, MIND_TAG_CONTEXT_SELF, MONTRU_ATT_WINDOW_MAIN);
+		
+		return MIND_TAG_RESULT_ACCEPT;
 	}
 
 }

@@ -12,6 +12,8 @@ import javax.swing.JTabbedPane;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
+import hu.sze.milab.dust.DustConsts.MindAccess;
+import hu.sze.milab.dust.DustConsts.MindHandle;
 import hu.sze.milab.dust.dev.DustDevUtils;
 
 @SuppressWarnings("rawtypes")
@@ -27,13 +29,13 @@ public class DustMontruNarrativeContainer extends DustAgent implements DustMontr
 				for (CompWrapper<?> mw : members) {
 					Object bl = BorderLayout.CENTER;
 					
-					Object a = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS, MONTRU_TAG_PAGE);
+					Object a = Dust.access(MindAccess.Peek, null, mw.hComp, MIND_ATT_KNOWLEDGE_TAGS, MONTRU_TAG_PAGE);
 					if ( MONTRU_TAG_PAGE_HEADER == a ) {
 						bl = BorderLayout.NORTH;
 					} else if ( MONTRU_TAG_PAGE_FOOTER == a ) {
 						bl = BorderLayout.SOUTH;
 					} else {
-						a = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS, MONTRU_TAG_LINE);
+						a = Dust.access(MindAccess.Peek, null, mw.hComp, MIND_ATT_KNOWLEDGE_TAGS, MONTRU_TAG_LINE);
 						if ( MONTRU_TAG_LINE_LEAD == a ) {
 							bl = BorderLayout.WEST;
 						} else if ( MONTRU_TAG_LINE_TAIL == a ) {
@@ -62,6 +64,8 @@ public class DustMontruNarrativeContainer extends DustAgent implements DustMontr
 
 			comp.setLeftComponent(members.get(0).comp);
 			comp.setRightComponent(members.get(1).comp);
+			
+			comp.setContinuousLayout(true);
 		}
 	}
 
@@ -87,7 +91,10 @@ public class DustMontruNarrativeContainer extends DustAgent implements DustMontr
 			ArrayList members = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_MEMBERARR);
 			ArrayList<CompWrapper<?>> mcw = new ArrayList<>();
 
+			MindHandle hSelf = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF);
+
 			for (Object m : members) {
+				Dust.access(MindAccess.Set, hSelf, m, MISC_ATT_CONN_OWNER);
 				Dust.access(MindAccess.Commit, MIND_TAG_ACTION_INIT, m);
 				mcw.add(Dust.access(MindAccess.Peek, null, m, DUST_ATT_IMPL_DATA));
 			}
@@ -113,6 +120,12 @@ public class DustMontruNarrativeContainer extends DustAgent implements DustMontr
 
 	@Override
 	protected MindHandle agentProcess() throws Exception {
+		ArrayList members = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_MEMBERARR);
+
+		for (Object m : members) {
+			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, m);
+		}
+
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 

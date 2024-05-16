@@ -61,7 +61,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		}
 	};
 	
-//	static DustMachineDialog SINGLE_DIALOG;
+	DustMachineDialog SINGLE_DIALOG;
 
 	final ThreadLocal<DustMachineDialog> DIALOGS = new ThreadLocal<DustMachineDialog>() {
 		@Override
@@ -69,6 +69,10 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			return new DustMachineDialog(DustMachine.this);
 		}
 	};
+	
+	private DustMachineDialog getDialog() {
+		return (null == SINGLE_DIALOG) ? DIALOGS.get() : SINGLE_DIALOG;
+	}
 
 	private final Thread shutdownHook = new Thread() {
 		@Override
@@ -134,7 +138,8 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			}
 		}
 
-//		SINGLE_DIALOG = new DustMachineDialog(this);
+		boolean singleThread = DustUtils.isEqual("true", System.getProperty("DustSingleThreaded", "false"));
+		SINGLE_DIALOG = singleThread ? new DustMachineDialog(this) : null;
 		idRes = this;
 
 		for (MindHandle hu : units) {
@@ -254,8 +259,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 			ret = idRes.recall((String) val);
 			break;
 		default:
-//			ret = SINGLE_DIALOG.access(cmd, val, root, path);
-			ret = DIALOGS.get().access(cmd, val, root, path);
+			ret = getDialog().access(cmd, val, root, path);
 			break;
 		}
 

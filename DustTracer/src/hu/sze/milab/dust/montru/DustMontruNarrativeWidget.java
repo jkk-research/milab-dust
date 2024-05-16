@@ -1,14 +1,18 @@
 package hu.sze.milab.dust.montru;
 
 import java.awt.Component;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
+import javax.swing.JTree;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
@@ -17,53 +21,83 @@ import hu.sze.milab.dust.dev.DustDevUtils;
 @SuppressWarnings("rawtypes")
 public class DustMontruNarrativeWidget extends DustAgent implements DustMontruConsts {
 
-	static class LabelWrapper extends CompWrapper<JLabel> {
+	static abstract class WidgetWrapper<CompType extends Component> extends CompWrapper<CompType> {
+		protected WidgetWrapper(CompType comp) {
+			super(comp);
+		}
+		
+		protected void update() {};
+	}
+
+	static class LabelWrapper extends WidgetWrapper<JLabel> {
 		protected LabelWrapper() {
 			super(new JLabel());
 		}
 	}
 
-	static class ButtonWrapper extends CompWrapper<JButton> {
+	static class ButtonWrapper extends WidgetWrapper<JButton> {
 		protected ButtonWrapper() {
 			super(new JButton());
+			
+			comp.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Dust.access(MindAccess.Commit, MIND_TAG_ACTION_PROCESS, hComp, MISC_ATT_CONN_TARGET);
+				}
+			});
 		}
 	}
 
-	static class InputWrapper extends CompWrapper<JTextField> {
+	static class InputWrapper extends WidgetWrapper<JTextField> {
 		protected InputWrapper() {
 			super(new JTextField());
 		}
 	}
 
-	static class TextWrapper extends CompWrapper<JTextArea> {
+	static class TextWrapper extends WidgetWrapper<JTextArea> {
 		protected TextWrapper() {
 			super(new JTextArea());
 		}
 	}
 
-	static class ToggleWrapper extends CompWrapper<JToggleButton> {
+	static class ToggleWrapper extends WidgetWrapper<JToggleButton> {
 		protected ToggleWrapper() {
 			super(new JToggleButton());
 		}
 	}
 
-	static class ListWrapper extends CompWrapper<JList> {
+	static class ListWrapper extends WidgetWrapper<JList> {
 		protected ListWrapper() {
 			super(new JList());
 		}
 	}
 
-	static class ComboWrapper extends CompWrapper<JComboBox> {
+	static class ComboWrapper extends WidgetWrapper<JComboBox> {
 		protected ComboWrapper() {
 			super(new JComboBox());
 		}
+		
+		@Override
+		protected void update() {
+			Dust.log(EVENT_TAG_TYPE_TRACE, "Updating combo box");
+		}
 	}
 
-	static DustCreator<CompWrapper<? extends Component>> CREATOR = new DustCreator<CompWrapper<? extends Component>>() {
+	static class TreeWrapper extends WidgetWrapper<JScrollPane> {
+		JTree tree;
+		
+		protected TreeWrapper() {
+			super(new JScrollPane());
+			tree = new JTree();
+			comp.setViewportView(tree);
+		}
+	}
+
+	static DustCreator<WidgetWrapper<? extends Component>> CREATOR = new DustCreator<WidgetWrapper<? extends Component>>() {
 
 		@Override
-		public CompWrapper<? extends Component> create(Object key, Object... hints) {
-			CompWrapper<? extends Component> ret = null;
+		public WidgetWrapper<? extends Component> create(Object key, Object... hints) {
+			WidgetWrapper<? extends Component> ret = null;
 
 			MindHandle hType = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS, MONTRU_TAG_WIDGET);
 
@@ -81,6 +115,8 @@ public class DustMontruNarrativeWidget extends DustAgent implements DustMontruCo
 				ret = new ListWrapper();
 			} else if ( hType == MONTRU_TAG_WIDGET_COMBO ) {
 				ret = new ComboWrapper();
+			} else if ( hType == MONTRU_TAG_WIDGET_TREE ) {
+				ret = new TreeWrapper();
 			}
 
 			return ret;
@@ -96,6 +132,10 @@ public class DustMontruNarrativeWidget extends DustAgent implements DustMontruCo
 
 	@Override
 	protected MindHandle agentProcess() throws Exception {
+		WidgetWrapper<? extends Component> ww = DustDevUtils.getImplOb(CREATOR, "");
+		
+		ww.update();
+		
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 }
