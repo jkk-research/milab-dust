@@ -3,6 +3,7 @@ package hu.sze.milab.dust.stream;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
+import java.util.regex.Pattern;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
@@ -45,16 +46,28 @@ public class DustStreamUtils extends DustUtilsFile implements DustStreamConsts {
 			return "";
 		}
 
-		String ret = valStr;
+		String ret = valStr.trim();
+		
+		if ( valStr.startsWith("\"") && valStr.endsWith("\"")) {
+			return ret;
+		}
 
 		if ( valStr.contains(sepChar) || valStr.contains("\"") || valStr.contains("\n") ) {
 			ret = csvEscape(valStr, true);
 		}
 		return ret;
 	}
+	
+	static Pattern PT_ESC = Pattern.compile("\\s+", Pattern.MULTILINE);
 
 	public static String csvEscape(String valStr, boolean addQuotes) {
-		String ret = (null == valStr) ? "" : valStr.replace("\"", "\"\"").replaceAll("\\s+", " ");
+		String ret = "";
+		
+		if (null != valStr) {
+			
+			ret = valStr.replace("\"", "\"\"");
+			ret = PT_ESC.matcher(ret).replaceAll(" ");
+		}
 
 		if ( addQuotes ) {
 			ret = "\"" + ret + "\"";

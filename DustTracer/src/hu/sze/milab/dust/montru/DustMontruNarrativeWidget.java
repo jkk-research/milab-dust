@@ -3,7 +3,10 @@ package hu.sze.milab.dust.montru;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Map;
 
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,15 +21,16 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.dev.DustDevUtils;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class DustMontruNarrativeWidget extends DustAgent implements DustMontruConsts {
 
 	static abstract class WidgetWrapper<CompType extends Component> extends CompWrapper<CompType> {
 		protected WidgetWrapper(CompType comp) {
 			super(comp);
 		}
-		
-		protected void update() {};
+
+		protected void update() {
+		};
 	}
 
 	static class LabelWrapper extends WidgetWrapper<JLabel> {
@@ -38,7 +42,7 @@ public class DustMontruNarrativeWidget extends DustAgent implements DustMontruCo
 	static class ButtonWrapper extends WidgetWrapper<JButton> {
 		protected ButtonWrapper() {
 			super(new JButton());
-			
+
 			comp.addActionListener(new ActionListener() {
 				@Override
 				public void actionPerformed(ActionEvent e) {
@@ -72,20 +76,41 @@ public class DustMontruNarrativeWidget extends DustAgent implements DustMontruCo
 		}
 	}
 
-	static class ComboWrapper extends WidgetWrapper<JComboBox> {
+	static class ComboWrapper extends WidgetWrapper<JComboBox<Object>> {
+
+		DefaultComboBoxModel<Object> cbm;
+
 		protected ComboWrapper() {
-			super(new JComboBox());
+			super(new JComboBox<>());
+
+			cbm = new DefaultComboBoxModel<>();
+			comp.setModel(cbm);
 		}
-		
+
 		@Override
 		protected void update() {
-			Dust.log(EVENT_TAG_TYPE_TRACE, "Updating combo box");
+			if ( 0 == cbm.getSize() ) {
+				Object src = DustDevUtils.getValueRec(hComp, MISC_ATT_CONN_SOURCE, MISC_ATT_CONN_OWNER);
+
+				if ( null != src ) {
+					ArrayList<Object> path = Dust.access(MindAccess.Peek, null, hComp, MISC_ATT_REF_PATH);
+					Object o = (null == path) ? src : Dust.access(MindAccess.Peek, null, src, path.toArray());
+
+					if ( o instanceof Map ) {
+						cbm.addElement("");
+
+						for (Object k : ((Map<Object, Object>) o).keySet()) {
+							cbm.addElement(k);
+						}
+					}
+				}
+			}
 		}
 	}
 
 	static class TreeWrapper extends WidgetWrapper<JScrollPane> {
 		JTree tree;
-		
+
 		protected TreeWrapper() {
 			super(new JScrollPane());
 			tree = new JTree();
@@ -133,9 +158,9 @@ public class DustMontruNarrativeWidget extends DustAgent implements DustMontruCo
 	@Override
 	protected MindHandle agentProcess() throws Exception {
 		WidgetWrapper<? extends Component> ww = DustDevUtils.getImplOb(CREATOR, "");
-		
+
 		ww.update();
-		
+
 		return MIND_TAG_RESULT_ACCEPT;
 	}
 }

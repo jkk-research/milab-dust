@@ -12,8 +12,6 @@ import javax.swing.JTabbedPane;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
-import hu.sze.milab.dust.DustConsts.MindAccess;
-import hu.sze.milab.dust.DustConsts.MindHandle;
 import hu.sze.milab.dust.dev.DustDevUtils;
 
 @SuppressWarnings("rawtypes")

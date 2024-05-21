@@ -156,6 +156,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_TAG_DBLHASH = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_READONLY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_HIDDEN = Dust.lookup("giskard:3:?");
+	MindHandle MISC_TAG_SORTED = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_TRANSACTION = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_LOADING = Dust.lookup("giskard:3:?");
 	MindHandle MISC_TAG_ROOT = Dust.lookup("giskard:3:?");
@@ -182,6 +183,9 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle MISC_NAR_FACTORY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_FACTORY_TYPE = Dust.lookup("giskard:3:?");
+	
+	MindHandle MISC_NAR_COUNTER = Dust.lookup("giskard:3:?");
+	
 
 	MindHandle TEXT_TAG_LANGUAGE = Dust.lookup("giskard:4:?");
 	MindHandle TEXT_TAG_LANGUAGE_EN_US = Dust.lookup("giskard:4:?");

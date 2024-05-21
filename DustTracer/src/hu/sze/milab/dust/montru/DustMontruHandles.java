@@ -14,6 +14,7 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_ATT_AREA_VECTORS = Dust.lookup("giskard:13:?");
 	
 	MindHandle MONTRU_NAR_WIDGET = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_ATT_WIDGET_CMDTAG = Dust.lookup("giskard:13:?");
 	
 	MindHandle MONTRU_TAG_WIDGET = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:?");
@@ -60,5 +61,6 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle MONTRU_NAR_GUI = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_ATT_GUI_SELECTED = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_ATT_GUI_THEME = Dust.lookup("giskard:13:?");
 
 }
