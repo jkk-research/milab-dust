@@ -140,6 +140,8 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ATT_CONN_MEMBERARR = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_MEMBERSET = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_SPACE = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_CONN_NEXT = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_CONN_PREV = Dust.lookup("giskard:3:?");
 
 	MindHandle MISC_ASP_ALIAS = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ASP_GEN = Dust.lookup("giskard:3:?");
