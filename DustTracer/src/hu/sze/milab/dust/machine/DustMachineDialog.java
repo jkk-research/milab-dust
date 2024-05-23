@@ -155,6 +155,11 @@ class DustMachineDialog implements DustMachineConsts {
 									continue;
 								}
 							}
+							
+							if ( a == oldAgent ) {
+								// the committer may listen to the committed handle but should not be called now
+								continue;
+							}
 
 							MindAgent agent = machine.selectAgent(a);
 							if ( null != agent ) {
@@ -163,18 +168,6 @@ class DustMachineDialog implements DustMachineConsts {
 								Dust.access(MindAccess.Set, val, null, MIND_TAG_CONTEXT_ACTION);
 								MindHandle result = agent.agentProcess(action);
 								stop = ((MIND_TAG_RESULT_REJECT == result) || (MIND_TAG_RESULT_READ == result));
-//								switch ( action ) {
-//								case Begin:
-//								case Process:
-//								case End:
-//									MindHandle result = agent.agentProcess(action);
-//									stop = ((MIND_TAG_RESULT_REJECT == result) || (MIND_TAG_RESULT_READ == result));
-//									break;
-//								case Init:
-//								case Release:
-//									DustException.wrap(null, "Invalid commit action", val);
-//									break;
-//								}
 							}
 						} catch (Throwable e) {
 							Dust.access(MindAccess.Set, null, a, MIND_ATT_AGENT_TARGET);
