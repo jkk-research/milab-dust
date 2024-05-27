@@ -12,6 +12,7 @@ import hu.sze.milab.dust.event.DustEventNarrative;
 import hu.sze.milab.dust.misc.DustMiscNarrative;
 import hu.sze.milab.dust.montru.DustMontruNarrativeContainer;
 import hu.sze.milab.dust.montru.DustMontruNarrativeFrame;
+import hu.sze.milab.dust.montru.DustMontruNarrativeGraph;
 import hu.sze.milab.dust.montru.DustMontruNarrativeGrid;
 import hu.sze.milab.dust.montru.DustMontruNarrativeWidget;
 import hu.sze.milab.dust.mvel.DustMvelNarrative;
@@ -121,6 +122,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustDevUtils.registerNative(MONTRU_NAR_CONTAINER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeContainer.class.getName());
 		DustDevUtils.registerNative(MONTRU_NAR_WIDGET, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeWidget.class.getName());
 		DustDevUtils.registerNative(MONTRU_NAR_GRID, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeGrid.class.getName());
+		DustDevUtils.registerNative(MONTRU_NAR_GRAPH, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeGraph.class.getName());
 		
 		DustDevUtils.registerNative(MISC_NAR_COUNTER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustDevNarrative.DevCounter.class.getName());
 		DustDevUtils.registerNative(MISC_NAR_TABLE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMiscNarrative.TableAgent.class.getName());

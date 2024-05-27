@@ -15,7 +15,8 @@ public class DustTestBootSimple implements DustTestConsts {
 	public static void boot(String[] launchParams) throws Exception {
 		DustMachineTempUtils.test();
 
-		startPortal();
+		startGui();
+//		startPortal();
 //		helloWorld();
 	}
 
@@ -25,6 +26,23 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hAgtHelloWorld = DustDevUtils.registerAgent(TEST0_UNIT, hLogHelloWorld);
 
 		Dust.access(MindAccess.Set, hAgtHelloWorld, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
+	}
+
+	public static void startGui() throws Exception {
+		MindHandle hAgtGuiFrame = DustDevUtils.registerAgent(TEST0_UNIT, MONTRU_NAR_WINDOW, "GUI frame");
+		Dust.access(MindAccess.Set, "Nimbus", hAgtGuiFrame, MONTRU_ATT_GUI_THEME);
+
+		Dust.access(MindAccess.Set, "XBRLDock - Graph test", hAgtGuiFrame, MONTRU_ATT_GEN_LABEL);
+		Dust.access(MindAccess.Insert, 10, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, KEY_ADD);
+		Dust.access(MindAccess.Insert, 10, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, KEY_ADD);
+		Dust.access(MindAccess.Insert, 1000, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, KEY_ADD);
+		Dust.access(MindAccess.Insert, 800, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, KEY_ADD);
+
+		MindHandle hAgtGuiMainPanel = DustDevUtils.registerAgent(TEST0_UNIT, MONTRU_NAR_GRAPH, "Main panel");
+		Dust.access(MindAccess.Set, hAgtGuiMainPanel, hAgtGuiFrame, MONTRU_ATT_WINDOW_MAIN);
+
+
+		Dust.access(MindAccess.Set, hAgtGuiFrame, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}
 
 	public static void startPortal() throws Exception {
