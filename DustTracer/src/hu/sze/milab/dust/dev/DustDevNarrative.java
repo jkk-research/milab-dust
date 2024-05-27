@@ -38,13 +38,17 @@ public interface DustDevNarrative extends DustHandles, DustUtilsConsts {
 
 			ArrayList<Object> path = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MISC_ATT_REF_PATH);
 			String val = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_TARGET, path.toArray());
-			
+
 			val = DustUtils.getPostfix(val, "reports/");
 
 			DustDevCounter cnt = DustDevUtils.getImplOb(CREATOR, null);
 
 			cnt.add(val);
-			cnt.add(" << TOTAL >>");
+			Long tc = cnt.add(" << TOTAL >>");
+
+			if ( 0 == (tc % 100) ) {
+				Dust.log(EVENT_TAG_TYPE_INFO, tc);
+			}
 
 			return super.agentProcess();
 		}
