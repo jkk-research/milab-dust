@@ -75,6 +75,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_TAG_ACCESS_COMMIT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_ACCESS_BROADCAST = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_ACCESS_LOOKUP = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_ACCESS_VISIT = Dust.lookup("giskard:1:?");
 
 	MindHandle MIND_TAG_ACTION = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_ACTION_INIT = Dust.lookup("giskard:1:?");

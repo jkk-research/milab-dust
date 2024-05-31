@@ -41,6 +41,11 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hAgtGuiMainPanel = DustDevUtils.registerAgent(TEST0_UNIT, MONTRU_NAR_GRAPH, "Main panel");
 		Dust.access(MindAccess.Set, hAgtGuiMainPanel, hAgtGuiFrame, MONTRU_ATT_WINDOW_MAIN);
 
+		MindHandle hUnits = DustDevUtils.newHandle(TEST0_UNIT, MISC_ASP_VARIANT, "unit list");
+		Dust.access(MindAccess.Insert, MIND_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, MISC_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		
+		Dust.access(MindAccess.Set, hUnits, hAgtGuiMainPanel, MISC_ATT_CONN_SOURCE);
 
 		Dust.access(MindAccess.Set, hAgtGuiFrame, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTAGENTS, KEY_ADD);
 	}

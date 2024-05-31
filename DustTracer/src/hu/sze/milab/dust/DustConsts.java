@@ -23,7 +23,7 @@ public interface DustConsts {
 	String DUST_EXT_CLASS = ".class";
 	
 	enum MindAccess {
-		Check, Peek, Get, Set, Insert, Delete, Reset, Commit, Broadcast, Lookup, 
+		Check, Peek, Get, Set, Insert, Delete, Reset, Commit, Broadcast, Lookup, Visit, 
 	};
 	
 	enum MindAction {

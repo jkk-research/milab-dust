@@ -231,6 +231,8 @@ class DustMachineDialog implements DustMachineConsts {
 			break;
 		case Lookup:
 			break;
+		case Visit:
+			break;
 		}
 
 		return (RetType) ret;
