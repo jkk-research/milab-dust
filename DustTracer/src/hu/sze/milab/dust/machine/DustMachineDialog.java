@@ -9,6 +9,7 @@ import java.util.Set;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
+import hu.sze.milab.dust.DustVisitor;
 import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
@@ -26,6 +27,8 @@ class DustMachineDialog implements DustMachineConsts {
 	
 	Map<MindHandle, Object> context = new HashMap<>();
 	
+	DustMachineVisitContext visitCtx = null;
+	
 	public DustMachineDialog(DustMachine machine) {
 		this.machine = machine;
 		context.put(MIND_ATT_UNIT_CONTENT, new HashMap());
@@ -41,7 +44,7 @@ class DustMachineDialog implements DustMachineConsts {
 		Object ret = null;
 		
 		boolean createIfMissing = DustUtilsAttCache.getAtt(MachineAtts.CreatorAccess, cmd, false);
-
+		
 		Object curr;
 
 		if ( null == root ) {
@@ -75,6 +78,8 @@ class DustMachineDialog implements DustMachineConsts {
 				}
 			}
 		}
+		
+		DustHandle hLastItem = ( curr instanceof DustHandle ) ? (DustHandle) curr : null;
 
 		Object prev = null;
 		Object lastKey = null;
@@ -90,7 +95,8 @@ class DustMachineDialog implements DustMachineConsts {
 			}
 			
 			if ( curr instanceof DustHandle ) {
-				curr = resolveKnowledge((DustHandle) curr, createIfMissing);
+				hLastItem = (DustHandle) curr;
+				curr = resolveKnowledge(hLastItem, createIfMissing);
 			} else if ( null == curr ) {
 				if ( createIfMissing ) {
 					curr = (p instanceof Integer) ? new ArrayList() : new HashMap();
@@ -232,6 +238,32 @@ class DustMachineDialog implements DustMachineConsts {
 		case Lookup:
 			break;
 		case Visit:
+			
+			boolean visitRoot = (null == visitCtx);
+			
+			try {
+				if ( visitRoot ) {
+					visitCtx = new DustMachineVisitContext(this);
+				}
+
+				DustVisitor visitor = (DustVisitor) val;
+				Object collection;
+				MindHandle hAtt = null;
+				if ( curr instanceof DustHandle ) {
+					hLastItem = (DustHandle) curr;
+					collection = resolveKnowledge(hLastItem, false);
+				} else {
+					 hAtt = (MindHandle) lastKey;
+					 collection = curr;
+				}
+				
+				visitCtx.visit(visitor, hLastItem, collection, hAtt);
+			} finally {
+				if ( visitRoot ) {
+					visitCtx = null;
+				}
+			}
+			
 			break;
 		}
 

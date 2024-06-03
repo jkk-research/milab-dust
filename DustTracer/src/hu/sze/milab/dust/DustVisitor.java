@@ -7,7 +7,7 @@ public abstract class DustVisitor extends DustAgent {
 	public static final int DEPTH_DEFAULT = 200;
 	public static final int DEPTH_UNLIMITED = -1;
 	
-	enum FollowRef {
+	public enum FollowRef {
 		No, Once, Always
 	}
 	
