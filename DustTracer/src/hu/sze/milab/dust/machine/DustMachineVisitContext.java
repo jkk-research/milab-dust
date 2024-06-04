@@ -130,6 +130,7 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			if (it.hasNext()) {
 				if (null == item) {
 					item = new MachineVisitItem(isMap);
+					setVI(visitor, this);
 					hProcRet = visitor.agentProcess(MindAction.Begin);
 				}
 
@@ -147,6 +148,7 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 				if ((next instanceof Map) || (next instanceof Collection)) {
 					ret = new MachineVisitInfo(visitor, hItem, next, hAtt);
 				} else {
+					setVI(visitor, this);					
 					hProcRet = visitor.agentProcess(MindAction.Process);
 
 					if ((FollowRef.No != visitor.followRef) && DustUtilsAttCache.getAtt(MachineAtts.CanContinue, hProcRet, false)

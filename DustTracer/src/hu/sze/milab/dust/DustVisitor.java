@@ -12,8 +12,8 @@ public abstract class DustVisitor extends DustAgent {
 	}
 	
 	public interface VisitItem {
-		Object getKey();
-		Object getValue();
+		<RetType> RetType getKey();
+		<RetType> RetType getValue();
 	}
 	
 	public interface VisitInfo extends VisitItem {

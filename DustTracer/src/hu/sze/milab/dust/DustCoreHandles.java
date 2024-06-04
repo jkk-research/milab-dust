@@ -14,12 +14,13 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_ATT_UNIT_CONTENT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_UNIT_AUTHOR = Dust.lookup("giskard:1:?");
 
-	MindHandle MIND_ASP_HANDLE = Dust.lookup("giskard:1:?");
-	MindHandle MIND_ATT_HANDLE_UNIT = Dust.lookup("giskard:1:?");
-	MindHandle MIND_ATT_HANDLE_ID = Dust.lookup("giskard:1:?");
+//	MindHandle MIND_ASP_HANDLE = Dust.lookup("giskard:1:?");
+//	MindHandle MIND_ATT_HANDLE_UNIT = Dust.lookup("giskard:1:?");
+//	MindHandle MIND_ATT_HANDLE_ID = Dust.lookup("giskard:1:?");
 
 	MindHandle MIND_ASP_KNOWLEDGE = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_HANDLE = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_KNOWLEDGE_UNIT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_TAGS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_LISTENERS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_PRIMARYASPECT = Dust.lookup("giskard:1:?");

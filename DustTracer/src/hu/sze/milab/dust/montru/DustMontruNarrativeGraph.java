@@ -1,9 +1,14 @@
 package hu.sze.milab.dust.montru;
 
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Point;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
@@ -12,8 +17,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -24,11 +27,8 @@ import javax.swing.JScrollPane;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.DustException;
-import hu.sze.milab.dust.DustConsts.MindAccess;
-import hu.sze.milab.dust.DustConsts.MindHandle;
+import hu.sze.milab.dust.DustVisitor;
 import hu.sze.milab.dust.dev.DustDevUtils;
-import hu.sze.milab.dust.stream.json.DustJsonUtils;
-import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustutilsFactory;
 
 public class DustMontruNarrativeGraph extends DustAgent implements DustMontruConsts {
@@ -53,17 +53,98 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 
 	static class GraphWrapper extends CompWrapper<JScrollPane> {
 
-		ArrayList<Object> cols = new ArrayList<>();
+//		ArrayList<Object> cols = new ArrayList<>();
 
 		class GraphPanel extends JPanel implements MouseWheelListener {
 			private static final long serialVersionUID = 1L;
 
+			private ComponentListener cl = new  ComponentAdapter() {
+				public void componentResized(ComponentEvent e) {
+					layoutChildren();
+				}
+				
+				@Override
+				public void componentShown(ComponentEvent e) {
+					layoutChildren();
+				}
+			};
+
 			private int zoomFactor = 0;
+			double zf = Math.pow(1.1, zoomFactor);
 
 			public GraphPanel() {
 				super(null);
 
 				addMouseWheelListener(this);
+				comp.addComponentListener(cl);
+			}
+
+			public void layoutChildren() {
+				{
+					int cc = getComponentCount();
+					
+					Dimension md = null;
+					Dimension d = new Dimension();
+
+					for ( int i = 0; i < cc; ++i) {
+						getComponent(i).getSize(d);
+						
+						if ( null == md ) {
+							md = new Dimension(d);
+						} else {
+							if ( d.height > md.height ) {
+								md.height = d.height;
+							}
+							if ( d.width > md.width ) {
+								md.width = d.width;
+							}
+						}
+					}
+					
+					md.height += 10;
+					md.width += 10;
+					int dx = md.width / 2;
+					
+					Dimension dPnl = comp.getViewport().getExtentSize();
+					
+					int pw = dPnl.width;
+					if ( 0 != zoomFactor ) {
+						pw = (int) ((double) pw / zf);
+					}
+					
+					Point ptChild = null;
+					
+					for ( int i = 0; i < cc; ++i) {
+						Component comp = getComponent(i);
+						
+						comp.getSize(d);
+						
+						if ( null == ptChild ) {
+							ptChild = new Point(md.width / 2, md.height/2);
+						} else {
+							ptChild.x += md.width;
+							
+							if ( (ptChild.x + dx ) > pw ) {
+								ptChild.x = md.width / 2;
+								ptChild.y += md.height;
+							}
+						}
+						
+						comp.setLocation(ptChild.x - (d.width / 2), ptChild.y - (d.height / 2));
+					}
+					
+					dPnl.height = ptChild.y + (md.height / 2);
+					if ( 0 != zoomFactor ) {
+						dPnl.height = (int) ((double) dPnl.height * zf);
+					}
+
+					setPreferredSize(dPnl);
+					
+					comp.revalidate();
+					comp.repaint();
+
+					
+				}
 			}
 
 			@Override
@@ -72,8 +153,8 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 
 				if (0 != rot) {
 					zoomFactor += rot;
-
-					repaint();
+					zf = Math.pow(1.1, zoomFactor);
+					layoutChildren();					
 				}
 
 			}
@@ -86,7 +167,6 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 					AffineTransform atOrig = g2.getTransform();
 
 					AffineTransform at = new AffineTransform();
-					double zf = 1.0 + (0.1 * zoomFactor);
 					at.scale(zf, zf);
 					g2.transform(at);
 
@@ -102,10 +182,10 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 
-				Graphics2D g2 = (Graphics2D) g;
-
-				g2.drawLine(20, 20, 200, 200);
-				g2.drawLine(20, 200, 200, 20);
+//				Graphics2D g2 = (Graphics2D) g;
+//
+//				g2.drawLine(20, 20, 200, 200);
+//				g2.drawLine(20, 200, 200, 20);
 
 			}
 
@@ -116,17 +196,7 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		protected GraphWrapper() {
 			super(new JScrollPane());
 
-			ImageIcon icon = new ImageIcon(imgs.get("ball_purple.png"));
-
-			JLabel label1 = new JLabel("Test", icon, JLabel.CENTER);
-			label1.setVerticalTextPosition(JLabel.BOTTOM);
-			label1.setHorizontalTextPosition(JLabel.CENTER);
-			gp.add(label1);
-
-			Dimension size = label1.getPreferredSize();
-			label1.setBounds(10, 10, size.width, size.height);
-
-			gp.setSize(400, 400);
+//			gp.setSize(400, 400);
 
 			comp.setViewportView(gp);
 		}
@@ -150,58 +220,89 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		Collection<Object> units = Dust.access(MindAccess.Peek, Collections.EMPTY_LIST, gw.hComp, MISC_ATT_CONN_SOURCE,
 				MISC_ATT_CONN_MEMBERARR);
 
+		MindHandle hUnit = Dust.access(MindAccess.Peek, null, gw.hComp, MIND_ATT_KNOWLEDGE_UNIT);
+		ArrayList<CompWrapper<?>> mcw = new ArrayList<>();
+
 		for (Object unit : units) {
-			Map<Object, MindHandle> items = Dust.access(MindAccess.Peek, Collections.EMPTY_MAP, unit, MIND_ATT_UNIT_HANDLES);
-			for (MindHandle hItem : items.values()) {
+			Dust.access(MindAccess.Visit, new DustVisitor() {
+				@Override
+				protected MindHandle agentProcess() throws Exception {
+					MindHandle hItem = getInfo().getValue();
 
-				Map<MindHandle, Object> itemData = Dust.access(MindAccess.Peek, Collections.EMPTY_MAP, unit,
-						MIND_ATT_UNIT_CONTENT, hItem);
+					MindHandle hItemLabel = Dust.access(MindAccess.Peek, null, gw.hComp, MISC_ATT_CONN_MEMBERMAP, hItem);
 
-				if (null != itemData) {
-					Object item = DustJsonUtils.handleToMap(hItem);
+					if (null == hItemLabel) {
+						String lbl = hItem.toString();
+						hItemLabel = DustDevUtils.registerAgent(hUnit, MONTRU_NAR_WIDGET, lbl);
+						DustDevUtils.setTag(hItemLabel, MONTRU_TAG_WIDGET_LABEL, MONTRU_TAG_WIDGET);
 
-					for (Map.Entry<MindHandle, Object> ce : itemData.entrySet()) {
-						MindHandle hAtt = ce.getKey();
+						Dust.access(MindAccess.Commit, MIND_TAG_ACTION_INIT, hItemLabel);
 
+						CompWrapper<?> cw = Dust.access(MindAccess.Peek, null, hItemLabel, DUST_ATT_IMPL_DATA);
+						JLabel jl = (JLabel) cw.comp;
+
+						ImageIcon icon = new ImageIcon(imgs.get("ball_purple.png"));
+						jl.setText(lbl);
+						jl.setIcon(icon);
+						jl.setVerticalTextPosition(JLabel.BOTTOM);
+						jl.setHorizontalTextPosition(JLabel.CENTER);
+
+						pnl.add(jl);
+						mcw.add(cw);
+
+						Dust.access(MindAccess.Set, hItemLabel, gw.hComp, MISC_ATT_CONN_MEMBERMAP, hItem);
+						Dust.access(MindAccess.Insert, hItemLabel, gw.hComp, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 					}
+
+					return MIND_TAG_RESULT_READACCEPT;
 				}
+			}, unit, MIND_ATT_UNIT_HANDLES);
+
+			Component cChild;
+			Dimension d;
+
+			for (CompWrapper<?> cw : mcw) {
+				cChild = cw.comp;
+				d = cChild.getPreferredSize();
+				cChild.setBounds(0, 0, d.width, d.height);
 			}
+
 		}
 
 		return MIND_TAG_RESULT_READACCEPT;
 	}
 
-	@SuppressWarnings("unchecked")
+//	@SuppressWarnings("unchecked")
 	@Override
 	protected MindHandle agentProcess() throws Exception {
-		GraphWrapper gw = DustDevUtils.getImplOb(CREATOR, "");
+//		GraphWrapper gw = DustDevUtils.getImplOb(CREATOR, "");
 
-		Object src = DustDevUtils.getValueRec(gw.hComp, MISC_ATT_CONN_SOURCE, MISC_ATT_CONN_OWNER);
-
-		if (null != src) {
-			ArrayList<Object> path = Dust.access(MindAccess.Peek, null, gw.hComp, MISC_ATT_REF_PATH);
-			Object o = (null == path) ? src : Dust.access(MindAccess.Peek, null, src, path.toArray());
-
-			if (o instanceof Map) {
-				for (Map.Entry<Object, Object> e : ((Map<Object, Object>) o).entrySet()) {
-					Map<Object, String> row = new HashMap<>();
-
-					row.put(TEXT_ATT_TOKEN, (String) e.getKey());
-
-					Map<Object, Object> m = Dust.access(MindAccess.Peek, Collections.EMPTY_MAP, e.getValue(),
-							MISC_ATT_GEN_EXTMAP);
-
-					for (Map.Entry<Object, Object> me : m.entrySet()) {
-						Object mk = me.getKey();
-						if (!gw.cols.contains(mk)) {
-							gw.cols.add(mk);
-						}
-
-						row.put(mk, DustUtils.toString(me.getValue()));
-					}
-				}
-			}
-		}
+//		Object src = DustDevUtils.getValueRec(gw.hComp, MISC_ATT_CONN_SOURCE, MISC_ATT_CONN_OWNER);
+//
+//		if (null != src) {
+//			ArrayList<Object> path = Dust.access(MindAccess.Peek, null, gw.hComp, MISC_ATT_REF_PATH);
+//			Object o = (null == path) ? src : Dust.access(MindAccess.Peek, null, src, path.toArray());
+//
+//			if (o instanceof Map) {
+//				for (Map.Entry<Object, Object> e : ((Map<Object, Object>) o).entrySet()) {
+//					Map<Object, String> row = new HashMap<>();
+//
+//					row.put(TEXT_ATT_TOKEN, (String) e.getKey());
+//
+//					Map<Object, Object> m = Dust.access(MindAccess.Peek, Collections.EMPTY_MAP, e.getValue(),
+//							MISC_ATT_GEN_EXTMAP);
+//
+//					for (Map.Entry<Object, Object> me : m.entrySet()) {
+//						Object mk = me.getKey();
+//						if (!gw.cols.contains(mk)) {
+//							gw.cols.add(mk);
+//						}
+//
+//						row.put(mk, DustUtils.toString(me.getValue()));
+//					}
+//				}
+//			}
+//		}
 
 		return super.agentProcess();
 	}

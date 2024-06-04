@@ -40,12 +40,9 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 	};
 
 	public static MindHandle newHandle(MindHandle hUnit, MindHandle hPrimaryAspect, String hint) {
-		return newHandle(hUnit.getId(), hPrimaryAspect, hint);
-	};
+		MindHandle h = Dust.lookup(hUnit.getId() + DUST_SEP_ID + ITEMID_NEW);
 
-	public static MindHandle newHandle(String unit, MindHandle hPrimaryAspect, String hint) {
-		MindHandle h = Dust.lookup(unit + DUST_SEP_ID + ITEMID_NEW);
-
+		Dust.access(MindAccess.Set, hUnit, h, MIND_ATT_KNOWLEDGE_UNIT);
 		Dust.access(MindAccess.Set, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
 		if ( !DustUtils.isEmpty(hint) ) {
@@ -100,7 +97,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 	}
 
 	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {
-		MindHandle hNative = newHandle(hUnit.getId(), DUST_ASP_IMPL, DustUtils.getPostfix(nativeClassName, "."));
+		MindHandle hNative = newHandle(hUnit, DUST_ASP_IMPL, DustUtils.getPostfix(nativeClassName, "."));
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_IMPL_NARRATIVE);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
