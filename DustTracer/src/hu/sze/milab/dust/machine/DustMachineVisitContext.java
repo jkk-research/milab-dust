@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import hu.sze.milab.dust.DustVisitor;
-import hu.sze.milab.dust.DustVisitor.FollowRef;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -70,17 +69,17 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 
 		@Override
 		public MindHandle getAttHandle() {
-			return hAtt;
+			return isRoot ? getKey() : hAtt;
 		}
 
 		@Override
-		public Object getKey() {
-			return item.key;
+		public <RetType> RetType getKey() {
+			return (RetType) item.key;
 		}
 
 		@Override
-		public Object getValue() {
-			return item.val;
+		public <RetType> RetType getValue() {
+			return (RetType) item.val;
 		}
 
 		@Override
@@ -148,13 +147,13 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 				if ((next instanceof Map) || (next instanceof Collection)) {
 					ret = new MachineVisitInfo(visitor, hItem, next, hAtt);
 				} else {
-					setVI(visitor, this);					
+					setVI(visitor, this);
 					hProcRet = visitor.agentProcess(MindAction.Process);
 
-					if ((FollowRef.No != visitor.followRef) && DustUtilsAttCache.getAtt(MachineAtts.CanContinue, hProcRet, false)
-							&& (next instanceof MindHandle)) {
+					if ((VisitFollowRef.No != visitor.followRef)
+							&& DustUtilsAttCache.getAtt(MachineAtts.CanContinue, hProcRet, false) && (next instanceof MindHandle)) {
 						MindHandle hNext = (MindHandle) next;
-						if ((FollowRef.Always == visitor.followRef) || shouldVisit(hNext)) {
+						if ((VisitFollowRef.Always == visitor.followRef) || shouldVisit(hNext)) {
 							Map kNext = dialog.resolveKnowledge(hNext, false);
 							if (null != kNext) {
 								ret = new MachineVisitInfo(visitor, hNext, kNext, null);
@@ -177,22 +176,23 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 
 	Stack<MachineVisitInfo> viStack = new Stack<MachineVisitInfo>();
 
-	Set<MindHandle> itemVisited;
+	Set<MindHandle> skipRef = new HashSet();
 
 	DustMachineVisitContext(DustMachineDialog dialog) {
 		this.dialog = dialog;
 	}
 
 	void visit(DustVisitor visitor, MindHandle hItem, Object collection, MindHandle hAtt) {
+		skipRef.add(hItem);
 		MachineVisitInfo vi = new MachineVisitInfo(visitor, hItem, collection, hAtt);
 		int depth = stepIn(vi);
 
-		for (; null != vi; ) {
+		for (; null != vi;) {
 			try {
 				vi = viCurrent.step();
 
 				if (null == vi) {
-					vi = stepOut(depth); 
+					vi = stepOut(depth);
 				} else if (vi != viCurrent) {
 					stepIn(vi);
 				}
@@ -210,19 +210,16 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		} else {
 			viCurrent = viStack.pop();
 		}
-		
-		return (depth < viStack.size()) ? viCurrent : null;
+
+		return (depth <= viStack.size()) ? viCurrent : null;
 	}
 
 	private int stepIn(MachineVisitInfo vi) {
 		int depth = 0;
-		
+
 		if (null != viCurrent) {
-			if (null == viStack) {
-				viStack = new Stack<MachineVisitInfo>();
-			}
 			viStack.push(viCurrent);
-			
+
 			depth = viStack.size();
 		}
 		viCurrent = vi;
@@ -231,12 +228,7 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 	}
 
 	boolean shouldVisit(MindHandle h) {
-		if (null == itemVisited) {
-			itemVisited = new HashSet();
-		}
-
-		return itemVisited.add(h);
-
+		return skipRef.add(h);
 	}
 
 	void populatePath(ArrayList<Object> target) {

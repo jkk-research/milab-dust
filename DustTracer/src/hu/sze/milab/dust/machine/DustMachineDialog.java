@@ -79,7 +79,7 @@ class DustMachineDialog implements DustMachineConsts {
 			}
 		}
 		
-		DustHandle hLastItem = ( curr instanceof DustHandle ) ? (DustHandle) curr : null;
+		DustHandle hLastItem = (DustHandle) ((curr instanceof Map) ? ((Map)curr).get(MIND_ATT_KNOWLEDGE_HANDLE) : (curr instanceof DustHandle) ? curr : (root instanceof DustHandle) ? root : null);
 
 		Object prev = null;
 		Object lastKey = null;
@@ -124,13 +124,15 @@ class DustMachineDialog implements DustMachineConsts {
 				ArrayList al = (ArrayList) curr;
 				Integer idx = (Integer) p;
 
-				if ( (KEY_ADD == idx) || (idx >= al.size()) ) {
+				if ( (KEY_SIZE == idx) ) {
+					curr = al.size();
+				} else if ( (KEY_ADD == idx) || (idx >= al.size()) ) {
 					curr = null;
 				} else {
 					curr = al.get(idx);
 				}
 			} else if ( curr instanceof Map ) {
-				curr = ((Map) curr).get(p);
+				curr = DustUtils.isEqual(KEY_SIZE, p) ? ((Map) curr).size() :((Map) curr).get(p);
 			} else {
 				curr = null;
 			}
@@ -239,13 +241,13 @@ class DustMachineDialog implements DustMachineConsts {
 			break;
 		case Visit:
 			
+			if ( null == hLastItem ) {
+				break;
+			}
+			
 			boolean visitRoot = (null == visitCtx);
 			
 			try {
-				if ( visitRoot ) {
-					visitCtx = new DustMachineVisitContext(this);
-				}
-
 				DustVisitor visitor = (DustVisitor) val;
 				Object collection;
 				MindHandle hAtt = null;
@@ -257,6 +259,9 @@ class DustMachineDialog implements DustMachineConsts {
 					 collection = curr;
 				}
 				
+				if ( visitRoot ) {
+					visitCtx = new DustMachineVisitContext(this);
+				}
 				visitCtx.visit(visitor, hLastItem, collection, hAtt);
 			} finally {
 				if ( visitRoot ) {

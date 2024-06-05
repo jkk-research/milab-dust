@@ -70,5 +70,10 @@ public interface DustConsts {
 			return null;
 		}
 	}
+	
+	public enum VisitFollowRef {
+		No, Once, Always
+	}
+
 
 }

@@ -6,11 +6,7 @@ import java.util.Collection;
 public abstract class DustVisitor extends DustAgent {
 	public static final int DEPTH_DEFAULT = 200;
 	public static final int DEPTH_UNLIMITED = -1;
-	
-	public enum FollowRef {
-		No, Once, Always
-	}
-	
+		
 	public interface VisitItem {
 		<RetType> RetType getKey();
 		<RetType> RetType getValue();
@@ -26,20 +22,20 @@ public abstract class DustVisitor extends DustAgent {
 		Collection<DustVisitor.VisitItem> getRemoved(Collection<DustVisitor.VisitItem> removed);
 	}
 	
-	public final FollowRef followRef;
+	public final VisitFollowRef followRef;
 	public final int maxDepth;
 	
 	private VisitInfo info;
 	
 	public DustVisitor() {
-		this(FollowRef.No, DEPTH_DEFAULT);
+		this(VisitFollowRef.No, DEPTH_DEFAULT);
 	}
 	
-	public DustVisitor(FollowRef followRef) {
+	public DustVisitor(VisitFollowRef followRef) {
 		this(followRef, DEPTH_DEFAULT);
 	}
 	
-	public DustVisitor(FollowRef followRef, int maxDepth) {
+	public DustVisitor(VisitFollowRef followRef, int maxDepth) {
 		super();
 		this.followRef = followRef;
 		this.maxDepth = maxDepth;

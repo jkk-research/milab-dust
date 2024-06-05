@@ -14,7 +14,6 @@ import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -58,11 +57,11 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		class GraphPanel extends JPanel implements MouseWheelListener {
 			private static final long serialVersionUID = 1L;
 
-			private ComponentListener cl = new  ComponentAdapter() {
+			private ComponentListener cl = new ComponentAdapter() {
 				public void componentResized(ComponentEvent e) {
 					layoutChildren();
 				}
-				
+
 				@Override
 				public void componentShown(ComponentEvent e) {
 					layoutChildren();
@@ -82,68 +81,67 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 			public void layoutChildren() {
 				{
 					int cc = getComponentCount();
-					
+
 					Dimension md = null;
 					Dimension d = new Dimension();
 
-					for ( int i = 0; i < cc; ++i) {
+					for (int i = 0; i < cc; ++i) {
 						getComponent(i).getSize(d);
-						
-						if ( null == md ) {
+
+						if (null == md) {
 							md = new Dimension(d);
 						} else {
-							if ( d.height > md.height ) {
+							if (d.height > md.height) {
 								md.height = d.height;
 							}
-							if ( d.width > md.width ) {
+							if (d.width > md.width) {
 								md.width = d.width;
 							}
 						}
 					}
-					
+
 					md.height += 10;
 					md.width += 10;
 					int dx = md.width / 2;
-					
+
 					Dimension dPnl = comp.getViewport().getExtentSize();
-					
+
 					int pw = dPnl.width;
-					if ( 0 != zoomFactor ) {
+					if (0 != zoomFactor) {
 						pw = (int) ((double) pw / zf);
 					}
-					
+
 					Point ptChild = null;
-					
-					for ( int i = 0; i < cc; ++i) {
+
+					for (int i = 0; i < cc; ++i) {
 						Component comp = getComponent(i);
-						
+
 						comp.getSize(d);
-						
-						if ( null == ptChild ) {
-							ptChild = new Point(md.width / 2, md.height/2);
+
+						if (null == ptChild) {
+							ptChild = new Point(md.width / 2, md.height / 2);
 						} else {
 							ptChild.x += md.width;
-							
-							if ( (ptChild.x + dx ) > pw ) {
+
+							if ((ptChild.x + dx) > pw) {
 								ptChild.x = md.width / 2;
 								ptChild.y += md.height;
 							}
 						}
-						
+
 						comp.setLocation(ptChild.x - (d.width / 2), ptChild.y - (d.height / 2));
 					}
-					
+
 					dPnl.height = ptChild.y + (md.height / 2);
-					if ( 0 != zoomFactor ) {
+					if (0 != zoomFactor) {
 						dPnl.height = (int) ((double) dPnl.height * zf);
 					}
 
 					setPreferredSize(dPnl);
-					
+
 					comp.revalidate();
 					comp.repaint();
 
-					
 				}
 			}
 
@@ -154,7 +152,7 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 				if (0 != rot) {
 					zoomFactor += rot;
 					zf = Math.pow(1.1, zoomFactor);
-					layoutChildren();					
+					layoutChildren();
 				}
 
 			}
@@ -182,11 +180,33 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 
-//				Graphics2D g2 = (Graphics2D) g;
-//
-//				g2.drawLine(20, 20, 200, 200);
-//				g2.drawLine(20, 200, 200, 20);
+				Graphics2D g2 = (Graphics2D) g;
+				Dimension d = new Dimension();
 
+				Point ptFrom = new Point();
+				Point ptTo = new Point();
+
+				int edgeCount = Dust.access(MindAccess.Peek, 0, hComp, GEOMETRY_ATT_GRAPH_EDGES, KEY_SIZE);
+
+				if (0 < edgeCount) {
+					Dust.access(MindAccess.Visit, new DustVisitor() {
+						@Override
+						protected MindHandle agentProcess() throws Exception {
+							MindHandle hEdge = getInfo().getValue();
+
+							CompWrapper<?> gwFrom = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_SOURCE,
+									DUST_ATT_IMPL_DATA);
+							CompWrapper<?> gwTo = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_TARGET, DUST_ATT_IMPL_DATA);
+
+							getCenter(d, ptFrom, gwFrom);
+							getCenter(d, ptTo, gwTo);
+
+							g2.drawLine(ptFrom.x, ptFrom.y - 10, ptTo.x, ptTo.y - 10);
+
+							return MIND_TAG_RESULT_READACCEPT;
+						}
+					}, hComp, GEOMETRY_ATT_GRAPH_EDGES);
+				}
 			}
 
 		};
@@ -195,8 +215,6 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 
 		protected GraphWrapper() {
 			super(new JScrollPane());
-
-//			gp.setSize(400, 400);
 
 			comp.setViewportView(gp);
 		}
@@ -211,6 +229,13 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		}
 	};
 
+	private static void getCenter(Dimension d, Point ptFrom, CompWrapper<?> gwFrom) {
+		gwFrom.comp.getSize(d);
+		gwFrom.comp.getLocation(ptFrom);
+		ptFrom.x += (d.width / 2);
+		ptFrom.y += (d.height / 2);
+	}
+
 	@Override
 	protected MindHandle agentInit() throws Exception {
 
@@ -221,51 +246,38 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 				MISC_ATT_CONN_MEMBERARR);
 
 		MindHandle hUnit = Dust.access(MindAccess.Peek, null, gw.hComp, MIND_ATT_KNOWLEDGE_UNIT);
-		ArrayList<CompWrapper<?>> mcw = new ArrayList<>();
 
 		for (Object unit : units) {
-			Dust.access(MindAccess.Visit, new DustVisitor() {
+//			Dust.access(MindAccess.Visit, new DustVisitor() {
+			Dust.access(MindAccess.Visit, new DustVisitor(VisitFollowRef.Once) {
 				@Override
 				protected MindHandle agentProcess() throws Exception {
-					MindHandle hItem = getInfo().getValue();
+					VisitInfo info = getInfo();
 
-					MindHandle hItemLabel = Dust.access(MindAccess.Peek, null, gw.hComp, MISC_ATT_CONN_MEMBERMAP, hItem);
+					MindHandle hAtt = info.getAttHandle();
 
-					if (null == hItemLabel) {
-						String lbl = hItem.toString();
-						hItemLabel = DustDevUtils.registerAgent(hUnit, MONTRU_NAR_WIDGET, lbl);
-						DustDevUtils.setTag(hItemLabel, MONTRU_TAG_WIDGET_LABEL, MONTRU_TAG_WIDGET);
+					Object val = info.getValue();
+					if (val instanceof MindHandle) {
+						MindHandle hItemLabel = getItemLabel(gw, pnl, hUnit, (MindHandle) val);
 
-						Dust.access(MindAccess.Commit, MIND_TAG_ACTION_INIT, hItemLabel);
+						if (null != hAtt) {
+							MindHandle hParentLabel = getItemLabel(gw, pnl, hUnit, info.getItemHandle());
+							if (null != hParentLabel) {
+								MindHandle hEdge = DustDevUtils.newHandle(hUnit, GEOMETRY_ASP_EDGE, "edge");
+								Dust.access(MindAccess.Set, hParentLabel, hEdge, MISC_ATT_CONN_SOURCE);
+								Dust.access(MindAccess.Set, hItemLabel, hEdge, MISC_ATT_CONN_TARGET);
+								Dust.access(MindAccess.Set, hAtt, hEdge, GEOMETRY_ATT_EDGE_CLASS);
 
-						CompWrapper<?> cw = Dust.access(MindAccess.Peek, null, hItemLabel, DUST_ATT_IMPL_DATA);
-						JLabel jl = (JLabel) cw.comp;
-
-						ImageIcon icon = new ImageIcon(imgs.get("ball_purple.png"));
-						jl.setText(lbl);
-						jl.setIcon(icon);
-						jl.setVerticalTextPosition(JLabel.BOTTOM);
-						jl.setHorizontalTextPosition(JLabel.CENTER);
-
-						pnl.add(jl);
-						mcw.add(cw);
-
-						Dust.access(MindAccess.Set, hItemLabel, gw.hComp, MISC_ATT_CONN_MEMBERMAP, hItem);
-						Dust.access(MindAccess.Insert, hItemLabel, gw.hComp, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+								Dust.access(MindAccess.Insert, hEdge, gw.hComp, GEOMETRY_ATT_GRAPH_EDGES, KEY_ADD);
+							}
+						} else {
+							DustDevUtils.breakpoint("heh");
+						}
 					}
 
 					return MIND_TAG_RESULT_READACCEPT;
 				}
 			}, unit, MIND_ATT_UNIT_HANDLES);
-
-			Component cChild;
-			Dimension d;
-
-			for (CompWrapper<?> cw : mcw) {
-				cChild = cw.comp;
-				d = cChild.getPreferredSize();
-				cChild.setBounds(0, 0, d.width, d.height);
-			}
 
 		}
 
@@ -275,36 +287,39 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 //	@SuppressWarnings("unchecked")
 	@Override
 	protected MindHandle agentProcess() throws Exception {
-//		GraphWrapper gw = DustDevUtils.getImplOb(CREATOR, "");
-
-//		Object src = DustDevUtils.getValueRec(gw.hComp, MISC_ATT_CONN_SOURCE, MISC_ATT_CONN_OWNER);
-//
-//		if (null != src) {
-//			ArrayList<Object> path = Dust.access(MindAccess.Peek, null, gw.hComp, MISC_ATT_REF_PATH);
-//			Object o = (null == path) ? src : Dust.access(MindAccess.Peek, null, src, path.toArray());
-//
-//			if (o instanceof Map) {
-//				for (Map.Entry<Object, Object> e : ((Map<Object, Object>) o).entrySet()) {
-//					Map<Object, String> row = new HashMap<>();
-//
-//					row.put(TEXT_ATT_TOKEN, (String) e.getKey());
-//
-//					Map<Object, Object> m = Dust.access(MindAccess.Peek, Collections.EMPTY_MAP, e.getValue(),
-//							MISC_ATT_GEN_EXTMAP);
-//
-//					for (Map.Entry<Object, Object> me : m.entrySet()) {
-//						Object mk = me.getKey();
-//						if (!gw.cols.contains(mk)) {
-//							gw.cols.add(mk);
-//						}
-//
-//						row.put(mk, DustUtils.toString(me.getValue()));
-//					}
-//				}
-//			}
-//		}
-
 		return super.agentProcess();
 	}
 
+	private MindHandle getItemLabel(GraphWrapper gw, JPanel pnl, MindHandle hUnit, MindHandle hItem) {
+		MindHandle hItemLabel = Dust.access(MindAccess.Peek, null, gw.hComp, MISC_ATT_CONN_MEMBERMAP, hItem);
+
+		if (null == hItemLabel) {
+			String lbl = hItem.toString();
+			hItemLabel = DustDevUtils.registerAgent(hUnit, MONTRU_NAR_WIDGET, lbl);
+			DustDevUtils.setTag(hItemLabel, MONTRU_TAG_WIDGET_LABEL, MONTRU_TAG_WIDGET);
+
+			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_INIT, hItemLabel);
+
+			CompWrapper<?> cw = Dust.access(MindAccess.Peek, null, hItemLabel, DUST_ATT_IMPL_DATA);
+			JLabel jl = (JLabel) cw.comp;
+
+			ImageIcon icon = new ImageIcon(imgs.get("ball_purple.png"));
+			jl.setText(lbl);
+			jl.setIcon(icon);
+			jl.setVerticalTextPosition(JLabel.BOTTOM);
+			jl.setHorizontalTextPosition(JLabel.CENTER);
+
+			pnl.add(jl);
+
+			Dimension d = jl.getPreferredSize();
+			jl.setBounds(0, 0, d.width, d.height);
+
+//				mcw.add(cw);
+
+			Dust.access(MindAccess.Set, hItemLabel, gw.hComp, MISC_ATT_CONN_MEMBERMAP, hItem);
+			Dust.access(MindAccess.Insert, hItemLabel, gw.hComp, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		}
+
+		return hItemLabel;
+	}
 }
