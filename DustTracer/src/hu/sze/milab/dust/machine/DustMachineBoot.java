@@ -8,6 +8,7 @@ import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.dev.DustDevNarrative;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.dev.forge.DustDevNarrativeForgeUI;
 import hu.sze.milab.dust.event.DustEventNarrative;
 import hu.sze.milab.dust.misc.DustMiscNarrative;
 import hu.sze.milab.dust.montru.DustMontruNarrativeContainer;
@@ -144,7 +145,8 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustDevUtils.registerNative(NET_NAR_HTTPSVCFILES, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpFileAgent.class.getName());
 		DustDevUtils.registerNative(NET_NAR_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getName());
 		
-
+		DustDevUtils.registerNative(DEV_NAR_FORGEUI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustDevNarrativeForgeUI.class.getName());
+		
 		String bootClass = System.getProperty("DustBootClass");
 		
 		if ( !DustUtils.isEmpty(bootClass)) {

@@ -5,10 +5,13 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Point;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
 import java.awt.geom.AffineTransform;
@@ -28,6 +31,7 @@ import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.DustVisitor;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustutilsFactory;
 
 public class DustMontruNarrativeGraph extends DustAgent implements DustMontruConsts {
@@ -57,9 +61,14 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		class GraphPanel extends JPanel implements MouseWheelListener {
 			private static final long serialVersionUID = 1L;
 
+			@Override
+			public boolean isFocusable() {
+				return true;
+			}
+
 			private ComponentListener cl = new ComponentAdapter() {
 				public void componentResized(ComponentEvent e) {
-					layoutChildren();
+//					layoutChildren();
 				}
 
 				@Override
@@ -68,8 +77,8 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 				}
 			};
 
-			private int zoomFactor = 0;
-			double zf = Math.pow(1.1, zoomFactor);
+			int zoomFactor = 0;
+			Double zf = null; // 1.0;
 
 			public GraphPanel() {
 				super(null);
@@ -80,64 +89,9 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 
 			public void layoutChildren() {
 				{
-					int cc = getComponentCount();
-
-					Dimension md = null;
-					Dimension d = new Dimension();
-
-					for (int i = 0; i < cc; ++i) {
-						getComponent(i).getSize(d);
-
-						if (null == md) {
-							md = new Dimension(d);
-						} else {
-							if (d.height > md.height) {
-								md.height = d.height;
-							}
-							if (d.width > md.width) {
-								md.width = d.width;
-							}
-						}
-					}
-
-					md.height += 10;
-					md.width += 10;
-					int dx = md.width / 2;
-
 					Dimension dPnl = comp.getViewport().getExtentSize();
 
-					int pw = dPnl.width;
-					if (0 != zoomFactor) {
-						pw = (int) ((double) pw / zf);
-					}
-
-					Point ptChild = null;
-
-					for (int i = 0; i < cc; ++i) {
-						Component comp = getComponent(i);
-
-						comp.getSize(d);
-
-						if (null == ptChild) {
-							ptChild = new Point(md.width / 2, md.height / 2);
-						} else {
-							ptChild.x += md.width;
-
-							if ((ptChild.x + dx) > pw) {
-								ptChild.x = md.width / 2;
-								ptChild.y += md.height;
-							}
-						}
-
-						comp.setLocation(ptChild.x - (d.width / 2), ptChild.y - (d.height / 2));
-					}
-
-					dPnl.height = ptChild.y + (md.height / 2);
-					if (0 != zoomFactor) {
-						dPnl.height = (int) ((double) dPnl.height * zf);
-					}
-
-					setPreferredSize(dPnl);
+					DustMontruUtils.gridLayout(this, dPnl, zf);
 
 					comp.revalidate();
 					comp.repaint();
@@ -151,15 +105,15 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 
 				if (0 != rot) {
 					zoomFactor += rot;
-					zf = Math.pow(1.1, zoomFactor);
-					layoutChildren();
+//					zf = Math.pow(1.1, zoomFactor);
+//					layoutChildren();
 				}
 
 			}
 
 			@Override
 			public void paint(Graphics g) {
-				if (0 != zoomFactor) {
+				if (null != zf) {
 					Graphics2D g2 = (Graphics2D) g;
 
 					AffineTransform atOrig = g2.getTransform();
@@ -218,6 +172,33 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 
 			comp.setViewportView(gp);
 		}
+	}
+
+	static {
+		KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
+			@Override
+			public boolean dispatchKeyEvent(KeyEvent e) {
+				boolean ret = false;
+				Component comp = e.getComponent();
+				if (DustUtils.isEqual(comp.getClass(), GraphWrapper.GraphPanel.class)) {
+					GraphWrapper.GraphPanel gp = (GraphWrapper.GraphPanel) comp;
+					int id = e.getID();
+
+					if (id == KeyEvent.KEY_TYPED) {
+						ret = true;
+						
+						switch (e.getKeyChar()) {
+						case 'g':
+							gp.layoutChildren();
+							break;
+						default:
+							ret = false;
+						}
+					}
+				}
+				return ret;
+			}
+		});
 	}
 
 	static DustCreator<GraphWrapper> CREATOR = new DustCreator<GraphWrapper>() {

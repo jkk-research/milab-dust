@@ -56,6 +56,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		public Map create(Object key, Object... hints) {
 			Map m = new KnowledgeMap();
 			initUnit(m, (DustHandle) key, hints);
+			((Set)rootUnit.get(DUST_ATT_MACHINE_UNITS)).add(key);
 
 			return m;
 		}
@@ -91,6 +92,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 		initUnit(rootUnit, APP_UNIT);
 		Map rootHandles = DustUtils.simpleGet(rootUnit, MIND_ATT_UNIT_HANDLES);
 		Map rootContent = DustUtils.simpleGet(rootUnit, MIND_ATT_UNIT_CONTENT);
+		rootUnit.put(DUST_ATT_MACHINE_UNITS, new HashSet());
 
 		Map<String, Map> unitHandles = new TreeMap<>();
 
@@ -144,6 +146,7 @@ class DustMachine extends Dust.Machine implements DustMachineConsts, DustConsts.
 
 		for (MindHandle hu : units) {
 			optLoadUnit(hu);
+			((Set)rootUnit.get(DUST_ATT_MACHINE_UNITS)).add(hu);
 		}
 
 		Dust.access(MindAccess.Set, APP_ASSEMBLY_MAIN, APP_MACHINE_MAIN, DUST_ATT_MACHINE_MAINASSEMBLY);

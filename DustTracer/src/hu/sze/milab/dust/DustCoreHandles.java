@@ -275,6 +275,8 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle DEV_ATT_HINT = Dust.lookup("giskard:7:?");
 	MindHandle DEV_TAG_TEST = Dust.lookup("giskard:7:?");
 
+	MindHandle DEV_NAR_FORGEUI = Dust.lookup("giskard:7:?");
+
 	MindHandle GEOMETRY_ASP_EDGE = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_ATT_EDGE_CLASS = Dust.lookup("giskard:12:?");
 

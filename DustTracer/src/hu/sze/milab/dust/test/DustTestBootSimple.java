@@ -32,19 +32,20 @@ public class DustTestBootSimple implements DustTestConsts {
 		MindHandle hAgtGuiFrame = DustDevUtils.registerAgent(TEST0_UNIT, MONTRU_NAR_WINDOW, "GUI frame");
 		Dust.access(MindAccess.Set, "Nimbus", hAgtGuiFrame, MONTRU_ATT_GUI_THEME);
 
-		Dust.access(MindAccess.Set, "XBRLDock - Graph test", hAgtGuiFrame, MONTRU_ATT_GEN_LABEL);
+		Dust.access(MindAccess.Set, "MiND/Dust Forge", hAgtGuiFrame, MONTRU_ATT_GEN_LABEL);
 		Dust.access(MindAccess.Insert, 10, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, KEY_ADD);
 		Dust.access(MindAccess.Insert, 10, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, KEY_ADD);
 		Dust.access(MindAccess.Insert, 1000, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, KEY_ADD);
 		Dust.access(MindAccess.Insert, 800, hAgtGuiFrame, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, KEY_ADD);
 
-		MindHandle hAgtGuiMainPanel = DustDevUtils.registerAgent(TEST0_UNIT, MONTRU_NAR_GRAPH, "Main panel");
+//		MindHandle hAgtGuiMainPanel = DustDevUtils.registerAgent(TEST0_UNIT, MONTRU_NAR_GRAPH, "Main panel");
+		MindHandle hAgtGuiMainPanel = DustDevUtils.registerAgent(TEST0_UNIT, DEV_NAR_FORGEUI, "Forge panel");
 		Dust.access(MindAccess.Set, hAgtGuiMainPanel, hAgtGuiFrame, MONTRU_ATT_WINDOW_MAIN);
 
 		MindHandle hUnits = DustDevUtils.newHandle(TEST0_UNIT, MISC_ASP_VARIANT, "unit list");
-//		Dust.access(MindAccess.Insert, MIND_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+		Dust.access(MindAccess.Insert, MIND_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 //		Dust.access(MindAccess.Insert, MISC_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
-		Dust.access(MindAccess.Insert, TEXT_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
+//		Dust.access(MindAccess.Insert, TEXT_UNIT, hUnits, MISC_ATT_CONN_MEMBERARR, KEY_ADD);
 		
 		Dust.access(MindAccess.Set, hUnits, hAgtGuiMainPanel, MISC_ATT_CONN_SOURCE);
 
