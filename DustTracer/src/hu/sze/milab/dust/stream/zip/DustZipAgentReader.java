@@ -35,6 +35,7 @@ public class DustZipAgentReader extends DustAgent implements DustZipConsts {
 
 			zipEnum = zipFile.getEntries();
 			openTime = System.currentTimeMillis() - t;
+			Dust.log(EVENT_TAG_TYPE_TRACE, path, "Open time", openTime);
 
 			if ( zipEnum.hasMoreElements() ) {
 				Dust.access(MindAccess.Commit, MIND_TAG_ACTION_BEGIN, MIND_TAG_CONTEXT_SELF, MISC_ATT_CONN_TARGET);
