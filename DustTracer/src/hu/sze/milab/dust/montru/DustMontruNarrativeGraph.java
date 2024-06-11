@@ -32,7 +32,7 @@ import hu.sze.milab.dust.DustException;
 import hu.sze.milab.dust.DustVisitor;
 import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.utils.DustUtils;
-import hu.sze.milab.dust.utils.DustutilsFactory;
+import hu.sze.milab.dust.utils.DustUtilsFactory;
 
 public class DustMontruNarrativeGraph extends DustAgent implements DustMontruConsts {
 
@@ -52,7 +52,7 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		}
 	};
 
-	static DustutilsFactory<String, Image> imgs = new DustutilsFactory<String, Image>(IMG_CREATOR);
+	static DustUtilsFactory<String, Image> imgs = new DustUtilsFactory<String, Image>(IMG_CREATOR);
 
 	static class GraphWrapper extends CompWrapper<JScrollPane> {
 

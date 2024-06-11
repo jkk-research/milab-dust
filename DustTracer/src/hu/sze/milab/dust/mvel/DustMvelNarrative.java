@@ -8,7 +8,7 @@ import org.mvel2.ParserContext;
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
 import hu.sze.milab.dust.stream.DustStreamConsts;
-import hu.sze.milab.dust.utils.DustutilsFactory;
+import hu.sze.milab.dust.utils.DustUtilsFactory;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public interface DustMvelNarrative extends DustMvelConsts {
@@ -16,7 +16,7 @@ public interface DustMvelNarrative extends DustMvelConsts {
 	static class Evaluator {
 		ParserContext pctx;
 
-		DustutilsFactory<String, Object> compExpr = new DustutilsFactory<String, Object>(new DustCreator<Object>() {
+		DustUtilsFactory<String, Object> compExpr = new DustUtilsFactory<String, Object>(new DustCreator<Object>() {
 			@Override
 			public Object create(Object key, Object... hints) {
 				return MVEL.compileExpression((String) key, pctx);

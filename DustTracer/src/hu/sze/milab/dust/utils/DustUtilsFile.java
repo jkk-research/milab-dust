@@ -1,6 +1,7 @@
 package hu.sze.milab.dust.utils;
 
 import java.io.File;
+import java.io.FileFilter;
 import java.io.IOException;
 
 public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
@@ -31,6 +32,27 @@ public class DustUtilsFile extends DustUtils implements DustUtilsConsts {
 		String path = DustUtils.sbAppend(null, File.separator, false, pathSegments).toString();
 		
 		return new File(path).exists();
+	}
+	
+	public static final FileFilter FF_DIR = new FileFilter() {
+		@Override
+		public boolean accept(File f) {
+			return f.isDirectory();
+		}
+	};
+	
+	public static class ExtFilter implements FileFilter {
+		String ext;
+		
+		public ExtFilter(String ext) {
+			this.ext = ext.toLowerCase();
+		}
+
+
+		@Override
+		public boolean accept(File f) {
+			return f.getName().toLowerCase().endsWith(ext);
+		}
 	}
 
 }
