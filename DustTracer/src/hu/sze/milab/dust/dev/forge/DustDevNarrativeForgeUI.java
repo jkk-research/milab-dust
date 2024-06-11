@@ -11,10 +11,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
 import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
@@ -45,11 +48,12 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		private static final long serialVersionUID = 1L;
 
 		EnumMap<DataGridType, TableModel> tms = new EnumMap<DataGridType, TableModel>(DataGridType.class);
+		EnumMap<DataGridType, JTable> tbls = new EnumMap<DataGridType, JTable>(DataGridType.class);
 
 		DefaultTableModel tmUnits;
 
 		GraphPanel gp;
-
+		
 		public ForgePanel() {
 			super(new BorderLayout());
 
@@ -59,8 +63,11 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			EnumMap<DataGridType, JComponent> tables = new EnumMap<DataGridType, JComponent>(DataGridType.class);
 
 			for (DataGridType gt : DataGridType.values()) {
-				TableModel tm;
+				JTable tbl = new JTable(null);
+				tbls.put(gt, tbl);
+				ListSelectionModel selModel = tbl.getSelectionModel();
 
+				TableModel tm;
 				RowSorter.SortKey defSort = null;
 
 				switch (gt) {
@@ -80,6 +87,17 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 					tm = tmUnits;
 					defSort = new RowSorter.SortKey(1, SortOrder.DESCENDING);
+					selModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+					selModel.addListSelectionListener(new ListSelectionListener() {
+						@Override
+						public void valueChanged(ListSelectionEvent e) {
+							if ( !e.getValueIsAdjusting() ) {
+								int idx = ((ListSelectionModel)e.getSource()).getMinSelectionIndex();
+								int ii = tbls.get(DataGridType.Units).getRowSorter().convertRowIndexToModel(idx);
+								selectUnit(ii);
+							}
+						}
+					});
 					break;
 				default:
 					tm = new MontruSwingTableModelTest(3, 5);
@@ -87,7 +105,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				}
 				tms.put(gt, tm);
 
-				JTable tbl = new JTable(tm);
+				tbl.setModel(tm);
 				tbl.setAutoCreateRowSorter(true);
 
 				if (null != defSort) {
@@ -125,7 +143,12 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			spLB.setDividerLocation(300);
 			spRight.setDividerLocation(600);
 			spMain.setDividerLocation(300);
+		}
 
+		protected void selectUnit(int idx) {
+			MindHandle hCnt = (MindHandle) tmUnits.getValueAt(idx, 0);
+			
+			Dust.log(null, "Unit selected", hCnt);
 		}
 	}
 
