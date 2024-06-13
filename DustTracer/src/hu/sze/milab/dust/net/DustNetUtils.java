@@ -68,7 +68,9 @@ public class DustNetUtils implements DustNetConsts {
 		return conn;
 	}
 
-	public static void download(String urlStr, OutputStream target, Collection<String> headers, int timeout) throws Exception {
+	public static boolean download(String urlStr, OutputStream target, Collection<String> headers, int timeout) throws Exception {
+		boolean success = false;
+		
 		URL url = new URL(urlStr);
 		HttpURLConnection conn = getConn(url, timeout, headers);
 
@@ -93,7 +95,7 @@ public class DustNetUtils implements DustNetConsts {
 
 		if ( "gzip".equals(conn.getContentEncoding()) ) {
 			try (GZIPInputStream i = new GZIPInputStream(is)) {
-				IOUtils.copy(i, target);
+				success = 0 < IOUtils.copy(i, target);
 			}
 		} else {
 			try (BufferedInputStream in = new BufferedInputStream(is)) {
@@ -101,8 +103,11 @@ public class DustNetUtils implements DustNetConsts {
 				int bytesRead;
 				while ((bytesRead = in.read(dataBuffer, 0, 1024)) != -1) {
 					target.write(dataBuffer, 0, bytesRead);
+					success = true;
 				}
 			}
 		}
+		
+		return success;
 	}
 }
