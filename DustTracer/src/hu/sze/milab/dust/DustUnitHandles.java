@@ -35,6 +35,8 @@ public interface DustUnitHandles extends DustConsts {
 
 	MindHandle MATH_UNIT = Dust.lookup("giskard:15");
 
+	MindHandle FORGE_UNIT = Dust.lookup("giskard:15");
+
 	MindHandle L10N_UNIT = Dust.lookup("giskard:100");
 
 }

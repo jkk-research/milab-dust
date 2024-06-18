@@ -247,7 +247,8 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 								MindHandle hEdge = DustDevUtils.newHandle(hUnit, GEOMETRY_ASP_EDGE, "edge");
 								Dust.access(MindAccess.Set, hParentLabel, hEdge, MISC_ATT_CONN_SOURCE);
 								Dust.access(MindAccess.Set, hItemLabel, hEdge, MISC_ATT_CONN_TARGET);
-								Dust.access(MindAccess.Set, hAtt, hEdge, GEOMETRY_ATT_EDGE_CLASS);
+//								Dust.access(MindAccess.Set, hAtt, hEdge, GEOMETRY_ATT_EDGE_CLASS);
+								DustDevUtils.setTag(hEdge, hAtt, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 
 								Dust.access(MindAccess.Insert, hEdge, gw.hComp, GEOMETRY_ATT_GRAPH_EDGES, KEY_ADD);
 							}

@@ -11,6 +11,8 @@ import java.util.Set;
 import java.util.Stack;
 
 import hu.sze.milab.dust.DustVisitor;
+import hu.sze.milab.dust.DustVisitor.VisitInfo;
+import hu.sze.milab.dust.DustVisitor.VisitItem;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -38,8 +40,51 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			return val;
 		}
 	}
+	
+	public static MindHandle visitSimple(DustVisitor visitor, MindHandle hItem, MindHandle hAtt, Object key, Object val ) throws Exception {
+		
+		VisitInfo vi = new VisitInfo() {
+			@Override
+			public MindHandle getItemHandle() {
+				return hItem;
+			}
+			
+			@Override
+			public MindHandle getAttHandle() {
+				return hAtt;
+			}
+
+			@Override
+			public <RetType> RetType getKey() {
+				return (RetType) key;
+			}
+			
+			@Override
+			public <RetType> RetType getValue() {
+				return (RetType) val;
+			}
+				
+			@Override
+			public void remove() {
+			}
+			
+			@Override
+			public Collection<VisitItem> getRemoved(Collection<VisitItem> removed) {
+				return null;
+			}
+			
+			@Override
+			public ArrayList<Object> getPath(ArrayList<Object> target) {
+				return null;
+			}
+		};
+		
+		setVI(visitor, vi);
+		return visitor.agentProcess(MindAction.Process);
+	}
 
 	class MachineVisitInfo implements DustMachineConsts, DustVisitor.VisitInfo {
+		
 		final DustVisitor visitor;
 
 		final MindHandle hItem;
@@ -59,7 +104,9 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 
 			isRoot = (null == hAtt);
 			this.isMap = coll instanceof Map;
-			it = isMap ? ((Map) coll).entrySet().iterator() : ((Collection) coll).iterator();
+			Collection cs = isMap ? ((Map) coll).entrySet() : (Collection) coll;
+			it = new ArrayList(cs).iterator();
+//			it = isMap ? ((Map) coll).entrySet().iterator() : ((Collection) coll).iterator();
 		}
 
 		@Override

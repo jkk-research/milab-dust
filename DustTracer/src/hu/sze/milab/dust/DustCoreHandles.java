@@ -14,19 +14,24 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_ATT_UNIT_CONTENT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_UNIT_AUTHOR = Dust.lookup("giskard:1:?");
 
-//	MindHandle MIND_ASP_HANDLE = Dust.lookup("giskard:1:?");
-//	MindHandle MIND_ATT_HANDLE_UNIT = Dust.lookup("giskard:1:?");
-//	MindHandle MIND_ATT_HANDLE_ID = Dust.lookup("giskard:1:?");
-
 	MindHandle MIND_ASP_KNOWLEDGE = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_HANDLE = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_UNIT = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_TAGS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_LISTENERS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_PRIMARYASPECT = Dust.lookup("giskard:1:?");
+	
+	MindHandle MIND_ASP_FACTORY = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_FACTORY_PRIMARYASPECT = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_FACTORY_DEFATTS = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_FACTORY_NARRATIVE = Dust.lookup("giskard:1:?");
 
 	MindHandle MIND_ASP_ASPECT = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_ASPECT_ATTFACTORIES = Dust.lookup("giskard:1:?");
+
 	MindHandle MIND_ASP_ATTRIBUTE = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_ATTRIBUTE_FACTORY = Dust.lookup("giskard:1:?");
+
 	MindHandle MIND_ASP_TAG = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ASP_NARRATIVE = Dust.lookup("giskard:1:?");
 	
@@ -136,7 +141,6 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ATT_CONN_PARENT = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_SOURCE = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_TARGET = Dust.lookup("giskard:3:?");
-	MindHandle MISC_ATT_CONN_FACTORY = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_REQUIRES = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_MEMBERMAP = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_CONN_MEMBERARR = Dust.lookup("giskard:3:?");
@@ -277,10 +281,13 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 
 	MindHandle DEV_NAR_FORGEUI = Dust.lookup("giskard:7:?");
 
+	MindHandle GEOMETRY_ASP_NODE = Dust.lookup("giskard:12:?");
+
 	MindHandle GEOMETRY_ASP_EDGE = Dust.lookup("giskard:12:?");
-	MindHandle GEOMETRY_ATT_EDGE_CLASS = Dust.lookup("giskard:12:?");
+//	MindHandle GEOMETRY_ATT_EDGE_CLASS = Dust.lookup("giskard:12:?"); SHOULD still use tag until counter example found
 
 	MindHandle GEOMETRY_ASP_GRAPH = Dust.lookup("giskard:12:?");
+	MindHandle GEOMETRY_ATT_GRAPH_NODES = Dust.lookup("giskard:12:?");
 	MindHandle GEOMETRY_ATT_GRAPH_EDGES = Dust.lookup("giskard:12:?");
 
 	MindHandle GEOMETRY_TAG_VECTOR_LOCATION = Dust.lookup("giskard:12:?");

@@ -15,6 +15,7 @@ import hu.sze.milab.dust.montru.DustMontruNarrativeContainer;
 import hu.sze.milab.dust.montru.DustMontruNarrativeFrame;
 import hu.sze.milab.dust.montru.DustMontruNarrativeGraph;
 import hu.sze.milab.dust.montru.DustMontruNarrativeGrid;
+import hu.sze.milab.dust.montru.DustMontruNarrativeUnitgraph;
 import hu.sze.milab.dust.montru.DustMontruNarrativeWidget;
 import hu.sze.milab.dust.mvel.DustMvelNarrative;
 import hu.sze.milab.dust.net.DustNetDownloadAgent;
@@ -96,6 +97,10 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.idRes = bh;
 
+		DustUtilsEnumTranslator.register(MindValType.class, MIND_TAG_VALTYPE_INT, MIND_TAG_VALTYPE_REAL, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE_BIN);
+		
+		DustUtilsEnumTranslator.register(MindCollType.class, MIND_TAG_COLLTYPE_ONE, MIND_TAG_COLLTYPE_SET, MIND_TAG_COLLTYPE_ARR, MIND_TAG_COLLTYPE_MAP);
+
 		DustUtilsEnumTranslator.register(MindAccess.class, MIND_TAG_ACCESS_CHECK, MIND_TAG_ACCESS_PEEK, MIND_TAG_ACCESS_GET, MIND_TAG_ACCESS_SET, MIND_TAG_ACCESS_INSERT, MIND_TAG_ACCESS_DELETE,
 				MIND_TAG_ACCESS_RESET, MIND_TAG_ACCESS_COMMIT, MIND_TAG_ACCESS_BROADCAST, MIND_TAG_ACCESS_LOOKUP, MIND_TAG_ACCESS_VISIT);
 
@@ -118,12 +123,13 @@ public class DustMachineBoot implements DustMachineConsts {
 
 		machine.bootInit(bh);
 		
-		
+		// core narratives
 		DustDevUtils.registerNative(MONTRU_NAR_WINDOW, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeFrame.class.getName(), true);
 		DustDevUtils.registerNative(MONTRU_NAR_CONTAINER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeContainer.class.getName());
 		DustDevUtils.registerNative(MONTRU_NAR_WIDGET, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeWidget.class.getName());
 		DustDevUtils.registerNative(MONTRU_NAR_GRID, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeGrid.class.getName());
 		DustDevUtils.registerNative(MONTRU_NAR_GRAPH, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeGraph.class.getName());
+		DustDevUtils.registerNative(MONTRU_NAR_UNITGRAPH, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMontruNarrativeUnitgraph.class.getName());
 		
 		DustDevUtils.registerNative(MISC_NAR_COUNTER, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustDevNarrative.DevCounter.class.getName());
 		DustDevUtils.registerNative(MISC_NAR_TABLE, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustMiscNarrative.TableAgent.class.getName());
@@ -146,6 +152,31 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustDevUtils.registerNative(NET_NAR_HTTPSVCJSONAPI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustHttpJsonapiAgent.class.getName());
 		
 		DustDevUtils.registerNative(DEV_NAR_FORGEUI, DUSTJAVA_UNIT, APP_MODULE_MAIN, DustDevNarrativeForgeUI.class.getName());
+		
+		// other info
+
+		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERMAP, MIND_TAG_COLLTYPE_MAP, MIND_TAG_COLLTYPE);
+		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERARR, MIND_TAG_COLLTYPE_ARR, MIND_TAG_COLLTYPE);
+		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERSET, MIND_TAG_COLLTYPE_SET, MIND_TAG_COLLTYPE);
+		
+		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERMAP, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
+		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERARR, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
+		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERSET, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
+
+		MindHandle hFact;
+		MindHandle hAgtUnitGraph = DustDevUtils.registerAgent(MIND_UNIT, MONTRU_NAR_UNITGRAPH);
+		
+		hFact = DustDevUtils.newHandle(MIND_UNIT, MIND_ASP_FACTORY);
+		Dust.access(MindAccess.Set, GEOMETRY_ASP_GRAPH, hFact, MIND_ATT_FACTORY_PRIMARYASPECT);
+		Dust.access(MindAccess.Set, hAgtUnitGraph, hFact, MIND_ATT_FACTORY_NARRATIVE);
+		Dust.access(MindAccess.Insert, MISC_ATT_CONN_SOURCE, hFact, MIND_ATT_FACTORY_DEFATTS);
+		Dust.access(MindAccess.Set, hFact, DEV_NAR_FORGEUI, MIND_ATT_ASPECT_ATTFACTORIES, MISC_ATT_CONN_MEMBERMAP);
+
+		hFact = DustDevUtils.newHandle(MIND_UNIT, MIND_ASP_FACTORY);
+		Dust.access(MindAccess.Set, GEOMETRY_ASP_NODE, hFact, MIND_ATT_FACTORY_PRIMARYASPECT);
+		Dust.access(MindAccess.Insert, MISC_ATT_CONN_SOURCE, hFact, MIND_ATT_FACTORY_DEFATTS);
+		Dust.access(MindAccess.Set, hFact, GEOMETRY_ASP_GRAPH, MIND_ATT_ASPECT_ATTFACTORIES, MISC_ATT_CONN_MEMBERMAP);
+
 		
 		String bootClass = System.getProperty("DustBootClass");
 		

@@ -22,6 +22,15 @@ public interface DustConsts {
 	String DUST_EXT_JAVA = ".java";
 	String DUST_EXT_CLASS = ".class";
 	
+	
+	enum MindValType {
+		Int, Real, Handle, Bin
+	};
+
+	enum MindCollType {
+		One, Set, Arr, Map
+	};
+	
 	enum MindAccess {
 		Check, Peek, Get, Set, Insert, Delete, Reset, Commit, Broadcast, Lookup, Visit, 
 	};

@@ -27,33 +27,109 @@ import hu.sze.milab.dust.DustVisitor;
 import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.montru.DustMontruConsts;
 import hu.sze.milab.dust.montru.DustMontruSwingComps;
+import hu.sze.milab.dust.montru.DustMontruUtils;
 
 public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruConsts, DustMontruSwingComps {
-
-	static class GraphPanel extends JPanel {
-		private static final long serialVersionUID = 1L;
-
-		public GraphPanel() {
-			super(null);
-
-//			setBackground(Color.yellow);
-		}
-	}
 
 	enum DataGridType {
 		Units, Aspects, Atts, SelectedData,
 	}
 
+	static class ForgeWrapper extends CompWrapper<ForgePanel> {
+		public ForgeWrapper() {
+			super(new ForgePanel());
+		}
+	}
+
+	static DustCreator<ForgeWrapper> CREATOR = new DustCreator<ForgeWrapper>() {
+		@Override
+		public ForgeWrapper create(Object key, Object... hints) {
+			ForgeWrapper ret = new ForgeWrapper();
+
+			ForgePanel fp = ret.comp;
+
+			Dust.access(MindAccess.Visit, new DustVisitor() {
+				@Override
+				protected MindHandle agentProcess() throws Exception {
+					MindHandle hCnt = getInfo().getValue();
+
+					int count = Dust.access(MindAccess.Peek, 0, hCnt, MIND_ATT_UNIT_HANDLES, KEY_SIZE);
+					Dust.log(null, "Unit found", hCnt, "Item count", count);
+
+					fp.tmUnits.addRow(new Object[] { hCnt, count });
+					return MIND_TAG_RESULT_READACCEPT;
+				}
+			}, APP_UNIT, DUST_ATT_MACHINE_UNITS);
+
+			return ret;
+		}
+	};
+
 	static class ForgePanel extends JPanel {
 		private static final long serialVersionUID = 1L;
+
+		class GraphPanel extends JPanel {
+			private static final long serialVersionUID = 1L;
+
+			public GraphPanel() {
+				super(null);
+
+//				setBackground(Color.yellow);
+			}
+		}
 
 		EnumMap<DataGridType, TableModel> tms = new EnumMap<DataGridType, TableModel>(DataGridType.class);
 		EnumMap<DataGridType, JTable> tbls = new EnumMap<DataGridType, JTable>(DataGridType.class);
 
 		DefaultTableModel tmUnits;
+		
+		MindHandle hUnit;
+		MindHandle hUnitGraph;
+		
+//		DustUtilsFactory<MindHandle, MindHandle> factUnitGraph = new DustUtilsFactory<MindHandle, MindHandle>(new DustCreator<MindHandle>() {
+//			@Override
+//			public MindHandle create(Object key, Object... hints) {
+//				
+//				MindHandle hGraph = DustDevUtils.newHandle(FORGE_UNIT, GEOMETRY_ASP_GRAPH, "Unit graph " + key);
+//
+//				
+//				Dust.access(MindAccess.Visit, new DustVisitor(VisitFollowRef.Once) {
+//					@Override
+//					protected MindHandle agentProcess() throws Exception {
+//						VisitInfo info = getInfo();
+//
+//						MindHandle hAtt = info.getAttHandle();
+//
+//						Object val = info.getValue();
+//						if (val instanceof MindHandle) {
+//							MindHandle hItemLabel = getItemLabel(gw, pnl, hUnit, (MindHandle) val);
+//
+//							if (null != hAtt) {
+//								MindHandle hParentLabel = getItemLabel(gw, pnl, hUnit, info.getItemHandle());
+//								if (null != hParentLabel) {
+//									MindHandle hEdge = DustDevUtils.newHandle(hUnit, GEOMETRY_ASP_EDGE, "edge");
+//									Dust.access(MindAccess.Set, hParentLabel, hEdge, MISC_ATT_CONN_SOURCE);
+//									Dust.access(MindAccess.Set, hItemLabel, hEdge, MISC_ATT_CONN_TARGET);
+////									Dust.access(MindAccess.Set, hAtt, hEdge, GEOMETRY_ATT_EDGE_CLASS);
+//									DustDevUtils.setTag(hEdge, hAtt, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+//
+//									Dust.access(MindAccess.Insert, hEdge, gw.hComp, GEOMETRY_ATT_GRAPH_EDGES, KEY_ADD);
+//								}
+//							} else {
+//								DustDevUtils.breakpoint("heh");
+//							}
+//						}
+//
+//						return MIND_TAG_RESULT_READACCEPT;
+//					}
+//				}, key, MIND_ATT_UNIT_HANDLES);
+//				
+//				return hGraph;
+//			}
+//		});
 
 		GraphPanel gp;
-		
+
 		public ForgePanel() {
 			super(new BorderLayout());
 
@@ -91,8 +167,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 					selModel.addListSelectionListener(new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							if ( !e.getValueIsAdjusting() ) {
-								int idx = ((ListSelectionModel)e.getSource()).getMinSelectionIndex();
+							if (!e.getValueIsAdjusting()) {
+								int idx = ((ListSelectionModel) e.getSource()).getMinSelectionIndex();
 								int ii = tbls.get(DataGridType.Units).getRowSorter().convertRowIndexToModel(idx);
 								selectUnit(ii);
 							}
@@ -146,41 +222,15 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		}
 
 		protected void selectUnit(int idx) {
-			MindHandle hCnt = (MindHandle) tmUnits.getValueAt(idx, 0);
+			hUnit = (MindHandle) tmUnits.getValueAt(idx, 0);
 			
-			Dust.log(null, "Unit selected", hCnt);
+			MindHandle hComp = DustMontruUtils.getItemHandle(gp);
+
+			hUnitGraph = Dust.access(MindAccess.Get, null, hComp, MISC_ATT_CONN_MEMBERMAP, hUnit);
+
+			Dust.log(null, "Unit selected", hUnit);
 		}
 	}
-
-	static class ForgeWrapper extends CompWrapper<ForgePanel> {
-		public ForgeWrapper() {
-			super(new ForgePanel());
-		}
-	}
-
-	static DustCreator<ForgeWrapper> CREATOR = new DustCreator<ForgeWrapper>() {
-		@Override
-		public ForgeWrapper create(Object key, Object... hints) {
-			ForgeWrapper ret = new ForgeWrapper();
-
-			ForgePanel fp = ret.comp;
-
-			Dust.access(MindAccess.Visit, new DustVisitor() {
-				@Override
-				protected MindHandle agentProcess() throws Exception {
-					MindHandle hCnt = getInfo().getValue();
-
-					int count = Dust.access(MindAccess.Peek, 0, hCnt, MIND_ATT_UNIT_HANDLES, KEY_SIZE);
-					Dust.log(null, "Unit found", hCnt, "Item count", count);
-
-					fp.tmUnits.addRow(new Object[] { hCnt, count });
-					return MIND_TAG_RESULT_READACCEPT;
-				}
-			}, APP_UNIT, DUST_ATT_MACHINE_UNITS);
-
-			return ret;
-		}
-	};
 
 	@Override
 	protected MindHandle agentInit() throws Exception {

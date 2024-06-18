@@ -39,6 +39,10 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 		}
 	};
 
+	public static MindHandle newHandle(MindHandle hUnit, MindHandle hPrimaryAspect) {
+		return newHandle(hUnit, hPrimaryAspect, "");
+	};
+
 	public static MindHandle newHandle(MindHandle hUnit, MindHandle hPrimaryAspect, String hint) {
 		MindHandle h = Dust.lookup(hUnit.getId() + DUST_SEP_ID + ITEMID_NEW);
 
@@ -81,11 +85,11 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 		registerNative(hLogic, hUnit, hModule, nativeClassName, false);
 	}
 
-	public static <RetType> RetType getImplOb(DustCreator<RetType> c, Object key, Object... hints) throws Exception {
+	public static <RetType> RetType getImplOb(DustCreator<RetType> c, Object key, Object... hints) {
 		return getImplOb(MIND_TAG_CONTEXT_SELF, c, key, hints);
 	}
 
-	public static <RetType> RetType getImplOb(MindHandle h, DustCreator<RetType> c, Object key, Object... hints) throws Exception {
+	public static <RetType> RetType getImplOb(MindHandle h, DustCreator<RetType> c, Object key, Object... hints) {
 		RetType val = Dust.access(MindAccess.Peek, null, h, DUST_ATT_IMPL_DATA);
 
 		if ( null == val ) {

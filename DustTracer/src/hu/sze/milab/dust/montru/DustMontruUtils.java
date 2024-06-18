@@ -12,7 +12,20 @@ import hu.sze.milab.dust.Dust;
 public class DustMontruUtils implements DustMontruConsts {
 
 	public static MindHandle getItemHandle(JComponent comp) {
-		return (MindHandle) comp.getClientProperty(SWING_ITEM_HANDLE);
+		MindHandle ret = null;
+		
+		while (null != comp ) {
+			ret = (MindHandle) comp.getClientProperty(SWING_ITEM_HANDLE);
+			
+			if ( null != ret ) {
+				break;
+			} else {
+				Container c = comp.getParent();
+				comp = (c instanceof JComponent ) ? (JComponent) c : null;
+			}
+		}
+		
+		return ret;
 	}
 	
 	public static void setBounds(Component comp) {

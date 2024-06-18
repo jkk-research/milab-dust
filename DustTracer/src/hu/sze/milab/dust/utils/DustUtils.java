@@ -168,6 +168,10 @@ public class DustUtils implements DustUtilsConsts {
 		}
 	}
 
-
+	public static void ensureSize(ArrayList arr, int idx) {
+		for ( int i = arr.size(); i <= idx; ++i ) {
+			arr.add(null);
+		}
+	}
 
 }

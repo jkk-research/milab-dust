@@ -53,7 +53,7 @@ public abstract class DustVisitor extends DustAgent {
 	}
 	
 	public static abstract class VisitContext {
-		protected VisitInfo setVI(DustVisitor visitor, VisitInfo info) {
+		protected static VisitInfo setVI(DustVisitor visitor, VisitInfo info) {
 			return visitor.setInfo(info);
 		}
 	}
