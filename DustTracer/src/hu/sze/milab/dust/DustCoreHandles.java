@@ -55,6 +55,15 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_TAG_CONTEXT_TARGET = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_DIALOG = Dust.lookup("giskard:1:?");
 	MindHandle MIND_TAG_CONTEXT_DIRECT = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_CONTEXT_VISITITEM = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_CONTEXT_VISITATT = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_CONTEXT_VISITKEY = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_CONTEXT_VISITVALUE = Dust.lookup("giskard:1:?");
+
+	MindHandle MIND_TAG_VISITFOLLOWREF = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_VISITFOLLOWREF_NO = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_VISITFOLLOWREF_ONCE = Dust.lookup("giskard:1:?");
+	MindHandle MIND_TAG_VISITFOLLOWREF_ALWAYS = Dust.lookup("giskard:1:?");
 
 	MindHandle MIND_TAG_UNIT = Dust.lookup("giskard:1:?");
 

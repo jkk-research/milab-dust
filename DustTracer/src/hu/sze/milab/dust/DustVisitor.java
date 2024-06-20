@@ -1,7 +1,6 @@
 package hu.sze.milab.dust;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 public abstract class DustVisitor extends DustAgent {
 	public static final int DEPTH_DEFAULT = 200;
@@ -18,8 +17,8 @@ public abstract class DustVisitor extends DustAgent {
 		MindHandle getItemHandle();
 		MindHandle getAttHandle();
 		
-		void remove();
-		Collection<DustVisitor.VisitItem> getRemoved(Collection<DustVisitor.VisitItem> removed);
+//		void remove();
+//		Collection<DustVisitor.VisitItem> getRemoved(Collection<DustVisitor.VisitItem> removed);
 	}
 	
 	public final VisitFollowRef followRef;

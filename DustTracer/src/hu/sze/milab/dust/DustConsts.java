@@ -41,6 +41,7 @@ public interface DustConsts {
 
 	enum MindContext {
 		Action, Self, Target, Dialog, Direct, 
+		VisitItem, VisitAtt, VisitKey, VisitValue,
 	};
 
 	int KEY_ADD = -1;

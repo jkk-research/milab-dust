@@ -2,7 +2,6 @@ package hu.sze.milab.dust.machine;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Map;
@@ -11,8 +10,6 @@ import java.util.Set;
 import java.util.Stack;
 
 import hu.sze.milab.dust.DustVisitor;
-import hu.sze.milab.dust.DustVisitor.VisitInfo;
-import hu.sze.milab.dust.DustVisitor.VisitItem;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -41,48 +38,6 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		}
 	}
 	
-	public static MindHandle visitSimple(DustVisitor visitor, MindHandle hItem, MindHandle hAtt, Object key, Object val ) throws Exception {
-		
-		VisitInfo vi = new VisitInfo() {
-			@Override
-			public MindHandle getItemHandle() {
-				return hItem;
-			}
-			
-			@Override
-			public MindHandle getAttHandle() {
-				return hAtt;
-			}
-
-			@Override
-			public <RetType> RetType getKey() {
-				return (RetType) key;
-			}
-			
-			@Override
-			public <RetType> RetType getValue() {
-				return (RetType) val;
-			}
-				
-			@Override
-			public void remove() {
-			}
-			
-			@Override
-			public Collection<VisitItem> getRemoved(Collection<VisitItem> removed) {
-				return null;
-			}
-			
-			@Override
-			public ArrayList<Object> getPath(ArrayList<Object> target) {
-				return null;
-			}
-		};
-		
-		setVI(visitor, vi);
-		return visitor.agentProcess(MindAction.Process);
-	}
-
 	class MachineVisitInfo implements DustMachineConsts, DustVisitor.VisitInfo {
 		
 		final DustVisitor visitor;
@@ -92,21 +47,23 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 
 		boolean isRoot;
 		boolean isMap;
+		Collection cs;
 		Iterator it;
 		MachineVisitItem item = null;
 
-		ArrayList<DustVisitor.VisitItem> removed;
+//		ArrayList<DustVisitor.VisitItem> removed;
 
 		public MachineVisitInfo(DustVisitor v, MindHandle hItem, Object coll, MindHandle hAtt) {
 			this.visitor = v;
 			this.hItem = hItem;
 			this.hAtt = hAtt;
 
-			isRoot = (null == hAtt);
-			this.isMap = coll instanceof Map;
-			Collection cs = isMap ? ((Map) coll).entrySet() : (Collection) coll;
+			isMap = coll instanceof Map;
+			cs = isMap ? ((Map) coll).entrySet() : (Collection) coll;
 			it = new ArrayList(cs).iterator();
 //			it = isMap ? ((Map) coll).entrySet().iterator() : ((Collection) coll).iterator();
+			
+			isRoot = isMap && (null == hAtt);
 		}
 
 		@Override
@@ -142,31 +99,31 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			return target;
 		}
 
-		@Override
-		public void remove() {
-			if (null == removed) {
-				removed = new ArrayList<DustVisitor.VisitItem>();
-			}
-			removed.add(item);
-			item = new MachineVisitItem(item);
-
-			it.remove();
-		}
-
-		@Override
-		public Collection<DustVisitor.VisitItem> getRemoved(Collection<DustVisitor.VisitItem> target) {
-			if (null == target) {
-				target = (null == removed) ? Collections.EMPTY_LIST : new ArrayList<DustVisitor.VisitItem>();
-			} else {
-				target.clear();
-			}
-
-			if (null != removed) {
-				target.addAll(removed);
-			}
-
-			return target;
-		}
+//		@Override
+//		public void remove() {
+//			if (null == removed) {
+//				removed = new ArrayList<DustVisitor.VisitItem>();
+//			}
+//			removed.add(item);
+//			item = new MachineVisitItem(item);
+//
+//			it.remove();
+//		}
+//
+//		@Override
+//		public Collection<DustVisitor.VisitItem> getRemoved(Collection<DustVisitor.VisitItem> target) {
+//			if (null == target) {
+//				target = (null == removed) ? Collections.EMPTY_LIST : new ArrayList<DustVisitor.VisitItem>();
+//			} else {
+//				target.clear();
+//			}
+//
+//			if (null != removed) {
+//				target.addAll(removed);
+//			}
+//
+//			return target;
+//		}
 
 		MachineVisitInfo step() throws Exception {
 			MachineVisitInfo ret = this;

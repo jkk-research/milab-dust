@@ -74,8 +74,11 @@ class DustMachineDialog implements DustMachineConsts {
 					curr = resolveKnowledge(activeAgent, true);
 					curr = DustUtils.safeGet(curr, MIND_ATT_AGENT_TARGET, null);
 					break;
-				default:
+				case Direct:
 					curr = resolveKnowledge((MindHandle) root, true);
+					break;					
+				default:
+					curr = context.get((MindHandle) root);
 					break;
 				}
 			}
@@ -152,6 +155,8 @@ class DustMachineDialog implements DustMachineConsts {
 				curr = null;
 			}
 
+			// factory
+			
 			if ((null == curr) && createIfMissing && (null != hLastAtt)) {
 				Map kAtt = resolveKnowledge(hLastAtt, false);
 				DustHandle hAttInfo = DustUtils.simpleGet(kAtt, MIND_ATT_KNOWLEDGE_TAGS, MIND_TAG_VALTYPE);
@@ -210,12 +215,21 @@ class DustMachineDialog implements DustMachineConsts {
 						
 						DustHandle hNar = DustUtils.simpleGet(kFact, MIND_ATT_FACTORY_NARRATIVE);
 						if ( null != hNar ) {
-							DustVisitor fn;
+							MindAgent fn;
 							try {
-								fn = (DustVisitor) machine.selectAgent(hNar);
-								DustMachineVisitContext.visitSimple(fn, hLastItem, hLastAtt, lk, curr);
+								fn = machine.selectAgent(hNar);
+								context.put(MIND_TAG_CONTEXT_VISITITEM, hLastItem);
+								context.put(MIND_TAG_CONTEXT_VISITATT, hLastAtt);
+								context.put(MIND_TAG_CONTEXT_VISITKEY, lk);
+								context.put(MIND_TAG_CONTEXT_VISITVALUE, curr);
+								fn.agentProcess(MindAction.Process);
 							} catch (Exception e) {
 								DustException.swallow(e, "Factory init logic failure", curr, hNar);
+							} finally {
+								context.remove(MIND_TAG_CONTEXT_VISITITEM);
+								context.remove(MIND_TAG_CONTEXT_VISITATT);
+								context.remove(MIND_TAG_CONTEXT_VISITKEY);
+								context.remove(MIND_TAG_CONTEXT_VISITVALUE);
 							}
 						}
 						
