@@ -188,6 +188,9 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MISC_ASP_SPACE = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_SPACE_DIMENSIONS = Dust.lookup("giskard:3:?");
 	
+	MindHandle MISC_ASP_SHAPE = Dust.lookup("giskard:3:?");
+	MindHandle MISC_ATT_SHAPE_VECTORS = Dust.lookup("giskard:3:?");
+	
 	MindHandle MISC_ASP_VECTOR = Dust.lookup("giskard:3:?");
 	MindHandle MISC_ATT_VECTOR_COORDINATES = Dust.lookup("giskard:3:?");
 

@@ -166,6 +166,9 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERARR, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
 		DustDevUtils.setTag(MISC_ATT_CONN_MEMBERSET, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
 
+		DustDevUtils.setTag(MISC_ATT_SHAPE_VECTORS, MIND_TAG_COLLTYPE_MAP, MIND_TAG_COLLTYPE);
+		DustDevUtils.setTag(MISC_ATT_SHAPE_VECTORS, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
+
 		MindHandle hFact;
 		MindHandle hAgtUnitGraph = DustDevUtils.registerAgent(MIND_UNIT, MONTRU_NAR_UNITGRAPH);
 		
@@ -179,6 +182,10 @@ public class DustMachineBoot implements DustMachineConsts {
 		Dust.access(MindAccess.Set, GEOMETRY_ASP_NODE, hFact, MIND_ATT_FACTORY_PRIMARYASPECT);
 		Dust.access(MindAccess.Insert, MISC_ATT_CONN_SOURCE, hFact, MIND_ATT_FACTORY_DEFATTS);
 		Dust.access(MindAccess.Set, hFact, GEOMETRY_ASP_GRAPH, MIND_ATT_ASPECT_ATTFACTORIES, MISC_ATT_CONN_MEMBERMAP);
+
+		hFact = DustDevUtils.newHandle(MONTRU_UNIT, MIND_ASP_FACTORY);
+		Dust.access(MindAccess.Set, MISC_ASP_VECTOR, hFact, MIND_ATT_FACTORY_PRIMARYASPECT);
+		Dust.access(MindAccess.Set, hFact, MISC_ATT_SHAPE_VECTORS, MIND_ATT_ATTRIBUTE_FACTORY);
 
 		
 		String bootClass = System.getProperty("DustBootClass");

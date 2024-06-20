@@ -2,6 +2,8 @@ package hu.sze.milab.dust.dev.forge;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.FontMetrics;
+import java.awt.Graphics;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -73,8 +75,58 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 			public GraphPanel() {
 				super(null);
+			}
 
-//				setBackground(Color.yellow);
+			@Override
+			protected void paintComponent(Graphics g) {
+				super.paintComponent(g);
+				FontMetrics metrics = g.getFontMetrics(getFont());
+				int offY = metrics.getHeight() / 2;
+
+				if (null != hUnitGraph) {
+					Dust.access(MindAccess.Visit, new DustVisitor() {
+						@Override
+						protected MindHandle agentProcess() throws Exception {
+							Object hEdge = getInfo().getValue();
+
+							if (null != hEdge) {
+								MindHandle src = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS,
+										GEOMETRY_TAG_VECTOR_LOCATION);
+								MindHandle target = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_TARGET,
+										MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION);
+
+								int xS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 0);
+								int yS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 1);
+
+								int xT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 0);
+								int yT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 1);
+
+								g.drawLine(xS, yS, xT, yT);
+							}
+							return MIND_TAG_RESULT_READACCEPT;
+						}
+					}, hUnitGraph, GEOMETRY_ATT_GRAPH_EDGES);
+
+					Dust.access(MindAccess.Visit, new DustVisitor() {
+						@Override
+						protected MindHandle agentProcess() throws Exception {
+							Object hNode = getInfo().getValue();
+
+							if (null != hNode) {
+								String txt = Dust.access(MindAccess.Peek, "? " + hNode.toString(), hNode, DEV_ATT_HINT);
+								int offX = metrics.stringWidth(txt) / 2;
+
+								int x = Dust.access(MindAccess.Peek, 0, hNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
+										MISC_ATT_VECTOR_COORDINATES, 0);
+								int y = Dust.access(MindAccess.Peek, 0, hNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
+										MISC_ATT_VECTOR_COORDINATES, 1);
+
+								g.drawString(txt, x - offX, y + offY);
+							}
+							return MIND_TAG_RESULT_READACCEPT;
+						}
+					}, hUnitGraph, GEOMETRY_ATT_GRAPH_NODES);
+				}
 			}
 		}
 
@@ -82,51 +134,9 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		EnumMap<DataGridType, JTable> tbls = new EnumMap<DataGridType, JTable>(DataGridType.class);
 
 		DefaultTableModel tmUnits;
-		
+
 		MindHandle hUnit;
 		MindHandle hUnitGraph;
-		
-//		DustUtilsFactory<MindHandle, MindHandle> factUnitGraph = new DustUtilsFactory<MindHandle, MindHandle>(new DustCreator<MindHandle>() {
-//			@Override
-//			public MindHandle create(Object key, Object... hints) {
-//				
-//				MindHandle hGraph = DustDevUtils.newHandle(FORGE_UNIT, GEOMETRY_ASP_GRAPH, "Unit graph " + key);
-//
-//				
-//				Dust.access(MindAccess.Visit, new DustVisitor(VisitFollowRef.Once) {
-//					@Override
-//					protected MindHandle agentProcess() throws Exception {
-//						VisitInfo info = getInfo();
-//
-//						MindHandle hAtt = info.getAttHandle();
-//
-//						Object val = info.getValue();
-//						if (val instanceof MindHandle) {
-//							MindHandle hItemLabel = getItemLabel(gw, pnl, hUnit, (MindHandle) val);
-//
-//							if (null != hAtt) {
-//								MindHandle hParentLabel = getItemLabel(gw, pnl, hUnit, info.getItemHandle());
-//								if (null != hParentLabel) {
-//									MindHandle hEdge = DustDevUtils.newHandle(hUnit, GEOMETRY_ASP_EDGE, "edge");
-//									Dust.access(MindAccess.Set, hParentLabel, hEdge, MISC_ATT_CONN_SOURCE);
-//									Dust.access(MindAccess.Set, hItemLabel, hEdge, MISC_ATT_CONN_TARGET);
-////									Dust.access(MindAccess.Set, hAtt, hEdge, GEOMETRY_ATT_EDGE_CLASS);
-//									DustDevUtils.setTag(hEdge, hAtt, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
-//
-//									Dust.access(MindAccess.Insert, hEdge, gw.hComp, GEOMETRY_ATT_GRAPH_EDGES, KEY_ADD);
-//								}
-//							} else {
-//								DustDevUtils.breakpoint("heh");
-//							}
-//						}
-//
-//						return MIND_TAG_RESULT_READACCEPT;
-//					}
-//				}, key, MIND_ATT_UNIT_HANDLES);
-//				
-//				return hGraph;
-//			}
-//		});
 
 		GraphPanel gp;
 
@@ -223,10 +233,13 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 		protected void selectUnit(int idx) {
 			hUnit = (MindHandle) tmUnits.getValueAt(idx, 0);
-			
+
 			MindHandle hComp = DustMontruUtils.getItemHandle(gp);
 
 			hUnitGraph = Dust.access(MindAccess.Get, null, hComp, MISC_ATT_CONN_MEMBERMAP, hUnit);
+
+			gp.invalidate();
+			gp.repaint();
 
 			Dust.log(null, "Unit selected", hUnit);
 		}

@@ -8,12 +8,22 @@ import hu.sze.milab.dust.utils.DustUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontruConsts {
+	
+	int gridX = 100;
+	int gridY = 40;
+	int width = 600;
+	int rowOff = 1;
+
+	
+	int nextX = gridX / 2;
+	int nextY = gridY / 2;
 
 	@Override
 	protected MindHandle agentProcess() throws Exception {
 
 		MindHandle hUnit = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_VISITKEY);
 		MindHandle hGraph = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_VISITVALUE);
+		
 
 		Dust.access(MindAccess.Visit, new DustVisitor(VisitFollowRef.Once) {
 			@Override
@@ -23,9 +33,21 @@ public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontr
 				MindHandle hItem = info.getItemHandle();
 				MindHandle hItemNode = Dust.access(MindAccess.Get, null, hGraph, MISC_ATT_CONN_MEMBERMAP, hItem);
 				
-				String nodeKey = "Node " + hItem;
+				String nodeKey = hItem.toString();
+				Dust.access(MindAccess.Set, hItem, hItemNode, MISC_ATT_CONN_OWNER);
 				Dust.access(MindAccess.Set, nodeKey, hItemNode, DEV_ATT_HINT);
 				
+				Dust.access(MindAccess.Insert, nextX, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, KEY_ADD);
+				Dust.access(MindAccess.Insert, nextY, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, KEY_ADD);
+				
+				nextX += gridX;
+				nextY += 10;
+				
+				if ( nextX > width ) {
+					++rowOff;
+					nextX = gridX / 2;
+					nextY = rowOff * gridY;
+				}
 
 				Dust.access(MindAccess.Insert, hItemNode, hGraph, GEOMETRY_ATT_GRAPH_NODES, KEY_ADD);
 
