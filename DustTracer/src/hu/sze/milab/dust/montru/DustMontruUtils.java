@@ -13,29 +13,29 @@ public class DustMontruUtils implements DustMontruConsts {
 
 	public static MindHandle getItemHandle(JComponent comp) {
 		MindHandle ret = null;
-		
-		while (null != comp ) {
+
+		while (null != comp) {
 			ret = (MindHandle) comp.getClientProperty(SWING_ITEM_HANDLE);
-			
-			if ( null != ret ) {
+
+			if (null != ret) {
 				break;
 			} else {
 				Container c = comp.getParent();
-				comp = (c instanceof JComponent ) ? (JComponent) c : null;
+				comp = (c instanceof JComponent) ? (JComponent) c : null;
 			}
 		}
-		
+
 		return ret;
 	}
-	
+
 	public static void setBounds(Component comp) {
 		setBounds(comp, MIND_TAG_CONTEXT_SELF);
 	}
-	
+
 	public static void gridLayout(Container c, Dimension dPnl) {
 		gridLayout(c, dPnl, null);
 	}
-	
+
 	public static void gridLayout(Container c, Dimension dPnl, Double zoomFactor) {
 
 		int cc = c.getComponentCount();
@@ -95,15 +95,26 @@ public class DustMontruUtils implements DustMontruConsts {
 
 		c.setPreferredSize(dPnl);
 	}
-	
-	public static void setBounds(Component comp, MindHandle hArea) {
+
+	public static Point getLocation(Point pt, MindHandle h) {
+		if ( null == pt ) {
+			pt = new Point();
+		}
+
+		pt.x = Dust.access(MindAccess.Peek, 0, h, MISC_ATT_VECTOR_COORDINATES, 0);
+		pt.y = Dust.access(MindAccess.Peek, 0, h, MISC_ATT_VECTOR_COORDINATES, 1);
 		
+		return pt;
+	}
+
+	public static void setBounds(Component comp, MindHandle hArea) {
+
 		Number x = Dust.access(MindAccess.Peek, 10, hArea, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, 0);
 		Number y = Dust.access(MindAccess.Peek, 10, hArea, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, 1);
 		Number w = Dust.access(MindAccess.Peek, 800, hArea, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, 0);
 		Number h = Dust.access(MindAccess.Peek, 400, hArea, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, 1);
-		
+
 		comp.setBounds(x.intValue(), y.intValue(), w.intValue(), h.intValue());
 	}
-	
+
 }

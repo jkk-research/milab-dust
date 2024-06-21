@@ -1,9 +1,15 @@
 package hu.sze.milab.dust.dev.forge;
 
 import java.awt.BorderLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.Shape;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Line2D;
 import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
@@ -70,6 +76,51 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 	static class ForgePanel extends JPanel {
 		private static final long serialVersionUID = 1L;
 
+		class GraphCfg {
+			FontMetrics fntMet;
+			int lblOffY;
+
+			public GraphCfg(Component c, Graphics g) {
+				fntMet = g.getFontMetrics(getFont());
+				lblOffY = fntMet.getHeight();
+			}
+		}
+
+		GraphCfg gCfg;
+
+		class ItemShape {
+			public final Shape shp;
+
+			public final MindHandle hndl;
+
+			String lbl;
+			int lblOffX;
+
+			public ItemShape(Shape shp, MindHandle hndl) {
+				super();
+				this.shp = shp;
+				this.hndl = hndl;
+
+				lbl = Dust.access(MindAccess.Peek, null, hndl, DEV_ATT_HINT);
+				if (null != lbl) {
+					lblOffX = -(gCfg.fntMet.stringWidth(lbl) / 2);
+				}
+			}
+
+			boolean chkTag(MindHandle tag) {
+				return DustDevUtils.chkTag(hndl, tag);
+			}
+
+			void draw(Graphics2D g) {
+				g.draw(shp);
+
+				if (null != lbl) {
+					Rectangle rct = shp.getBounds();
+					g.drawString(lbl, rct.x + lblOffX, rct.y + gCfg.lblOffY);
+				}
+			}
+		}
+
 		class GraphPanel extends JPanel {
 			private static final long serialVersionUID = 1L;
 
@@ -80,55 +131,19 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			@Override
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
-				FontMetrics metrics = g.getFontMetrics(getFont());
-				int offY = metrics.getHeight() / 2;
 
-				if (null != hUnitGraph) {
-					Dust.access(MindAccess.Visit, new DustVisitor() {
-						@Override
-						protected MindHandle agentProcess() throws Exception {
-							Object hEdge = getInfo().getValue();
+				if (null == gCfg) {
+					gCfg = new GraphCfg(this, g);
+				}
 
-							if (null != hEdge) {
-								MindHandle src = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS,
-										GEOMETRY_TAG_VECTOR_LOCATION);
-								MindHandle target = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_TARGET,
-										MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION);
-
-								int xS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 0);
-								int yS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 1);
-
-								int xT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 0);
-								int yT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 1);
-
-								g.drawLine(xS, yS, xT, yT);
-							}
-							return MIND_TAG_RESULT_READACCEPT;
-						}
-					}, hUnitGraph, GEOMETRY_ATT_GRAPH_EDGES);
-
-					Dust.access(MindAccess.Visit, new DustVisitor() {
-						@Override
-						protected MindHandle agentProcess() throws Exception {
-							Object hNode = getInfo().getValue();
-
-							if (null != hNode) {
-								String txt = Dust.access(MindAccess.Peek, "? " + hNode.toString(), hNode, DEV_ATT_HINT);
-								int offX = metrics.stringWidth(txt) / 2;
-
-								int x = Dust.access(MindAccess.Peek, 0, hNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-										MISC_ATT_VECTOR_COORDINATES, 0);
-								int y = Dust.access(MindAccess.Peek, 0, hNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-										MISC_ATT_VECTOR_COORDINATES, 1);
-
-								g.drawString(txt, x - offX, y + offY);
-							}
-							return MIND_TAG_RESULT_READACCEPT;
-						}
-					}, hUnitGraph, GEOMETRY_ATT_GRAPH_NODES);
+				Graphics2D g2 = (Graphics2D) g;
+				for (ItemShape is : shapes ) {
+					is.draw(g2);
 				}
 			}
 		}
+
+		ArrayList<ItemShape> shapes = new ArrayList<>();
 
 		EnumMap<DataGridType, TableModel> tms = new EnumMap<DataGridType, TableModel>(DataGridType.class);
 		EnumMap<DataGridType, JTable> tbls = new EnumMap<DataGridType, JTable>(DataGridType.class);
@@ -238,11 +253,56 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 			hUnitGraph = Dust.access(MindAccess.Get, null, hComp, MISC_ATT_CONN_MEMBERMAP, hUnit);
 
+			shapes.clear();
+			
+			if (null != hUnitGraph) {
+				Dust.access(MindAccess.Visit, new DustVisitor() {
+					@Override
+					protected MindHandle agentProcess() throws Exception {
+						Object hEdge = getInfo().getValue();
+
+						if (null != hEdge) {
+							MindHandle src = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS,
+									GEOMETRY_TAG_VECTOR_LOCATION);
+							MindHandle target = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_TARGET,
+									MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION);
+
+							int xS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 0);
+							int yS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 1);
+
+							int xT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 0);
+							int yT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 1);
+
+							shapes.add(new ItemShape(new Line2D.Double(xS, yS, xT, yT), (MindHandle) hEdge));
+						}
+						return MIND_TAG_RESULT_READACCEPT;
+					}
+				}, hUnitGraph, GEOMETRY_ATT_GRAPH_EDGES);
+
+				Dust.access(MindAccess.Visit, new DustVisitor() {
+					@Override
+					protected MindHandle agentProcess() throws Exception {
+						Object hNode = getInfo().getValue();
+
+						if (null != hNode) {
+							int x = Dust.access(MindAccess.Peek, 0, hNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
+									MISC_ATT_VECTOR_COORDINATES, 0);
+							int y = Dust.access(MindAccess.Peek, 0, hNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
+									MISC_ATT_VECTOR_COORDINATES, 1);
+
+							shapes.add(new ItemShape(new Ellipse2D.Double(x - 5, y - 5, 10, 10), (MindHandle) hNode));
+						}
+						return MIND_TAG_RESULT_READACCEPT;
+					}
+				}, hUnitGraph, GEOMETRY_ATT_GRAPH_NODES);
+			}
+			
 			gp.invalidate();
 			gp.repaint();
 
 			Dust.log(null, "Unit selected", hUnit);
 		}
+
 	}
 
 	@Override
