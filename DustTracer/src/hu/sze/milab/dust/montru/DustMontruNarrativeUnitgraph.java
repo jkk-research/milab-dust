@@ -9,14 +9,17 @@ import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontruConsts {
 	
-	int gridX = 100;
-	int gridY = 40;
-	int width = 600;
-	int rowOff = 1;
-
+	static int gridX = 100;
+	static int gridY = 40;
+	static int width = 600;
 	
-	int nextX = gridX / 2;
-	int nextY = gridY / 2;
+	static int nextX = gridX / 2;
+	static int nextY = gridY / 2;
+	
+	public static void reset() {
+		nextX = gridX / 2;
+		nextY = gridY / 2;
+	}
 
 	@Override
 	protected MindHandle agentProcess() throws Exception {
@@ -41,12 +44,10 @@ public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontr
 				Dust.access(MindAccess.Insert, nextY, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, KEY_ADD);
 				
 				nextX += gridX;
-				nextY += 10;
 				
 				if ( nextX > width ) {
-					++rowOff;
 					nextX = gridX / 2;
-					nextY = rowOff * gridY;
+					nextY += gridY;
 				}
 
 				Dust.access(MindAccess.Insert, hItemNode, hGraph, GEOMETRY_ATT_GRAPH_NODES, KEY_ADD);
