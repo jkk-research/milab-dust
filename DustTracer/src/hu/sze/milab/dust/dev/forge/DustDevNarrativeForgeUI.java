@@ -3,23 +3,26 @@ package hu.sze.milab.dust.dev.forge;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
-import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.swing.JComponent;
@@ -48,6 +51,7 @@ import hu.sze.milab.dust.montru.DustMontruSwingComps;
 import hu.sze.milab.dust.montru.DustMontruUtils;
 import hu.sze.milab.dust.utils.DustUtils;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruConsts, DustMontruSwingComps {
 
 	enum DataGridType {
@@ -99,27 +103,33 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 		GraphCfg gCfg;
 
-		abstract class ItemShape {
+		abstract class ItemShape<ShapeClass extends Shape> {
 			public final MindHandle hndl;
 			public final boolean moveable;
-			Shape shp;
-
+			public final ShapeClass shp;
+			
+			public final Set<ItemShape<?>> conn = new HashSet<>();
+			
 			boolean focused;
 			boolean selected;
 
 			String lbl;
 			int lblOffX;
 
-			protected ItemShape(MindHandle hndl, boolean moveable) {
+			protected ItemShape(MindHandle hndl, ShapeClass shp, boolean moveable) {
 				this.hndl = hndl;
+				this.shp = shp;
 				this.moveable = moveable;
 				updateShape();
 			}
-
-			protected abstract Shape getShape();
+			
+			protected void connect(MindHandle h) {
+				ItemShape is = shapes.get(h);
+				conn.add(is);
+				is.conn.add(this);
+			}
 
 			public void updateShape() {
-				this.shp = getShape();
 				lbl = Dust.access(MindAccess.Peek, null, hndl, DEV_ATT_HINT);
 				if (null != lbl) {
 					if (lbl.contains("[")) {
@@ -148,13 +158,16 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			}
 		}
 
-		public class ItemShapeEdge extends ItemShape {
+		public class ItemShapeEdge extends ItemShape<Line2D.Double> {
 			protected ItemShapeEdge(MindHandle hndl) {
-				super(hndl, false);
+				super(hndl, new Line2D.Double(), false);
+				
+				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE));
+				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_TARGET));
 			}
-
+			
 			@Override
-			protected Shape getShape() {
+			public void updateShape() {
 				MindHandle src = Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS,
 						GEOMETRY_TAG_VECTOR_LOCATION);
 				MindHandle target = Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_TARGET, MISC_ATT_SHAPE_VECTORS,
@@ -165,24 +178,47 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 				int xT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 0);
 				int yT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 1);
-
-				return new Line2D.Double(xS, yS, xT, yT);
+				
+				shp.setLine(xS, yS, xT, yT);
+				
+				super.updateShape();
 			}
 		}
 
-		public class ItemShapeNode extends ItemShape {
-			protected ItemShapeNode(MindHandle hndl) {
-				super(hndl, true);
+		public class ItemShapeLoop extends ItemShape<Ellipse2D.Double> {
+			protected ItemShapeLoop(MindHandle hndl) {
+				super(hndl, new Ellipse2D.Double(), false);
+				
+				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE));
 			}
 
 			@Override
-			protected Shape getShape() {
+			public void updateShape() {
+				int x = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
+						MISC_ATT_VECTOR_COORDINATES, 0);
+				int y = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
+						MISC_ATT_VECTOR_COORDINATES, 1);
+				
+				shp.setFrame(x - 5, y - 5, 10, 100);
+				
+				super.updateShape();
+			}
+		}
+		
+		public class ItemShapeNode extends ItemShape<Ellipse2D.Double> {
+			protected ItemShapeNode(MindHandle hndl) {
+				super(hndl, new Ellipse2D.Double(), true);
+			}
+
+			@Override
+			public void updateShape() {
 				int x = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
 						MISC_ATT_VECTOR_COORDINATES, 0);
 				int y = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
 						MISC_ATT_VECTOR_COORDINATES, 1);
-
-				return new Ellipse2D.Double(x - 5, y - 5, 10, 10);
+				
+				shp.setFrame(x - 5, y - 5, 10, 10);
+				super.updateShape();
 			}
 
 			@Override
@@ -217,13 +253,13 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			@Override
 			public void mousePressed(MouseEvent e) {
 				selectFocused(e);
-				dragOrigin = e.getPoint();
+				dragFrom = e.getPoint();
 			}
 
 			@Override
 			public void mouseDragged(MouseEvent e) {
-				Point pt = e.getPoint();
-				selMove.setToTranslation(pt.x - dragOrigin.x, pt.y - dragOrigin.y);
+				dragTo = e.getPoint();
+				moveSelected();
 
 				gp.invalidate();
 				gp.repaint();
@@ -231,7 +267,6 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 			@Override
 			public void mouseReleased(MouseEvent e) {
-				moveSelected(e.getPoint());
 			}
 
 			@Override
@@ -239,13 +274,23 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				Point mpos = e.getPoint();
 				int r = 4;
 				int d = 2 * r;
+				
+				int mc = Cursor.DEFAULT_CURSOR;
 
 				if (null != mpos) {
 					Rectangle2D ht = new Rectangle2D.Double(mpos.x - r, mpos.y - r, d, d);
 					Set<ItemShape> hit = new HashSet<>();
-					for (ItemShape is : shapes) {
+					for (ItemShape is : shapes.values()) {
 						if (is.shp.intersects(ht)) {
 							hit.add(is);
+							
+							if ( is.moveable ) {
+								mc = Cursor.MOVE_CURSOR;
+								
+								for ( Object conn : is.conn ) {
+									hit.add((ItemShape) conn);
+								}
+							}
 						}
 					}
 
@@ -255,6 +300,11 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 						gp.invalidate();
 						gp.repaint();
+
+						Cursor cc = Cursor.getPredefinedCursor(mc);
+						Component comp = ForgePanel.this;
+						comp.setCursor(cc);
+						Dust.log(EVENT_TAG_TYPE_TRACE, "Set cursor", mc, cc);
 					}
 				}
 			}
@@ -280,21 +330,22 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 				Graphics2D g2 = (Graphics2D) g;
 
+				Map rh = new HashMap();
+				rh.put(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON);
+				rh.put(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g2.setRenderingHints(rh);
+
 				Color c = g2.getColor();
-				for (ItemShape is : shapes) {
+				for (ItemShape is : shapes.values()) {
 					if (is.selected || focused.contains(is)) {
 						continue;
 					}
 					is.draw(g2);
 				}
 
-				AffineTransform atOrig = g2.getTransform();
-
-				g2.transform(selMove);
-
 				g2.setColor(Color.BLUE);
-				for (ItemShape is : shapes) {
-					if (is.selected) {
+				for (ItemShape is : shapes.values()) {
+					if (is.selected && !focused.contains(is)) {
 						is.draw(g2);
 					}
 				}
@@ -305,7 +356,6 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				}
 
 				g2.setColor(c);
-				g2.setTransform(atOrig);
 			}
 		}
 
@@ -319,11 +369,11 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 		GraphPanel gp;
 
-		ArrayList<ItemShape> shapes = new ArrayList<>();
+		Map<MindHandle, ItemShape> shapes = new HashMap<>();
 		Set<ItemShape> focused = new HashSet<>();
 
-		Point dragOrigin;
-		AffineTransform selMove = new AffineTransform();
+		Point dragFrom;
+		Point dragTo;
 
 		public ForgePanel() {
 			super(new BorderLayout());
@@ -416,15 +466,17 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			spMain.setDividerLocation(300);
 		}
 
-		public void moveSelected(Point pt) {
-			int dx = pt.x - dragOrigin.x;
-			int dy = pt.y - dragOrigin.y;
+		public void moveSelected() {
+			int dx = dragTo.x - dragFrom.x;
+			int dy = dragTo.y - dragFrom.y;
+			
+			dragFrom.setLocation(dragTo);
 
 			Dust.log(EVENT_TAG_TYPE_TRACE, "Moving", dx, dy);
 
 			Set<ItemShape> delayed = new HashSet<>();
 
-			for (ItemShape is : shapes) {
+			for (ItemShape is : shapes.values()) {
 				if (is.selected) {
 					if (is.moveable) {
 						is.moveShape(dx, dy);
@@ -437,8 +489,6 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			for (ItemShape is : delayed) {
 				is.moveShape(dx, dy);
 			}
-
-			selMove.setToTranslation(0, 0);
 
 			gp.invalidate();
 			gp.repaint();
@@ -456,29 +506,33 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			focused.clear();
 
 			if (null != hUnitGraph) {
-				Dust.access(MindAccess.Visit, new DustVisitor() {
-					@Override
-					protected MindHandle agentProcess() throws Exception {
-						Object hEdge = getInfo().getValue();
-
-						if (null != hEdge) {
-							shapes.add(new ItemShapeEdge((MindHandle) hEdge));
-						}
-						return MIND_TAG_RESULT_READACCEPT;
-					}
-				}, hUnitGraph, GEOMETRY_ATT_GRAPH_EDGES);
 
 				Dust.access(MindAccess.Visit, new DustVisitor() {
 					@Override
 					protected MindHandle agentProcess() throws Exception {
-						Object hNode = getInfo().getValue();
+						MindHandle hNode = getInfo().getValue();
 
 						if (null != hNode) {
-							shapes.add(new ItemShapeNode((MindHandle) hNode));
+							shapes.put(hNode, new ItemShapeNode(hNode));
 						}
 						return MIND_TAG_RESULT_READACCEPT;
 					}
 				}, hUnitGraph, GEOMETRY_ATT_GRAPH_NODES);
+
+				Dust.access(MindAccess.Visit, new DustVisitor() {
+					@Override
+					protected MindHandle agentProcess() throws Exception {
+						MindHandle hEdge = getInfo().getValue();
+
+						if (null != hEdge) {
+							MindHandle src = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_SOURCE);
+							MindHandle target = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_TARGET);
+
+							shapes.put(hEdge, DustUtils.isEqual(src, target) ? new ItemShapeLoop(hEdge) : new ItemShapeEdge(hEdge));
+						}
+						return MIND_TAG_RESULT_READACCEPT;
+					}
+				}, hUnitGraph, GEOMETRY_ATT_GRAPH_EDGES);
 			}
 
 			gp.invalidate();
@@ -491,7 +545,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			boolean add = ((e.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) != 0);
 
 			if (!add) {
-				for (ItemShape is : shapes) {
+				for (ItemShape is : shapes.values()) {
 					is.selected = false;
 				}
 			}
@@ -509,6 +563,9 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 	protected MindHandle agentInit() throws Exception {
 		@SuppressWarnings("unused")
 		ForgeWrapper fp = DustDevUtils.getImplOb(CREATOR, "");
+		
+		Cursor cc = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
+		fp.comp.setCursor(cc);
 
 		return MIND_TAG_RESULT_READACCEPT;
 	}
