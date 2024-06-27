@@ -103,6 +103,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 
 	public static void initFromInterfaces(Class... ifClasses) throws IllegalAccessException {
 		Map<String, MindHandle> parents = new TreeMap<>();
+		Map<String, MindHandle> units = new TreeMap<>();
 
 //		Dust.access(MindAccess.Set, TEXT_TAG_LANGUAGE_EN_US, null, TEXT_ATT_LANGUAGE_DEFAULT);
 
@@ -118,6 +119,9 @@ public class DustMachineTempUtils implements DustJsonConsts {
 					Dust.access(MindAccess.Set, name, ch, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);
+					if ( (2 == nn.length) && "UNIT".equals(nn[1])) {
+						units.put(nn[0], hItem);
+					}
 //					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
 
 					String aId = hItem.getId().split(DUST_SEP_ID)[0];
@@ -145,6 +149,11 @@ public class DustMachineTempUtils implements DustJsonConsts {
 					MindHandle hPA = DustUtilsAttCache.getAtt(MachineAtts.PrimaryAspectNames, nn[1], null);
 
 					Dust.access(MindAccess.Set, hPA, ch, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+					MindHandle hUnit = units.get(nn[0]);
+//					if ( (null != hUnit ) && (ch != hUnit) ) {
+					if ( null != hUnit ) {
+						Dust.access(MindAccess.Set, hUnit, ch, MIND_ATT_KNOWLEDGE_UNIT);						
+					}
 
 					if ( "ATT".equals(nn[1]) || "TAG".equals(nn[1]) ) {
 						String pName = name.substring(0, nn[0].length() + nn[1].length() + nn[2].length() + 2);

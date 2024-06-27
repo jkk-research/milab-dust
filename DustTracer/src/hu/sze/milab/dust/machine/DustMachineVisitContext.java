@@ -143,15 +143,15 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		MachineVisitInfo step() throws Exception {
 			MachineVisitInfo ret = this;
 
-			MindHandle hProcRet;
+			MindHandle hProcRet = MIND_TAG_RESULT_READACCEPT;
+			
+			if (null == item) {
+				item = new MachineVisitItem(isMap);
+				setVI(visitor, this);
+				hProcRet = visitor.agentProcess(MindAction.Begin);
+			}
 
-			if (it.hasNext()) {
-				if (null == item) {
-					item = new MachineVisitItem(isMap);
-					setVI(visitor, this);
-					hProcRet = visitor.agentProcess(MindAction.Begin);
-				}
-
+			if (it.hasNext() && DustUtilsAttCache.getAtt(MachineAtts.CanContinue, hProcRet, false) ) {
 				Object next = it.next();
 
 				if (isMap) {

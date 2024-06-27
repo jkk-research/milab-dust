@@ -35,15 +35,13 @@ public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontr
 				MindHandle hItem = info.getItemHandle();
 				MindHandle hItemNode = Dust.access(MindAccess.Get, null, hGraph, MISC_ATT_CONN_MEMBERMAP, hItem);
 
-				if (null == Dust.access(MindAccess.Peek, null, hItemNode, MISC_ATT_CONN_OWNER)) {
+				if ( null == Dust.access(MindAccess.Peek, null, hItemNode, MISC_ATT_CONN_OWNER) ) {
 					String nodeKey = hItem.toString();
 					Dust.access(MindAccess.Set, hItem, hItemNode, MISC_ATT_CONN_OWNER);
 					Dust.access(MindAccess.Set, nodeKey, hItemNode, DEV_ATT_HINT);
 
-					Dust.access(MindAccess.Set, nextX, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-							MISC_ATT_VECTOR_COORDINATES, 0);
-					Dust.access(MindAccess.Set, nextY, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-							MISC_ATT_VECTOR_COORDINATES, 1);
+					Dust.access(MindAccess.Set, nextX, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 0);
+					Dust.access(MindAccess.Set, nextY, hItemNode, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 1);
 
 					Dust.access(MindAccess.Insert, hItemNode, hGraph, GEOMETRY_ATT_GRAPH_NODES, KEY_ADD);
 
@@ -51,7 +49,7 @@ public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontr
 
 					nextX += gridX;
 
-					if (nextX > width) {
+					if ( nextX > width ) {
 						nextX = gridX / 2;
 						nextY += gridY;
 					}
@@ -59,7 +57,13 @@ public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontr
 					DustDevUtils.breakpoint("Repeating graph item", hItem, hItemNode);
 				}
 
-				return MIND_TAG_RESULT_ACCEPT;
+				boolean read = (hItem == hUnit) || !(boolean) Dust.access(MindAccess.Check, MIND_ASP_UNIT, hItem, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+
+				if ( read ) {
+					return MIND_TAG_RESULT_READACCEPT ;
+				} else {
+					return MIND_TAG_RESULT_PASS;
+				}
 			}
 
 			@Override
@@ -83,16 +87,16 @@ public class DustMontruNarrativeUnitgraph extends DustAgent implements DustMontr
 				MindHandle hItem = info.getItemHandle();
 				MindHandle hAtt = info.getAttHandle();
 
-				if (null == hAtt) {
+				if ( null == hAtt ) {
 					Dust.log(EVENT_TAG_TYPE_TRACE, " --- No attribute in process", hItem);
-				} else if (!DustUtilsAttCache.getAtt(MachineAtts.TransientAtt, hAtt, false)) {
+				} else if ( !DustUtilsAttCache.getAtt(MachineAtts.TransientAtt, hAtt, false) ) {
 
 					Object key = info.getKey();
 					Object val = info.getValue();
 
 //					Dust.log(EVENT_TAG_TYPE_TRACE, hItem, hAtt, key, val);
 
-					if ((null != hAtt) && (val instanceof MindHandle)) {
+					if ( (null != hAtt) && (val instanceof MindHandle) ) {
 						MindHandle hItemNode = Dust.access(MindAccess.Get, null, hGraph, MISC_ATT_CONN_MEMBERMAP, hItem);
 						MindHandle hTargetNode = Dust.access(MindAccess.Get, null, hGraph, MISC_ATT_CONN_MEMBERMAP, val);
 

@@ -107,9 +107,11 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			public final MindHandle hndl;
 			public final boolean moveable;
 			public final ShapeClass shp;
-			
+
+			protected boolean filled = false;
+
 			public final Set<ItemShape<?>> conn = new HashSet<>();
-			
+
 			boolean focused;
 			boolean selected;
 
@@ -122,7 +124,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				this.moveable = moveable;
 				updateShape();
 			}
-			
+
 			protected void connect(MindHandle h) {
 				ItemShape is = shapes.get(h);
 				if ( null == is ) {
@@ -135,8 +137,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 			public void updateShape() {
 				lbl = Dust.access(MindAccess.Peek, null, hndl, DEV_ATT_HINT);
-				if (null != lbl) {
-					if (lbl.contains("[")) {
+				if ( null != lbl ) {
+					if ( lbl.contains("[") ) {
 						lbl = DustUtils.cutPostfix(lbl, "]");
 						lbl = DustUtils.getPostfix(lbl, "[");
 					}
@@ -153,9 +155,13 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			}
 
 			void draw(Graphics2D g) {
-				g.draw(shp);
-
-				if (null != lbl) {
+				if ( filled ) {
+					g.fill(shp);
+				} else {
+					g.draw(shp);
+				}
+				
+				if ( null != lbl ) {
 					Rectangle rct = shp.getBounds();
 					g.drawString(lbl, (int) rct.getCenterX() + lblOffX, (int) rct.getCenterY() + gCfg.lblOffY);
 				}
@@ -165,26 +171,24 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		public class ItemShapeEdge extends ItemShape<Line2D.Double> {
 			protected ItemShapeEdge(MindHandle hndl) {
 				super(hndl, new Line2D.Double(), false);
-				
+
 				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE));
 				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_TARGET));
 			}
-			
+
 			@Override
 			public void updateShape() {
-				MindHandle src = Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS,
-						GEOMETRY_TAG_VECTOR_LOCATION);
-				MindHandle target = Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_TARGET, MISC_ATT_SHAPE_VECTORS,
-						GEOMETRY_TAG_VECTOR_LOCATION);
+				MindHandle src = Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION);
+				MindHandle target = Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_TARGET, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION);
 
 				int xS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 0);
 				int yS = Dust.access(MindAccess.Peek, 0, src, MISC_ATT_VECTOR_COORDINATES, 1);
 
 				int xT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 0);
 				int yT = Dust.access(MindAccess.Peek, 0, target, MISC_ATT_VECTOR_COORDINATES, 1);
-				
+
 				shp.setLine(xS, yS, xT, yT);
-				
+
 				super.updateShape();
 			}
 		}
@@ -192,50 +196,44 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		public class ItemShapeLoop extends ItemShape<Ellipse2D.Double> {
 			protected ItemShapeLoop(MindHandle hndl) {
 				super(hndl, new Ellipse2D.Double(), false);
-				
+
 				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE));
 			}
 
 			@Override
 			public void updateShape() {
-				int x = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 0);
-				int y = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 1);
-				
+				int x = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 0);
+				int y = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_CONN_SOURCE, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 1);
+
 				shp.setFrame(x - 5, y - 5, 10, 100);
-				
+
 				super.updateShape();
 			}
 		}
-		
+
 		public class ItemShapeNode extends ItemShape<Ellipse2D.Double> {
 			protected ItemShapeNode(MindHandle hndl) {
 				super(hndl, new Ellipse2D.Double(), true);
+				
+				filled = Dust.access(MindAccess.Check, hUnit, hndl, MISC_ATT_CONN_OWNER, MIND_ATT_KNOWLEDGE_UNIT);
 			}
 
 			@Override
 			public void updateShape() {
-				int x = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 0);
-				int y = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 1);
-				
+				int x = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 0);
+				int y = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 1);
+
 				shp.setFrame(x - 5, y - 5, 10, 10);
 				super.updateShape();
 			}
 
 			@Override
 			public void moveShape(int x, int y) {
-				int origX = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 0);
-				int origY = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 1);
+				int origX = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 0);
+				int origY = Dust.access(MindAccess.Peek, 0, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 1);
 
-				Dust.access(MindAccess.Set, origX + x, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 0);
-				Dust.access(MindAccess.Set, origY + y, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION,
-						MISC_ATT_VECTOR_COORDINATES, 1);
+				Dust.access(MindAccess.Set, origX + x, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 0);
+				Dust.access(MindAccess.Set, origY + y, hndl, MISC_ATT_SHAPE_VECTORS, GEOMETRY_TAG_VECTOR_LOCATION, MISC_ATT_VECTOR_COORDINATES, 1);
 
 				super.moveShape(x, y);
 			}
@@ -278,27 +276,27 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				Point mpos = e.getPoint();
 				int r = 4;
 				int d = 2 * r;
-				
+
 				int mc = Cursor.DEFAULT_CURSOR;
 
-				if (null != mpos) {
+				if ( null != mpos ) {
 					Rectangle2D ht = new Rectangle2D.Double(mpos.x - r, mpos.y - r, d, d);
 					Set<ItemShape> hit = new HashSet<>();
 					for (ItemShape is : shapes.values()) {
-						if (is.shp.intersects(ht)) {
+						if ( is.shp.intersects(ht) ) {
 							hit.add(is);
-							
+
 							if ( is.moveable ) {
 								mc = Cursor.MOVE_CURSOR;
-								
-								for ( Object conn : is.conn ) {
+
+								for (Object conn : is.conn) {
 									hit.add((ItemShape) conn);
 								}
 							}
 						}
 					}
 
-					if (!hit.equals(focused)) {
+					if ( !hit.equals(focused) ) {
 						focused.clear();
 						focused.addAll(hit);
 
@@ -328,7 +326,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			protected void paintComponent(Graphics g) {
 				super.paintComponent(g);
 
-				if (null == gCfg) {
+				if ( null == gCfg ) {
 					gCfg = new GraphCfg(this, g);
 				}
 
@@ -341,7 +339,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 				Color c = g2.getColor();
 				for (ItemShape is : shapes.values()) {
-					if (is.selected || focused.contains(is)) {
+					if ( is.selected || focused.contains(is) ) {
 						continue;
 					}
 					is.draw(g2);
@@ -349,7 +347,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 				g2.setColor(Color.BLUE);
 				for (ItemShape is : shapes.values()) {
-					if (is.selected && !focused.contains(is)) {
+					if ( is.selected && !focused.contains(is) ) {
 						is.draw(g2);
 					}
 				}
@@ -395,13 +393,13 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				TableModel tm;
 				RowSorter.SortKey defSort = null;
 
-				switch (gt) {
+				switch ( gt ) {
 				case Units:
 					tmUnits = new DefaultTableModel(new Object[] { "Name", "Count" }, 0) {
 						private static final long serialVersionUID = 1L;
 
 						public Class<?> getColumnClass(int columnIndex) {
-							switch (columnIndex) {
+							switch ( columnIndex ) {
 							case 1:
 								return Integer.class;
 							default:
@@ -416,7 +414,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 					selModel.addListSelectionListener(new ListSelectionListener() {
 						@Override
 						public void valueChanged(ListSelectionEvent e) {
-							if (!e.getValueIsAdjusting()) {
+							if ( !e.getValueIsAdjusting() ) {
 								int idx = ((ListSelectionModel) e.getSource()).getMinSelectionIndex();
 								int ii = tbls.get(DataGridType.Units).getRowSorter().convertRowIndexToModel(idx);
 								selectUnit(ii);
@@ -433,7 +431,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				tbl.setModel(tm);
 				tbl.setAutoCreateRowSorter(true);
 
-				if (null != defSort) {
+				if ( null != defSort ) {
 					List<RowSorter.SortKey> sortKeys = new ArrayList<>();
 					sortKeys.add(defSort);
 					tbl.getRowSorter().setSortKeys(sortKeys);
@@ -444,8 +442,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				tables.put(gt, scp);
 			}
 
-			JSplitPane spLB = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tables.get(DataGridType.Aspects),
-					tables.get(DataGridType.Atts));
+			JSplitPane spLB = new JSplitPane(JSplitPane.VERTICAL_SPLIT, tables.get(DataGridType.Aspects), tables.get(DataGridType.Atts));
 			spLB.setResizeWeight(0.5);
 			spLB.setContinuousLayout(true);
 
@@ -473,7 +470,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		public void moveSelected() {
 			int dx = dragTo.x - dragFrom.x;
 			int dy = dragTo.y - dragFrom.y;
-			
+
 			dragFrom.setLocation(dragTo);
 
 //			Dust.log(EVENT_TAG_TYPE_TRACE, "Moving", dx, dy);
@@ -481,8 +478,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			Set<ItemShape> delayed = new HashSet<>();
 
 			for (ItemShape is : shapes.values()) {
-				if (is.selected) {
-					if (is.moveable) {
+				if ( is.selected ) {
+					if ( is.moveable ) {
 						is.moveShape(dx, dy);
 					} else {
 						delayed.add(is);
@@ -509,14 +506,14 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			shapes.clear();
 			focused.clear();
 
-			if (null != hUnitGraph) {
+			if ( null != hUnitGraph ) {
 
 				Dust.access(MindAccess.Visit, new DustVisitor() {
 					@Override
 					protected MindHandle agentProcess() throws Exception {
 						MindHandle hNode = getInfo().getValue();
 
-						if (null != hNode) {
+						if ( null != hNode ) {
 							shapes.put(hNode, new ItemShapeNode(hNode));
 						} else {
 							Dust.log(EVENT_TAG_TYPE_TRACE, "No node in visitor");
@@ -530,7 +527,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 					protected MindHandle agentProcess() throws Exception {
 						MindHandle hEdge = getInfo().getValue();
 
-						if (null != hEdge) {
+						if ( null != hEdge ) {
 							MindHandle src = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_SOURCE);
 							MindHandle target = Dust.access(MindAccess.Peek, null, hEdge, MISC_ATT_CONN_TARGET);
 
@@ -550,7 +547,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		private void selectFocused(MouseEvent e) {
 			boolean add = ((e.getModifiersEx() & InputEvent.SHIFT_DOWN_MASK) != 0);
 
-			if (!add) {
+			if ( !add ) {
 				for (ItemShape is : shapes.values()) {
 					is.selected = false;
 				}
@@ -569,7 +566,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 	protected MindHandle agentInit() throws Exception {
 		@SuppressWarnings("unused")
 		ForgeWrapper fp = DustDevUtils.getImplOb(CREATOR, "");
-		
+
 		Cursor cc = Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR);
 		fp.comp.setCursor(cc);
 
