@@ -10,6 +10,7 @@ import java.util.Set;
 import java.util.Stack;
 
 import hu.sze.milab.dust.DustVisitor;
+import hu.sze.milab.dust.dev.DustDevUtils;
 import hu.sze.milab.dust.utils.DustUtilsAttCache;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -36,10 +37,15 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		public Object getValue() {
 			return val;
 		}
+
+		@Override
+		public String toString() {
+			return "[" + key + "] = " + val;
+		}
 	}
-	
+
 	class MachineVisitInfo implements DustMachineConsts, DustVisitor.VisitInfo {
-		
+
 		final DustVisitor visitor;
 
 		final MindHandle hItem;
@@ -58,12 +64,21 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			this.hItem = hItem;
 			this.hAtt = hAtt;
 
+			if (MIND_ATT_KNOWLEDGE_ASPECTS == hAtt) {
+				DustDevUtils.breakpoint();
+			}
+
 			isMap = coll instanceof Map;
 			cs = isMap ? ((Map) coll).entrySet() : (Collection) coll;
 			it = new ArrayList(cs).iterator();
 //			it = isMap ? ((Map) coll).entrySet().iterator() : ((Collection) coll).iterator();
-			
+
 			isRoot = isMap && (null == hAtt);
+		}
+
+		@Override
+		public String toString() {
+			return "VisitInfo [" + hItem + ":" + hAtt + "] -> " + item;
 		}
 
 		@Override
@@ -148,8 +163,11 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 					item.key = ((int) item.key) + 1;
 				}
 
-				if ((next instanceof Map) || (next instanceof Collection)) {
-					ret = new MachineVisitInfo(visitor, hItem, next, hAtt);
+				if (MIND_ATT_UNIT_CONTENT == hAtt) {
+					// do nothing!
+				} else if ((next instanceof Map) || (next instanceof Collection)) {
+					ret = new MachineVisitInfo(visitor, hItem, next, (null == hAtt) ? (MindHandle) item.key : hAtt);
+//					ret = new MachineVisitInfo(visitor, hItem, next, hAtt);
 				} else {
 					setVI(visitor, this);
 					hProcRet = visitor.agentProcess(MindAction.Process);
@@ -166,6 +184,7 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 					}
 				}
 			} else {
+				setVI(visitor, this);
 				visitor.agentProcess(MindAction.End);
 				ret = null;
 			}

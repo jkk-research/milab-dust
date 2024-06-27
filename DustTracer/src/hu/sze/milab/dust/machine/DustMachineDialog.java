@@ -76,7 +76,7 @@ class DustMachineDialog implements DustMachineConsts {
 					break;
 				case Direct:
 					curr = resolveKnowledge((MindHandle) root, true);
-					break;					
+					break;
 				default:
 					curr = context.get((MindHandle) root);
 					break;
@@ -91,12 +91,15 @@ class DustMachineDialog implements DustMachineConsts {
 		Object prev = null;
 		Object lastKey = null;
 
-		Map prevMap = null;
-		ArrayList prevArr = null;
-		Set prevSet = null;
-		
+		Object prevColl = null;
+		MindCollType collType = null;
+//		Map prevMap = null;
+//		ArrayList prevArr = null;
+//		Set prevSet = null;
+
 		boolean setLastAtt = true;
 		DustHandle hLastAtt = null;
+		Map kAtt = null;
 
 		for (Object p : path) {
 			if (curr instanceof Enum) {
@@ -112,29 +115,49 @@ class DustMachineDialog implements DustMachineConsts {
 				if (createIfMissing) {
 					curr = (p instanceof Integer) ? new ArrayList() : new HashMap();
 
-					if (null != prevArr) {
-						DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
-					} else if (null != prevMap) {
-						prevMap.put(lastKey, curr);
-					} else if (null != prevSet) {
-						prevSet.add(curr);
+					if (null != prevColl) {
+						switch (collType) {
+						case Arr:
+							DustUtils.safePut((ArrayList) prevColl, (Integer) lastKey, val, false);
+							break;
+						case Map:
+							((Map) prevColl).put(lastKey, curr);
+							break;
+						case One:
+							break;
+						case Set:
+							((Set) prevColl).add(curr);
+							break;
+						}
 					}
+
+					updateEnvInfo(currItem, kAtt, collType, prevColl, val);
+//					if (null != prevArr) {
+//						DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
+//					} else if (null != prevMap) {
+//						prevMap.put(lastKey, curr);
+//					} else if (null != prevSet) {
+//						prevSet.add(curr);
+//					}
 				} else {
 					break;
 				}
 			}
 
 			prev = curr;
-			prevArr = (prev instanceof ArrayList) ? (ArrayList) prev : null;
-			prevMap = (prev instanceof Map) ? (Map) prev : null;
-			prevSet = (prev instanceof Set) ? (Set) prev : null;
+			collType = DustDevUtils.getCollType(prev);
+			prevColl = (null == collType) ? null : prev;
+//			prevArr = (prev instanceof ArrayList) ? (ArrayList) prev : null;
+//			prevMap = (prev instanceof Map) ? (Map) prev : null;
+//			prevSet = (prev instanceof Set) ? (Set) prev : null;
 
 			lastKey = p;
-			
-			if ( setLastAtt ) {
+
+			if (setLastAtt) {
 				setLastAtt = false;
 				if (p instanceof DustHandle) {
 					hLastAtt = (DustHandle) p;
+					kAtt = resolveKnowledge(hLastAtt, false);
 				}
 			}
 
@@ -156,19 +179,18 @@ class DustMachineDialog implements DustMachineConsts {
 			}
 
 			// factory
-			
+
 			if ((null == curr) && createIfMissing && (null != hLastAtt)) {
-				Map kAtt = resolveKnowledge(hLastAtt, false);
 				DustHandle hAttInfo = DustUtils.simpleGet(kAtt, MIND_ATT_KNOWLEDGE_TAGS, MIND_TAG_VALTYPE);
 
 				if (MIND_TAG_VALTYPE_HANDLE == hAttInfo) {
 					hAttInfo = DustUtils.simpleGet(kAtt, MIND_ATT_KNOWLEDGE_TAGS, MIND_TAG_COLLTYPE);
 					MindCollType ct = DustUtilsEnumTranslator.getEnum(hAttInfo, MindCollType.One);
-					switch ( ct  ) {
+					switch (ct) {
 					case Arr:
 					case Map:
 					case Set:
-						if ( hLastAtt == lastKey ) {
+						if (hLastAtt == lastKey) {
 							continue;
 						}
 						break;
@@ -192,29 +214,33 @@ class DustMachineDialog implements DustMachineConsts {
 
 						curr = DustDevUtils.newHandle(hUnit, hPA);
 						Object lk = lastKey;
-						
-						switch ( ct  ) {
-						case Arr:
-							if ( DustUtils.isEqual(KEY_ADD, lastKey) ) {
+
+						switch (ct) {
+						case Arr: {
+							ArrayList prevArr = (ArrayList) prevColl;
+							if (DustUtils.isEqual(KEY_ADD, lastKey)) {
 								prevArr.add(curr);
 							} else {
-								DustUtils.ensureSize(prevArr, (int)lastKey);
-								prevArr.set((int)lastKey, curr);
+								DustUtils.ensureSize(prevArr, (int) lastKey);
+								prevArr.set((int) lastKey, curr);
 							}
+						}
 							break;
 						case Map:
-							prevMap.put(lastKey, curr);
+							((Map) prevColl).put(lastKey, curr);
 							break;
 						case Set:
 							break;
 						case One:
-							((Map)currItem).put(hLastAtt, curr);
+							((Map) currItem).put(hLastAtt, curr);
 							lk = null;
 							break;
 						}
-						
+
+						updateEnvInfo(currItem, kAtt, collType, prevColl, curr);
+
 						DustHandle hNar = DustUtils.simpleGet(kFact, MIND_ATT_FACTORY_NARRATIVE);
-						if ( null != hNar ) {
+						if (null != hNar) {
 							MindAgent fn;
 							try {
 								fn = machine.selectAgent(hNar);
@@ -232,10 +258,14 @@ class DustMachineDialog implements DustMachineConsts {
 								context.remove(MIND_TAG_CONTEXT_VISITVALUE);
 							}
 						}
-						
+
 					}
 				}
 			}
+		}
+
+		if (createIfMissing) {
+			updateEnvInfo(currItem, kAtt, collType, prevColl, val);
 		}
 
 		switch (cmd) {
@@ -299,19 +329,36 @@ class DustMachineDialog implements DustMachineConsts {
 			ret = (null == curr) ? val : curr;
 			break;
 		case Insert:
-			if (curr instanceof Set) {
-				prevSet = (Set) curr;
-			}
-			if (!DustUtils.isEqual(curr, val)) {
-				if (null != prevArr) {
-					DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
-				} else if (null != prevSet) {
-					prevSet.add(val);
-				} else {
-					Set s = new HashSet();
+//			if (curr instanceof Set) {
+//				prevColl = curr;
+////				prevSet = (Set) curr;
+//			}
+			if (!DustUtils.isEqual(curr, val) && (null != prevColl)) {
+				switch (collType) {
+				case Arr:
+					DustUtils.safePut((ArrayList) prevColl, (Integer) lastKey, val, false);
+					break;
+				case Map:
+					Set s = (curr instanceof Set) ? (Set) curr : new HashSet();
 					s.add(val);
-					prevMap.put(lastKey, s);
+					((Map) prevColl).put(lastKey, s);
+					break;
+				case One:
+					break;
+				case Set:
+					((Set) prevColl).add(curr);
+					break;
 				}
+
+//				if (null != prevArr) {
+//					DustUtils.safePut(prevArr, (Integer) lastKey, val, false);
+//				} else if (null != prevSet) {
+//					prevSet.add(val);
+//				} else {
+//					Set s = new HashSet();
+//					s.add(val);
+//					prevMap.put(lastKey, s);
+//				}
 			}
 			break;
 		case Peek:
@@ -325,14 +372,30 @@ class DustMachineDialog implements DustMachineConsts {
 			}
 			break;
 		case Set:
-			if (null != lastKey) {
-				if (null != prevMap) {
+			if ((null != lastKey) && (null != prevColl)) {
+				switch (collType) {
+				case Arr:
+					DustUtils.safePut((ArrayList) prevColl, (Integer) lastKey, val, true);
+					break;
+				case Map:
 					if (!DustUtils.isEqual(curr, val)) {
-						prevMap.put(lastKey, val);
+						((Map) prevColl).put(lastKey, val);
 					}
-				} else if (null != prevArr) {
-					DustUtils.safePut(prevArr, (Integer) lastKey, val, true);
+					break;
+				case One:
+					break;
+				case Set:
+					((Set) prevColl).add(curr);
+					break;
 				}
+
+//				if (null != prevMap) {
+//					if (!DustUtils.isEqual(curr, val)) {
+//						prevMap.put(lastKey, val);
+//					}
+//				} else if (null != prevArr) {
+//					DustUtils.safePut(prevArr, (Integer) lastKey, val, true);
+//				}
 			}
 
 			break;
@@ -349,6 +412,34 @@ class DustMachineDialog implements DustMachineConsts {
 		}
 
 		return (RetType) ret;
+	}
+
+	private void updateEnvInfo(Object kItem, Object kAtt, MindCollType collType, Object coll, Object val) {
+		MindHandle hAsp = DustUtils.simpleGet(kAtt, MISC_ATT_CONN_PARENT);
+
+		if ((null != hAsp) && (MIND_ASP_KNOWLEDGE != hAsp)) {
+			Set as = DustUtils.safeGet(kItem, MIND_ATT_KNOWLEDGE_ASPECTS, SET_CREATOR);
+			as.add(hAsp);
+		}
+
+		if ((null != kAtt) && (null != val)) {
+			Map tm = DustUtils.safeGet(kAtt, MIND_ATT_KNOWLEDGE_TAGS, MAP_CREATOR);
+
+			if (!tm.containsKey(MIND_TAG_VALTYPE)) {
+				MindValType vt = DustUtils.getValType(val);
+				MindHandle hVT = DustUtilsEnumTranslator.getHandle(vt);
+				if (null != hVT) {
+					tm.put(MIND_TAG_VALTYPE, hVT);
+				}
+			}
+
+			if (!tm.containsKey(MIND_TAG_COLLTYPE)) {
+				MindHandle hCT = (kItem == coll) ? MIND_TAG_COLLTYPE_ONE : DustUtilsEnumTranslator.getHandle(collType);
+				if (null != hCT) {
+				tm.put(MIND_TAG_COLLTYPE, hCT);
+				}
+			}
+		}
 	}
 
 	private void doVisit(DustVisitor visitor, DustHandle hLastItem, Object lastKey, Object curr) {

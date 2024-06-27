@@ -1,8 +1,11 @@
 package hu.sze.milab.dust.dev;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Map;
+import java.util.Set;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustHandles;
@@ -14,7 +17,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 	public static final Comparator<String> ID_COMP = new Comparator<String>() {
 		@Override
 		public int compare(String o1, String o2) {
-			if ( o1.equals(o2) ) {
+			if (o1.equals(o2)) {
 				return 0;
 			}
 
@@ -26,9 +29,9 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 			int m2 = s2.length - 1;
 
 			for (int i = 1; (0 == ret) && (i < 3); ++i) {
-				if ( i > m1 ) {
+				if (i > m1) {
 					ret = -1;
-				} else if ( i > m2 ) {
+				} else if (i > m2) {
 					ret = 1;
 				} else {
 					ret = Integer.valueOf(s1[i]) - Integer.valueOf(s2[i]);
@@ -48,8 +51,9 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 
 		Dust.access(MindAccess.Set, hUnit, h, MIND_ATT_KNOWLEDGE_UNIT);
 		Dust.access(MindAccess.Set, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
+		Dust.access(MindAccess.Insert, hPrimaryAspect, h, MIND_ATT_KNOWLEDGE_ASPECTS);
 
-		if ( !DustUtils.isEmpty(hint) ) {
+		if (!DustUtils.isEmpty(hint)) {
 			Dust.access(MindAccess.Set, hint, h, DEV_ATT_HINT);
 		}
 
@@ -92,7 +96,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 	public static <RetType> RetType getImplOb(MindHandle h, DustCreator<RetType> c, Object key, Object... hints) {
 		RetType val = Dust.access(MindAccess.Peek, null, h, DUST_ATT_IMPL_DATA);
 
-		if ( null == val ) {
+		if (null == val) {
 			val = c.create(key, hints);
 			Dust.access(MindAccess.Set, val, h, DUST_ATT_IMPL_DATA);
 		}
@@ -100,14 +104,15 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 		return val;
 	}
 
-	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName, boolean srv) {
+	public static void registerNative(MindHandle hLogic, MindHandle hUnit, MindHandle hModule, String nativeClassName,
+			boolean srv) {
 		MindHandle hNative = newHandle(hUnit, DUST_ASP_IMPL, DustUtils.getPostfix(nativeClassName, "."));
 
 		Dust.access(MindAccess.Set, hLogic, hNative, DUST_ATT_IMPL_NARRATIVE);
 		Dust.access(MindAccess.Set, nativeClassName, hNative, TEXT_ATT_TOKEN);
 
 		Dust.access(MindAccess.Set, hNative, hModule, DUST_ATT_MODULE_NARRATIVEIMPLS, KEY_ADD);
-		if ( srv ) {
+		if (srv) {
 			setTag(hNative, DUST_TAG_NATIVE_SERVER);
 		}
 	}
@@ -130,7 +135,7 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 
 	public static <RetType> RetType getValueRec(MindHandle hStart, MindHandle hKeyValue, MindHandle hKeyNext) {
 		RetType ret = null;
-		
+
 		while ((null != hStart) && (null == (ret = Dust.access(MindAccess.Peek, null, hStart, hKeyValue)))) {
 			hStart = Dust.access(MindAccess.Peek, null, hStart, hKeyNext);
 		}
@@ -166,6 +171,14 @@ public class DustDevUtils implements DustHandles, DustUtilsConsts {
 
 	public static String getTimeStr(Date d) {
 		return TS_FMT.get().format((null == d) ? new Date() : d);
+	}
+
+	public static MindCollType getCollType(Object coll) {
+		MindCollType ret = (null == coll) ? MindCollType.One
+				: (coll instanceof ArrayList) ? MindCollType.Arr
+						: (coll instanceof Map) ? MindCollType.Map : (coll instanceof Set) ? MindCollType.Set : null;
+
+		return ret;
 	}
 
 }

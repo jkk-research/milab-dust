@@ -125,6 +125,10 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			
 			protected void connect(MindHandle h) {
 				ItemShape is = shapes.get(h);
+				if ( null == is ) {
+					DustDevUtils.breakpoint("NO shape for item", h);
+					return;
+				}
 				conn.add(is);
 				is.conn.add(this);
 			}
@@ -304,7 +308,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 						Cursor cc = Cursor.getPredefinedCursor(mc);
 						Component comp = ForgePanel.this;
 						comp.setCursor(cc);
-						Dust.log(EVENT_TAG_TYPE_TRACE, "Set cursor", mc, cc);
+//						Dust.log(EVENT_TAG_TYPE_TRACE, "Set cursor", mc, cc);
 					}
 				}
 			}
@@ -460,8 +464,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 			setPreferredSize(new Dimension(1000, 800));
 
-			spLeft.setDividerLocation(200);
-			spLB.setDividerLocation(300);
+			spLeft.setDividerLocation(350);
+			spLB.setDividerLocation(200);
 			spRight.setDividerLocation(600);
 			spMain.setDividerLocation(300);
 		}
@@ -472,7 +476,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			
 			dragFrom.setLocation(dragTo);
 
-			Dust.log(EVENT_TAG_TYPE_TRACE, "Moving", dx, dy);
+//			Dust.log(EVENT_TAG_TYPE_TRACE, "Moving", dx, dy);
 
 			Set<ItemShape> delayed = new HashSet<>();
 
@@ -514,6 +518,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 						if (null != hNode) {
 							shapes.put(hNode, new ItemShapeNode(hNode));
+						} else {
+							Dust.log(EVENT_TAG_TYPE_TRACE, "No node in visitor");
 						}
 						return MIND_TAG_RESULT_READACCEPT;
 					}

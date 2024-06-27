@@ -118,7 +118,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 					Dust.access(MindAccess.Set, name, ch, DEV_ATT_HINT);
 
 					String[] nn = name.split(DUST_SEP);
-					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
+//					String tokenVal = (2 == nn.length) ? nn[0] : name.substring(nn[0].length() + nn[1].length() + 2);
 
 					String aId = hItem.getId().split(DUST_SEP_ID)[0];
 					if ( authors.add(aId) ) {
@@ -131,7 +131,7 @@ public class DustMachineTempUtils implements DustJsonConsts {
 						parents.put(name, (MindHandle) ch);
 					}
 
-					Dust.log(null, name, " -> ", tokenVal);
+//					Dust.log(null, name, " -> ", tokenVal);
 				}
 			}
 		}

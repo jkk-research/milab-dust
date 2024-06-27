@@ -2,7 +2,9 @@ package hu.sze.milab.dust.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import hu.sze.milab.dust.DustConsts;
 import hu.sze.milab.dust.DustException;
@@ -34,6 +36,7 @@ public interface DustUtilsConsts extends DustConsts, DustHandles {
 	}
 	
 	DustCreator<Map> MAP_CREATOR = new DustCreatorSimple<>(HashMap.class);
+	DustCreator<Set> SET_CREATOR = new DustCreatorSimple<>(HashSet.class);
 	DustCreator<ArrayList> ARRAY_CREATOR = new DustCreatorSimple<>(ArrayList.class);
 
 	enum MachineAtts {

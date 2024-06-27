@@ -174,4 +174,19 @@ public class DustUtils implements DustUtilsConsts {
 		}
 	}
 
+	public static MindValType getValType(Object val) {
+		if ( null != val ) {
+			if ( val instanceof MindHandle ) {
+				return MindValType.Handle;
+			} else if (Long.class.isAssignableFrom(val.getClass())) {
+				return MindValType.Int;
+			} else if (Double.class.isAssignableFrom(val.getClass())) {
+				return MindValType.Real;
+			} else {
+				return MindValType.Bin;
+			}
+		}
+		return null;
+	}
+
 }

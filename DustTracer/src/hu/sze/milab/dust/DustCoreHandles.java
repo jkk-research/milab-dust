@@ -20,6 +20,7 @@ public interface DustCoreHandles extends DustConsts, DustUnitHandles {
 	MindHandle MIND_ATT_KNOWLEDGE_TAGS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_LISTENERS = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_KNOWLEDGE_PRIMARYASPECT = Dust.lookup("giskard:1:?");
+	MindHandle MIND_ATT_KNOWLEDGE_ASPECTS = Dust.lookup("giskard:1:?");
 	
 	MindHandle MIND_ASP_FACTORY = Dust.lookup("giskard:1:?");
 	MindHandle MIND_ATT_FACTORY_PRIMARYASPECT = Dust.lookup("giskard:1:?");
