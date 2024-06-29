@@ -404,10 +404,7 @@ class DustMachineDialog implements DustMachineConsts {
 		case Lookup:
 			break;
 		case Visit:
-			if (null != hLastItem) {
-				doVisit((DustVisitor) val, hLastItem, lastKey, curr);
-			}
-
+			doVisit((DustVisitor) val, hLastItem, lastKey, curr);
 			break;
 		}
 
@@ -436,13 +433,21 @@ class DustMachineDialog implements DustMachineConsts {
 			if (!tm.containsKey(MIND_TAG_COLLTYPE)) {
 				MindHandle hCT = (kItem == coll) ? MIND_TAG_COLLTYPE_ONE : DustUtilsEnumTranslator.getHandle(collType);
 				if (null != hCT) {
-				tm.put(MIND_TAG_COLLTYPE, hCT);
+					tm.put(MIND_TAG_COLLTYPE, hCT);
 				}
 			}
 		}
 	}
 
 	private void doVisit(DustVisitor visitor, DustHandle hLastItem, Object lastKey, Object curr) {
+		if (null == hLastItem) {
+			return;
+		}
+
+		if ((null == curr) && (null != lastKey)) {
+			return;
+		}
+
 		boolean visitRoot = (null == visitCtx);
 
 		try {

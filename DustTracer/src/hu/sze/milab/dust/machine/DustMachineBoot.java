@@ -170,7 +170,7 @@ public class DustMachineBoot implements DustMachineConsts {
 		DustDevUtils.setTag(MISC_ATT_SHAPE_VECTORS, MIND_TAG_VALTYPE_HANDLE, MIND_TAG_VALTYPE);
 
 		MindHandle hFact;
-		MindHandle hAgtUnitGraph = DustDevUtils.registerAgent(MIND_UNIT, MONTRU_NAR_UNITGRAPH);
+		MindHandle hAgtUnitGraph = DustDevUtils.registerAgent(MONTRU_UNIT, MONTRU_NAR_UNITGRAPH);
 		
 		hFact = DustDevUtils.newHandle(MIND_UNIT, MIND_ASP_FACTORY);
 		Dust.access(MindAccess.Set, GEOMETRY_ASP_GRAPH, hFact, MIND_ATT_FACTORY_PRIMARYASPECT);

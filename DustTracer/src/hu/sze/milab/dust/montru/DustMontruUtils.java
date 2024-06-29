@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.Point;
 
 import javax.swing.JComponent;
+import javax.swing.JSplitPane;
 
 import hu.sze.milab.dust.Dust;
 
@@ -115,6 +116,13 @@ public class DustMontruUtils implements DustMontruConsts {
 		Number h = Dust.access(MindAccess.Peek, 400, hArea, MONTRU_ATT_AREA_VECTORS, GEOMETRY_TAG_VECTOR_SIZE, 1);
 
 		comp.setBounds(x.intValue(), y.intValue(), w.intValue(), h.intValue());
+	}
+
+	public static JSplitPane createSplit(boolean horizontal, JComponent c1, JComponent c2, double weight) {
+		JSplitPane spp = new JSplitPane(horizontal ? JSplitPane.HORIZONTAL_SPLIT : JSplitPane.VERTICAL_SPLIT, c1, c2);
+		spp.setResizeWeight(0.5);
+		spp.setContinuousLayout(true);
+		return spp;
 	}
 
 }
