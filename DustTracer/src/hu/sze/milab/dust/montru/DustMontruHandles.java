@@ -60,6 +60,10 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_NAR_GRAPH = Dust.lookup("giskard:13:?");
 
 	MindHandle MONTRU_NAR_UNITGRAPH = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_UNITGRAPHEDGE = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_UNITGRAPHEDGE_REF = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_UNITGRAPHEDGE_ATT = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_UNITGRAPHEDGE_KEY = Dust.lookup("giskard:13:?");
 
 	MindHandle MONTRU_NAR_GUI = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_ATT_GUI_SELECTED = Dust.lookup("giskard:13:?");

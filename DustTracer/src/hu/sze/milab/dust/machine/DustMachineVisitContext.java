@@ -80,6 +80,11 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		public String toString() {
 			return "VisitInfo [" + hItem + ":" + hAtt + "] -> " + item;
 		}
+		
+		@Override
+		public boolean isRoot() {
+			return isRoot;
+		}
 
 		@Override
 		public MindHandle getItemHandle() {

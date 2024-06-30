@@ -16,6 +16,8 @@ public abstract class DustVisitor extends DustAgent {
 		
 		MindHandle getItemHandle();
 		MindHandle getAttHandle();
+
+		boolean isRoot();
 		
 //		void remove();
 //		Collection<DustVisitor.VisitItem> getRemoved(Collection<DustVisitor.VisitItem> removed);

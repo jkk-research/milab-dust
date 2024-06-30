@@ -1,5 +1,6 @@
 package hu.sze.milab.dust.dev.forge;
 
+import java.awt.BasicStroke;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
@@ -8,10 +9,14 @@ import java.awt.Dimension;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
+import java.awt.Stroke;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Ellipse2D;
@@ -30,6 +35,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
 import javax.swing.JTable;
+import javax.swing.JToggleButton;
 import javax.swing.ListSelectionModel;
 import javax.swing.RowSorter;
 import javax.swing.SortOrder;
@@ -40,7 +46,6 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.event.MouseInputAdapter;
 import javax.swing.table.AbstractTableModel;
-import javax.swing.table.DefaultTableModel;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.DustAgent;
@@ -52,6 +57,7 @@ import hu.sze.milab.dust.montru.DustMontruNarrativeUnitgraph;
 import hu.sze.milab.dust.montru.DustMontruSwingComps;
 import hu.sze.milab.dust.montru.DustMontruUtils;
 import hu.sze.milab.dust.utils.DustUtils;
+import hu.sze.milab.dust.utils.DustUtilsEnumTranslator;
 import hu.sze.milab.dust.utils.DustUtilsFactory;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -62,7 +68,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 	}
 
 	enum DataGridType {
-		Units(1, SortOrder.DESCENDING, GridCol.Name, GridCol.Count), Aspects(GridCol.Name, GridCol.Unit, GridCol.Show, GridCol.Color),
+		Units(1, SortOrder.DESCENDING, GridCol.Name, GridCol.Count),
+		Aspects(GridCol.Name, GridCol.Unit, GridCol.Show, GridCol.Color),
 		Attributes(GridCol.Name, GridCol.Unit, GridCol.Show, GridCol.Color),
 		Focused(GridCol.Name, GridCol.Unit, GridCol.Value), Items(GridCol.ID, GridCol.Name, GridCol.Unit, GridCol.PrimAsp),
 
@@ -81,6 +88,15 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			this.defSortOrder = defSortOrder;
 			this.colNames = uc;
 		}
+	}
+
+	enum LineType {
+		Ref, Att, Key
+	}
+
+	static {
+		DustUtilsEnumTranslator.register(LineType.class, MONTRU_TAG_UNITGRAPHEDGE_REF, MONTRU_TAG_UNITGRAPHEDGE_ATT,
+				MONTRU_TAG_UNITGRAPHEDGE_KEY);
 	}
 
 	static class ForgeWrapper extends CompWrapper<ForgePanel> {
@@ -103,7 +119,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 					return MIND_TAG_RESULT_READACCEPT;
 				}
 			}, APP_UNIT, DUST_ATT_MACHINE_UNITS);
-			
+
 			unitModel.updated();
 
 			return ret;
@@ -191,11 +207,32 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		}
 
 		public class ItemShapeEdge extends ItemShape<Line2D.Double> {
+			final LineType type;
+
 			protected ItemShapeEdge(MindHandle hndl) {
 				super(hndl, new Line2D.Double(), false);
 
+				MindHandle hT = Dust.access(MindAccess.Peek, null, hndl, MIND_ATT_KNOWLEDGE_TAGS, MONTRU_TAG_UNITGRAPHEDGE);
+
+				this.type = DustUtilsEnumTranslator.getEnum(hT, LineType.Ref);
+
 				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_SOURCE));
 				connect(Dust.access(MindAccess.Peek, null, hndl, MISC_ATT_CONN_TARGET));
+			}
+
+			@Override
+			void draw(Graphics2D g) {
+				if (!lineButtons.get(type).isSelected()) {
+					return;
+				}
+
+				Stroke s = g.getStroke();
+				try {
+					g.setStroke(lineStrokes.get(type));
+					super.draw(g);
+				} finally {
+					g.setStroke(s);
+				}
 			}
 
 			@Override
@@ -284,8 +321,10 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			}
 
 			public void reset() {
-				rows.clear();
-				extData.clear();
+				if (type != DataGridType.Units) {
+					rows.clear();
+					extData.clear();
+				}
 			}
 
 			public void updated() {
@@ -293,6 +332,10 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			}
 
 			public int optAdd(MindHandle h) {
+				if (null == h) {
+					return -1;
+				}
+
 				int ret = rows.indexOf(h);
 
 				if (-1 == ret) {
@@ -307,12 +350,19 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					int idx = ((ListSelectionModel) e.getSource()).getMinSelectionIndex();
+					if (-1 == idx) {
+						return;
+					}
+
 					int ii = tbls.get(type).getRowSorter().convertRowIndexToModel(idx);
 					MindHandle h = rows.get(ii);
 
 					switch (type) {
 					case Units:
 						selectUnit(h);
+						break;
+					case Items:
+
 						break;
 					default:
 						break;
@@ -531,10 +581,11 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 		EnumMap<DataGridType, GridDataModel> tms = new EnumMap<DataGridType, GridDataModel>(DataGridType.class);
 		EnumMap<DataGridType, JTable> tbls = new EnumMap<DataGridType, JTable>(DataGridType.class);
 
-		DefaultTableModel tmUnitsX;
-
 		MindHandle hUnit;
 		MindHandle hUnitGraph;
+
+		EnumMap<LineType, Stroke> lineStrokes = new EnumMap<LineType, Stroke>(LineType.class);
+		EnumMap<LineType, JToggleButton> lineButtons = new EnumMap<LineType, JToggleButton>(LineType.class);
 
 		GraphPanel gp;
 
@@ -546,6 +597,13 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 		public ForgePanel() {
 			super(new BorderLayout());
+
+			BasicStroke stkRef = new BasicStroke();
+			lineStrokes.put(LineType.Ref, stkRef);
+			lineStrokes.put(LineType.Att, new BasicStroke(stkRef.getLineWidth(), stkRef.getEndCap(), stkRef.getLineJoin(),
+					stkRef.getMiterLimit(), new float[] { 5.0F }, 0));
+			lineStrokes.put(LineType.Key, new BasicStroke(stkRef.getLineWidth() * 3, stkRef.getEndCap(), stkRef.getLineJoin(),
+					stkRef.getMiterLimit(), new float[] { 20.0F }, 0));
 
 			gp = new GraphPanel();
 			gp.setBorder(new TitledBorder(LineBorder.createBlackLineBorder(), "Unit graph"));
@@ -577,7 +635,26 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			JSplitPane spLB = DustMontruUtils.createSplit(false, tables.get(DataGridType.Aspects),
 					tables.get(DataGridType.Attributes), 0.5);
 
-			JSplitPane spLeft = DustMontruUtils.createSplit(false, tables.get(DataGridType.Units), spLB, 0.2);
+			JPanel pnl1 = new JPanel(new BorderLayout());
+			pnl1.add(tables.get(DataGridType.Units), BorderLayout.CENTER);
+
+			JPanel pnl2 = new JPanel(new GridLayout(1, LineType.values().length));
+			pnl1.add(pnl2, BorderLayout.SOUTH);
+			ActionListener al1 = new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					gp.revalidate();
+					gp.repaint();
+				}
+			};
+			for (LineType lt : LineType.values()) {
+				JToggleButton tb = new JToggleButton(lt.name());
+				lineButtons.put(lt, tb);
+				pnl2.add(tb);
+				tb.addActionListener(al1);
+			}
+
+			JSplitPane spLeft = DustMontruUtils.createSplit(false, pnl1, spLB, 0.2);
 
 			JSplitPane spTop = DustMontruUtils.createSplit(true, spLeft, gp, 0.2);
 
@@ -635,6 +712,9 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 			shapes.clear();
 			focused.clear();
+			for (GridDataModel gdm : tms.values()) {
+				gdm.reset();
+			}
 
 			if (null != hUnitGraph) {
 
@@ -645,6 +725,7 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 
 						if (null != hNode) {
 							shapes.put(hNode, new ItemShapeNode(hNode));
+							tms.get(DataGridType.Items).optAdd(Dust.access(MindAccess.Peek, null, hNode, MISC_ATT_CONN_OWNER));
 						} else {
 							Dust.log(EVENT_TAG_TYPE_TRACE, "No node in visitor");
 						}
@@ -666,6 +747,10 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 						return MIND_TAG_RESULT_READACCEPT;
 					}
 				}, hUnitGraph, GEOMETRY_ATT_GRAPH_EDGES);
+			}
+
+			for (GridDataModel gdm : tms.values()) {
+				gdm.updated();
 			}
 
 			gp.invalidate();
