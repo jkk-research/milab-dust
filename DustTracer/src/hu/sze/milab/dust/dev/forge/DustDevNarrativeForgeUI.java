@@ -19,6 +19,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.InputEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
+import java.awt.event.MouseMotionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -308,16 +310,77 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			}
 		}
 
-		class GridDataModel extends AbstractTableModel implements ListSelectionListener {
+		class GridDataModel extends AbstractTableModel {
 			private static final long serialVersionUID = 1L;
 
 			public final DataGridType type;
+			private final ListSelectionListener selListener = new ListSelectionListener() {
+				@Override
+				public void valueChanged(ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						int idx = ((ListSelectionModel) e.getSource()).getMinSelectionIndex();
+						if (-1 == idx) {
+							return;
+						}
+
+						int ii = tbls.get(type).getRowSorter().convertRowIndexToModel(idx);
+						MindHandle h = rows.get(ii);
+
+						switch (type) {
+						case Units:
+							selectUnit(h);
+							break;
+						case Items:
+
+							break;
+						default:
+							break;
+						}
+					}
+				}
+			};
+
+			private final MouseMotionListener mouseListener = new MouseMotionAdapter() {
+				public void mouseMoved(MouseEvent e) {
+					JTable table = (JTable) e.getComponent();
+					int idx = table.rowAtPoint(e.getPoint());
+					
+					if (idx > -1) {
+						int ii = tbls.get(type).getRowSorter().convertRowIndexToModel(idx);
+						MindHandle h = rows.get(ii);
+
+						switch (type) {
+						case Units:
+							break;
+						case Items:
+
+							break;
+						default:
+							break;
+						}
+					}
+				}
+			};
 
 			private final ArrayList<MindHandle> rows = new ArrayList<MindHandle>();
 			private final DustUtilsFactory extData = new DustUtilsFactory(MAP_CREATOR);
 
-			public GridDataModel(DataGridType type) {
+			public GridDataModel(DataGridType type, JTable tbl) {
 				this.type = type;
+
+				tbl.setModel(this);
+				tbl.setAutoCreateRowSorter(true);
+
+				RowSorter.SortKey defSort = new RowSorter.SortKey(type.defSortColIdx, type.defSortOrder);
+				List<RowSorter.SortKey> sortKeys = new ArrayList<>();
+				sortKeys.add(defSort);
+				tbl.getRowSorter().setSortKeys(sortKeys);
+
+				ListSelectionModel selModel = tbl.getSelectionModel();
+				selModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+				selModel.addListSelectionListener(selListener);
+
+				tbl.addMouseMotionListener(mouseListener);
 			}
 
 			public void reset() {
@@ -344,30 +407,6 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 				}
 
 				return ret;
-			}
-
-			@Override
-			public void valueChanged(ListSelectionEvent e) {
-				if (!e.getValueIsAdjusting()) {
-					int idx = ((ListSelectionModel) e.getSource()).getMinSelectionIndex();
-					if (-1 == idx) {
-						return;
-					}
-
-					int ii = tbls.get(type).getRowSorter().convertRowIndexToModel(idx);
-					MindHandle h = rows.get(ii);
-
-					switch (type) {
-					case Units:
-						selectUnit(h);
-						break;
-					case Items:
-
-						break;
-					default:
-						break;
-					}
-				}
 			}
 
 			@Override
@@ -611,21 +650,11 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 			EnumMap<DataGridType, JComponent> tables = new EnumMap<DataGridType, JComponent>(DataGridType.class);
 
 			for (DataGridType gt : DataGridType.values()) {
-				GridDataModel tm = new GridDataModel(gt);
-				tms.put(gt, tm);
-
-				JTable tbl = new JTable(tm);
+				JTable tbl = new JTable(null);
 				tbls.put(gt, tbl);
-				tbl.setAutoCreateRowSorter(true);
 
-				RowSorter.SortKey defSort = new RowSorter.SortKey(gt.defSortColIdx, gt.defSortOrder);
-				List<RowSorter.SortKey> sortKeys = new ArrayList<>();
-				sortKeys.add(defSort);
-				tbl.getRowSorter().setSortKeys(sortKeys);
-
-				ListSelectionModel selModel = tbl.getSelectionModel();
-				selModel.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-				selModel.addListSelectionListener(tm);
+				GridDataModel tm = new GridDataModel(gt, tbl);
+				tms.put(gt, tm);
 
 				JScrollPane scp = new JScrollPane(tbl);
 				scp.setBorder(new TitledBorder(LineBorder.createBlackLineBorder(), gt.name()));

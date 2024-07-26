@@ -7,6 +7,7 @@ public abstract class DustVisitor extends DustAgent {
 	public static final int DEPTH_UNLIMITED = -1;
 		
 	public interface VisitItem {
+		MindCollType getCollType();
 		<RetType> RetType getKey();
 		<RetType> RetType getValue();
 	}

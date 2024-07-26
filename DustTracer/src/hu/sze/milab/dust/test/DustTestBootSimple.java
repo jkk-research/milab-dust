@@ -7,6 +7,7 @@ import java.util.TreeMap;
 
 import hu.sze.milab.dust.Dust;
 import hu.sze.milab.dust.dev.DustDevUtils;
+import hu.sze.milab.dust.dev.forge.DustDevForgeUnitExport;
 import hu.sze.milab.dust.machine.DustMachineTempMetaGenJavaScript;
 import hu.sze.milab.dust.machine.DustMachineTempUtils;
 
@@ -15,9 +16,29 @@ public class DustTestBootSimple implements DustTestConsts {
 	public static void boot(String[] launchParams) throws Exception {
 		DustMachineTempUtils.test();
 
-		startGui();
+//		startGui();
 //		startPortal();
 //		helloWorld();
+//		helloWorld2();
+		export();
+	}
+
+	public static void export() throws Exception {
+		File f = new File("../../../Giskard/Generations/G06/store/local/units");
+		DustDevForgeUnitExport.export(f);
+	}
+
+	public static void helloWorld2() throws Exception {
+		MindHandle hMsg = DustDevUtils.newHandle(TEST0_UNIT, TEXT_ASP_PLAIN, "Message");
+		Dust.access(MindAccess.Set, "\n\n*** Hello, world DUE! ***\n\n", hMsg, TEXT_ATT_PLAIN_TEXT);
+
+		MindHandle hLogHelloWorld = DustDevUtils.registerLogic(TEST0_UNIT, DustTestAgentConsoleOut.class.getCanonicalName(), "out LOGIC");
+
+		MindHandle hAgtHelloWorld = DustDevUtils.registerAgent(TEST0_UNIT, hLogHelloWorld);
+		
+		Dust.access(MindAccess.Insert, hAgtHelloWorld, hMsg, MIND_ATT_KNOWLEDGE_LISTENERS, KEY_ADD);
+
+		Dust.access(MindAccess.Set, hMsg, APP_ASSEMBLY_MAIN, MIND_ATT_ASSEMBLY_STARTCOMMITS, KEY_ADD);
 	}
 
 	public static void helloWorld() throws Exception {

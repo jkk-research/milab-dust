@@ -17,15 +17,22 @@ import hu.sze.milab.dust.utils.DustUtilsAttCache;
 class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMachineConsts {
 
 	class MachineVisitItem implements DustVisitor.VisitItem {
+		MindCollType collType;
 		Object key;
 		Object val;
 
-		public MachineVisitItem(boolean isMap) {
-			key = isMap ? null : -1;
+		public MachineVisitItem(MindCollType ct) {
+			this.collType = ct;
+			key = (ct == MindCollType.Map) ? null : -1;
 		}
 
 		public MachineVisitItem(MachineVisitItem prev) {
 			key = prev.key;
+		}
+		
+		@Override
+		public MindCollType getCollType() {
+			return collType;
 		}
 
 		@Override
@@ -52,7 +59,8 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		MindHandle hAtt;
 
 		boolean isRoot;
-		boolean isMap;
+//		boolean isMap;
+		MindCollType ct;
 		Collection cs;
 		Iterator it;
 		MachineVisitItem item = null;
@@ -67,11 +75,13 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			if (MIND_ATT_KNOWLEDGE_ASPECTS == hAtt) {
 				DustDevUtils.breakpoint();
 			}
+			
+			ct = (coll instanceof Map) ? MindCollType.Map : (coll instanceof Collection) ? 
+					(coll instanceof Set) ? MindCollType.Set : MindCollType.Arr : MindCollType.One;
 
-			isMap = coll instanceof Map;
+			boolean isMap = ct == MindCollType.Map;
 			cs = isMap ? ((Map) coll).entrySet() : (Collection) coll;
 			it = new ArrayList(cs).iterator();
-//			it = isMap ? ((Map) coll).entrySet().iterator() : ((Collection) coll).iterator();
 
 			isRoot = isMap && (null == hAtt);
 		}
@@ -94,6 +104,11 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 		@Override
 		public MindHandle getAttHandle() {
 			return isRoot ? getKey() : hAtt;
+		}
+		
+		@Override
+		public MindCollType getCollType() {
+			return item.getCollType();
 		}
 
 		@Override
@@ -151,7 +166,7 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			MindHandle hProcRet = MIND_TAG_RESULT_READACCEPT;
 			
 			if (null == item) {
-				item = new MachineVisitItem(isMap);
+				item = new MachineVisitItem(ct);
 				setVI(visitor, this);
 				hProcRet = visitor.agentProcess(MindAction.Begin);
 			}
@@ -159,7 +174,7 @@ class DustMachineVisitContext extends DustVisitor.VisitContext implements DustMa
 			if (it.hasNext() && DustUtilsAttCache.getAtt(MachineAtts.CanContinue, hProcRet, false) ) {
 				Object next = it.next();
 
-				if (isMap) {
+				if (ct == MindCollType.Map) {
 					Map.Entry<Object, Object> ne = (Entry<Object, Object>) next;
 					item.key = ne.getKey();
 					next = item.val = ne.getValue();
