@@ -346,8 +346,8 @@ public class DustDevNarrativeForgeUI extends DustAgent implements DustMontruCons
 					int idx = table.rowAtPoint(e.getPoint());
 					
 					if (idx > -1) {
-						int ii = tbls.get(type).getRowSorter().convertRowIndexToModel(idx);
-						MindHandle h = rows.get(ii);
+//						int ii = tbls.get(type).getRowSorter().convertRowIndexToModel(idx);
+//						MindHandle h = rows.get(ii);
 
 						switch (type) {
 						case Units:

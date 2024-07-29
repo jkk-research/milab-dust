@@ -109,15 +109,10 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 					case Arr:
 						at = "a";
 						key = String.format("%02d", (Integer) key);
-//						key = null;
 						break;
 					case Map:
 						at = "m";
-						if (key instanceof MindHandle) {
-							key = "h" + handleToId((MindHandle) key);
-						} else if (key instanceof String) {
-							key = "b" + key;
-						}
+						key = prefixVal(key);
 						break;
 					case One:
 						at = "o";
@@ -131,16 +126,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 
 					String att = at + handleToId(hAtt);
 
-					String vt = "b";
-					if (val instanceof MindHandle) {
-						val = handleToId((MindHandle) val);
-						vt = "h";
-					} else if (val instanceof Double) {
-						vt = "r";
-					} else if (val instanceof Long) {
-						vt = "i";
-					}
-					String vs = vt + val;
+					String vs = prefixVal(val);
 
 					StringBuilder sb = DustUtils.sbAppend(null, "\t", false, sItem, att, key, vs);
 
@@ -148,6 +134,20 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 				}
 				return MIND_TAG_RESULT_READACCEPT;
 			}
+		};
+
+		public String prefixVal(Object val) {
+			String vt = "b";
+			if (val instanceof MindHandle) {
+				val = handleToId((MindHandle) val);
+				vt = "h";
+			} else if ((val instanceof Double) || (val instanceof Float)) {
+				vt = "r";
+			} else if ((val instanceof Long) || (val instanceof Integer)) {
+				vt = "i";
+			}
+			
+			return vt + val;
 		};
 
 		public void export(File root, String strDate, MindHandle hUnit) throws Exception {
@@ -180,7 +180,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 				writer.println("\n!units");
 				for (MindHandle h : idxRefUnit.keys()) {
 					String ui = getShortUnitId(h);
-					line = "0	" + authorID + "	" + ui + "	1.0	1	" + strDate;
+					line = "0	" + ui + "	1.0	1	" + strDate;
 					writer.println(line);
 				}
 
@@ -252,7 +252,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 					writer.println("\n!units");
 					for (MindHandle h : idxRefUnit.keys()) {
 						String ui = getShortUnitId(h);
-						line = "0	" + authorID + "	" + ui + "	1.0	1	" + strDate;
+						line = "0	" + ui + "	1.0	1	" + strDate;
 						writer.println(line);
 					}
 
