@@ -150,8 +150,8 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 			return vt + val;
 		};
 
-		public void export(File root, String strDate, MindHandle hUnit) throws Exception {
-			this.hUnit = hUnit;
+		public void export(File root, String strDate, MindHandle hU) throws Exception {
+			this.hUnit = hU;
 
 			idxAuthors.reset();
 			idxAuthors.getIndex("giskard.me");
@@ -166,7 +166,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 
 			String unitID = getShortUnitId(hUnit);
 
-			try (PrintWriter writer = new PrintWriter(new File(root, unitID + ".dut"))) {
+			try (PrintWriter writer = new PrintWriter(new File(root, unitID + "_1.0.dut"))) {
 				String authorID = "giskard.me";
 				String line = "DustUnitText	1.0	UTF8	" + authorID + "	" + unitID + "	1.0	1	" + strDate;
 
@@ -205,6 +205,8 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 				String tText = "h" + handleToId(TEXT_ASP_PLAIN);
 				String tLang = "h" + handleToId(TEXT_TAG_LANGUAGE);
 				String tLangEn = "h" + handleToId(TEXT_TAG_LANGUAGE_EN_US);
+				String tType = "h" + handleToId(TEXT_TAG_TYPE);
+				String tTypeToken = "h" + handleToId(TEXT_TAG_TYPE_TOKEN);
 				String aOwner = "o" + handleToId(MISC_ATT_CONN_OWNER);
 				String aToken = "o" + handleToId(TEXT_ATT_TOKEN);
 				
@@ -226,6 +228,9 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 					sb = DustUtils.sbAppend(null, "\t", false, txtId, aTags, tLang, tLangEn);
 					lines.add(sb.toString());
 					
+					sb = DustUtils.sbAppend(null, "\t", false, txtId, aTags, tType, tTypeToken);
+					lines.add(sb.toString());
+					
 					sb = DustUtils.sbAppend(null, "\t", false, txtId, aToken, "b" + txt);
 					lines.add(sb.toString());
 					
@@ -233,14 +238,14 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 					
 					++txtId;
 				}
-				String txtID = unitID + "_txt_en";
+//				String txtIDx = unitID + "_1.0_txt_en";
 				
 				File rs = new File(root, "res");
 				rs.mkdirs();
 				
-				try (PrintWriter writer = new PrintWriter(new File(rs, txtID + ".dut"))) {
+				try (PrintWriter writer = new PrintWriter(new File(rs, unitID + "_txt_en_1.0.dut"))) {
 					String authorID = "giskard.me";
-					String line = "DustUnitText	1.0	UTF8	" + authorID + "	" + txtID + "	1.0	1	" + strDate;
+					String line = "DustUnitText	1.0	UTF8	" + authorID + "	" + unitID + "_txt_en	1.0	1	" + strDate;
 
 					writer.println(line);
 
