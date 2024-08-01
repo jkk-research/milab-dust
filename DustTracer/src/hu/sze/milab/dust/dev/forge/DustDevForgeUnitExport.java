@@ -243,7 +243,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 				File rs = new File(root, "res");
 				rs.mkdirs();
 				
-				try (PrintWriter writer = new PrintWriter(new File(rs, unitID + "_txt_en_1.0.dut"))) {
+				try (PrintWriter writer = new PrintWriter(new File(rs, unitID + "_txt_en_1.0.dut"), DUST_CHARSET_UTF8)) {
 					String authorID = "giskard.me";
 					String line = "DustUnitText	1.0	UTF8	" + authorID + "	" + unitID + "_txt_en	1.0	1	" + strDate;
 
