@@ -29,22 +29,22 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 
 		ArrayList<String> lines = new ArrayList<>();
 		Map<String, String> hints = new HashMap<>();
-		
+
 		Comparator<String> linecomp = new Comparator<String>() {
-			
+
 			@Override
 			public int compare(String o1, String o2) {
 				Integer i1 = Integer.parseInt(o1.split("\t")[0]);
 				Integer i2 = Integer.parseInt(o2.split("\t")[0]);
 				int d = DustUtils.safeCompare(i1, i2);
-				
+
 				return (0 == d) ? DustUtils.safeCompare(o1, o2) : d;
 			}
 		};
 
 		String handleToId(MindHandle h) {
 			String ret = DustUtils.getPostfix(h.getId(), ":");
-			
+
 			MindHandle hU = Dust.access(MindAccess.Peek, null, h, MIND_ATT_KNOWLEDGE_UNIT);
 
 			if (null == hU) {
@@ -81,18 +81,19 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 				MindHandle hItem = info.getItemHandle();
 				String sItem = handleToId(hItem);
 				MindHandle hAtt = info.getAttHandle();
-				
+
 				if (null == sItem) {
 					Dust.log(EVENT_TAG_TYPE_WARNING, " --- Invalid item", hItem);
 				} else if (sItem.contains(":")) {
-					Dust.log(EVENT_TAG_TYPE_WARNING, " --- Alien item", hItem, "in unit", hUnit);
+//					Dust.log(EVENT_TAG_TYPE_WARNING, " --- Alien item", hItem, "in unit", hUnit);
+					return MIND_TAG_RESULT_READACCEPT;
 				} else if (null == hAtt) {
 					Dust.log(EVENT_TAG_TYPE_TRACE, " --- No attribute in process", hItem);
 				} else if (!DustUtilsAttCache.getAtt(MachineAtts.TransientAtt, hAtt, false)) {
-					
+
 					Object val = info.getValue();
-					
-					if (DEV_ATT_HINT == hAtt ) {
+
+					if (DEV_ATT_HINT == hAtt) {
 						hints.put(sItem, (String) val);
 						return MIND_TAG_RESULT_READACCEPT;
 					}
@@ -146,7 +147,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 			} else if ((val instanceof Long) || (val instanceof Integer)) {
 				vt = "i";
 			}
-			
+
 			return vt + val;
 		};
 
@@ -158,7 +159,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 
 			idxRefUnit.reset();
 			idxLocalItems.reset();
-			
+
 			lines.clear();
 			hints.clear();
 
@@ -190,16 +191,16 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 					writer.println(l);
 				}
 			}
-			
-			if ( !hints.isEmpty() ) {
+
+			if (!hints.isEmpty()) {
 				idxRefUnit.reset();
 				idxRefUnit.getIndex(hUnit);
-				
+
 				hUnit = null;
 				lines.clear();
-				
+
 				int txtId = 0;
-				
+
 				String aPrimAsp = "o" + handleToId(MIND_ATT_KNOWLEDGE_PRIMARYASPECT);
 				String aTags = "m" + handleToId(MIND_ATT_KNOWLEDGE_TAGS);
 				String tText = "h" + handleToId(TEXT_ASP_PLAIN);
@@ -209,40 +210,40 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 				String tTypeToken = "h" + handleToId(TEXT_TAG_TYPE_TOKEN);
 				String aOwner = "o" + handleToId(MISC_ATT_CONN_OWNER);
 				String aToken = "o" + handleToId(TEXT_ATT_TOKEN);
-				
+
 				ArrayList<String> ids = new ArrayList<>(hints.keySet());
 				ids.sort(linecomp);
-				
-				for ( String sItem : ids ) {
+
+				for (String sItem : ids) {
 					String txt = hints.get(sItem);
 //					for ( Map.Entry<String, String> e : hints.entrySet() ) {
 //					String sItem = handleToId(e.getKey());
 //					String txt = e.getValue();
-					
+
 					StringBuilder sb = DustUtils.sbAppend(null, "\t", false, txtId, aPrimAsp, tText);
 					lines.add(sb.toString());
-					
+
 					sb = DustUtils.sbAppend(null, "\t", false, txtId, aOwner, "h0:" + sItem);
 					lines.add(sb.toString());
-					
+
 					sb = DustUtils.sbAppend(null, "\t", false, txtId, aTags, tLang, tLangEn);
 					lines.add(sb.toString());
-					
+
 					sb = DustUtils.sbAppend(null, "\t", false, txtId, aTags, tType, tTypeToken);
 					lines.add(sb.toString());
-					
+
 					sb = DustUtils.sbAppend(null, "\t", false, txtId, aToken, "b" + txt);
 					lines.add(sb.toString());
-					
+
 					lines.add("");
-					
+
 					++txtId;
 				}
 //				String txtIDx = unitID + "_1.0_txt_en";
-				
+
 				File rs = new File(root, "res");
 				rs.mkdirs();
-				
+
 				try (PrintWriter writer = new PrintWriter(new File(rs, unitID + "_txt_en_1.0.dut"), DUST_CHARSET_UTF8)) {
 					String authorID = "giskard.me";
 					String line = "DustUnitText	1.0	UTF8	" + authorID + "	" + unitID + "_txt_en	1.0	1	" + strDate;
@@ -266,7 +267,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 						writer.println(l);
 					}
 				}
-				
+
 			}
 		}
 
@@ -291,17 +292,27 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 		Dust.log(EVENT_TAG_TYPE_TRACE, "export date", strDate, "root", root.getCanonicalPath());
 
 		UnitExporter exporter = new UnitExporter();
+		
+		ArrayList<MindHandle> toExp = new ArrayList<>();
 
 		Dust.access(MindAccess.Visit, new DustVisitor() {
 			@Override
 			protected MindHandle agentProcess() throws Exception {
 				MindHandle hUnit = getInfo().getValue();
 
-				exporter.export(r, strDate, hUnit);
+//				if (MIND_UNIT == hUnit) 
+				{
+					toExp.add(hUnit);
+//					exporter.export(r, strDate, hUnit);
+				}
 
 				return MIND_TAG_RESULT_READACCEPT;
 			}
 		}, APP_UNIT, DUST_ATT_MACHINE_UNITS);
+		
+		for ( MindHandle hUnit : toExp ) {
+			exporter.export(r, strDate, hUnit);
+		}
 
 	}
 }
