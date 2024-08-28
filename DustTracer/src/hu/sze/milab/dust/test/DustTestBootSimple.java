@@ -189,19 +189,19 @@ public class DustTestBootSimple implements DustTestConsts {
 		Dust.access(MindAccess.Set, hWebDataRequest, hGetDataBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnGetData", hGetDataBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hGetDataBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Get Data!");
-		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
+		DustDevUtils.setTag(hGetDataBtn, MONTRU_TAG_WIDGETTYPE_BUTTON, MONTRU_TAG_WIDGETTYPE);
 
 		MindHandle hSrvInfoBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - info");
 		Dust.access(MindAccess.Set, hWebCmdInfo, hSrvInfoBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnInfo", hSrvInfoBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hSrvInfoBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server info");
-		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
+		DustDevUtils.setTag(hSrvInfoBtn, MONTRU_TAG_WIDGETTYPE_BUTTON, MONTRU_TAG_WIDGETTYPE);
 
 		MindHandle hSrvStopBtn = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_WIDGET, "Btn logic - stop");
 		Dust.access(MindAccess.Set, hWebCmdStop, hSrvStopBtn, MISC_ATT_CONN_TARGET);
 		Dust.access(MindAccess.Set, "btnStop", hSrvStopBtn, TEXT_ATT_TOKEN);
 		DustDevUtils.setText(hSrvStopBtn, TEXT_TAG_TYPE_LABEL, TEXT_TAG_LANGUAGE_EN_US, "Server STOP!");
-		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_WIDGET_BUTTON, MONTRU_TAG_WIDGET);
+		DustDevUtils.setTag(hSrvStopBtn, MONTRU_TAG_WIDGETTYPE_BUTTON, MONTRU_TAG_WIDGETTYPE);
 
 		MindHandle hResponseArea = DustDevUtils.registerAgent(TEST1_UNIT, MONTRU_NAR_AREA, "Srv response text area");
 		Dust.access(MindAccess.Set, "srvResponse", hResponseArea, TEXT_ATT_TOKEN);

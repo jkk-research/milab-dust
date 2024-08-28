@@ -16,15 +16,15 @@ public interface DustMontruHandles extends DustConsts, DustUnitHandles {
 	MindHandle MONTRU_NAR_WIDGET = Dust.lookup("giskard:13:?");
 	MindHandle MONTRU_ATT_WIDGET_CMDTAG = Dust.lookup("giskard:13:?");
 	
-	MindHandle MONTRU_TAG_WIDGET = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_LABEL = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_BUTTON = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_INPUT = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_TEXT = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_TOGGLE = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_LIST = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_COMBO = Dust.lookup("giskard:13:?");
-	MindHandle MONTRU_TAG_WIDGET_TREE = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_LABEL = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_BUTTON = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_INPUT = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_TEXT = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_TOGGLE = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_LIST = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_COMBO = Dust.lookup("giskard:13:?");
+	MindHandle MONTRU_TAG_WIDGETTYPE_TREE = Dust.lookup("giskard:13:?");
 
 	MindHandle MONTRU_NAR_CONTAINER = Dust.lookup("giskard:13:?");
 

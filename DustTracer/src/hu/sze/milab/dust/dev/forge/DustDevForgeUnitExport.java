@@ -300,7 +300,7 @@ public class DustDevForgeUnitExport implements DustMontruConsts {
 			protected MindHandle agentProcess() throws Exception {
 				MindHandle hUnit = getInfo().getValue();
 
-//				if (MIND_UNIT == hUnit) 
+				if (APP_UNIT != hUnit) 
 				{
 					toExp.add(hUnit);
 //					exporter.export(r, strDate, hUnit);

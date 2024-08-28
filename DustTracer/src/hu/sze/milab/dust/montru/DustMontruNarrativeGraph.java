@@ -278,7 +278,7 @@ public class DustMontruNarrativeGraph extends DustAgent implements DustMontruCon
 		if (null == hItemLabel) {
 			String lbl = hItem.toString();
 			hItemLabel = DustDevUtils.registerAgent(hUnit, MONTRU_NAR_WIDGET, lbl);
-			DustDevUtils.setTag(hItemLabel, MONTRU_TAG_WIDGET_LABEL, MONTRU_TAG_WIDGET);
+			DustDevUtils.setTag(hItemLabel, MONTRU_TAG_WIDGETTYPE_LABEL, MONTRU_TAG_WIDGETTYPE);
 
 			Dust.access(MindAccess.Commit, MIND_TAG_ACTION_INIT, hItemLabel);
 

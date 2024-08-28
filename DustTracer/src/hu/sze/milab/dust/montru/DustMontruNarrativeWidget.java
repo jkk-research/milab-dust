@@ -165,23 +165,23 @@ public class DustMontruNarrativeWidget extends DustAgent implements DustMontruCo
 			WidgetWrapper<? extends Component> ret = null;
 
 			MindHandle hType = Dust.access(MindAccess.Peek, null, MIND_TAG_CONTEXT_SELF, MIND_ATT_KNOWLEDGE_TAGS,
-					MONTRU_TAG_WIDGET);
+					MONTRU_TAG_WIDGETTYPE);
 
-			if (hType == MONTRU_TAG_WIDGET_LABEL) {
+			if (hType == MONTRU_TAG_WIDGETTYPE_LABEL) {
 				ret = new LabelWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_BUTTON) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_BUTTON) {
 				ret = new ButtonWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_INPUT) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_INPUT) {
 				ret = new InputWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_TEXT) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_TEXT) {
 				ret = new TextWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_TOGGLE) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_TOGGLE) {
 				ret = new ToggleWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_LIST) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_LIST) {
 				ret = new ListWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_COMBO) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_COMBO) {
 				ret = new ComboWrapper();
-			} else if (hType == MONTRU_TAG_WIDGET_TREE) {
+			} else if (hType == MONTRU_TAG_WIDGETTYPE_TREE) {
 				ret = new TreeWrapper();
 			}
 
